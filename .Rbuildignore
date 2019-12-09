@@ -45,3 +45,4 @@ vignettes/.*_files
 ^LICENSE\.md$
 ^\.travis\.yml$
 ^appveyor\.yml$
+^CODE_OF_CONDUCT\.md$
