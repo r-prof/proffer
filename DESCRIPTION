@@ -1,0 +1,30 @@
+Package: proffer
+Title: Pprof-Powered Profiling Packaged for R
+Version: 0.0.0.9000
+Authors@R: c(
+  person(
+    given = c("William", "Michael"),
+    family = "Landau",
+    role = c("aut", "cre"),
+    email = "will.landau@gmail.com",
+    comment = c(ORCID = "0000-0003-1878-3253")
+  ),
+  person(
+    family = "Eli Lilly and Company",
+    role = "cph"
+  ))
+Description: 
+License: MIT + file LICENSE
+URL: https://github.com/wlandau/proffer,
+  https://wlandau.github.io/proffer
+BugReports: https://github.com/wlandau/proffer/issues
+Depends:
+  R (>= 3.3.0)
+Imports:
+  profile
+Suggests:
+  testthat (>= 2.1.0)
+Encoding: UTF-8
+Language: en-US
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.0.0
