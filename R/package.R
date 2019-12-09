@@ -7,6 +7,7 @@
 #' @examples
 #' # TBD
 #' @references <https://github.com/wlandau/pprof>
+#' @importFrom callr r_bg
 #' @importFrom profile read_rprof write_pprof
 #' @importFrom RProtoBuf readProtoFiles
 #' @importFrom utils browseURL Rprof

@@ -50,7 +50,7 @@ serve_pprof_windows <- function(args) {
 }
 
 serve_pprof_linux <- function(args) {
-  system2(Sys.getenv("pprof"), args)
+  system2(Sys.getenv("pprof_path"), args)
 }
 # nocov end
 
@@ -59,7 +59,7 @@ random_port <- function(from = 49152L, to = 65355L) {
 }
 
 assert_pprof <- function() {
-  if (file.exists(Sys.getenv("pprof"))) {
+  if (file.exists(Sys.getenv("pprof_path"))) {
     return()
   }
   missing_pprof()
@@ -68,7 +68,7 @@ assert_pprof <- function() {
 missing_pprof <- function() {
   stop(
     "cannot find pprof at ",
-    shQuote(Sys.getenv("pprof")),
+    shQuote(Sys.getenv("pprof_path")),
     ". See the setup instructions at https://wlandau.github.io/proffer.",
     call. = FALSE
   )
