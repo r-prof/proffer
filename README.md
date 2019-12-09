@@ -31,7 +31,7 @@ system.time({
   x
 })
 #>    user  system elapsed 
-#>   3.016   0.428   3.446
+#>   3.027   0.442   3.470
 ```
 
 Why is it so slow? Where exactly are the slow parts? The standard
@@ -52,9 +52,10 @@ profvis({
 
 ![](https://wlandau.github.io/proffer/reference/profvis.png)
 
-`profvis` makes profiling super easy, but it struggles with heavy-duty
-use cases. When there are a lot of operations to profile, flame graphs
-like the one above can be [difficult to
+`profvis` makes profiling super easy. However, when `proffer` was first
+released, `profvis` was struggling with heavy-duty use cases. When there
+are a lot of operations to profile, `profvis`-generated flame graphs
+like the one above were sometimes [difficult to
 read](https://github.com/rstudio/profvis/issues/115) and [slow to
 respond to mouse clicks](https://github.com/rstudio/profvis/issues/104).
 `proffer` uses [`pprof`](https://github.com/google/pprof) to make the
@@ -180,9 +181,12 @@ remotes::install_github("wlandau/proffer")
 ```
 
 To use functions `pprof()` and `serve_pprof()`, you need to install
-[`pprof`](https://github.com/google/pprof). If you have trouble, please
-do not hesitate to [open an
-issue](https://github.com/wlandau/proffer/issues) and ask for help.
+[`pprof`](https://github.com/google/pprof). Installing `pprof` is hard,
+so if you have trouble, please do not hesitate to [open an
+issue](https://github.com/wlandau/proffer/issues) and ask for help. And
+if you cannot install `pprof`, then
+[`profvis`](https://rstudio.github.io/profvis/) is an excellent
+alternative.
 
 1.  [Install the Go programming
     language](https://golang.org/doc/install).

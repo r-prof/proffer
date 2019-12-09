@@ -94,7 +94,7 @@
 <a class="sourceLine" id="cb1-7" data-line-number="7">  x</a>
 <a class="sourceLine" id="cb1-8" data-line-number="8">})</a>
 <a class="sourceLine" id="cb1-9" data-line-number="9"><span class="co">#&gt;    user  system elapsed </span></a>
-<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="co">#&gt;   3.016   0.428   3.446</span></a></code></pre></div>
+<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="co">#&gt;   3.027   0.442   3.470</span></a></code></pre></div>
 <p>Why is it so slow? Where exactly are the slow parts? The standard recommendation is to use <a href="https://github.com/rstudio/profvis"><code>profvis</code></a> to find out.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(profvis)</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/pkg/profvis/man/profvis.html">profvis</a></span>({</a>
@@ -106,7 +106,7 @@
 <a class="sourceLine" id="cb2-8" data-line-number="8">  x</a>
 <a class="sourceLine" id="cb2-9" data-line-number="9">})</a></code></pre></div>
 <p><img src="https://wlandau.github.io/proffer/reference/profvis.png"></p>
-<p><code>profvis</code> makes profiling super easy, but it struggles with heavy-duty use cases. When there are a lot of operations to profile, flame graphs like the one above can be <a href="https://github.com/rstudio/profvis/issues/115">difficult to read</a> and <a href="https://github.com/rstudio/profvis/issues/104">slow to respond to mouse clicks</a>. <code>proffer</code> uses <a href="https://github.com/google/pprof"><code>pprof</code></a> to make the visualizations friendly and fast.</p>
+<p><code>profvis</code> makes profiling super easy. However, when <code>proffer</code> was first released, <code>profvis</code> was struggling with heavy-duty use cases. When there are a lot of operations to profile, <code>profvis</code>-generated flame graphs like the one above were sometimes <a href="https://github.com/rstudio/profvis/issues/115">difficult to read</a> and <a href="https://github.com/rstudio/profvis/issues/104">slow to respond to mouse clicks</a>. <code>proffer</code> uses <a href="https://github.com/google/pprof"><code>pprof</code></a> to make the visualizations friendly and fast.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(proffer)</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2">px &lt;-<span class="st"> </span><span class="kw"><a href="reference/pprof.html">pprof</a></span>({</a>
 <a class="sourceLine" id="cb3-3" data-line-number="3">  n &lt;-<span class="st"> </span><span class="fl">1e4</span></a>
@@ -191,7 +191,7 @@
 <p>Alternatively, you can install the development version from GitHub.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="co"># install.packages("remotes")</span></a>
 <a class="sourceLine" id="cb8-2" data-line-number="2">remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="st">"wlandau/proffer"</span>)</a></code></pre></div>
-<p>To use functions <code><a href="reference/pprof.html">pprof()</a></code> and <code><a href="reference/serve_pprof.html">serve_pprof()</a></code>, you need to install <a href="https://github.com/google/pprof"><code>pprof</code></a>. If you have trouble, please do not hesitate to <a href="https://github.com/wlandau/proffer/issues">open an issue</a> and ask for help.</p>
+<p>To use functions <code><a href="reference/pprof.html">pprof()</a></code> and <code><a href="reference/serve_pprof.html">serve_pprof()</a></code>, you need to install <a href="https://github.com/google/pprof"><code>pprof</code></a>. Installing <code>pprof</code> is hard, so if you have trouble, please do not hesitate to <a href="https://github.com/wlandau/proffer/issues">open an issue</a> and ask for help. And if you cannot install <code>pprof</code>, then <a href="https://rstudio.github.io/profvis/"><code>profvis</code></a> is an excellent alternative.</p>
 <ol>
 <li>
 <a href="https://golang.org/doc/install">Install the Go programming language</a>.</li>
