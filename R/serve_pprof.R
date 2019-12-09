@@ -21,6 +21,7 @@
 #' # Terminate the server.
 #' px$kill()
 #' }
+# nocov start
 serve_pprof <- function(
   pprof,
   host = "localhost",
@@ -44,16 +45,17 @@ serve_pprof <- function(
   px
 }
 
-random_port <- function(from = 49152L, to = 65355L) {
-  sample(seq.int(from = from, to = to, by = 1L), size = 1L)
-}
-
 serve_pprof_windows <- function(args) {
   shell(paste(c("pprof", args), collapse = " "))
 }
 
 serve_pprof_linux <- function(args) {
   system2(Sys.getenv("pprof"), args)
+}
+# nocov end
+
+random_port <- function(from = 49152L, to = 65355L) {
+  sample(seq.int(from = from, to = to, by = 1L), size = 1L)
 }
 
 assert_pprof <- function() {
@@ -65,7 +67,7 @@ assert_pprof <- function() {
 
 missing_pprof <- function() {
   stop(
-    "Cannot find pprof at path ",
+    "cannot find pprof at ",
     shQuote(Sys.getenv("pprof")),
     ". See the setup instructions at https://wlandau.github.io/proffer.",
     call. = FALSE
