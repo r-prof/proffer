@@ -27,7 +27,7 @@ record_pprof <- function(expr, pprof = tempfile()) {
 record_rprof <- function(expr, rprof = tempfile()) {
   on.exit(Rprof(NULL))
   Rprof(filename = rprof)
-  force(expr)
+  expr
   rprof
 }
 
@@ -59,30 +59,4 @@ to_rprof <- function(pprof, rprof = tempfile()) {
   samples <- profile::read_pprof(path = pprof)
   profile::write_rprof(x = samples, path = rprof)
   rprof
-}
-
-#' @title Visualize profiling data with pprof.
-#' @export
-#' @description Visualize profiling data with pprof.
-#' @details Uses a local interactive server.
-#'   Navigate a browser to a URL in the message.
-#' @return Nothing.
-#' @param pprof Path to pprof samples.
-#' @param host Host name. Set to `"localhost"` to view locally
-#'   or `"0.0.0.0"` to view from another machine.
-#' @param port Port number.
-#' @examples
-#' \dontrun{
-#' pprof <- record_pprof(replicate(1e2, sample.int(1e4)))
-#' vis_pprof(pprof)
-#' }
-vis_pprof <- function(pprof, host = "localhost", port = NULL) {
-  server <- sprintf("%s:%s", host, port %||% random_port())
-  message("local pprof server: http://", server)
-  args <- c("-http", server, pprof)
-  if (on_windows()) {
-    shell(paste(c("pprof", args), collapse = " "))
-  } else {
-    system2("pprof", args)
-  }
 }

@@ -2,10 +2,11 @@
 
 export(record_pprof)
 export(record_rprof)
+export(serve_pprof)
 export(to_pprof)
 export(to_rprof)
-export(vis_pprof)
 importFrom(RProtoBuf,readProtoFiles)
 importFrom(profile,read_rprof)
 importFrom(profile,write_pprof)
 importFrom(utils,Rprof)
+importFrom(utils,browseURL)
