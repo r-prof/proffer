@@ -31,7 +31,7 @@ system.time({
   x
 })
 #>    user  system elapsed 
-#>   3.027   0.442   3.470
+#>   2.992   0.424   3.418
 ```
 
 Why is it so slow? Where exactly are the slow parts? The standard
@@ -50,12 +50,18 @@ profvis({
 })
 ```
 
-![](https://wlandau.github.io/proffer/reference/profvis.png)
+<center>
+
+<a href="https://wlandau.github.io/proffer/reference/figures/profvis.png">
+<img src="https://wlandau.github.io/proffer/reference/figures/profvis.png" alt="top" align="center" style = "border: none; float: center;">
+</a>
+
+</center>
 
 `profvis` makes profiling super easy. However, when `proffer` was first
-released, `profvis` was struggling with some heavy-duty use cases. When there
-are a lot of operations to profile, `profvis`-generated flame graphs
-like the one above were sometimes [difficult to
+released, `profvis` was struggling with some heavy-duty use cases. When
+there are a lot of operations to profile, `profvis`-generated flame
+graphs like the one above were sometimes [difficult to
 read](https://github.com/rstudio/profvis/issues/115) and [slow to
 respond to mouse clicks](https://github.com/rstudio/profvis/issues/104).
 `proffer` uses [`pprof`](https://github.com/google/pprof) to make the
@@ -79,12 +85,24 @@ the flame graph under the VIEW menu, `[<-.data.frame()` jumps out at us
 immediately. Apparently, the line `x[i, ] <- x[i, ] + 1` takes the most
 runtime.
 
-![](https://wlandau.github.io/proffer/reference/flame.png)
+<center>
+
+<a href="https://wlandau.github.io/proffer/reference/figures/flame.png">
+<img src="https://wlandau.github.io/proffer/reference/figures/flame.png" alt="top" align="center" style = "border: none; float: center;">
+</a>
+
+</center>
 
 Indeed, a look at “Top” shows we spend 85% of the runtime on `x[i, ] <-
 x[i, ] + 1`. The other operations are fast by comparison.
 
-![](https://wlandau.github.io/proffer/reference/top.png)
+<center>
+
+<a href="https://wlandau.github.io/proffer/reference/figures/top.png">
+<img src="https://wlandau.github.io/proffer/reference/figures/top.png" alt="top" align="center" style = "border: none; float: center;">
+</a>
+
+</center>
 
 So we return to our R code and avoid data frame row assignment. Much
 faster\!
@@ -101,7 +119,7 @@ system.time({
   x <- data.frame(x = x, y = y)
 })
 #>    user  system elapsed 
-#>   0.007   0.000   0.007
+#>   0.007   0.000   0.006
 ```
 
 ## Managing the pprof server
