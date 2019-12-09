@@ -31,7 +31,7 @@ system.time({
   x
 })
 #>    user  system elapsed 
-#>   2.992   0.424   3.418
+#>   3.015   0.428   3.447
 ```
 
 Why is it so slow? Where exactly are the slow parts? The standard
@@ -119,7 +119,7 @@ system.time({
   x <- data.frame(x = x, y = y)
 })
 #>    user  system elapsed 
-#>   0.007   0.000   0.006
+#>   0.007   0.000   0.007
 ```
 
 ## Managing the pprof server
@@ -140,6 +140,8 @@ px <- pprof({
 
 px # How is my background process doing?
 #> PROCESS 'R', finished.
+px$is_alive()
+# [1] FALSE
 
 px$read_error() # Why did it quit soon?
 #> [1] "sh: /user/local/bin/pprof: No such file or directory\nWarning message:\nIn system2(Sys.getenv(\"pprof_path\"), args) : error in running command\n"
@@ -166,6 +168,8 @@ px <- pprof({
 
 px
 #> PROCESS 'R', running, pid 12361.
+px$is_alive()
+# [1] TRUE
 
 # Now a web browser should be able to open http://localhost:64610.
 ```

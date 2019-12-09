@@ -13,7 +13,6 @@
 #' # Terminate the server.
 #' px$kill()
 #' }
-# nocov start
 pprof <- function(
   expr,
   host = "localhost",
@@ -91,7 +90,6 @@ serve_pprof_windows <- function(args) {
 serve_pprof_linux <- function(args) {
   system2(Sys.getenv("pprof_path"), args)
 }
-# nocov end
 
 random_port <- function(from = 49152L, to = 65355L) {
   sample(seq.int(from = from, to = to, by = 1L), size = 1L)
