@@ -1,4 +1,9 @@
-test_that("", {
+test_that("populate_pkgenv()", {
+  expect_silent(populate_pkgenv())
+  expect_true(is.logical(pkgenv[["on_windows"]]))
+})
+
+test_that("random_port()", {
   port <- random_port()
   expect_true(is.integer(port))
   expect_equal(length(port), 1L)

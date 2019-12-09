@@ -8,4 +8,6 @@
 #' # TBD
 #' @references <https://github.com/wlandau/pprof>
 #' @importFrom profile read_rprof write_pprof
+#' @importFrom RProtoBuf readProtoFiles
+#' @importFrom utils Rprof
 NULL

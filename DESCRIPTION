@@ -13,7 +13,7 @@ Authors@R: c(
     family = "Eli Lilly and Company",
     role = "cph"
   ))
-Description: 
+Description: Pprof-powered profiling packaged for R.
 License: MIT + file LICENSE
 URL: https://github.com/wlandau/proffer,
   https://wlandau.github.io/proffer
@@ -21,7 +21,9 @@ BugReports: https://github.com/wlandau/proffer/issues
 Depends:
   R (>= 3.3.0)
 Imports:
-  profile
+  profile,
+  RProtoBuf,
+  utils
 Suggests:
   testthat (>= 2.1.0)
 Encoding: UTF-8

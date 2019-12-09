@@ -4,12 +4,12 @@
 \alias{record_rprof}
 \title{Profile R code and record Rprof samples.}
 \usage{
-record_rprof(expr)
+record_rprof(expr, rprof = tempfile())
 }
 \arguments{
 \item{expr}{An R expression to profile.}
 
-\item{pprof}{Path to a file with Rprof samples.
+\item{rprof}{Path to a file with Rprof samples.
 Also returned from the function.}
 }
 \value{

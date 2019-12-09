@@ -21,7 +21,6 @@
 ^paper\.md$
 ^README\.md$
 ^README\.Rmd$
-^LICENSE$
 vignettes/.*\.html
 vignettes/.*\.md
 vignettes/.*\.log
