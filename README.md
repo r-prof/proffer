@@ -31,12 +31,11 @@ system.time({
   x
 })
 #>    user  system elapsed 
-#>   3.015   0.428   3.447
+#>   2.995   0.426   3.426
 ```
 
-Why is it so slow? Where exactly are the slow parts? The standard
-recommendation is to use [`profvis`](https://github.com/rstudio/profvis)
-to find out.
+Why is it so slow? The standard recommendation is to use
+[`profvis`](https://github.com/rstudio/profvis) to find out.
 
 ``` r
 library(profvis)

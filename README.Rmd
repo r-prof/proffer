@@ -39,7 +39,7 @@ system.time({
 })
 ```
 
-Why is it so slow? Where exactly are the slow parts? The standard recommendation is to use [`profvis`](https://github.com/rstudio/profvis) to find out. 
+Why is it so slow? The standard recommendation is to use [`profvis`](https://github.com/rstudio/profvis) to find out. 
 
 ```{r, eval = FALSE}
 library(profvis)
