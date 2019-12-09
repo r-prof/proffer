@@ -1,5 +1,5 @@
 Package: proffer
-Title: Pprof-Powered Profiling Packaged for R
+Title: Profile R Code with Pprof
 Version: 0.0.0.9000
 Authors@R: c(
   person(
@@ -13,7 +13,14 @@ Authors@R: c(
     family = "Eli Lilly and Company",
     role = "cph"
   ))
-Description: Pprof-powered profiling packaged for R.
+Description: Proffer is a profiling package.
+  It runs R code and displays summaries
+  to show where the code is slowest. Proffer leverages
+  the pprof utility to create highly efficient, clear, easy-to-read
+  interactive displays that help users find ways to reduce runtime.
+  The package also contains helpers to convert profiling data
+  to and from pprof format and visualize existing profiling data files.
+  For documentation, visit <https://wlandau.github.io/proffer>.
 License: MIT + file LICENSE
 URL: https://github.com/wlandau/proffer,
   https://wlandau.github.io/proffer

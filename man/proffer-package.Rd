@@ -4,9 +4,16 @@
 \name{proffer-package}
 \alias{proffer-package}
 \alias{proffer}
-\title{proffer: pprof-powered profiling packaged for R}
+\title{proffer: profile R code with pprof}
 \description{
-Profiling in R powered by pprof.
+Proffer is a profiling package.
+It runs R code and displays summaries
+to show where the code is slowest. Proffer leverages
+the pprof utility to create highly efficient, clear, easy-to-read
+interactive displays that help users find ways to reduce runtime.
+The package also contains helpers to convert profiling data
+to and from pprof format and visualize existing profiling data files.
+For documentation, visit \url{https://wlandau.github.io/proffer}.
 }
 \examples{
 # TBD

@@ -1,6 +1,13 @@
-#' proffer: pprof-powered profiling packaged for R
+#' proffer: profile R code with pprof
 #' @docType package
-#' @description Profiling in R powered by pprof.
+#' @description Proffer is a profiling package.
+#' It runs R code and displays summaries
+#' to show where the code is slowest. Proffer leverages
+#' the pprof utility to create highly efficient, clear, easy-to-read
+#' interactive displays that help users find ways to reduce runtime.
+#' The package also contains helpers to convert profiling data
+#' to and from pprof format and visualize existing profiling data files.
+#' For documentation, visit <https://wlandau.github.io/proffer>.
 #' @name proffer-package
 #' @aliases proffer
 #' @author William Michael Landau \email{will.landau@@gmail.com}
