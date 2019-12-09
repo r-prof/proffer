@@ -31,7 +31,7 @@ system.time({
   x
 })
 #>    user  system elapsed 
-#>   2.995   0.426   3.426
+#>   3.020   0.423   3.445
 ```
 
 Why is it so slow? The standard recommendation is to use
@@ -118,7 +118,7 @@ system.time({
   x <- data.frame(x = x, y = y)
 })
 #>    user  system elapsed 
-#>   0.007   0.000   0.007
+#>   0.007   0.000   0.008
 ```
 
 ## Managing the pprof server
@@ -179,7 +179,7 @@ It is best to take down the `pprof` server when you are done with it.
 px$kill()
 ```
 
-`px` is a handler to a [`callr`](https://github.com/r-lib/callr)
+`px` is the handle of a [`callr`](https://github.com/r-lib/callr)
 background process. To learn more about how to manage the process, have
 a look at the [`callr`](https://callr.r-lib.org/) documentation,
 particularly the function

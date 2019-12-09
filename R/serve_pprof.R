@@ -36,7 +36,7 @@ pprof <- function(
 #' @details Uses a local interactive server.
 #'   Navigate a browser to a URL in the message.
 #'   The server starts in a background process
-#' @return A `callr::r_bg()` handler. Use this handler
+#' @return A `callr::r_bg()` handle. Use this handle
 #'   to take down the server with `$kill()`.
 #' @param pprof Path to pprof samples.
 #' @param host Host name. Set to `"localhost"` to view locally
