@@ -16,9 +16,15 @@ pprof(
 \item{expr}{R code to run and profile.}
 
 \item{host}{Host name. Set to \code{"localhost"} to view locally
-or \code{"0.0.0.0"} to view from another machine.}
+or \code{"0.0.0.0"} to view from another machine. If you view
+from another machine, the printed out URL will not be valid.
+For example, if \code{pprof()} or \code{serve_pprof()} prints
+"http://0.0.0.0:8080", then you need to replace 0.0.0.0
+with your computer's name or IP address, e.g.
+"http://my_computer.com:8080".}
 
-\item{port}{Port number.}
+\item{port}{Port number for hosting the local pprof server.
+Chosen randomly by default.}
 
 \item{browse}{Logical, whether to open a browser to view
 the pprof server.}

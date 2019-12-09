@@ -137,11 +137,17 @@ in a local interactive pprof server.</p>
     <tr>
       <th>host</th>
       <td><p>Host name. Set to <code>"localhost"</code> to view locally
-or <code>"0.0.0.0"</code> to view from another machine.</p></td>
+or <code>"0.0.0.0"</code> to view from another machine. If you view
+from another machine, the printed out URL will not be valid.
+For example, if <code>pprof()</code> or <code><a href='serve_pprof.html'>serve_pprof()</a></code> prints
+"http://0.0.0.0:8080", then you need to replace 0.0.0.0
+with your computer's name or IP address, e.g.
+"http://my_computer.com:8080".</p></td>
     </tr>
     <tr>
       <th>port</th>
-      <td><p>Port number.</p></td>
+      <td><p>Port number for hosting the local pprof server.
+Chosen randomly by default.</p></td>
     </tr>
     <tr>
       <th>browse</th>

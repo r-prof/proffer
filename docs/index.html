@@ -5,13 +5,20 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pprof-Powered Profiling Packaged for R • proffer</title>
+<title>Profile R Code with Pprof • proffer</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="Pprof-Powered Profiling Packaged for R">
-<meta property="og:description" content="Pprof-powered profiling packaged for R.">
+<script src="pkgdown.js"></script><meta property="og:title" content="Profile R Code with Pprof">
+<meta property="og:description" content="Proffer is a profiling package.
+  It runs R code and displays summaries
+  to show where the code is slowest. Proffer leverages
+  the pprof utility to create highly efficient, clear, easy-to-read
+  interactive displays that help users find ways to reduce runtime.
+  The package also contains helpers to convert profiling data
+  to and from pprof format and visualize existing profiling data files.
+  For documentation, visit &lt;https://wlandau.github.io/proffer&gt;.">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -73,7 +80,7 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#proffer" class="anchor"></a>proffer</h1></div>
 
-<p>The <code>proffer</code> package profiles R code to find out where it is slowest. Visit <a href="https://wlandau.github.io/proffer" class="uri">https://wlandau.github.io/proffer</a> for documentation. <a href="https://wlandau.github.io/proffer/reference/index.html" class="uri">https://wlandau.github.io/proffer/reference/index.html</a> has a complete list of available functions in the package.</p>
+<p>The <code>proffer</code> package profiles R code to find the slow parts. Visit <a href="https://wlandau.github.io/proffer" class="uri">https://wlandau.github.io/proffer</a> for documentation. <a href="https://wlandau.github.io/proffer/reference/index.html" class="uri">https://wlandau.github.io/proffer/reference/index.html</a> has a complete list of available functions in the package.</p>
 <div id="how-it-works" class="section level2">
 <h2 class="hasAnchor">
 <a href="#how-it-works" class="anchor"></a>How it works</h2>
@@ -87,7 +94,7 @@
 <a class="sourceLine" id="cb1-7" data-line-number="7">  x</a>
 <a class="sourceLine" id="cb1-8" data-line-number="8">})</a>
 <a class="sourceLine" id="cb1-9" data-line-number="9"><span class="co">#&gt;    user  system elapsed </span></a>
-<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="co">#&gt;   3.191   0.495   3.696</span></a></code></pre></div>
+<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="co">#&gt;   3.016   0.428   3.446</span></a></code></pre></div>
 <p>Why is it so slow? Where exactly are the slow parts? The standard recommendation is to use <a href="https://github.com/rstudio/profvis"><code>profvis</code></a> to find out.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(profvis)</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/pkg/profvis/man/profvis.html">profvis</a></span>({</a>
@@ -98,8 +105,8 @@
 <a class="sourceLine" id="cb2-7" data-line-number="7">  }</a>
 <a class="sourceLine" id="cb2-8" data-line-number="8">  x</a>
 <a class="sourceLine" id="cb2-9" data-line-number="9">})</a></code></pre></div>
-<p><img src="./man/figures/profvis.png"></p>
-<p><code>profvis</code> makes profiling super easy, but it struggles with some use cases. When there are a lot of operations to profile, flame graphs like the one above can be <a href="https://github.com/rstudio/profvis/issues/115">difficult to read</a> and <a href="https://github.com/rstudio/profvis/issues/104">slow to respond</a>. <code>proffer</code> uses <a href="https://github.com/google/pprof"><code>pprof</code></a> because its visualizations are fast and friendly.</p>
+<p><img src="https://wlandau.github.io/proffer/reference/profvis.png"></p>
+<p><code>profvis</code> makes profiling super easy, but it struggles with heavy-duty use cases. When there are a lot of operations to profile, flame graphs like the one above can be <a href="https://github.com/rstudio/profvis/issues/115">difficult to read</a> and <a href="https://github.com/rstudio/profvis/issues/104">slow to respond to mouse clicks</a>. <code>proffer</code> uses <a href="https://github.com/google/pprof"><code>pprof</code></a> to make the visualizations friendly and fast.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(proffer)</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2">px &lt;-<span class="st"> </span><span class="kw"><a href="reference/pprof.html">pprof</a></span>({</a>
 <a class="sourceLine" id="cb3-3" data-line-number="3">  n &lt;-<span class="st"> </span><span class="fl">1e4</span></a>
@@ -111,9 +118,9 @@
 <a class="sourceLine" id="cb3-9" data-line-number="9">})</a>
 <a class="sourceLine" id="cb3-10" data-line-number="10"><span class="co">#&gt; http://localhost:64610</span></a></code></pre></div>
 <p>When we navigate a web browser to <a href="http://localhost:64610" class="uri">http://localhost:64610</a> and select the flame graph under the VIEW menu, <code>[&lt;-.data.frame()</code> jumps out at us immediately. Apparently, the line <code>x[i, ] &lt;- x[i, ] + 1</code> takes the most runtime.</p>
-<p><img src="./man/figures/flame.png"></p>
+<p><img src="https://wlandau.github.io/proffer/reference/flame.png"></p>
 <p>Indeed, a look at “Top” shows we spend 85% of the runtime on <code>x[i, ] &lt;- x[i, ] + 1</code>. The other operations are fast by comparison.</p>
-<p><img src="./man/figures/top.png"></p>
+<p><img src="https://wlandau.github.io/proffer/reference/top.png"></p>
 <p>So we return to our R code and avoid data frame row assignment. Much faster!</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>({</a>
 <a class="sourceLine" id="cb4-2" data-line-number="2">  n &lt;-<span class="st"> </span><span class="fl">1e4</span></a>
@@ -194,7 +201,7 @@
 <li>Enter <code>go get -u github.com/google/pprof</code> in your terminal to install <code>pprof</code>
 </li>
 <li>Find the path to the <code>pprof</code> executable. It is usually in the <code>bin</code> subdirectory of <code>GOPATH</code>, e.g. <code>/home/landau/go/bin/pprof</code>.</li>
-<li>Add a line to your <code>.Renviron</code> file to set the <code>pprof_path</code> environment variable, e.g. <code>pprof_path=/home/landau/go/bin/pprof</code>.</li>
+<li>Add a line to your <code>.Renviron</code> file to set the <code>pprof_path</code> environment variable, e.g. <code>pprof_path=/home/landau/go/bin/pprof</code>. This variable tells <code>proffer</code> how to find <code>pprof</code>.</li>
 <li>Open a new R session check that pprof installed correctly.</li>
 </ol>
 <!-- end list --><div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span>(<span class="st">"pprof_path"</span>)</a>

@@ -12,8 +12,8 @@ status](https://travis-ci.org/wlandau/proffer.svg?branch=master)](https://travis
 status](https://ci.appveyor.com/api/projects/status/github/wlandau/proffer?branch=master&svg=true)](https://ci.appveyor.com/project/wlandau/proffer)
 [![Codecov](https://codecov.io/github/wlandau/proffer/coverage.svg?branch=master)](https://codecov.io/github/wlandau/proffer?branch=master)
 
-The `proffer` package profiles R code to find out where it is slowest.
-Visit <https://wlandau.github.io/proffer> for documentation.
+The `proffer` package profiles R code to find the slow parts. Visit
+<https://wlandau.github.io/proffer> for documentation.
 <https://wlandau.github.io/proffer/reference/index.html> has a complete
 list of available functions in the package.
 
@@ -31,7 +31,7 @@ system.time({
   x
 })
 #>    user  system elapsed 
-#>   3.191   0.495   3.696
+#>   3.016   0.428   3.446
 ```
 
 Why is it so slow? Where exactly are the slow parts? The standard
@@ -50,15 +50,15 @@ profvis({
 })
 ```
 
-![](./man/figures/profvis.png)
+![](https://wlandau.github.io/proffer/reference/profvis.png)
 
-`profvis` makes profiling super easy, but it struggles with some use
-cases. When there are a lot of operations to profile, flame graphs like
-the one above can be [difficult to
+`profvis` makes profiling super easy, but it struggles with heavy-duty
+use cases. When there are a lot of operations to profile, flame graphs
+like the one above can be [difficult to
 read](https://github.com/rstudio/profvis/issues/115) and [slow to
-respond](https://github.com/rstudio/profvis/issues/104). `proffer` uses
-[`pprof`](https://github.com/google/pprof) because its visualizations
-are fast and friendly.
+respond to mouse clicks](https://github.com/rstudio/profvis/issues/104).
+`proffer` uses [`pprof`](https://github.com/google/pprof) to make the
+visualizations friendly and fast.
 
 ``` r
 library(proffer)
@@ -78,12 +78,12 @@ the flame graph under the VIEW menu, `[<-.data.frame()` jumps out at us
 immediately. Apparently, the line `x[i, ] <- x[i, ] + 1` takes the most
 runtime.
 
-![](./man/figures/flame.png)
+![](https://wlandau.github.io/proffer/reference/flame.png)
 
 Indeed, a look at “Top” shows we spend 85% of the runtime on `x[i, ] <-
 x[i, ] + 1`. The other operations are fast by comparison.
 
-![](./man/figures/top.png)
+![](https://wlandau.github.io/proffer/reference/top.png)
 
 So we return to our R code and avoid data frame row assignment. Much
 faster\!
@@ -204,6 +204,7 @@ issue](https://github.com/wlandau/proffer/issues) and ask for help.
     subdirectory of `GOPATH`, e.g. `/home/landau/go/bin/pprof`.
 6.  Add a line to your `.Renviron` file to set the `pprof_path`
     environment variable, e.g. `pprof_path=/home/landau/go/bin/pprof`.
+    This variable tells `proffer` how to find `pprof`.
 7.  Open a new R session check that pprof installed correctly.
 
 <!-- end list -->

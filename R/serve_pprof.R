@@ -41,8 +41,14 @@ pprof <- function(
 #'   to take down the server with `$kill()`.
 #' @param pprof Path to pprof samples.
 #' @param host Host name. Set to `"localhost"` to view locally
-#'   or `"0.0.0.0"` to view from another machine.
-#' @param port Port number.
+#'   or `"0.0.0.0"` to view from another machine. If you view
+#'   from another machine, the printed out URL will not be valid.
+#'   For example, if `pprof()` or `serve_pprof()` prints
+#'   "http://0.0.0.0:8080", then you need to replace 0.0.0.0
+#'   with your computer's name or IP address, e.g.
+#'   "http://my_computer.com:8080".
+#' @param port Port number for hosting the local pprof server.
+#'   Chosen randomly by default.
 #' @param browse Logical, whether to open a browser to view
 #'   the pprof server.
 #' @param verbose Logical, whether to print the URL of the pprof
