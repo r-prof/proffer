@@ -53,7 +53,7 @@ profvis({
 ![](https://wlandau.github.io/proffer/reference/profvis.png)
 
 `profvis` makes profiling super easy. However, when `proffer` was first
-released, `profvis` was struggling with heavy-duty use cases. When there
+released, `profvis` was struggling with some heavy-duty use cases. When there
 are a lot of operations to profile, `profvis`-generated flame graphs
 like the one above were sometimes [difficult to
 read](https://github.com/rstudio/profvis/issues/115) and [slow to
