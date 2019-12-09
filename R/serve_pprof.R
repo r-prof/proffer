@@ -2,7 +2,7 @@
 #' @export
 #' @description Run R code and display profiling results
 #'   in a local interactive pprof server.
-#' @return A `callr::r_bg()` handler. Use this handler
+#' @return A `callr::r_bg()` handle. Use this handle
 #'   to take down the server with `$kill()`.
 #' @inheritParams serve_pprof
 #' @param expr R code to run and profile.

@@ -96,7 +96,7 @@
 <a class="sourceLine" id="cb1-7" data-line-number="7">  x</a>
 <a class="sourceLine" id="cb1-8" data-line-number="8">})</a>
 <a class="sourceLine" id="cb1-9" data-line-number="9"><span class="co">#&gt;    user  system elapsed </span></a>
-<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="co">#&gt;   2.995   0.426   3.426</span></a></code></pre></div>
+<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="co">#&gt;   3.020   0.423   3.445</span></a></code></pre></div>
 <p>Why is it so slow? The standard recommendation is to use <a href="https://github.com/rstudio/profvis"><code>profvis</code></a> to find out.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(profvis)</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/pkg/profvis/man/profvis.html">profvis</a></span>({</a>
@@ -150,7 +150,7 @@
 <a class="sourceLine" id="cb4-9" data-line-number="9">  x &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)</a>
 <a class="sourceLine" id="cb4-10" data-line-number="10">})</a>
 <a class="sourceLine" id="cb4-11" data-line-number="11"><span class="co">#&gt;    user  system elapsed </span></a>
-<a class="sourceLine" id="cb4-12" data-line-number="12"><span class="co">#&gt;   0.007   0.000   0.007</span></a></code></pre></div>
+<a class="sourceLine" id="cb4-12" data-line-number="12"><span class="co">#&gt;   0.007   0.000   0.008</span></a></code></pre></div>
 </div>
 <div id="managing-the-pprof-server" class="section level2">
 <h2 class="hasAnchor">
@@ -202,7 +202,7 @@
 <a class="sourceLine" id="cb5-44" data-line-number="44"><span class="co"># Now a web browser should be able to open http://localhost:64610.</span></a></code></pre></div>
 <p>It is best to take down the <code>pprof</code> server when you are done with it.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">px<span class="op">$</span><span class="kw">kill</span>()</a></code></pre></div>
-<p><code>px</code> is a handler to a <a href="https://github.com/r-lib/callr"><code>callr</code></a> background process. To learn more about how to manage the process, have a look at the <a href="https://callr.r-lib.org/"><code>callr</code></a> documentation, particularly the function <a href="https://callr.r-lib.org/reference/r_bg.html"><code>r_bg()</code></a>.</p>
+<p><code>px</code> is the handle of a <a href="https://github.com/r-lib/callr"><code>callr</code></a> background process. To learn more about how to manage the process, have a look at the <a href="https://callr.r-lib.org/"><code>callr</code></a> documentation, particularly the function <a href="https://callr.r-lib.org/reference/r_bg.html"><code>r_bg()</code></a>.</p>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
