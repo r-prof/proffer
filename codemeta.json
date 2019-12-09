@@ -1,0 +1,125 @@
+{
+  "@context": ["https://doi.org/10.5063/schema/codemeta-2.0", "http://schema.org"],
+  "@type": "SoftwareSourceCode",
+  "identifier": "proffer",
+  "description": "Pprof-powered profiling packaged for R.",
+  "name": "proffer: Pprof-Powered Profiling Packaged for R",
+  "codeRepository": "https://github.com/wlandau/proffer",
+  "relatedLink": "https://wlandau.github.io/proffer",
+  "issueTracker": "https://github.com/wlandau/proffer/issues",
+  "license": "https://spdx.org/licenses/MIT",
+  "version": "0.0.0.9000",
+  "programmingLanguage": {
+    "@type": "ComputerLanguage",
+    "name": "R",
+    "version": "3.6.1",
+    "url": "https://r-project.org"
+  },
+  "runtimePlatform": "R version 3.6.1 (2019-07-05)",
+  "author": [
+    {
+      "@type": "Person",
+      "givenName": ["William", "Michael"],
+      "familyName": "Landau",
+      "email": "will.landau@gmail.com",
+      "@id": "https://orcid.org/0000-0003-1878-3253"
+    }
+  ],
+  "contributor": {},
+  "copyrightHolder": [
+    {
+      "@type": "Organization",
+      "name": "Eli Lilly and Company"
+    }
+  ],
+  "funder": {},
+  "maintainer": [
+    {
+      "@type": "Person",
+      "givenName": ["William", "Michael"],
+      "familyName": "Landau",
+      "email": "will.landau@gmail.com",
+      "@id": "https://orcid.org/0000-0003-1878-3253"
+    }
+  ],
+  "softwareSuggestions": [
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "profvis",
+      "name": "profvis",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=profvis"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "testthat",
+      "name": "testthat",
+      "version": ">= 2.1.0",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=testthat"
+    }
+  ],
+  "softwareRequirements": [
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "R",
+      "name": "R",
+      "version": ">= 3.3.0"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "callr",
+      "name": "callr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=callr"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "profile",
+      "name": "profile",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=profile"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "RProtoBuf",
+      "name": "RProtoBuf",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=RProtoBuf"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "utils",
+      "name": "utils"
+    }
+  ],
+  "releaseNotes": "https://github.com/wlandau/proffer/blob/master/NEWS.md",
+  "readme": "https://github.com/wlandau/proffer/blob/master/README.md",
+  "fileSize": "127.275KB",
+  "contIntegration": ["https://travis-ci.org/wlandau/proffer", "https://ci.appveyor.com/project/wlandau/proffer", "https://codecov.io/github/wlandau/proffer?branch=master"]
+}

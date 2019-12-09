@@ -15,7 +15,12 @@ knitr::opts_chunk$set(
 
 # proffer
 
-[![CRAN](https://www.r-pkg.org/badges/version/proffer)](https://cran.r-project.org/package=proffer) [![Travis build status](https://travis-ci.org/wlandau/proffer.svg?branch=master)](https://travis-ci.org/wlandau/proffer) [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/wlandau/proffer?branch=master&svg=true)](https://ci.appveyor.com/project/wlandau/proffer) [![Codecov](https://codecov.io/github/wlandau/proffer/coverage.svg?branch=master)](https://codecov.io/github/wlandau/proffer?branch=master)
+[![CRAN](https://www.r-pkg.org/badges/version/proffer)](https://cran.r-project.org/package=proffer)
+[![license](https://img.shields.io/badge/licence-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![Travis build status](https://travis-ci.org/wlandau/proffer.svg?branch=master)](https://travis-ci.org/wlandau/proffer)
+[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/wlandau/proffer?branch=master&svg=true)](https://ci.appveyor.com/project/wlandau/proffer)
+[![Codecov](https://codecov.io/github/wlandau/proffer/coverage.svg?branch=master)](https://codecov.io/github/wlandau/proffer?branch=master)
 
 The `proffer` package profiles R code to find out where it is slowest. Visit <https://wlandau.github.io/proffer> for documentation. <https://wlandau.github.io/proffer/reference/index.html> has a complete list of available functions in the package. 
 

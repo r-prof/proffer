@@ -4,6 +4,8 @@
 # proffer
 
 [![CRAN](https://www.r-pkg.org/badges/version/proffer)](https://cran.r-project.org/package=proffer)
+[![license](https://img.shields.io/badge/licence-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Travis build
 status](https://travis-ci.org/wlandau/proffer.svg?branch=master)](https://travis-ci.org/wlandau/proffer)
 [![AppVeyor build
@@ -29,7 +31,7 @@ system.time({
   x
 })
 #>    user  system elapsed 
-#>   3.152   0.516   3.676
+#>   3.191   0.495   3.696
 ```
 
 Why is it so slow? Where exactly are the slow parts? The standard
@@ -98,7 +100,7 @@ system.time({
   x <- data.frame(x = x, y = y)
 })
 #>    user  system elapsed 
-#>   0.006   0.000   0.007
+#>   0.007   0.000   0.007
 ```
 
 ## Managing the pprof server
@@ -214,3 +216,12 @@ file.exists(Sys.getenv("pprof_path"))
 system2(Sys.getenv("pprof_path")) # Shows the pprof help menu on Unix systems.
 shell(Sys.getenv("pprof_path")) # Analogous for Windows.
 ```
+
+## Contributing
+
+We encourage participation through
+[issues](https://github.com/wlandau/proffer/issues) and [pull
+requests](https://github.com/wlandau/proffer/pulls). `proffer` has a
+[Contributor Code of
+Conduct](https://github.com/wlandau/CODE_OF_CONDUCT.md). By contributing
+to this project, you agree to abide by its terms.

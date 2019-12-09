@@ -26,6 +26,7 @@ Imports:
   RProtoBuf,
   utils
 Suggests:
+  profvis,
   testthat (>= 2.1.0)
 Encoding: UTF-8
 Language: en-US
