@@ -1,6 +1,6 @@
 ^Thumbs\.db$
 ^build_site.R$
-^pkgdown$
+^docs
 ^\.DS_Store
 ^\.drake$
 ^\.drake_history$
@@ -43,3 +43,5 @@ vignettes/.*_files
 ^\.httr-oauth$
 ^CRAN-RELEASE$
 ^LICENSE\.md$
+^\.travis\.yml$
+^appveyor\.yml$

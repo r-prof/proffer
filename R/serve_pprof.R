@@ -1,3 +1,36 @@
+#' @title Profile R code and visualize with pprof.
+#' @export
+#' @description Run R code and display profiling results
+#'   in a local interactive pprof server.
+#' @return A `callr::r_bg()` handler. Use this handler
+#'   to take down the server with `$kill()`.
+#' @inheritParams serve_pprof
+#' @param expr R code to run and profile.
+#' @examples
+#' \dontrun{
+#' # Start a pprof virtual server in the background.
+#' px <- pprof(replicate(1e2, sample.int(1e4)))
+#' # Terminate the server.
+#' px$kill()
+#' }
+# nocov start
+pprof <- function(
+  expr,
+  host = "localhost",
+  port = NULL,
+  browse = interactive(),
+  verbose = TRUE
+) {
+  pprof <- record_pprof(expr)
+  serve_pprof(
+    pprof = pprof,
+    host = host,
+    port = port,
+    browse = browse,
+    verbose = verbose
+  )
+}
+
 #' @title Visualize profiling data with pprof.
 #' @export
 #' @description Visualize profiling data with pprof.
@@ -5,6 +38,7 @@
 #'   Navigate a browser to a URL in the message.
 #'   The server starts in a background process
 #' @return A `callr::r_bg()` handler. Use this handler
+#'   to take down the server with `$kill()`.
 #' @param pprof Path to pprof samples.
 #' @param host Host name. Set to `"localhost"` to view locally
 #'   or `"0.0.0.0"` to view from another machine.
@@ -21,7 +55,6 @@
 #' # Terminate the server.
 #' px$kill()
 #' }
-# nocov start
 serve_pprof <- function(
   pprof,
   host = "localhost",

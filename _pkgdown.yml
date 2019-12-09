@@ -1,0 +1,17 @@
+destination: docs/
+reference:
+- title: Help
+  contents:
+  - '`proffer-package`'
+- title: Visualize
+  contents:
+  - '`pprof`'
+  - '`serve_pprof`'
+- title: Profile
+  contents:
+  - '`record_pprof`'
+  - '`record_rprof`'
+- title: Convert
+  contents:
+  - '`to_pprof`'
+  - '`to_rprof`'

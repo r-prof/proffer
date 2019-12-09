@@ -10,6 +10,12 @@ Profiling in R powered by pprof.
 }
 \examples{
 # TBD
+\dontrun{
+# Start a pprof virtual server in the background.
+px <- pprof(replicate(1e2, sample.int(1e4)))
+# Terminate the server.
+px$kill()
+}
 }
 \references{
 \url{https://github.com/wlandau/pprof}

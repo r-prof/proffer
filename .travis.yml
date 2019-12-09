@@ -1,0 +1,25 @@
+language: R
+sudo: false
+cache: packages
+repos:
+  CRAN: https://cloud.r-project.org
+
+branches:
+  except:
+  - gh-pages
+
+warnings_are_errors: true
+
+r_packages:
+  - covr
+  - lintr
+
+after_success:
+  - Rscript -e 'cov <- covr::package_coverage(clean = FALSE)' -e 'print(cov)' -e 'covr::codecov(coverage = cov)'
+  - Rscript -e 'lintr::lint_package()'
+
+after_failure:
+  - find *Rcheck -name '*fail' -print -exec cat '{}' \;
+
+env:
+  - NOT_CRAN = true
