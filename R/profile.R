@@ -72,8 +72,10 @@ to_rprof <- function(pprof, rprof = tempfile()) {
 #'   or `"0.0.0.0"` to view from another machine.
 #' @param port Port number.
 #' @examples
+#' \dontrun{
 #' pprof <- record_pprof(replicate(1e2, sample.int(1e4)))
-#' to_rprof(pprof)
+#' vis_pprof(pprof)
+#' }
 vis_pprof <- function(pprof, host = "localhost", port = NULL) {
   server <- sprintf("%s:%s", host, port %||% random_port())
   message("local pprof server: http://", server)

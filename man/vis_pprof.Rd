@@ -25,6 +25,8 @@ Uses a local interactive server.
 Navigate a browser to a URL in the message.
 }
 \examples{
+\dontrun{
 pprof <- record_pprof(replicate(1e2, sample.int(1e4)))
-to_rprof(pprof)
+vis_pprof(pprof)
+}
 }
