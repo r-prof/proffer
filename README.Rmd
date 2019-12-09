@@ -90,6 +90,7 @@ Indeed, a look at "Top" shows we spend 85% of the runtime on `x[i, ] <- x[i, ] +
 <img src="https://wlandau.github.io/proffer/reference/figures/top.png" alt="top" align="center" style = "border: none; float: center;">
 </a>
 </center>
+<br>
 
 So we return to our R code and avoid data frame row assignment. Much faster!
 

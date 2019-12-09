@@ -31,7 +31,7 @@ system.time({
   x
 })
 #>    user  system elapsed 
-#>   3.020   0.423   3.445
+#>   2.894   0.477   3.373
 ```
 
 Why is it so slow? The standard recommendation is to use
@@ -103,6 +103,8 @@ x[i, ] + 1`. The other operations are fast by comparison.
 
 </center>
 
+<br>
+
 So we return to our R code and avoid data frame row assignment. Much
 faster\!
 
@@ -118,7 +120,7 @@ system.time({
   x <- data.frame(x = x, y = y)
 })
 #>    user  system elapsed 
-#>   0.007   0.000   0.008
+#>   0.006   0.000   0.006
 ```
 
 ## Managing the pprof server
