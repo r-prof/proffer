@@ -11,7 +11,7 @@
   "relatedLink": "https://wlandau.github.io/proffer",
   "issueTracker": "https://github.com/wlandau/proffer/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "0.0.0.9000",
+  "version": "0.0.1",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -123,7 +123,7 @@
   ],
   "releaseNotes": "https://github.com/wlandau/proffer/blob/master/NEWS.md",
   "readme": "https://github.com/wlandau/proffer/blob/master/README.md",
-  "fileSize": "97.512KB",
+  "fileSize": "97.517KB",
   "contIntegration": [
     "https://travis-ci.org/wlandau/proffer",
     "https://ci.appveyor.com/project/wlandau/proffer",

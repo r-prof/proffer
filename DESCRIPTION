@@ -1,6 +1,6 @@
 Package: proffer
 Title: Profile R Code with Pprof
-Version: 0.0.0.9000
+Version: 0.0.1
 Authors@R: c(
   person(
     given = c("William", "Michael"),
