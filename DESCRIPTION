@@ -13,7 +13,9 @@ Authors@R: c(
     family = "Eli Lilly and Company",
     role = "cph"
   ))
-Description: Proffer is a profiling package.
+Description: It can be challenging to find sources of
+  slowness in large workflows, and the proffer package can help.
+  Proffer runs R code and displays summaries
   It runs R code and displays summaries
   to show where the code is slowest. Proffer leverages
   the pprof utility to create highly efficient, clear, easy-to-read

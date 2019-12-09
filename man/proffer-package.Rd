@@ -6,8 +6,9 @@
 \alias{proffer}
 \title{proffer: profile R code with pprof}
 \description{
-Proffer is a profiling package.
-It runs R code and displays summaries
+It can be challenging to find sources of
+slowness in large workflows, and the proffer package can help.
+Proffer runs R code and displays summaries
 to show where the code is slowest. Proffer leverages
 the pprof utility to create highly efficient, clear, easy-to-read
 interactive displays that help users find ways to reduce runtime.
@@ -25,7 +26,7 @@ px$kill()
 }
 }
 \references{
-\url{https://github.com/wlandau/pprof}
+\url{https://github.com/wlandau/proffer}
 }
 \author{
 William Michael Landau \email{will.landau@gmail.com}
