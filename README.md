@@ -103,7 +103,7 @@ x[i, ] + 1`. The other operations are fast by comparison.
 
 </center>
 
-<br>
+<br><br>
 
 So we return to our R code and avoid data frame row assignment. Much
 faster\!
