@@ -3,10 +3,13 @@ reference:
 - title: Help
   contents:
   - '`proffer-package`'
-- title: Visualize
+- title: Everything
   contents:
   - '`pprof`'
+- title: Visualize
+  contents:
   - '`serve_pprof`'
+  - '`serve_rprof`'
 - title: Profile
   contents:
   - '`record_pprof`'
