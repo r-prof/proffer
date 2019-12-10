@@ -123,7 +123,7 @@
   ],
   "releaseNotes": "https://github.com/wlandau/proffer/blob/master/NEWS.md",
   "readme": "https://github.com/wlandau/proffer/blob/master/README.md",
-  "fileSize": "97.517KB",
+  "fileSize": "96.126KB",
   "contIntegration": [
     "https://travis-ci.org/wlandau/proffer",
     "https://ci.appveyor.com/project/wlandau/proffer",
