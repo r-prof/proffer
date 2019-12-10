@@ -39,7 +39,9 @@ pprof <- function(
 #'   The server starts in a background process
 #' @return A `callr::r_bg()` handle. Use this handle
 #'   to take down the server with `$kill()`.
-#' @inheritParams serve_pprov
+#' @inheritParams serve_pprof
+#' @param rprof Path to profiling samples generated
+#'   by `Rprof()` or [record_rprof()].
 #' @examples
 #' \dontrun{
 #' rprof <- record_rprof(replicate(1e2, sample.int(1e4)))

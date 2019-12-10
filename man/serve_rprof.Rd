@@ -12,6 +12,27 @@ serve_rprof(
   verbose = TRUE
 )
 }
+\arguments{
+\item{rprof}{Path to profiling samples generated
+by \code{Rprof()} or \code{\link[=record_rprof]{record_rprof()}}.}
+
+\item{host}{Host name. Set to \code{"localhost"} to view locally
+or \code{"0.0.0.0"} to view from another machine. If you view
+from another machine, the printed out URL will not be valid.
+For example, if \code{pprof()} or \code{serve_pprof()} prints
+"http://0.0.0.0:8080", then you need to replace 0.0.0.0
+with your computer's name or IP address, e.g.
+"http://my_computer.com:8080".}
+
+\item{port}{Port number for hosting the local pprof server.
+Chosen randomly by default.}
+
+\item{browse}{Logical, whether to open a browser to view
+the pprof server.}
+
+\item{verbose}{Logical, whether to print the URL of the pprof
+server to the R console as a message.}
+}
 \value{
 A \code{callr::r_bg()} handle. Use this handle
 to take down the server with \verb{$kill()}.
