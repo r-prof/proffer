@@ -8,13 +8,13 @@
 #' interactive displays that help users find ways to reduce runtime.
 #' The package also contains helpers to convert profiling data
 #' to and from pprof format and visualize existing profiling data files.
-#' For documentation, visit <https://wlandau.github.io/proffer>.
+#' For documentation, visit <https://r-prof.github.io/proffer>.
 #' @name proffer-package
 #' @aliases proffer
 #' @author William Michael Landau \email{will.landau@@gmail.com}
 #' @examples
 #' # TBD
-#' @references <https://github.com/wlandau/proffer>
+#' @references <https://github.com/r-prof/proffer>
 #' @importFrom callr r_bg
 #' @importFrom profile read_rprof write_pprof
 #' @importFrom RProtoBuf readProtoFiles

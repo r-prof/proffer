@@ -143,7 +143,7 @@ missing_pprof <- function() {
   stop(
     "cannot find pprof at ",
     shQuote(Sys.getenv("pprof_path")),
-    ". See the setup instructions at https://wlandau.github.io/proffer.",
+    ". See the setup instructions at https://r-prof.github.io/proffer.",
     call. = FALSE
   )
 }

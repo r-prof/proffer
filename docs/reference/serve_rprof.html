@@ -91,7 +91,7 @@ produced by Rprof() or record_rprof()." />
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/wlandau/proffer">
+  <a href="https://github.com/r-prof/proffer">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -110,7 +110,7 @@ produced by Rprof() or record_rprof()." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Visualize Rprof() output with pprof.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/wlandau/proffer/blob/master/R/pprof.R'><code>R/pprof.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/r-prof/proffer/blob/master/R/pprof.R'><code>R/pprof.R</code></a></small>
     <div class="hidden name"><code>serve_rprof.Rd</code></div>
     </div>
 
@@ -127,6 +127,40 @@ produced by <code><a href='https://rdrr.io/r/utils/Rprof.html'>Rprof()</a></code
   <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
 )</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>rprof</th>
+      <td><p>Path to profiling samples generated
+by <code><a href='https://rdrr.io/r/utils/Rprof.html'>Rprof()</a></code> or <code><a href='record_rprof.html'>record_rprof()</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>host</th>
+      <td><p>Host name. Set to <code>"localhost"</code> to view locally
+or <code>"0.0.0.0"</code> to view from another machine. If you view
+from another machine, the printed out URL will not be valid.
+For example, if <code><a href='pprof.html'>pprof()</a></code> or <code><a href='serve_pprof.html'>serve_pprof()</a></code> prints
+"http://0.0.0.0:8080", then you need to replace 0.0.0.0
+with your computer's name or IP address, e.g.
+"http://my_computer.com:8080".</p></td>
+    </tr>
+    <tr>
+      <th>port</th>
+      <td><p>Port number for hosting the local pprof server.
+Chosen randomly by default.</p></td>
+    </tr>
+    <tr>
+      <th>browse</th>
+      <td><p>Logical, whether to open a browser to view
+the pprof server.</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>Logical, whether to print the URL of the pprof
+server to the R console as a message.</p></td>
+    </tr>
+    </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
@@ -150,6 +184,7 @@ The server starts in a background process</p>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
       <li><a href="#details">Details</a></li>
       <li><a href="#examples">Examples</a></li>

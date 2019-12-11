@@ -3,13 +3,13 @@ name: New feature
 about: Suggest a new feature.
 title: ''
 labels: 'type: new feature'
-assignees: wlandau
+assignees: r-prof
 ---
 
 ## Prework
 
-- [ ] Read and abide by `proffer`'s [code of conduct](https://github.com/wlandau/proffer/blob/master/CODE_OF_CONDUCT.md).
-- [ ] Search for duplicates among the [existing issues](https://github.com/wlandau/proffer/issues), both open and closed.
+- [ ] Read and abide by `proffer`'s [code of conduct](https://github.com/r-prof/proffer/blob/master/CODE_OF_CONDUCT.md).
+- [ ] Search for duplicates among the [existing issues](https://github.com/r-prof/proffer/issues), both open and closed.
 
 ## Proposal
 

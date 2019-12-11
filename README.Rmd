@@ -18,11 +18,11 @@ knitr::opts_chunk$set(
 [![CRAN](https://www.r-pkg.org/badges/version/proffer)](https://cran.r-project.org/package=proffer)
 [![license](https://img.shields.io/badge/licence-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![Travis build status](https://travis-ci.org/wlandau/proffer.svg?branch=master)](https://travis-ci.org/wlandau/proffer)
-[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/wlandau/proffer?branch=master&svg=true)](https://ci.appveyor.com/project/wlandau/proffer)
-[![Codecov](https://codecov.io/github/wlandau/proffer/coverage.svg?branch=master)](https://codecov.io/github/wlandau/proffer?branch=master)
+[![Travis build status](https://travis-ci.org/r-prof/proffer.svg?branch=master)](https://travis-ci.org/r-prof/proffer)
+[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/r-prof/proffer?branch=master&svg=true)](https://ci.appveyor.com/project/r-prof/proffer)
+[![Codecov](https://codecov.io/github/r-prof/proffer/coverage.svg?branch=master)](https://codecov.io/github/r-prof/proffer?branch=master)
 
-The `proffer` package profiles R code to find the slow parts. Visit <https://wlandau.github.io/proffer> for documentation. <https://wlandau.github.io/proffer/reference/index.html> has a complete list of available functions in the package. 
+The `proffer` package profiles R code to find the slow parts. Visit <https://r-prof.github.io/proffer> for documentation. <https://r-prof.github.io/proffer/reference/index.html> has a complete list of available functions in the package. 
 
 ## How it works
 
@@ -54,8 +54,8 @@ profvis({
 ```
 
 <center>
-<a href="https://wlandau.github.io/proffer/reference/figures/profvis.png">
-<img src="https://wlandau.github.io/proffer/reference/figures/profvis.png" alt="top" align="center" style = "border: none; float: center;">
+<a href="https://r-prof.github.io/proffer/reference/figures/profvis.png">
+<img src="https://r-prof.github.io/proffer/reference/figures/profvis.png" alt="top" align="center" style = "border: none; float: center;">
 </a>
 </center>
 
@@ -78,16 +78,16 @@ px <- pprof({
 When we navigate a web browser to <http://localhost:64610> and select the flame graph under the VIEW menu, `[<-.data.frame()` jumps out at us immediately. Apparently, the line `x[i, ] <- x[i, ] + 1` takes the most runtime.
 
 <center>
-<a href="https://wlandau.github.io/proffer/reference/figures/flame.png">
-<img src="https://wlandau.github.io/proffer/reference/figures/flame.png" alt="top" align="center" style = "border: none; float: center;">
+<a href="https://r-prof.github.io/proffer/reference/figures/flame.png">
+<img src="https://r-prof.github.io/proffer/reference/figures/flame.png" alt="top" align="center" style = "border: none; float: center;">
 </a>
 </center>
 
 Indeed, a look at "Top" shows we spend 85% of the runtime on `x[i, ] <- x[i, ] + 1`. The other operations are fast by comparison.
 
 <center>
-<a href="https://wlandau.github.io/proffer/reference/figures/top.png">
-<img src="https://wlandau.github.io/proffer/reference/figures/top.png" alt="top" align="center" style = "border: none; float: center;">
+<a href="https://r-prof.github.io/proffer/reference/figures/top.png">
+<img src="https://r-prof.github.io/proffer/reference/figures/top.png" alt="top" align="center" style = "border: none; float: center;">
 </a>
 </center>
 <br><br>
@@ -178,10 +178,10 @@ Alternatively, you can install the development version from GitHub.
 
 ```{r, eval = FALSE}
 # install.packages("remotes")
-remotes::install_github("wlandau/proffer")
+remotes::install_github("r-prof/proffer")
 ```
 
-To use functions `pprof()` and `serve_pprof()`, you need to install [`pprof`](https://github.com/google/pprof). Installing `pprof` is hard, so if you have trouble, please do not hesitate to [open an issue](https://github.com/wlandau/proffer/issues) and ask for help. And if you cannot install `pprof`, then [`profvis`](https://rstudio.github.io/profvis/) is an excellent alternative.
+To use functions `pprof()` and `serve_pprof()`, you need to install [`pprof`](https://github.com/google/pprof). Installing `pprof` is hard, so if you have trouble, please do not hesitate to [open an issue](https://github.com/r-prof/proffer/issues) and ask for help. And if you cannot install `pprof`, then [`profvis`](https://rstudio.github.io/profvis/) is an excellent alternative.
 
 1. [Install the Go programming language](https://golang.org/doc/install).
 2. Ensure your system can find the Go binaries. Open your command line interface of choice (e.g. Terminal or Command Prompt) and type `go version`. If you get an error, you may need to set the `PATH` environment variable as described [here for Linux](https://www.callicoder.com/golang-installation-setup-gopath-workspace/#linux) and [here for Windows](http://www.wadewegner.com/2014/12/easy-go-programming-setup-for-windows/)
@@ -202,4 +202,4 @@ shell(Sys.getenv("pprof_path")) # Analogous for Windows.
 
 ## Contributing
 
-We encourage participation through [issues](https://github.com/wlandau/proffer/issues) and [pull requests](https://github.com/wlandau/proffer/pulls). `proffer` has a [Contributor Code of Conduct](https://github.com/wlandau/CODE_OF_CONDUCT.md). By contributing to this project, you agree to abide by its terms.
+We encourage participation through [issues](https://github.com/r-prof/proffer/issues) and [pull requests](https://github.com/r-prof/proffer/pulls). `proffer` has a [Contributor Code of Conduct](https://github.com/r-prof/CODE_OF_CONDUCT.md). By contributing to this project, you agree to abide by its terms.

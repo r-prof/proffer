@@ -14,7 +14,7 @@ the pprof utility to create highly efficient, clear, easy-to-read
 interactive displays that help users find ways to reduce runtime.
 The package also contains helpers to convert profiling data
 to and from pprof format and visualize existing profiling data files.
-For documentation, visit \url{https://wlandau.github.io/proffer}.
+For documentation, visit \url{https://r-prof.github.io/proffer}.
 }
 \examples{
 # TBD
@@ -26,7 +26,7 @@ px$kill()
 }
 }
 \references{
-\url{https://github.com/wlandau/proffer}
+\url{https://github.com/r-prof/proffer}
 }
 \author{
 William Michael Landau \email{will.landau@gmail.com}

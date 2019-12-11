@@ -1,15 +1,12 @@
 {
-  "@context": [
-    "https://doi.org/10.5063/schema/codemeta-2.0",
-    "http://schema.org"
-  ],
+  "@context": ["https://doi.org/10.5063/schema/codemeta-2.0", "http://schema.org"],
   "@type": "SoftwareSourceCode",
   "identifier": "proffer",
-  "description": "It can be challenging to find sources of\n  slowness in large workflows, and the proffer package can help.\n  Proffer runs R code and displays summaries\n  It runs R code and displays summaries\n  to show where the code is slowest. Proffer leverages\n  the pprof utility to create highly efficient, clear, easy-to-read\n  interactive displays that help users find ways to reduce runtime.\n  The package also contains helpers to convert profiling data\n  to and from pprof format and visualize existing profiling data files.\n  For documentation, visit <https://wlandau.github.io/proffer>.",
+  "description": "It can be challenging to find sources of\n  slowness in large workflows, and the proffer package can help.\n  Proffer runs R code and displays summaries\n  It runs R code and displays summaries\n  to show where the code is slowest. Proffer leverages\n  the pprof utility to create highly efficient, clear, easy-to-read\n  interactive displays that help users find ways to reduce runtime.\n  The package also contains helpers to convert profiling data\n  to and from pprof format and visualize existing profiling data files.\n  For documentation, visit <https://r-prof.github.io/proffer>.",
   "name": "proffer: Profile R Code with Pprof",
-  "codeRepository": "https://github.com/wlandau/proffer",
-  "relatedLink": "https://wlandau.github.io/proffer",
-  "issueTracker": "https://github.com/wlandau/proffer/issues",
+  "codeRepository": "https://github.com/r-prof/proffer",
+  "relatedLink": "https://r-prof.github.io/proffer",
+  "issueTracker": "https://github.com/r-prof/proffer/issues",
   "license": "https://spdx.org/licenses/MIT",
   "version": "0.0.1",
   "programmingLanguage": {
@@ -121,13 +118,9 @@
       "name": "utils"
     }
   ],
-  "releaseNotes": "https://github.com/wlandau/proffer/blob/master/NEWS.md",
-  "readme": "https://github.com/wlandau/proffer/blob/master/README.md",
-  "fileSize": "96.126KB",
-  "contIntegration": [
-    "https://travis-ci.org/wlandau/proffer",
-    "https://ci.appveyor.com/project/wlandau/proffer",
-    "https://codecov.io/github/wlandau/proffer?branch=master"
-  ],
+  "releaseNotes": "https://github.com/r-prof/proffer/blob/master/NEWS.md",
+  "readme": "https://github.com/r-prof/proffer/blob/master/README.md",
+  "fileSize": "96.066KB",
+  "contIntegration": ["https://travis-ci.org/r-prof/proffer", "https://ci.appveyor.com/project/r-prof/proffer", "https://codecov.io/github/r-prof/proffer?branch=master"],
   "developmentStatus": "https://www.repostatus.org/#active"
 }

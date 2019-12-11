@@ -7,14 +7,14 @@
 [![license](https://img.shields.io/badge/licence-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Travis build
-status](https://travis-ci.org/wlandau/proffer.svg?branch=master)](https://travis-ci.org/wlandau/proffer)
+status](https://travis-ci.org/r-prof/proffer.svg?branch=master)](https://travis-ci.org/r-prof/proffer)
 [![AppVeyor build
-status](https://ci.appveyor.com/api/projects/status/github/wlandau/proffer?branch=master&svg=true)](https://ci.appveyor.com/project/wlandau/proffer)
-[![Codecov](https://codecov.io/github/wlandau/proffer/coverage.svg?branch=master)](https://codecov.io/github/wlandau/proffer?branch=master)
+status](https://ci.appveyor.com/api/projects/status/github/r-prof/proffer?branch=master&svg=true)](https://ci.appveyor.com/project/r-prof/proffer)
+[![Codecov](https://codecov.io/github/r-prof/proffer/coverage.svg?branch=master)](https://codecov.io/github/r-prof/proffer?branch=master)
 
 The `proffer` package profiles R code to find the slow parts. Visit
-<https://wlandau.github.io/proffer> for documentation.
-<https://wlandau.github.io/proffer/reference/index.html> has a complete
+<https://r-prof.github.io/proffer> for documentation.
+<https://r-prof.github.io/proffer/reference/index.html> has a complete
 list of available functions in the package.
 
 ## How it works
@@ -51,8 +51,8 @@ profvis({
 
 <center>
 
-<a href="https://wlandau.github.io/proffer/reference/figures/profvis.png">
-<img src="https://wlandau.github.io/proffer/reference/figures/profvis.png" alt="top" align="center" style = "border: none; float: center;">
+<a href="https://r-prof.github.io/proffer/reference/figures/profvis.png">
+<img src="https://r-prof.github.io/proffer/reference/figures/profvis.png" alt="top" align="center" style = "border: none; float: center;">
 </a>
 
 </center>
@@ -86,8 +86,8 @@ runtime.
 
 <center>
 
-<a href="https://wlandau.github.io/proffer/reference/figures/flame.png">
-<img src="https://wlandau.github.io/proffer/reference/figures/flame.png" alt="top" align="center" style = "border: none; float: center;">
+<a href="https://r-prof.github.io/proffer/reference/figures/flame.png">
+<img src="https://r-prof.github.io/proffer/reference/figures/flame.png" alt="top" align="center" style = "border: none; float: center;">
 </a>
 
 </center>
@@ -97,8 +97,8 @@ x[i, ] + 1`. The other operations are fast by comparison.
 
 <center>
 
-<a href="https://wlandau.github.io/proffer/reference/figures/top.png">
-<img src="https://wlandau.github.io/proffer/reference/figures/top.png" alt="top" align="center" style = "border: none; float: center;">
+<a href="https://r-prof.github.io/proffer/reference/figures/top.png">
+<img src="https://r-prof.github.io/proffer/reference/figures/top.png" alt="top" align="center" style = "border: none; float: center;">
 </a>
 
 </center>
@@ -200,13 +200,13 @@ Alternatively, you can install the development version from GitHub.
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("wlandau/proffer")
+remotes::install_github("r-prof/proffer")
 ```
 
 To use functions `pprof()` and `serve_pprof()`, you need to install
 [`pprof`](https://github.com/google/pprof). Installing `pprof` is hard,
 so if you have trouble, please do not hesitate to [open an
-issue](https://github.com/wlandau/proffer/issues) and ask for help. And
+issue](https://github.com/r-prof/proffer/issues) and ask for help. And
 if you cannot install `pprof`, then
 [`profvis`](https://rstudio.github.io/profvis/) is an excellent
 alternative.
@@ -248,8 +248,8 @@ shell(Sys.getenv("pprof_path")) # Analogous for Windows.
 ## Contributing
 
 We encourage participation through
-[issues](https://github.com/wlandau/proffer/issues) and [pull
-requests](https://github.com/wlandau/proffer/pulls). `proffer` has a
+[issues](https://github.com/r-prof/proffer/issues) and [pull
+requests](https://github.com/r-prof/proffer/pulls). `proffer` has a
 [Contributor Code of
-Conduct](https://github.com/wlandau/CODE_OF_CONDUCT.md). By contributing
+Conduct](https://github.com/r-prof/CODE_OF_CONDUCT.md). By contributing
 to this project, you agree to abide by its terms.

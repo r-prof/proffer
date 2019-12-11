@@ -22,11 +22,11 @@ Description: It can be challenging to find sources of
   interactive displays that help users find ways to reduce runtime.
   The package also contains helpers to convert profiling data
   to and from pprof format and visualize existing profiling data files.
-  For documentation, visit <https://wlandau.github.io/proffer>.
+  For documentation, visit <https://r-prof.github.io/proffer>.
 License: MIT + file LICENSE
-URL: https://github.com/wlandau/proffer,
-  https://wlandau.github.io/proffer
-BugReports: https://github.com/wlandau/proffer/issues
+URL: https://github.com/r-prof/proffer,
+  https://r-prof.github.io/proffer
+BugReports: https://github.com/r-prof/proffer/issues
 Depends:
   R (>= 3.3.0)
 Imports:
