@@ -31,7 +31,7 @@ system.time({
   x
 })
 #>    user  system elapsed 
-#>   2.507   0.016   2.524
+#>   2.398   0.012   2.409
 ```
 
 Why is it so slow? The standard recommendation is to use
@@ -120,7 +120,7 @@ system.time({
   x <- data.frame(x = x, y = y)
 })
 #>    user  system elapsed 
-#>   0.004   0.000   0.004
+#>   0.005   0.000   0.005
 ```
 
 ## Managing the pprof server
