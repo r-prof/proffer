@@ -1,5 +1,8 @@
 {
-  "@context": ["https://doi.org/10.5063/schema/codemeta-2.0", "http://schema.org"],
+  "@context": [
+    "https://doi.org/10.5063/schema/codemeta-2.0",
+    "http://schema.org"
+  ],
   "@type": "SoftwareSourceCode",
   "identifier": "proffer",
   "description": "It can be challenging to find sources of\n  slowness in large workflows, and the proffer package can help.\n  Proffer runs R code and displays summaries\n  It runs R code and displays summaries\n  to show where the code is slowest. Proffer leverages\n  the pprof utility to create highly efficient, clear, easy-to-read\n  interactive displays that help users find ways to reduce runtime.\n  The package also contains helpers to convert profiling data\n  to and from pprof format and visualize existing profiling data files.\n  For documentation, visit <https://r-prof.github.io/proffer>.",
@@ -8,7 +11,7 @@
   "relatedLink": "https://r-prof.github.io/proffer",
   "issueTracker": "https://github.com/r-prof/proffer/issues",
   "license": "https://spdx.org/licenses/MIT",
-  "version": "0.0.1",
+  "version": "0.0.1.9000",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
@@ -78,15 +81,15 @@
     },
     {
       "@type": "SoftwareApplication",
-      "identifier": "callr",
-      "name": "callr",
+      "identifier": "processx",
+      "name": "processx",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
         "name": "Comprehensive R Archive Network (CRAN)",
         "url": "https://cran.r-project.org"
       },
-      "sameAs": "https://CRAN.R-project.org/package=callr"
+      "sameAs": "https://CRAN.R-project.org/package=processx"
     },
     {
       "@type": "SoftwareApplication",
@@ -118,9 +121,13 @@
       "name": "utils"
     }
   ],
-  "releaseNotes": "https://github.com/r-prof/proffer/blob/master/NEWS.md",
+  "releaseNotes": "https://github.com/wlandau/proffer/blob/master/NEWS.md",
   "readme": "https://github.com/r-prof/proffer/blob/master/README.md",
-  "fileSize": "96.066KB",
-  "contIntegration": ["https://travis-ci.org/r-prof/proffer", "https://ci.appveyor.com/project/r-prof/proffer", "https://codecov.io/github/r-prof/proffer?branch=master"],
+  "fileSize": "432.932KB",
+  "contIntegration": [
+    "https://travis-ci.org/r-prof/proffer",
+    "https://ci.appveyor.com/project/r-prof/proffer",
+    "https://codecov.io/github/r-prof/proffer?branch=master"
+  ],
   "developmentStatus": "https://www.repostatus.org/#active"
 }

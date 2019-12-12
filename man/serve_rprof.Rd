@@ -34,7 +34,7 @@ the pprof server.}
 server to the R console as a message.}
 }
 \value{
-A \code{callr::r_bg()} handle. Use this handle
+A \code{processx::process$new()} handle. Use this handle
 to take down the server with \verb{$kill()}.
 }
 \description{

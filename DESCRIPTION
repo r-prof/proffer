@@ -30,7 +30,7 @@ BugReports: https://github.com/r-prof/proffer/issues
 Depends:
   R (>= 3.3.0)
 Imports:
-  callr,
+  processx,
   profile,
   RProtoBuf,
   utils

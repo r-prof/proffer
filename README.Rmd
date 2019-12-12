@@ -164,7 +164,7 @@ It is best to take down the `pprof` server when you are done with it.
 px$kill()
 ```
 
-`px` is the handle of a [`callr`](https://github.com/r-lib/callr) background process. To learn more about how to manage the process, have a look at the [`callr`](https://callr.r-lib.org/) documentation, particularly the function [`r_bg()`](https://callr.r-lib.org/reference/r_bg.html).
+`px` is the handle of a [`processx`](https://github.com/r-lib/processx) background process. To learn more about how to manage the process, have a look at the [`processx`](https://processx.r-lib.org/) documentation, particularly the [help page of processx::process$new()](https://processx.r-lib.org/reference/process.html).
 
 ## Installation
 

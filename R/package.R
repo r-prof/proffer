@@ -15,7 +15,7 @@
 #' @examples
 #' # TBD
 #' @references <https://github.com/r-prof/proffer>
-#' @importFrom callr r_bg
+#' @importFrom processx process
 #' @importFrom profile read_rprof write_pprof
 #' @importFrom RProtoBuf readProtoFiles
 #' @importFrom utils browseURL Rprof

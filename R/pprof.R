@@ -2,7 +2,7 @@
 #' @export
 #' @description Run R code and display profiling results
 #'   in a local interactive pprof server.
-#' @return A `callr::r_bg()` handle. Use this handle
+#' @return A `processx::process$new()` handle. Use this handle
 #'   to take down the server with `$kill()`.
 #' @inheritParams serve_pprof
 #' @param expr R code to run and profile.
@@ -37,7 +37,7 @@ pprof <- function(
 #' @details Uses a local interactive server.
 #'   Navigate a browser to a URL in the message.
 #'   The server starts in a background process
-#' @return A `callr::r_bg()` handle. Use this handle
+#' @return A `processx::process$new()` handle. Use this handle
 #'   to take down the server with `$kill()`.
 #' @inheritParams serve_pprof
 #' @param rprof Path to profiling samples generated
@@ -73,7 +73,7 @@ serve_rprof <- function(
 #' @details Uses a local interactive server.
 #'   Navigate a browser to a URL in the message.
 #'   The server starts in a background process
-#' @return A `callr::r_bg()` handle. Use this handle
+#' @return A `processx::process$new()` handle. Use this handle
 #'   to take down the server with `$kill()`.
 #' @param pprof Path to pprof samples.
 #' @param host Host name. Set to `"localhost"` to view locally
@@ -107,10 +107,8 @@ serve_pprof <- function(
   assert_pprof()
   server <- sprintf("%s:%s", host, port %||% random_port())
   url <- sprintf("http://%s", server)
-  func <- ifelse(on_windows(), serve_pprof_windows, serve_pprof_linux)
   args <- c("-http", server, pprof)
-  env <- callr::rcmd_safe_env()
-  px <- callr::r_bg(func = func, args = list(args = args), supervise = TRUE)
+  px <- serve_pprof_impl(args)
   if (verbose) {
     message(url)
   }
@@ -120,12 +118,14 @@ serve_pprof <- function(
   px
 }
 
-serve_pprof_windows <- function(args) {
-  shell(paste(c("pprof", args), collapse = " "))
-}
-
-serve_pprof_linux <- function(args) {
-  system2(Sys.getenv("pprof_path"), args)
+serve_pprof_impl <- function(args) {
+  processx::process$new(
+    command = Sys.getenv("pprof_path"),
+    args = args,
+    stdout = "|",
+    stderr = "|",
+    supervise = TRUE
+  )
 }
 
 random_port <- function(from = 49152L, to = 65355L) {
