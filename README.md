@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# proffer
+# proffer <img src="https://r-prof.github.io/proffer/reference/figures/logo.png" align="right" alt="logo" width="120" height="139" style="border: none; float: right;">
 
 [![CRAN](https://www.r-pkg.org/badges/version/proffer)](https://cran.r-project.org/package=proffer)
 [![license](https://img.shields.io/badge/licence-MIT-blue.svg)](https://opensource.org/licenses/MIT)
@@ -31,7 +31,7 @@ system.time({
   x
 })
 #>    user  system elapsed 
-#>   2.894   0.477   3.373
+#>   2.507   0.016   2.524
 ```
 
 Why is it so slow? The standard recommendation is to use
@@ -120,7 +120,7 @@ system.time({
   x <- data.frame(x = x, y = y)
 })
 #>    user  system elapsed 
-#>   0.006   0.000   0.006
+#>   0.004   0.000   0.004
 ```
 
 ## Managing the pprof server
