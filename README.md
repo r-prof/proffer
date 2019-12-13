@@ -12,14 +12,14 @@ status](https://travis-ci.org/r-prof/proffer.svg?branch=master)](https://travis-
 status](https://ci.appveyor.com/api/projects/status/github/r-prof/proffer?branch=master&svg=true)](https://ci.appveyor.com/project/r-prof/proffer)
 [![Codecov](https://codecov.io/github/r-prof/proffer/coverage.svg?branch=master)](https://codecov.io/github/r-prof/proffer?branch=master)
 
-The `proffer` package profiles R code to find the slow parts. Visit
+The `proffer` package profiles R code to find bottlenecks. Visit
 <https://r-prof.github.io/proffer> for documentation.
 <https://r-prof.github.io/proffer/reference/index.html> has a complete
 list of available functions in the package.
 
 ## How it works
 
-Let’s say you have some slow R code and you want to speed it up.
+This R code is slow.
 
 ``` r
 system.time({
@@ -34,7 +34,7 @@ system.time({
 #> 82.060  28.440 110.582 
 ```
 
-Why is it so slow? The standard recommendation is to use
+What exactly is slowing it down? A common recommendation is to use
 [`profvis`](https://github.com/rstudio/profvis) to find out.
 
 ``` r
@@ -49,6 +49,11 @@ profvis({
 })
 ```
 
+However, `profvis`-generated flame graphs can be [difficult to
+read](https://github.com/rstudio/profvis/issues/115) and [slow to
+respond to mouse
+clicks](https://github.com/rstudio/profvis/issues/104).
+
 <center>
 
 <a href="https://r-prof.github.io/proffer/reference/figures/profvis.png">
@@ -57,14 +62,8 @@ profvis({
 
 </center>
 
-`profvis` makes profiling super easy. However, when `proffer` was first
-released, `profvis` was struggling with some heavy-duty use cases. When
-there are a lot of operations to profile, `profvis`-generated flame
-graphs like the one above were sometimes [difficult to
-read](https://github.com/rstudio/profvis/issues/115) and [slow to
-respond to mouse clicks](https://github.com/rstudio/profvis/issues/104).
-`proffer` uses [`pprof`](https://github.com/google/pprof) to make the
-visualizations friendly and fast.
+`proffer` uses [`pprof`](https://github.com/google/pprof) to create
+friendly, fast visualizations.
 
 ``` r
 library(proffer)
@@ -79,10 +78,9 @@ px <- pprof({
 #> http://localhost:64610
 ```
 
-When we navigate a web browser to <http://localhost:64610> and select
-the flame graph under the VIEW menu, `[<-.data.frame()` jumps out at us
-immediately. Apparently, the line `x[i, ] <- x[i, ] + 1` takes the most
-runtime.
+When we navigate to <http://localhost:64610> and select the flame graph,
+`[<-.data.frame()` jumps out at us immediately. Apparently, the line
+`x[i, ] <- x[i, ] + 1` is the bottleneck.
 
 <center>
 
@@ -120,7 +118,7 @@ system.time({
   x <- data.frame(x = x, y = y)
 })
 #>    user  system elapsed 
-#>   0.051   0.002   0.052
+#>   0.049   0.002   0.051
 ```
 
 ## Managing the pprof server
