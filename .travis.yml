@@ -7,7 +7,6 @@ repos:
 addons:
   apt:
     packages:
-    - gfortran
     - libprotoc-dev
     - libprotobuf-dev
     - protobuf-compiler
