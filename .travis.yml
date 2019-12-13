@@ -4,6 +4,16 @@ cache: packages
 repos:
   CRAN: https://cloud.r-project.org
 
+addons:
+  apt:
+    packages:
+    - libprotoc-dev
+    - libprotobuf-dev
+    - protobuf-compiler
+
+before_script:
+  - sudo apt-get -qq update
+
 branches:
   except:
   - gh-pages
@@ -23,10 +33,3 @@ after_failure:
 
 env:
   - NOT_CRAN = true
-
-addons:
-  apt:
-    packages:
-    - libprotoc-dev
-    - libprotobuf-dev
-    - protobuf-compiler
