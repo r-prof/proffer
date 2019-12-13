@@ -7,12 +7,10 @@ repos:
 addons:
   apt:
     packages:
+    - gfortran
     - libprotoc-dev
     - libprotobuf-dev
     - protobuf-compiler
-
-before_script:
-  - sudo apt-get -qq update
 
 branches:
   except:
