@@ -28,15 +28,17 @@ The `proffer` package profiles R code to find the slow parts. Visit <https://r-p
 
 Let's say you have some slow R code and you want to speed it up.
 
-```{r}
+```{r, eval = FALSE}
 system.time({
-  n <- 1e4
+  n <- 1e5
   x <- data.frame(x = rnorm(n), y = rnorm(n))
   for (i in seq_len(n)) {
     x[i, ] <- x[i, ] + 1
   }
   x
 })
+#>   user  system elapsed 
+#> 82.060  28.440 110.582 
 ```
 
 Why is it so slow? The standard recommendation is to use [`profvis`](https://github.com/rstudio/profvis) to find out. 
@@ -44,7 +46,7 @@ Why is it so slow? The standard recommendation is to use [`profvis`](https://git
 ```{r, eval = FALSE}
 library(profvis)
 profvis({
-  n <- 1e4
+  n <- 1e5
   x <- data.frame(x = rnorm(n), y = rnorm(n))
   for (i in seq_len(n)) {
     x[i, ] <- x[i, ] + 1
@@ -64,7 +66,7 @@ profvis({
 ```{r, eval = FALSE}
 library(proffer)
 px <- pprof({
-  n <- 1e4
+  n <- 1e5
   x <- data.frame(x = rnorm(n), y = rnorm(n))
   for (i in seq_len(n)) {
     x[i, ] <- x[i, ] + 1
@@ -83,7 +85,7 @@ When we navigate a web browser to <http://localhost:64610> and select the flame 
 </a>
 </center>
 
-Indeed, a look at "Top" shows we spend 85% of the runtime on `x[i, ] <- x[i, ] + 1`. The other operations are fast by comparison.
+Indeed, a look at "Top" shows we spend most of the runtime on `x[i, ] <- x[i, ] + 1`. The other operations are fast by comparison.
 
 <center>
 <a href="https://r-prof.github.io/proffer/reference/figures/top.png">
@@ -96,7 +98,7 @@ So we return to our R code and avoid data frame row assignment. Much faster!
 
 ```{r}
 system.time({
-  n <- 1e4
+  n <- 1e5
   x <- rnorm(n)
   y <- rnorm(n)
   for (i in seq_len(n)) {
@@ -128,20 +130,16 @@ px$is_alive()
 # [1] FALSE
 
 px$read_error() # Why did it quit soon?
-#> [1] "sh: /user/local/bin/pprof: No such file or directory\n"
+#> [1] "sh: /user/local/bin/pprof: No such file or directory\nWarning message:\nIn system2(Sys.getenv(\"pprof_path\"), args) : error in running command\n"
 
 # Oh, I must have set the wrong path to the pprof executable.
 # Let me find out where I actually installed pprof.
 system("which", "pprof")
 #> "/home/landau/go/bin/pprof"
 
-# Let's tell proffer where pprof lives.
+# I can put a line in my .Rprofile or .Renviron file
+# to automatically tell new sessions where pprof lives.
 Sys.setenv(pprof_path = "/home/landau/go/bin/pprof")
-
-# And type pprof_path=/home/landau/go/bin/pprof
-# in our .Renviron file so we do not need to call
-# Sys.setenv() next time.
-usethis::edit_r_environ()
 
 # Now, pprof should work.
 px <- pprof({
@@ -168,7 +166,7 @@ It is best to take down the `pprof` server when you are done with it.
 px$kill()
 ```
 
-`px` is the handle of a [`processx`](https://github.com/r-lib/processx) background process. To learn more about how to manage the process, have a look at the [`processx`](https://processx.r-lib.org/) documentation, particularly the [help page of processx::process$new()](https://processx.r-lib.org/reference/process.html).
+`px` is the handle of a [`callr`](https://github.com/r-lib/callr) background process. To learn more about how to manage the process, have a look at the [`callr`](https://callr.r-lib.org/) documentation, particularly the function [`r_bg()`](https://callr.r-lib.org/reference/r_bg.html).
 
 ## Installation
 
@@ -192,7 +190,7 @@ To use functions `pprof()` and `serve_pprof()`, you need to install [`pprof`](ht
 3. Follow [these instructions](https://github.com/golang/go/wiki/SettingGOPATH) to set the `GOPATH` environment variables on your system. Type `go env GOPATH` in in a new terminal session verify that you set it correctly. 
 4. Enter `go get -u github.com/google/pprof` in your terminal to install `pprof`
 5. Find the path to the `pprof` executable. It is usually in the `bin` subdirectory of `GOPATH`, e.g. `/home/landau/go/bin/pprof`.
-6. Add a line to your `.Renviron` file to set the `pprof_path` environment variable, e.g. `pprof_path=/home/landau/go/bin/pprof` to tell `proffer` where `pprof` lives. [usethis::edit_r_environ()](https://usethis.r-lib.org/reference/edit.html) is particularly handy for this.
+6. Add a line to your `.Renviron` file to set the `pprof_path` environment variable, e.g. `pprof_path=/home/landau/go/bin/pprof`. This variable tells `proffer` how to find `pprof`.
 7. Open a new R session check that pprof installed correctly.
 
 ```{r, eval = FALSE}
