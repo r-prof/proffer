@@ -120,7 +120,7 @@ serve_pprof <- function(
 
 serve_pprof_impl <- function(args) {
   processx::process$new(
-    command = Sys.getenv("pprof_path"),
+    command = get_pprof_path(),
     args = args,
     stdout = "|",
     stderr = "|",
@@ -133,7 +133,7 @@ random_port <- function(from = 49152L, to = 65355L) {
 }
 
 assert_pprof <- function() {
-  if (file.exists(Sys.getenv("pprof_path"))) {
+  if (file.exists(get_pprof_path())) {
     return()
   }
   missing_pprof()
@@ -142,8 +142,12 @@ assert_pprof <- function() {
 missing_pprof <- function() {
   stop(
     "cannot find pprof at ",
-    shQuote(Sys.getenv("pprof_path")),
+    shQuote(get_pprof_path()),
     ". See the setup instructions at https://r-prof.github.io/proffer.",
     call. = FALSE
   )
+}
+
+get_pprof_path <- function() {
+  Sys.getenv("pprof_path")
 }

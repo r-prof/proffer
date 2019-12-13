@@ -128,16 +128,20 @@ px$is_alive()
 # [1] FALSE
 
 px$read_error() # Why did it quit soon?
-#> [1] "sh: /user/local/bin/pprof: No such file or directory\nWarning message:\nIn system2(Sys.getenv(\"pprof_path\"), args) : error in running command\n"
+#> [1] "sh: /user/local/bin/pprof: No such file or directory\n"
 
 # Oh, I must have set the wrong path to the pprof executable.
 # Let me find out where I actually installed pprof.
 system("which", "pprof")
 #> "/home/landau/go/bin/pprof"
 
-# I can put a line in my .Rprofile or .Renviron file
-# to automatically tell new sessions where pprof lives.
+# Let's tell proffer where pprof lives.
 Sys.setenv(pprof_path = "/home/landau/go/bin/pprof")
+
+# And type pprof_path=/home/landau/go/bin/pprof
+# in our .Renviron file so we do not need to call
+# Sys.setenv() next time.
+usethis::edit_r_environ()
 
 # Now, pprof should work.
 px <- pprof({
@@ -188,7 +192,7 @@ To use functions `pprof()` and `serve_pprof()`, you need to install [`pprof`](ht
 3. Follow [these instructions](https://github.com/golang/go/wiki/SettingGOPATH) to set the `GOPATH` environment variables on your system. Type `go env GOPATH` in in a new terminal session verify that you set it correctly. 
 4. Enter `go get -u github.com/google/pprof` in your terminal to install `pprof`
 5. Find the path to the `pprof` executable. It is usually in the `bin` subdirectory of `GOPATH`, e.g. `/home/landau/go/bin/pprof`.
-6. Add a line to your `.Renviron` file to set the `pprof_path` environment variable, e.g. `pprof_path=/home/landau/go/bin/pprof`. This variable tells `proffer` how to find `pprof`.
+6. Add a line to your `.Renviron` file to set the `pprof_path` environment variable, e.g. `pprof_path=/home/landau/go/bin/pprof` to tell `proffer` where `pprof` lives. [usethis::edit_r_environ()](https://usethis.r-lib.org/reference/edit.html) is particularly handy for this.
 7. Open a new R session check that pprof installed correctly.
 
 ```{r, eval = FALSE}
