@@ -13,6 +13,7 @@
 ^\.Rbuildignore$
 ^\.Rhistory$
 ^\.lintr$
+^\.xcf$
 ^CODE_OF_CONDUCT.md$
 ^CONTRIBUTING.md$
 ^pkgdown$
@@ -47,3 +48,4 @@ vignettes/.*_files
 ^\.travis\.yml$
 ^appveyor\.yml$
 ^CODE_OF_CONDUCT\.md$
+^man/figures/logo-large\.png$
