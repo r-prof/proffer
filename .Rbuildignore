@@ -13,7 +13,6 @@
 ^\.Rbuildignore$
 ^\.Rhistory$
 ^\.lintr$
-^\.xcf$
 ^CODE_OF_CONDUCT.md$
 ^CONTRIBUTING.md$
 ^pkgdown$
@@ -37,6 +36,7 @@ vignettes/.*_files
 ^.*\.Rproj$
 ^.*\.svg$
 ^\.Rproj\.user$
+^.*\.xcf$
 ^.*\.yaml$
 ^.*\.yml$
 ^docs$
