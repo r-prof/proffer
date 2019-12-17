@@ -1,6 +1,12 @@
 Package: proffer
-Title: Profile R Code with Pprof
-Version: 0.0.1.9000
+Title: Profile R Code and Visualize with 'Pprof'
+Version: 0.0.2
+Encoding: UTF-8
+Language: en-US
+License: MIT + file LICENSE
+URL: https://github.com/r-prof/proffer,
+  https://r-prof.github.io/proffer
+BugReports: https://github.com/r-prof/proffer/issues
 Authors@R: c(
   person(
     given = c("William", "Michael"),
@@ -13,20 +19,22 @@ Authors@R: c(
     family = "Eli Lilly and Company",
     role = "cph"
   ))
-Description: It can be challenging to find sources of
-  slowness in large workflows, and the proffer package can help.
-  Proffer runs R code and displays summaries
-  It runs R code and displays summaries
-  to show where the code is slowest. Proffer leverages
-  the pprof utility to create highly efficient, clear, easy-to-read
-  interactive displays that help users find ways to reduce runtime.
-  The package also contains helpers to convert profiling data
-  to and from pprof format and visualize existing profiling data files.
-  For documentation, visit <https://r-prof.github.io/proffer>.
-License: MIT + file LICENSE
-URL: https://github.com/r-prof/proffer,
-  https://r-prof.github.io/proffer
-BugReports: https://github.com/r-prof/proffer/issues
+Description: Like similar profiling tools,
+  the 'proffer' package automatically detects
+  sources of slowness in R code.
+  The distinguishing feature of 'proffer' is its utilization of
+  'pprof', which supplies interactive visualizations
+  that are efficient and easy to interpret.
+  Behind the scenes, the 'profile' package converts
+  native 'Rprof()' data to a protocol buffer
+  that 'pprof' understands.
+  For the documentation of 'proffer',
+  visit <https://r-prof.github.io/proffer>.
+  To learn about the implementations and methodologies of
+  'pprof', 'profile', and protocol buffers,
+  visit <https://github.com/google/pprof>.
+  <https://developers.google.com/protocol-buffers>,
+  and <https://github.com/r-prof/profile>, respectively.
 Depends:
   R (>= 3.3.0)
 Imports:
@@ -37,7 +45,8 @@ Imports:
 Suggests:
   profvis,
   testthat (>= 2.1.0)
-Encoding: UTF-8
-Language: en-US
+SystemRequirements:
+  Graphviz (https://www.graphviz.org/),
+  pprof (https://github.com/google/pprof)
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.0.2

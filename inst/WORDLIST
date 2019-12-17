@@ -2,6 +2,7 @@ AppVeyor
 Codecov
 environ
 github
+Graphviz
 http
 https
 io

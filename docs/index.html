@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Profile R Code with Pprof • proffer</title>
+<title>Profile R Code and Visualize with Pprof • proffer</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
@@ -16,17 +16,23 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="Profile R Code with Pprof">
-<meta property="og:description" content="It can be challenging to find sources of
-  slowness in large workflows, and the proffer package can help.
-  Proffer runs R code and displays summaries
-  It runs R code and displays summaries
-  to show where the code is slowest. Proffer leverages
-  the pprof utility to create highly efficient, clear, easy-to-read
-  interactive displays that help users find ways to reduce runtime.
-  The package also contains helpers to convert profiling data
-  to and from pprof format and visualize existing profiling data files.
-  For documentation, visit &lt;https://r-prof.github.io/proffer&gt;.">
+<script src="pkgdown.js"></script><meta property="og:title" content="Profile R Code and Visualize with Pprof">
+<meta property="og:description" content="Like similar profiling tools,
+  the proffer package automatically detects
+  sources of slowness in R code.
+  The distinguishing feature of proffer is its utilization of
+  pprof, which supplies interactive visualizations
+  that are efficient and easy to interpret.
+  Behind the scenes, the profile package converts
+  native Rprof() data to a protocol buffer
+  that pprof understands.
+  For the documentation of proffer,
+  visit &lt;https://r-prof.github.io/proffer&gt;.
+  To learn about the implementations and methodologies of
+  pprof, profile, and protocol buffers,
+  visit &lt;https://github.com/google/pprof&gt;.
+  &lt;https://developers.google.com/protocol-buffers&gt;,
+  and &lt;https://github.com/r-prof/profile&gt;, respectively.">
 <meta property="og:image" content="https://r-prof.github.io/proffer/reference/figures/logo.png">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -47,7 +53,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">proffer</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
       </span>
     </div>
 
@@ -160,7 +166,7 @@
 <a class="sourceLine" id="cb4-9" data-line-number="9">  x &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)</a>
 <a class="sourceLine" id="cb4-10" data-line-number="10">})</a>
 <a class="sourceLine" id="cb4-11" data-line-number="11"><span class="co">#&gt;    user  system elapsed </span></a>
-<a class="sourceLine" id="cb4-12" data-line-number="12"><span class="co">#&gt;   0.049   0.002   0.051</span></a></code></pre></div>
+<a class="sourceLine" id="cb4-12" data-line-number="12"><span class="co">#&gt;   0.055   0.000   0.055</span></a></code></pre></div>
 </div>
 <div id="managing-the-pprof-server" class="section level2">
 <h2 class="hasAnchor">
@@ -224,6 +230,7 @@
 <a class="sourceLine" id="cb8-2" data-line-number="2">remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="st">"r-prof/proffer"</span>)</a></code></pre></div>
 <p>To use functions <code><a href="reference/pprof.html">pprof()</a></code> and <code><a href="reference/serve_pprof.html">serve_pprof()</a></code>, you need to install <a href="https://github.com/google/pprof"><code>pprof</code></a>. Installing <code>pprof</code> is hard, so if you have trouble, please do not hesitate to <a href="https://github.com/r-prof/proffer/issues">open an issue</a> and ask for help. And if you cannot install <code>pprof</code>, then <a href="https://rstudio.github.io/profvis/"><code>profvis</code></a> is an excellent alternative.</p>
 <ol>
+<li>Install <a href="https://www.graphviz.org">Graphviz</a> and ensure the Graphviz executables appear in your <code>PATH</code> environment variable (<a href="https://bobswift.atlassian.net/wiki/spaces/GVIZ/pages/131924165/Graphviz+installation">directions here</a>).</li>
 <li>
 <a href="https://golang.org/doc/install">Install the Go programming language</a>.</li>
 <li>Ensure your system can find the Go binaries. Open your command line interface of choice (e.g. Terminal or Command Prompt) and type <code>go version</code>. If you get an error, you may need to set the <code>PATH</code> environment variable as described <a href="https://www.callicoder.com/golang-installation-setup-gopath-workspace/#linux">here for Linux</a> and <a href="http://www.wadewegner.com/2014/12/easy-go-programming-setup-for-windows/">here for Windows</a>
