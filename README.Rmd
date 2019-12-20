@@ -187,6 +187,7 @@ remotes::install_github("r-prof/proffer")
 
 To use functions `pprof()` and `serve_pprof()`, you need to install [`pprof`](https://github.com/google/pprof). Installing `pprof` is hard, so if you have trouble, please do not hesitate to [open an issue](https://github.com/r-prof/proffer/issues) and ask for help. And if you cannot install `pprof`, then [`profvis`](https://rstudio.github.io/profvis/) is an excellent alternative.
 
+1. Install the [`RProtoBuf`](https://github.com/eddelbuettel/rprotobuf) package. On Linux, you also need to install the supporting protocol buffer libraries, e.g. `sudo apt-get install protobuf-compiler libprotobuf-dev libprotoc-dev` on Ubuntu.
 1. Install [Graphviz](https://www.graphviz.org) and ensure the Graphviz executables appear in your `PATH` environment variable ([directions here](https://bobswift.atlassian.net/wiki/spaces/GVIZ/pages/131924165/Graphviz+installation)).
 1. [Install the Go programming language](https://golang.org/doc/install).
 1. Ensure your system can find the Go binaries. Open your command line interface of choice (e.g. Terminal or Command Prompt) and type `go version`. If you get an error, you may need to set the `PATH` environment variable as described [here for Linux](https://www.callicoder.com/golang-installation-setup-gopath-workspace/#linux) and [here for Windows](http://www.wadewegner.com/2014/12/easy-go-programming-setup-for-windows/)
