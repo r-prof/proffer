@@ -26,7 +26,7 @@ Description: Like similar profiling tools,
   'pprof', which supplies interactive visualizations
   that are efficient and easy to interpret.
   Behind the scenes, the 'profile' package converts
-  native 'Rprof()' data to a protocol buffer
+  native Rprof() data to a protocol buffer
   that 'pprof' understands.
   For the documentation of 'proffer',
   visit <https://r-prof.github.io/proffer>.
