@@ -1,6 +1,7 @@
 # proffer 0.0.2.9000
 
 * In the `DESCRIPTION`, unquote function names and add parentheses afterwards. (CRAN comments for next submission.)
+* Motivate profilers more in the README.
 
 # proffer 0.0.2
 

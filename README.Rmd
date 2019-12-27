@@ -24,7 +24,7 @@ knitr::opts_chunk$set(
 
 The `proffer` package profiles R code to find bottlenecks. Visit <https://r-prof.github.io/proffer> for documentation. <https://r-prof.github.io/proffer/reference/index.html> has a complete list of available functions in the package. 
 
-## How it works
+## Why use a profiler?
 
 This R code is slow.
 
@@ -41,29 +41,7 @@ system.time({
 #> 82.060  28.440 110.582 
 ```
 
-What exactly is slowing it down? A common recommendation is to use [`profvis`](https://github.com/rstudio/profvis) to find out. 
-
-```{r, eval = FALSE}
-library(profvis)
-profvis({
-  n <- 1e5
-  x <- data.frame(x = rnorm(n), y = rnorm(n))
-  for (i in seq_len(n)) {
-    x[i, ] <- x[i, ] + 1
-  }
-  x
-})
-```
-
-However, `profvis`-generated flame graphs can be [difficult to read](https://github.com/rstudio/profvis/issues/115) and [slow to respond to mouse clicks](https://github.com/rstudio/profvis/issues/104).
-
-<center>
-<a href="https://r-prof.github.io/proffer/reference/figures/profvis.png">
-<img src="https://r-prof.github.io/proffer/reference/figures/profvis.png" alt="top" align="center" style = "border: none; float: center;">
-</a>
-</center>
-
-`proffer` uses [`pprof`](https://github.com/google/pprof) to create friendly, fast visualizations.
+What exactly is slowing it down? Everyone says `for` loops are slow in R, so that must be the answer...right? Let's find out empirically.
 
 ```{r, eval = FALSE}
 library(proffer)
@@ -79,7 +57,7 @@ px <- pprof({
 ```
 
 
-When we navigate to <http://localhost:64610> and select the flame graph, `[<-.data.frame()` jumps out at us immediately. Apparently, the line `x[i, ] <- x[i, ] + 1` is the bottleneck.
+When we navigate to <http://localhost:64610> and look at the flame graph, we see `[<-.data.frame()` (i.e. `x[i, ] <- x[i, ] + 1`) is taking most of the runtime.
 
 <center>
 <a href="https://r-prof.github.io/proffer/reference/figures/flame.png">
@@ -87,16 +65,7 @@ When we navigate to <http://localhost:64610> and select the flame graph, `[<-.da
 </a>
 </center>
 
-Indeed, a look at "Top" shows we spend most of the runtime on `x[i, ] <- x[i, ] + 1`. The other operations are fast by comparison.
-
-<center>
-<a href="https://r-prof.github.io/proffer/reference/figures/top.png">
-<img src="https://r-prof.github.io/proffer/reference/figures/top.png" alt="top" align="center" style = "border: none; float: center;">
-</a>
-</center>
-<br><br>
-
-So we return to our R code and avoid data frame row assignment. Much faster!
+So we refactor the code to avoid data frame row assignment. Much faster, even with a `for` loop!
 
 ```{r}
 system.time({
@@ -110,6 +79,8 @@ system.time({
   x <- data.frame(x = x, y = y)
 })
 ```
+
+Moral of the story: before you optimize, throw away your assumptions and run your code through a profiler. That way, you can spend your time optimizing where it counts!
 
 ## Managing the pprof server
 
@@ -209,3 +180,31 @@ shell(Sys.getenv("pprof_path")) # Analogous for Windows.
 ## Contributing
 
 We encourage participation through [issues](https://github.com/r-prof/proffer/issues) and [pull requests](https://github.com/r-prof/proffer/pulls). `proffer` has a [Contributor Code of Conduct](https://github.com/r-prof/CODE_OF_CONDUCT.md). By contributing to this project, you agree to abide by its terms.
+
+## Similar work
+
+### profvis
+
+The [`profvis`](https://github.com/rstudio/profvis) is much easier to install than `proffer` and equally easy to invoke.
+
+```{r, eval = FALSE}
+library(profvis)
+profvis({
+  n <- 1e5
+  x <- data.frame(x = rnorm(n), y = rnorm(n))
+  for (i in seq_len(n)) {
+    x[i, ] <- x[i, ] + 1
+  }
+  x
+})
+```
+
+However, `profvis`-generated flame graphs can be [difficult to read](https://github.com/rstudio/profvis/issues/115) and [slow to respond to mouse clicks](https://github.com/rstudio/profvis/issues/104).
+
+<center>
+<a href="https://r-prof.github.io/proffer/reference/figures/profvis.png">
+<img src="https://r-prof.github.io/proffer/reference/figures/profvis.png" alt="top" align="center" style = "border: none; float: center;">
+</a>
+</center>
+
+`proffer` uses [`pprof`](https://github.com/google/pprof) to create friendlier, faster visualizations.

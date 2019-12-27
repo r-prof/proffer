@@ -97,9 +97,9 @@
 </h1></div>
 
 <p>The <code>proffer</code> package profiles R code to find bottlenecks. Visit <a href="https://r-prof.github.io/proffer" class="uri">https://r-prof.github.io/proffer</a> for documentation. <a href="https://r-prof.github.io/proffer/reference/index.html" class="uri">https://r-prof.github.io/proffer/reference/index.html</a> has a complete list of available functions in the package.</p>
-<div id="how-it-works" class="section level2">
+<div id="why-use-a-profiler" class="section level2">
 <h2 class="hasAnchor">
-<a href="#how-it-works" class="anchor"></a>How it works</h2>
+<a href="#why-use-a-profiler" class="anchor"></a>Why use a profiler?</h2>
 <p>This R code is slow.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>({</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2">  n &lt;-<span class="st"> </span><span class="fl">1e5</span></a>
@@ -111,123 +111,99 @@
 <a class="sourceLine" id="cb1-8" data-line-number="8">})</a>
 <a class="sourceLine" id="cb1-9" data-line-number="9"><span class="co">#&gt;   user  system elapsed </span></a>
 <a class="sourceLine" id="cb1-10" data-line-number="10"><span class="co">#&gt; 82.060  28.440 110.582 </span></a></code></pre></div>
-<p>What exactly is slowing it down? A common recommendation is to use <a href="https://github.com/rstudio/profvis"><code>profvis</code></a> to find out.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(profvis)</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/pkg/profvis/man/profvis.html">profvis</a></span>({</a>
+<p>What exactly is slowing it down? Everyone says <code>for</code> loops are slow in R, so that must be the answer…right? Let’s find out empirically.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(proffer)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">px &lt;-<span class="st"> </span><span class="kw"><a href="reference/pprof.html">pprof</a></span>({</a>
 <a class="sourceLine" id="cb2-3" data-line-number="3">  n &lt;-<span class="st"> </span><span class="fl">1e5</span></a>
 <a class="sourceLine" id="cb2-4" data-line-number="4">  x &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(n), <span class="dt">y =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(n))</a>
 <a class="sourceLine" id="cb2-5" data-line-number="5">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span>(n)) {</a>
 <a class="sourceLine" id="cb2-6" data-line-number="6">    x[i, ] &lt;-<span class="st"> </span>x[i, ] <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
 <a class="sourceLine" id="cb2-7" data-line-number="7">  }</a>
 <a class="sourceLine" id="cb2-8" data-line-number="8">  x</a>
-<a class="sourceLine" id="cb2-9" data-line-number="9">})</a></code></pre></div>
-<p>However, <code>profvis</code>-generated flame graphs can be <a href="https://github.com/rstudio/profvis/issues/115">difficult to read</a> and <a href="https://github.com/rstudio/profvis/issues/104">slow to respond to mouse clicks</a>.</p>
-<center>
-
-<a href="https://r-prof.github.io/proffer/reference/figures/profvis.png">
-<img src="https://r-prof.github.io/proffer/reference/figures/profvis.png" alt="top" align="center" style="border: none; float: center;"></a>
-
-</center>
-<p><code>proffer</code> uses <a href="https://github.com/google/pprof"><code>pprof</code></a> to create friendly, fast visualizations.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(proffer)</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">px &lt;-<span class="st"> </span><span class="kw"><a href="reference/pprof.html">pprof</a></span>({</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3">  n &lt;-<span class="st"> </span><span class="fl">1e5</span></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4">  x &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(n), <span class="dt">y =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(n))</a>
-<a class="sourceLine" id="cb3-5" data-line-number="5">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span>(n)) {</a>
-<a class="sourceLine" id="cb3-6" data-line-number="6">    x[i, ] &lt;-<span class="st"> </span>x[i, ] <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb3-7" data-line-number="7">  }</a>
-<a class="sourceLine" id="cb3-8" data-line-number="8">  x</a>
-<a class="sourceLine" id="cb3-9" data-line-number="9">})</a>
-<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="co">#&gt; http://localhost:64610</span></a></code></pre></div>
-<p>When we navigate to <a href="http://localhost:64610" class="uri">http://localhost:64610</a> and select the flame graph, <code>[&lt;-.data.frame()</code> jumps out at us immediately. Apparently, the line <code>x[i, ] &lt;- x[i, ] + 1</code> is the bottleneck.</p>
+<a class="sourceLine" id="cb2-9" data-line-number="9">})</a>
+<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="co">#&gt; http://localhost:64610</span></a></code></pre></div>
+<p>When we navigate to <a href="http://localhost:64610" class="uri">http://localhost:64610</a> and look at the flame graph, we see <code>[&lt;-.data.frame()</code> (i.e. <code>x[i, ] &lt;- x[i, ] + 1</code>) is taking most of the runtime.</p>
 <center>
 
 <a href="https://r-prof.github.io/proffer/reference/figures/flame.png">
 <img src="https://r-prof.github.io/proffer/reference/figures/flame.png" alt="top" align="center" style="border: none; float: center;"></a>
 
 </center>
-<p>Indeed, a look at “Top” shows we spend most of the runtime on <code>x[i, ] &lt;- x[i, ] + 1</code>. The other operations are fast by comparison.</p>
-<center>
-
-<a href="https://r-prof.github.io/proffer/reference/figures/top.png">
-<img src="https://r-prof.github.io/proffer/reference/figures/top.png" alt="top" align="center" style="border: none; float: center;"></a>
-
-</center>
-<p><br><br></p>
-<p>So we return to our R code and avoid data frame row assignment. Much faster!</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>({</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2">  n &lt;-<span class="st"> </span><span class="fl">1e5</span></a>
-<a class="sourceLine" id="cb4-3" data-line-number="3">  x &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(n)</a>
-<a class="sourceLine" id="cb4-4" data-line-number="4">  y &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(n)</a>
-<a class="sourceLine" id="cb4-5" data-line-number="5">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span>(n)) {</a>
-<a class="sourceLine" id="cb4-6" data-line-number="6">    x[i] &lt;-<span class="st"> </span>x[i] <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb4-7" data-line-number="7">    y[i] &lt;-<span class="st"> </span>y[i] <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb4-8" data-line-number="8">  }</a>
-<a class="sourceLine" id="cb4-9" data-line-number="9">  x &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)</a>
-<a class="sourceLine" id="cb4-10" data-line-number="10">})</a>
-<a class="sourceLine" id="cb4-11" data-line-number="11"><span class="co">#&gt;    user  system elapsed </span></a>
-<a class="sourceLine" id="cb4-12" data-line-number="12"><span class="co">#&gt;   0.056   0.000   0.055</span></a></code></pre></div>
+<p>So we refactor the code to avoid data frame row assignment. Much faster, even with a <code>for</code> loop!</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>({</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">  n &lt;-<span class="st"> </span><span class="fl">1e5</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">  x &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(n)</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">  y &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(n)</a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span>(n)) {</a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">    x[i] &lt;-<span class="st"> </span>x[i] <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">    y[i] &lt;-<span class="st"> </span>y[i] <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">  }</a>
+<a class="sourceLine" id="cb3-9" data-line-number="9">  x &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)</a>
+<a class="sourceLine" id="cb3-10" data-line-number="10">})</a>
+<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="co">#&gt;    user  system elapsed </span></a>
+<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="co">#&gt;   0.056   0.000   0.055</span></a></code></pre></div>
+<p>Moral of the story: before you optimize, throw away your assumptions and run your code through a profiler. That way, you can spend your time optimizing where it counts!</p>
 </div>
 <div id="managing-the-pprof-server" class="section level2">
 <h2 class="hasAnchor">
 <a href="#managing-the-pprof-server" class="anchor"></a>Managing the pprof server</h2>
 <p>Sometimes, your <code>pprof</code> server may not work right away. If that happens, take a look at the error logs.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">px &lt;-<span class="st"> </span><span class="kw"><a href="reference/pprof.html">pprof</a></span>({</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2">  n &lt;-<span class="st"> </span><span class="fl">1e4</span></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3">  x &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(n), <span class="dt">y =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(n))</a>
-<a class="sourceLine" id="cb5-4" data-line-number="4">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span>(n)) {</a>
-<a class="sourceLine" id="cb5-5" data-line-number="5">    x[i, ] &lt;-<span class="st"> </span>x[i, ] <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb5-6" data-line-number="6">  }</a>
-<a class="sourceLine" id="cb5-7" data-line-number="7">  x</a>
-<a class="sourceLine" id="cb5-8" data-line-number="8">})</a>
-<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt; http://localhost:50195</span></a>
-<a class="sourceLine" id="cb5-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb5-11" data-line-number="11">px <span class="co"># How is my background process doing?</span></a>
-<a class="sourceLine" id="cb5-12" data-line-number="12"><span class="co">#&gt; PROCESS 'R', finished.</span></a>
-<a class="sourceLine" id="cb5-13" data-line-number="13">px<span class="op">$</span><span class="kw">is_alive</span>()</a>
-<a class="sourceLine" id="cb5-14" data-line-number="14"><span class="co"># [1] FALSE</span></a>
-<a class="sourceLine" id="cb5-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb5-16" data-line-number="16">px<span class="op">$</span><span class="kw">read_error</span>() <span class="co"># Why did it quit soon?</span></a>
-<a class="sourceLine" id="cb5-17" data-line-number="17"><span class="co">#&gt; [1] "sh: /user/local/bin/pprof: No such file or directory\nWarning message:\nIn system2(Sys.getenv(\"pprof_path\"), args) : error in running command\n"</span></a>
-<a class="sourceLine" id="cb5-18" data-line-number="18"></a>
-<a class="sourceLine" id="cb5-19" data-line-number="19"><span class="co"># Oh, I must have set the wrong path to the pprof executable.</span></a>
-<a class="sourceLine" id="cb5-20" data-line-number="20"><span class="co"># Let me find out where I actually installed pprof.</span></a>
-<a class="sourceLine" id="cb5-21" data-line-number="21"><span class="kw"><a href="https://rdrr.io/r/base/system.html">system</a></span>(<span class="st">"which"</span>, <span class="st">"pprof"</span>)</a>
-<a class="sourceLine" id="cb5-22" data-line-number="22"><span class="co">#&gt; "/home/landau/go/bin/pprof"</span></a>
-<a class="sourceLine" id="cb5-23" data-line-number="23"></a>
-<a class="sourceLine" id="cb5-24" data-line-number="24"><span class="co"># I can put a line in my .Rprofile or .Renviron file</span></a>
-<a class="sourceLine" id="cb5-25" data-line-number="25"><span class="co"># to automatically tell new sessions where pprof lives.</span></a>
-<a class="sourceLine" id="cb5-26" data-line-number="26"><span class="kw"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span>(<span class="dt">pprof_path =</span> <span class="st">"/home/landau/go/bin/pprof"</span>)</a>
-<a class="sourceLine" id="cb5-27" data-line-number="27"></a>
-<a class="sourceLine" id="cb5-28" data-line-number="28"><span class="co"># Now, pprof should work.</span></a>
-<a class="sourceLine" id="cb5-29" data-line-number="29">px &lt;-<span class="st"> </span><span class="kw"><a href="reference/pprof.html">pprof</a></span>({</a>
-<a class="sourceLine" id="cb5-30" data-line-number="30">  n &lt;-<span class="st"> </span><span class="fl">1e4</span></a>
-<a class="sourceLine" id="cb5-31" data-line-number="31">  x &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(n), <span class="dt">y =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(n))</a>
-<a class="sourceLine" id="cb5-32" data-line-number="32">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span>(n)) {</a>
-<a class="sourceLine" id="cb5-33" data-line-number="33">    x[i, ] &lt;-<span class="st"> </span>x[i, ] <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb5-34" data-line-number="34">  }</a>
-<a class="sourceLine" id="cb5-35" data-line-number="35">  x</a>
-<a class="sourceLine" id="cb5-36" data-line-number="36">})</a>
-<a class="sourceLine" id="cb5-37" data-line-number="37"><span class="co">#&gt; http://localhost:64610</span></a>
-<a class="sourceLine" id="cb5-38" data-line-number="38"></a>
-<a class="sourceLine" id="cb5-39" data-line-number="39">px</a>
-<a class="sourceLine" id="cb5-40" data-line-number="40"><span class="co">#&gt; PROCESS 'R', running, pid 12361.</span></a>
-<a class="sourceLine" id="cb5-41" data-line-number="41">px<span class="op">$</span><span class="kw">is_alive</span>()</a>
-<a class="sourceLine" id="cb5-42" data-line-number="42"><span class="co"># [1] TRUE</span></a>
-<a class="sourceLine" id="cb5-43" data-line-number="43"></a>
-<a class="sourceLine" id="cb5-44" data-line-number="44"><span class="co"># Now a web browser should be able to open http://localhost:64610.</span></a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">px &lt;-<span class="st"> </span><span class="kw"><a href="reference/pprof.html">pprof</a></span>({</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">  n &lt;-<span class="st"> </span><span class="fl">1e4</span></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">  x &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(n), <span class="dt">y =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(n))</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span>(n)) {</a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">    x[i, ] &lt;-<span class="st"> </span>x[i, ] <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">  }</a>
+<a class="sourceLine" id="cb4-7" data-line-number="7">  x</a>
+<a class="sourceLine" id="cb4-8" data-line-number="8">})</a>
+<a class="sourceLine" id="cb4-9" data-line-number="9"><span class="co">#&gt; http://localhost:50195</span></a>
+<a class="sourceLine" id="cb4-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb4-11" data-line-number="11">px <span class="co"># How is my background process doing?</span></a>
+<a class="sourceLine" id="cb4-12" data-line-number="12"><span class="co">#&gt; PROCESS 'R', finished.</span></a>
+<a class="sourceLine" id="cb4-13" data-line-number="13">px<span class="op">$</span><span class="kw">is_alive</span>()</a>
+<a class="sourceLine" id="cb4-14" data-line-number="14"><span class="co"># [1] FALSE</span></a>
+<a class="sourceLine" id="cb4-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb4-16" data-line-number="16">px<span class="op">$</span><span class="kw">read_error</span>() <span class="co"># Why did it quit soon?</span></a>
+<a class="sourceLine" id="cb4-17" data-line-number="17"><span class="co">#&gt; [1] "sh: /user/local/bin/pprof: No such file or directory\nWarning message:\nIn system2(Sys.getenv(\"pprof_path\"), args) : error in running command\n"</span></a>
+<a class="sourceLine" id="cb4-18" data-line-number="18"></a>
+<a class="sourceLine" id="cb4-19" data-line-number="19"><span class="co"># Oh, I must have set the wrong path to the pprof executable.</span></a>
+<a class="sourceLine" id="cb4-20" data-line-number="20"><span class="co"># Let me find out where I actually installed pprof.</span></a>
+<a class="sourceLine" id="cb4-21" data-line-number="21"><span class="kw"><a href="https://rdrr.io/r/base/system.html">system</a></span>(<span class="st">"which"</span>, <span class="st">"pprof"</span>)</a>
+<a class="sourceLine" id="cb4-22" data-line-number="22"><span class="co">#&gt; "/home/landau/go/bin/pprof"</span></a>
+<a class="sourceLine" id="cb4-23" data-line-number="23"></a>
+<a class="sourceLine" id="cb4-24" data-line-number="24"><span class="co"># I can put a line in my .Rprofile or .Renviron file</span></a>
+<a class="sourceLine" id="cb4-25" data-line-number="25"><span class="co"># to automatically tell new sessions where pprof lives.</span></a>
+<a class="sourceLine" id="cb4-26" data-line-number="26"><span class="kw"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span>(<span class="dt">pprof_path =</span> <span class="st">"/home/landau/go/bin/pprof"</span>)</a>
+<a class="sourceLine" id="cb4-27" data-line-number="27"></a>
+<a class="sourceLine" id="cb4-28" data-line-number="28"><span class="co"># Now, pprof should work.</span></a>
+<a class="sourceLine" id="cb4-29" data-line-number="29">px &lt;-<span class="st"> </span><span class="kw"><a href="reference/pprof.html">pprof</a></span>({</a>
+<a class="sourceLine" id="cb4-30" data-line-number="30">  n &lt;-<span class="st"> </span><span class="fl">1e4</span></a>
+<a class="sourceLine" id="cb4-31" data-line-number="31">  x &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(n), <span class="dt">y =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(n))</a>
+<a class="sourceLine" id="cb4-32" data-line-number="32">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span>(n)) {</a>
+<a class="sourceLine" id="cb4-33" data-line-number="33">    x[i, ] &lt;-<span class="st"> </span>x[i, ] <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb4-34" data-line-number="34">  }</a>
+<a class="sourceLine" id="cb4-35" data-line-number="35">  x</a>
+<a class="sourceLine" id="cb4-36" data-line-number="36">})</a>
+<a class="sourceLine" id="cb4-37" data-line-number="37"><span class="co">#&gt; http://localhost:64610</span></a>
+<a class="sourceLine" id="cb4-38" data-line-number="38"></a>
+<a class="sourceLine" id="cb4-39" data-line-number="39">px</a>
+<a class="sourceLine" id="cb4-40" data-line-number="40"><span class="co">#&gt; PROCESS 'R', running, pid 12361.</span></a>
+<a class="sourceLine" id="cb4-41" data-line-number="41">px<span class="op">$</span><span class="kw">is_alive</span>()</a>
+<a class="sourceLine" id="cb4-42" data-line-number="42"><span class="co"># [1] TRUE</span></a>
+<a class="sourceLine" id="cb4-43" data-line-number="43"></a>
+<a class="sourceLine" id="cb4-44" data-line-number="44"><span class="co"># Now a web browser should be able to open http://localhost:64610.</span></a></code></pre></div>
 <p>It is best to take down the <code>pprof</code> server when you are done with it.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">px<span class="op">$</span><span class="kw">kill</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">px<span class="op">$</span><span class="kw">kill</span>()</a></code></pre></div>
 <p><code>px</code> is the handle of a <a href="https://github.com/r-lib/callr"><code>callr</code></a> background process. To learn more about how to manage the process, have a look at the <a href="https://callr.r-lib.org/"><code>callr</code></a> documentation, particularly the function <a href="https://callr.r-lib.org/reference/r_bg.html"><code>r_bg()</code></a>.</p>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>The latest release of <code>proffer</code> is available on <a href="https://CRAN.R-project.org">CRAN</a>.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"proffer"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"proffer"</span>)</a></code></pre></div>
 <p>Alternatively, you can install the development version from GitHub.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="co"># install.packages("remotes")</span></a>
-<a class="sourceLine" id="cb8-2" data-line-number="2">remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="st">"r-prof/proffer"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co"># install.packages("remotes")</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">remotes<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/remotes/man/install_github.html">install_github</a></span>(<span class="st">"r-prof/proffer"</span>)</a></code></pre></div>
 <p>To use functions <code><a href="reference/pprof.html">pprof()</a></code> and <code><a href="reference/serve_pprof.html">serve_pprof()</a></code>, you need to install <a href="https://github.com/google/pprof"><code>pprof</code></a>. Installing <code>pprof</code> is hard, so if you have trouble, please do not hesitate to <a href="https://github.com/r-prof/proffer/issues">open an issue</a> and ask for help. And if you cannot install <code>pprof</code>, then <a href="https://rstudio.github.io/profvis/"><code>profvis</code></a> is an excellent alternative.</p>
 <ol>
 <li>Install the <a href="https://github.com/eddelbuettel/rprotobuf"><code>RProtoBuf</code></a> package. On Linux, you also need to install the supporting protocol buffer libraries, e.g. <code>sudo apt-get install protobuf-compiler libprotobuf-dev libprotoc-dev</code> on Ubuntu.</li>
@@ -243,17 +219,43 @@
 <li>Add a line to your <code>.Renviron</code> file to set the <code>pprof_path</code> environment variable, e.g. <code>pprof_path=/home/landau/go/bin/pprof</code>. This variable tells <code>proffer</code> how to find <code>pprof</code>.</li>
 <li>Open a new R session check that pprof installed correctly.</li>
 </ol>
-<!-- end list --><div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span>(<span class="st">"pprof_path"</span>)</a>
-<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co">#&gt; /home/landau/go/bin/pprof</span></a>
-<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/base/files.html">file.exists</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span>(<span class="st">"pprof_path"</span>))</a>
-<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="co">#&gt; TRUE</span></a>
-<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="kw"><a href="https://rdrr.io/r/base/system2.html">system2</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span>(<span class="st">"pprof_path"</span>)) <span class="co"># Shows the pprof help menu on Unix systems.</span></a>
-<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="kw"><a href="https://rdrr.io/r/base/system.html">shell</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span>(<span class="st">"pprof_path"</span>)) <span class="co"># Analogous for Windows.</span></a></code></pre></div>
+<!-- end list --><div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span>(<span class="st">"pprof_path"</span>)</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="co">#&gt; /home/landau/go/bin/pprof</span></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/base/files.html">file.exists</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span>(<span class="st">"pprof_path"</span>))</a>
+<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co">#&gt; TRUE</span></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="kw"><a href="https://rdrr.io/r/base/system2.html">system2</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span>(<span class="st">"pprof_path"</span>)) <span class="co"># Shows the pprof help menu on Unix systems.</span></a>
+<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="kw"><a href="https://rdrr.io/r/base/system.html">shell</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/Sys.getenv.html">Sys.getenv</a></span>(<span class="st">"pprof_path"</span>)) <span class="co"># Analogous for Windows.</span></a></code></pre></div>
 </div>
 <div id="contributing" class="section level2">
 <h2 class="hasAnchor">
 <a href="#contributing" class="anchor"></a>Contributing</h2>
 <p>We encourage participation through <a href="https://github.com/r-prof/proffer/issues">issues</a> and <a href="https://github.com/r-prof/proffer/pulls">pull requests</a>. <code>proffer</code> has a <a href="https://github.com/r-prof/CODE_OF_CONDUCT.md">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
+</div>
+<div id="similar-work" class="section level2">
+<h2 class="hasAnchor">
+<a href="#similar-work" class="anchor"></a>Similar work</h2>
+<div id="profvis" class="section level3">
+<h3 class="hasAnchor">
+<a href="#profvis" class="anchor"></a>profvis</h3>
+<p>The <a href="https://github.com/rstudio/profvis"><code>profvis</code></a> is much easier to install than <code>proffer</code> and equally easy to invoke.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(profvis)</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/pkg/profvis/man/profvis.html">profvis</a></span>({</a>
+<a class="sourceLine" id="cb9-3" data-line-number="3">  n &lt;-<span class="st"> </span><span class="fl">1e5</span></a>
+<a class="sourceLine" id="cb9-4" data-line-number="4">  x &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(n), <span class="dt">y =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(n))</a>
+<a class="sourceLine" id="cb9-5" data-line-number="5">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span>(n)) {</a>
+<a class="sourceLine" id="cb9-6" data-line-number="6">    x[i, ] &lt;-<span class="st"> </span>x[i, ] <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb9-7" data-line-number="7">  }</a>
+<a class="sourceLine" id="cb9-8" data-line-number="8">  x</a>
+<a class="sourceLine" id="cb9-9" data-line-number="9">})</a></code></pre></div>
+<p>However, <code>profvis</code>-generated flame graphs can be <a href="https://github.com/rstudio/profvis/issues/115">difficult to read</a> and <a href="https://github.com/rstudio/profvis/issues/104">slow to respond to mouse clicks</a>.</p>
+<center>
+
+<a href="https://r-prof.github.io/proffer/reference/figures/profvis.png">
+<img src="https://r-prof.github.io/proffer/reference/figures/profvis.png" alt="top" align="center" style="border: none; float: center;"></a>
+
+</center>
+<p><code>proffer</code> uses <a href="https://github.com/google/pprof"><code>pprof</code></a> to create friendlier, faster visualizations.</p>
+</div>
 </div>
 </div>
   </div>
