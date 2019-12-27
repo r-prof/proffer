@@ -181,6 +181,15 @@ shell(Sys.getenv("pprof_path")) # Analogous for Windows.
 
 We encourage participation through [issues](https://github.com/r-prof/proffer/issues) and [pull requests](https://github.com/r-prof/proffer/pulls). `proffer` has a [Contributor Code of Conduct](https://github.com/r-prof/CODE_OF_CONDUCT.md). By contributing to this project, you agree to abide by its terms.
 
+## Resources
+
+Profilers identify bottlenecks, but the do not offer solutions. It helps to learn about fast code in general so you can think of efficient alternatives to try.
+
+- <http://adv-r.had.co.nz/Performance.html>
+- <https://www.r-bloggers.com/strategies-to-speedup-r-code/>
+- <https://www.r-bloggers.com/faster-higher-stonger-a-guide-to-speeding-up-r-code-for-busy-people/>
+- <https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html>
+
 ## Similar work
 
 ### profvis

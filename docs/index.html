@@ -141,7 +141,7 @@
 <a class="sourceLine" id="cb3-9" data-line-number="9">  x &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)</a>
 <a class="sourceLine" id="cb3-10" data-line-number="10">})</a>
 <a class="sourceLine" id="cb3-11" data-line-number="11"><span class="co">#&gt;    user  system elapsed </span></a>
-<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="co">#&gt;   0.056   0.000   0.055</span></a></code></pre></div>
+<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="co">#&gt;   0.051   0.000   0.051</span></a></code></pre></div>
 <p>Moral of the story: before you optimize, throw away your assumptions and run your code through a profiler. That way, you can spend your time optimizing where it counts!</p>
 </div>
 <div id="managing-the-pprof-server" class="section level2">
@@ -230,6 +230,17 @@
 <h2 class="hasAnchor">
 <a href="#contributing" class="anchor"></a>Contributing</h2>
 <p>We encourage participation through <a href="https://github.com/r-prof/proffer/issues">issues</a> and <a href="https://github.com/r-prof/proffer/pulls">pull requests</a>. <code>proffer</code> has a <a href="https://github.com/r-prof/CODE_OF_CONDUCT.md">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
+</div>
+<div id="resources" class="section level2">
+<h2 class="hasAnchor">
+<a href="#resources" class="anchor"></a>Resources</h2>
+<p>Profilers identify bottlenecks, but the do not offer solutions. It helps to learn about fast code in general so you can think of efficient alternatives to try.</p>
+<ul>
+<li><a href="http://adv-r.had.co.nz/Performance.html" class="uri">http://adv-r.had.co.nz/Performance.html</a></li>
+<li><a href="https://www.r-bloggers.com/strategies-to-speedup-r-code/" class="uri">https://www.r-bloggers.com/strategies-to-speedup-r-code/</a></li>
+<li><a href="https://www.r-bloggers.com/faster-higher-stonger-a-guide-to-speeding-up-r-code-for-busy-people/" class="uri">https://www.r-bloggers.com/faster-higher-stonger-a-guide-to-speeding-up-r-code-for-busy-people/</a></li>
+<li><a href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html" class="uri">https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html</a></li>
+</ul>
 </div>
 <div id="similar-work" class="section level2">
 <h2 class="hasAnchor">

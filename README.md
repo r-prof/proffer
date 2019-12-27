@@ -77,7 +77,7 @@ system.time({
   x <- data.frame(x = x, y = y)
 })
 #>    user  system elapsed 
-#>   0.056   0.000   0.055
+#>   0.051   0.000   0.051
 ```
 
 Moral of the story: before you optimize, throw away your assumptions and
@@ -221,6 +221,18 @@ requests](https://github.com/r-prof/proffer/pulls). `proffer` has a
 [Contributor Code of
 Conduct](https://github.com/r-prof/CODE_OF_CONDUCT.md). By contributing
 to this project, you agree to abide by its terms.
+
+## Resources
+
+Profilers identify bottlenecks, but the do not offer solutions. It helps
+to learn about fast code in general so you can think of efficient
+alternatives to
+    try.
+
+  - <http://adv-r.had.co.nz/Performance.html>
+  - <https://www.r-bloggers.com/strategies-to-speedup-r-code/>
+  - <https://www.r-bloggers.com/faster-higher-stonger-a-guide-to-speeding-up-r-code-for-busy-people/>
+  - <https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html>
 
 ## Similar work
 
