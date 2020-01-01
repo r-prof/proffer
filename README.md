@@ -19,7 +19,7 @@ list of available functions in the package.
 
 ## Why use a profiler?
 
-This R code is slow.
+This data processing code is slow.
 
 ``` r
 system.time({
@@ -34,8 +34,8 @@ system.time({
 #> 82.060  28.440 110.582 
 ```
 
-What exactly is slowing it down? Everyone says `for` loops are slow in
-R, so that must be the answer…right? Let’s find out empirically.
+Why exactly does it take so long? Is it because `for` loops are slow as
+a general rule? Let’s find out empirically.
 
 ``` r
 library(proffer)
@@ -77,7 +77,7 @@ system.time({
   x <- data.frame(x = x, y = y)
 })
 #>    user  system elapsed 
-#>   0.051   0.000   0.051
+#>   0.050   0.003   0.054
 ```
 
 Moral of the story: before you optimize, throw away your assumptions and

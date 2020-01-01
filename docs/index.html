@@ -100,7 +100,7 @@
 <div id="why-use-a-profiler" class="section level2">
 <h2 class="hasAnchor">
 <a href="#why-use-a-profiler" class="anchor"></a>Why use a profiler?</h2>
-<p>This R code is slow.</p>
+<p>This data processing code is slow.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>({</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2">  n &lt;-<span class="st"> </span><span class="fl">1e5</span></a>
 <a class="sourceLine" id="cb1-3" data-line-number="3">  x &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(n), <span class="dt">y =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(n))</a>
@@ -111,7 +111,7 @@
 <a class="sourceLine" id="cb1-8" data-line-number="8">})</a>
 <a class="sourceLine" id="cb1-9" data-line-number="9"><span class="co">#&gt;   user  system elapsed </span></a>
 <a class="sourceLine" id="cb1-10" data-line-number="10"><span class="co">#&gt; 82.060  28.440 110.582 </span></a></code></pre></div>
-<p>What exactly is slowing it down? Everyone says <code>for</code> loops are slow in R, so that must be the answer…right? Let’s find out empirically.</p>
+<p>Why exactly does it take so long? Is it because <code>for</code> loops are slow as a general rule? Let’s find out empirically.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(proffer)</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2">px &lt;-<span class="st"> </span><span class="kw"><a href="reference/pprof.html">pprof</a></span>({</a>
 <a class="sourceLine" id="cb2-3" data-line-number="3">  n &lt;-<span class="st"> </span><span class="fl">1e5</span></a>
@@ -141,7 +141,7 @@
 <a class="sourceLine" id="cb3-9" data-line-number="9">  x &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)</a>
 <a class="sourceLine" id="cb3-10" data-line-number="10">})</a>
 <a class="sourceLine" id="cb3-11" data-line-number="11"><span class="co">#&gt;    user  system elapsed </span></a>
-<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="co">#&gt;   0.051   0.000   0.051</span></a></code></pre></div>
+<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="co">#&gt;   0.050   0.003   0.054</span></a></code></pre></div>
 <p>Moral of the story: before you optimize, throw away your assumptions and run your code through a profiler. That way, you can spend your time optimizing where it counts!</p>
 </div>
 <div id="managing-the-pprof-server" class="section level2">
