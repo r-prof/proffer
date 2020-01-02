@@ -2,6 +2,7 @@
 
 * In the `DESCRIPTION`, unquote function names and add parentheses afterwards. (CRAN comments for next submission.)
 * Motivate profilers more in the README.
+* Increase font size in logo.
 
 # proffer 0.0.2
 
