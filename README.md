@@ -77,7 +77,7 @@ system.time({
   x <- data.frame(x = x, y = y)
 })
 #>    user  system elapsed 
-#>   0.050   0.003   0.054
+#>   0.046   0.001   0.048
 ```
 
 Moral of the story: before you optimize, throw away your assumptions and
@@ -108,14 +108,22 @@ px$is_alive()
 px$read_error() # Why did it quit soon?
 #> [1] "sh: /user/local/bin/pprof: No such file or directory\nWarning message:\nIn system2(Sys.getenv(\"pprof_path\"), args) : error in running command\n"
 
-# Oh, I must have set the wrong path to the pprof executable.
+# Can my system find pprof?
+test_pprof()
+#> Error: cannot find pprof executable. See the setup instructions at https://r-prof.github.io/proffer.
+assert_pprof()
+#> Error: cannot find pprof executable. See the setup instructions at https://r-prof.github.io/proffer.
+pprof_path()
+#> ""
+
+# Maybe my system cannot find the pprof executable.
 # Let me find out where I actually installed pprof.
 system("which", "pprof")
-#> "/home/landau/go/bin/pprof"
+#> "/home/landau/alternative/path/pprof"
 
 # I can put a line in my .Rprofile or .Renviron file
 # to automatically tell new sessions where pprof lives.
-Sys.setenv(pprof_path = "/home/landau/go/bin/pprof")
+Sys.setenv(pprof_path = "/home/landau/alternative/path/pprof")
 
 # Now, pprof should work.
 px <- pprof({
@@ -164,13 +172,18 @@ Alternatively, you can install the development version from GitHub.
 remotes::install_github("r-prof/proffer")
 ```
 
-To use functions `pprof()` and `serve_pprof()`, you need to install
-[`pprof`](https://github.com/google/pprof). Installing `pprof` is hard,
-so if you have trouble, please do not hesitate to [open an
-issue](https://github.com/r-prof/proffer/issues) and ask for help. And
-if you cannot install `pprof`, then
+To use functions `pprof()` and `serve_pprof()`,
+[`pprof`](https://github.com/google/pprof) needs to be installed.
+Installing `pprof` is hard, so if you have trouble, please do not
+hesitate to [open an issue](https://github.com/r-prof/proffer/issues)
+and ask for help. And if you cannot install `pprof`, then
 [`profvis`](https://rstudio.github.io/profvis/) is an excellent
 alternative.
+
+As you follow the installation instructions below, you can run
+`test_pprof()`, `assert_pprof()`, or `pprof_path()` at any time to see
+if `proffer` can find and use `pprof`. If these functions succeed early,
+you are already done.
 
 1.  Install the [`RProtoBuf`](https://github.com/eddelbuettel/rprotobuf)
     package. On Linux, you also need to install the supporting protocol

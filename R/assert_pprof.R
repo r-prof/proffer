@@ -1,4 +1,39 @@
-#' @title Check if `pprof` is installed.
+#' @title Test `pprof()`
+#' @export
+#' @seealso [pprof()]
+#' @description Do a test run of `pprof()` to verify that the
+#'   system dependencies like `pprof` work as expected.
+#' @details See <https://github.com/r-prof/proffer#installation>
+#'   for setup instructions.
+#' @inheritParams pprof
+#' @examples
+#' \dontrun{
+#' test_pprof()
+#' }
+test_pprof <- function(
+  host = "localhost",
+  port = NULL,
+  browse = interactive(),
+  verbose = TRUE
+) {
+  slow_function <- function() {
+    n <- 1e3
+    x <- data.frame(x = rnorm(n), y = rnorm(n))
+    for (i in seq_len(n)) {
+      x[i, ] <- x[i, ] + 1
+    }
+    x
+  }
+  pprof(
+    slow_function(),
+    host = host,
+    port = port,
+    browse = browse,
+    verbose = verbose
+  )
+}
+
+#' @title Check if `proffer` can find your `pprof` installation.
 #' @export
 #' @description Returns silently if `pprof` is installed
 #'   and throws an error if `pprof` is missing.
