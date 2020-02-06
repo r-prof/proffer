@@ -70,7 +70,9 @@ missing_pprof <- function() {
 #' @param verbose Logical, whether to print out messages
 #'   when `proffer` is having trouble searching for `pprof`.
 #' @examples
+#' \dontrun{
 #' pprof_path()
+#' }
 pprof_path <- function(verbose = TRUE) {
   pprof_path <- Sys.getenv("pprof_path")
   if (file.exists(pprof_path)) {
