@@ -3,7 +3,7 @@
 * In the `DESCRIPTION`, unquote function names and add parentheses afterwards. (CRAN comments for next submission.)
 * Motivate profilers more in the README.
 * Increase font size in logo.
-* Search the system for `pprof` if the `pprof_path` env var is not set (#14, @krlmlr).
+* Search non-Windows systems for `pprof` if the `pprof_path` env var is not set (#14, @krlmlr).
 * Export `assert_pprof()` (#13, @krlmlr).
 
 # proffer 0.0.2
