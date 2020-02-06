@@ -10,7 +10,8 @@ pprof(
   port = NULL,
   browse = interactive(),
   verbose = TRUE,
-  recorder = record_pprof
+  recorder = record_pprof,
+  ...
 )
 }
 \arguments{
@@ -35,6 +36,9 @@ server to the R console as a message.}
 
 \item{recorder}{A function that records a \code{pprof} profile
 for an expression. Default: \link{record_pprof}.}
+
+\item{...}{Additional arguments passed on to the
+recorder function.}
 }
 \value{
 A \code{processx::process$new()} handle. Use this handle

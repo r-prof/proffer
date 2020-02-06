@@ -8,6 +8,8 @@
 #' @param expr R code to run and profile.
 #' @param recorder A function that records a `pprof` profile
 #'   for an expression. Default: [record_pprof].
+#' @param ... Additional arguments passed on to the
+#'   recorder function.
 #' @examples
 #' \dontrun{
 #' # Start a pprof virtual server in the background.
@@ -21,9 +23,10 @@ pprof <- function(
   port = NULL,
   browse = interactive(),
   verbose = TRUE,
-  recorder = record_pprof
+  recorder = record_pprof,
+  ...
 ) {
-  pprof <- recorder(expr = expr)
+  pprof <- recorder(expr = expr, ...)
   serve_pprof(
     pprof = pprof,
     host = host,
