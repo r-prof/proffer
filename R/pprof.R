@@ -6,6 +6,8 @@
 #'   to take down the server with `$kill()`.
 #' @inheritParams serve_pprof
 #' @param expr R code to run and profile.
+#' @param recorder A function that records a `pprof` profile
+#'   for an expression. Default: [record_pprof].
 #' @examples
 #' \dontrun{
 #' # Start a pprof virtual server in the background.
@@ -18,9 +20,10 @@ pprof <- function(
   host = "localhost",
   port = NULL,
   browse = interactive(),
-  verbose = TRUE
+  verbose = TRUE,
+  recorder = record_pprof
 ) {
-  pprof <- record_pprof(expr)
+  pprof <- recorder(expr = expr)
   serve_pprof(
     pprof = pprof,
     host = host,
