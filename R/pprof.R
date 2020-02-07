@@ -108,7 +108,7 @@ serve_pprof <- function(
   server <- sprintf("%s:%s", host, port %||% random_port())
   url <- sprintf("http://%s", server)
   args <- c("-http", server, pprof)
-  px <- serve_pprof_impl(args)
+  px <- serve_pprof_impl(args, verbose)
   if (verbose) {
     message(url)
   }
@@ -118,9 +118,9 @@ serve_pprof <- function(
   px
 }
 
-serve_pprof_impl <- function(args) {
+serve_pprof_impl <- function(args, verbose) {
   processx::process$new(
-    command = pprof_path(),
+    command = pprof_path(verbose),
     args = args,
     stdout = "|",
     stderr = "|",

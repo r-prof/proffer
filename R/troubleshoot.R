@@ -78,24 +78,10 @@ pprof_path <- function(verbose = TRUE) {
   if (file.exists(pprof_path)) {
     return(pprof_path)
   }
-  verbose_msg(verbose, "Cannot find pprof at 'pprof_path' env var:", pprof_path)
   pprof_search(verbose)
 }
 
 pprof_search <- function(verbose) {
-  search <- structure(list(), class = .Platform$OS.type)
-  pprof_search_impl(search, verbose)
-}
-
-pprof_search_impl <- function(search, verbose) {
-  UseMethod("pprof_search_impl")
-}
-
-pprof_search_impl.windows <- function(search, verbose) {
-  stop("cannot yet search for pprof on Windows", call = FALSE)
-}
-
-pprof_search_impl.default <- function(search, verbose) {
   if (nchar(Sys.which("go")) == 0) {
     verbose_msg(verbose, "Go lang compiler tools not installed.")
     return("")
@@ -106,6 +92,9 @@ pprof_search_impl.default <- function(search, verbose) {
     return("")
   }
   pprof_path <- file.path(gopath, "bin", "pprof")
+  if (.Platform$OS.type == "windows") {
+    pprof_path <- paste0(pprof_path, ".exe")
+  }
   if (!file.exists(pprof_path)) {
     verbose_msg(verbose, "Cannot find pprof in GOPATH: ", pprof_path)
     return("")
