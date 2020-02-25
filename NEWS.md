@@ -5,6 +5,7 @@
 * Increase font size in logo.
 * Search systems for `pprof` if the `pprof_path` env var is not set (#14, @krlmlr).
 * Export `assert_pprof()` (#13, @krlmlr).
+* Use `PROFFER_PPROF_PATH` env var instead of `pprof_path` (#11, @krlmlr). `pprof_path` is still back-compatibly supported.
 
 # proffer 0.0.2
 
