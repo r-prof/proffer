@@ -14,7 +14,7 @@ when \code{proffer} is having trouble searching for \code{pprof}.}
 Character, path to \code{pprof} it exists and \code{""} otherwise.
 }
 \description{
-Defaults to the \code{pprof_path} environment variable.
+Defaults to the \code{PROFFER_PPROF_PATH} environment variable.
 Otherwise, it searches your Go lang installation for \code{pprof}.
 }
 \details{

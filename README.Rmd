@@ -103,7 +103,7 @@ px$is_alive()
 # [1] FALSE
 
 px$read_error() # Why did it quit soon?
-#> [1] "sh: /user/local/bin/pprof: No such file or directory\nWarning message:\nIn system2(Sys.getenv(\"pprof_path\"), args) : error in running command\n"
+#> [1] "sh: /user/local/bin/pprof: No such file or directory\nWarning message:\nIn system2(Sys.getenv(\"PROFFER_PPROF_PATH\"), args) : error in running command\n"
 
 # Can my system find pprof?
 test_pprof()
@@ -120,7 +120,7 @@ system("which", "pprof")
 
 # I can put a line in my .Rprofile or .Renviron file
 # to automatically tell new sessions where pprof lives.
-Sys.setenv(pprof_path = "/home/landau/alternative/path/pprof")
+Sys.setenv(PROFFER_PPROF_PATH = "/home/landau/alternative/path/pprof")
 
 # Now, pprof should work.
 px <- pprof({
@@ -175,16 +175,16 @@ As you follow the installation instructions below, you can run `test_pprof()`, `
 1. Follow [these instructions](https://github.com/golang/go/wiki/SettingGOPATH) to set the `GOPATH` environment variables on your system. Type `go env GOPATH` in in a new terminal session verify that you set it correctly. 
 1. Enter `go get -u github.com/google/pprof` in your terminal to install `pprof`
 1. Find the path to the `pprof` executable. It is usually in the `bin` subdirectory of `GOPATH`, e.g. `/home/landau/go/bin/pprof`.
-1. Add a line to your `.Renviron` file to set the `pprof_path` environment variable, e.g. `pprof_path=/home/landau/go/bin/pprof`. This variable tells `proffer` how to find `pprof`.
+1. Add a line to your `.Renviron` file to set the `PROFFER_PPROF_PATH` environment variable, e.g. `PROFFER_PPROF_PATH=/home/landau/go/bin/pprof`. This variable tells `proffer` how to find `pprof`.
 1. Open a new R session check that pprof installed correctly.
 
 ```{r, eval = FALSE}
-Sys.getenv("pprof_path")
+Sys.getenv("PROFFER_PPROF_PATH")
 #> /home/landau/go/bin/pprof
-file.exists(Sys.getenv("pprof_path"))
+file.exists(Sys.getenv("PROFFER_PPROF_PATH"))
 #> TRUE
-system2(Sys.getenv("pprof_path")) # Shows the pprof help menu on Unix systems.
-shell(Sys.getenv("pprof_path")) # Analogous for Windows.
+system2(Sys.getenv("PROFFER_PPROF_PATH")) # Shows the pprof help menu on Unix systems.
+shell(Sys.getenv("PROFFER_PPROF_PATH")) # Analogous for Windows.
 ```
 
 ## Contributing

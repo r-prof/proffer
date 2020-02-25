@@ -62,7 +62,7 @@ missing_pprof <- function() {
 
 #' @title Show the path to the pprof executable.
 #' @export
-#' @description Defaults to the `pprof_path` environment variable.
+#' @description Defaults to the `PROFFER_PPROF_PATH` environment variable.
 #'   Otherwise, it searches your Go lang installation for `pprof`.
 #' @details See <https://github.com/r-prof/proffer#installation>
 #'   for setup instructions.
@@ -74,6 +74,11 @@ missing_pprof <- function() {
 #' pprof_path()
 #' }
 pprof_path <- function(verbose = TRUE) {
+  pprof_path <- Sys.getenv("PROFFER_PPROF_PATH")
+  if (file.exists(pprof_path)) {
+    return(pprof_path)
+  }
+  verbose_msg(verbose, "Cannot find pprof at 'PROFFER_PPROF_PATH' env var:", pprof_path)
   pprof_path <- Sys.getenv("pprof_path")
   if (file.exists(pprof_path)) {
     return(pprof_path)

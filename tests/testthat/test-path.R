@@ -17,3 +17,15 @@ test_that("pprof_path()", {
 test_that("missing_pprof()", {
   expect_error(missing_pprof(), regexp = "cannot find pprof")
 })
+
+test_that("pprof_path() environment vars", {
+  skip_if_not_installed("withr")
+  withr::with_envvar(
+    c(PROFFER_PPROF_PATH = ""),
+    expect_message(pprof_path(), regexp = "PROFFER_PPROF_PATH")
+  )
+  withr::with_envvar(
+    c(PROFFER_PPROF_PATH = "", pprof_path = ""),
+    expect_message(pprof_path(), regexp = "pprof_path")
+  )
+})
