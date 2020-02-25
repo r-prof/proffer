@@ -24,7 +24,7 @@ pprof <- function(
   verbose = TRUE,
   ...
 ) {
-  pprof <- record_pprof(expr = expr, ...)
+  pprof <- record_pprof(expr, ...)
   serve_pprof(
     pprof = pprof,
     host = host,
