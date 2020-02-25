@@ -164,7 +164,7 @@ Alternatively, you can install the development version from GitHub.
 remotes::install_github("r-prof/proffer")
 ```
 
-To use functions `pprof()` and `serve_pprof()`, [`pprof`](https://github.com/google/pprof) needs to be installed. Installing `pprof` is hard, so if you have trouble, please do not hesitate to [open an issue](https://github.com/r-prof/proffer/issues) and ask for help. And if you cannot install `pprof`, then [`profvis`](https://rstudio.github.io/profvis/) is an excellent alternative.
+To use functions `pprof()` and `serve_pprof()`, [`pprof`](https://github.com/google/pprof) needs to be installed. This requires a working Go installation and Graphviz. If you have trouble, please do not hesitate to [open an issue](https://github.com/r-prof/proffer/issues) and ask for help. The [`profvis`](https://rstudio.github.io/profvis/) package is an excellent alternative with fewer dependencies.
 
 As you follow the installation instructions below, you can run `test_pprof()`, `assert_pprof()`, or `pprof_path()` at any time to see if `proffer` can find and use `pprof`. If these functions succeed early, you are already done.
 
