@@ -2,14 +2,12 @@
 #' @export
 #' @description Run R code and display profiling results
 #'   in a local interactive pprof server.
+#'   Results are collected with [record_pprof()].
 #' @return A `processx::process$new()` handle. Use this handle
 #'   to take down the server with `$kill()`.
 #' @inheritParams serve_pprof
 #' @param expr R code to run and profile.
-#' @param recorder A function that records a `pprof` profile
-#'   for an expression. Default: [record_pprof].
-#' @param ... Additional arguments passed on to the
-#'   recorder function.
+#' @param ... Additional arguments passed on to [record_pprof()].
 #' @examples
 #' \dontrun{
 #' # Start a pprof virtual server in the background.
@@ -23,10 +21,9 @@ pprof <- function(
   port = NULL,
   browse = interactive(),
   verbose = TRUE,
-  recorder = record_pprof,
   ...
 ) {
-  pprof <- recorder(expr = expr, ...)
+  pprof <- record_pprof(expr = expr, ...)
   serve_pprof(
     pprof = pprof,
     host = host,

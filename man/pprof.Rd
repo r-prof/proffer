@@ -10,7 +10,6 @@ pprof(
   port = NULL,
   browse = interactive(),
   verbose = TRUE,
-  recorder = record_pprof,
   ...
 )
 }
@@ -34,11 +33,7 @@ the pprof server.}
 \item{verbose}{Logical, whether to print the URL of the pprof
 server to the R console as a message.}
 
-\item{recorder}{A function that records a \code{pprof} profile
-for an expression. Default: \link{record_pprof}.}
-
-\item{...}{Additional arguments passed on to the
-recorder function.}
+\item{...}{Additional arguments passed on to \code{\link[=record_pprof]{record_pprof()}}.}
 }
 \value{
 A \code{processx::process$new()} handle. Use this handle
@@ -47,6 +42,7 @@ to take down the server with \verb{$kill()}.
 \description{
 Run R code and display profiling results
 in a local interactive pprof server.
+Results are collected with \code{\link[=record_pprof]{record_pprof()}}.
 }
 \examples{
 \dontrun{
