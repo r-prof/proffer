@@ -78,7 +78,11 @@ pprof_path <- function(verbose = TRUE) {
   if (file.exists(pprof_path)) {
     return(pprof_path)
   }
-  verbose_msg(verbose, "Cannot find pprof at 'PROFFER_PPROF_PATH' env var:", pprof_path)
+  verbose_msg(
+    verbose,
+    "Cannot find pprof at 'PROFFER_PPROF_PATH' env var:",
+    pprof_path
+  )
   pprof_path <- Sys.getenv("pprof_path")
   if (file.exists(pprof_path)) {
     return(pprof_path)
