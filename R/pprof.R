@@ -7,7 +7,8 @@
 #'   to take down the server with `$kill()`.
 #' @inheritParams serve_pprof
 #' @param expr R code to run and profile.
-#' @param ... Additional arguments passed on to [record_pprof()].
+#' @param ... Additional arguments passed on to [Rprof()]
+#'   via [record_pprof()].
 #' @examples
 #' \dontrun{
 #' # Start a pprof virtual server in the background.

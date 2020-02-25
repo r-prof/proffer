@@ -33,7 +33,8 @@ the pprof server.}
 \item{verbose}{Logical, whether to print the URL of the pprof
 server to the R console as a message.}
 
-\item{...}{Additional arguments passed on to \code{\link[=record_pprof]{record_pprof()}}.}
+\item{...}{Additional arguments passed on to \code{\link[=Rprof]{Rprof()}}
+via \code{\link[=record_pprof]{record_pprof()}}.}
 }
 \value{
 A \code{processx::process$new()} handle. Use this handle
