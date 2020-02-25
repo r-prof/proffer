@@ -186,6 +186,12 @@ system2(Sys.getenv("PROFFER_PPROF_PATH")) # Shows the pprof help menu on Unix sy
 shell(Sys.getenv("PROFFER_PPROF_PATH")) # Analogous for Windows.
 ```
 
+## Configuration
+
+The following environment variables let you manually configure the non-R dependencies of `proffer`.
+
+* `PROFFER_PPROF_PATH`: path to the installed [`pprof`](https://github.com/google/pprof) executable.
+
 ## Contributing
 
 We encourage participation through [issues](https://github.com/r-prof/proffer/issues) and [pull requests](https://github.com/r-prof/proffer/pulls). `proffer` has a [Contributor Code of Conduct](https://github.com/r-prof/CODE_OF_CONDUCT.md). By contributing to this project, you agree to abide by its terms.
