@@ -91,8 +91,8 @@ serve_rprof <- function(
 #'   Chosen randomly by default.
 #' @param browse Logical, whether to open a browser to view
 #'   the pprof server.
-#' @param verbose Logical, whether to print the URL of the pprof
-#'   server to the R console as a message.
+#' @param verbose Logical, whether to print console messages
+#'   such as the URL of the local `pprof` server.
 #' @examples
 #' \dontrun{
 #' pprof <- record_pprof(replicate(1e2, sample.int(1e4)))
@@ -108,11 +108,11 @@ serve_pprof <- function(
   browse = interactive(),
   verbose = TRUE
 ) {
-  assert_pprof()
+  assert_pprof(verbose)
   server <- sprintf("%s:%s", host, port %||% random_port())
   url <- sprintf("http://%s", server)
   args <- c("-http", server, pprof)
-  px <- serve_pprof_impl(args)
+  px <- serve_pprof_impl(args, verbose)
   if (verbose) {
     message(url)
   }
@@ -122,36 +122,12 @@ serve_pprof <- function(
   px
 }
 
-serve_pprof_impl <- function(args) {
+serve_pprof_impl <- function(args, verbose) {
   processx::process$new(
-    command = get_pprof_path(),
+    command = pprof_path(verbose),
     args = args,
     stdout = "|",
     stderr = "|",
     supervise = TRUE
   )
-}
-
-random_port <- function(from = 49152L, to = 65355L) {
-  sample(seq.int(from = from, to = to, by = 1L), size = 1L)
-}
-
-assert_pprof <- function() {
-  if (file.exists(get_pprof_path())) {
-    return()
-  }
-  missing_pprof()
-}
-
-missing_pprof <- function() {
-  stop(
-    "cannot find pprof at ",
-    shQuote(get_pprof_path()),
-    ". See the setup instructions at https://r-prof.github.io/proffer.",
-    call. = FALSE
-  )
-}
-
-get_pprof_path <- function() {
-  Sys.getenv("pprof_path")
 }

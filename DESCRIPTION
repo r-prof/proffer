@@ -43,8 +43,8 @@ Imports:
   RProtoBuf,
   utils
 Suggests:
-  profvis,
-  testthat (>= 2.1.0)
+  testthat (>= 2.1.0),
+  withr (>= 2.1.2)
 SystemRequirements:
   Graphviz (https://www.graphviz.org/),
   pprof (https://github.com/google/pprof)

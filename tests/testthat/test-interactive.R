@@ -37,3 +37,10 @@ test_that("pprof()", {
   )
   px$kill()
 })
+
+test_that("test_pprof()", {
+  skip("interactive only")
+  # Should launch a browser and show a message.
+  px <- test_pprof()
+  px$kill()
+})

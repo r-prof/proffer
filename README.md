@@ -77,7 +77,7 @@ system.time({
   x <- data.frame(x = x, y = y)
 })
 #>    user  system elapsed 
-#>   0.050   0.003   0.054
+#>   0.049   0.001   0.050
 ```
 
 Moral of the story: before you optimize, throw away your assumptions and
@@ -106,16 +106,24 @@ px$is_alive()
 # [1] FALSE
 
 px$read_error() # Why did it quit soon?
-#> [1] "sh: /user/local/bin/pprof: No such file or directory\nWarning message:\nIn system2(Sys.getenv(\"pprof_path\"), args) : error in running command\n"
+#> [1] "sh: /user/local/bin/pprof: No such file or directory\nWarning message:\nIn system2(Sys.getenv(\"PROFFER_PPROF_PATH\"), args) : error in running command\n"
 
-# Oh, I must have set the wrong path to the pprof executable.
+# Can my system find pprof?
+test_pprof()
+#> Error: cannot find pprof executable. See the setup instructions at https://r-prof.github.io/proffer.
+assert_pprof()
+#> Error: cannot find pprof executable. See the setup instructions at https://r-prof.github.io/proffer.
+pprof_path()
+#> ""
+
+# Maybe my system cannot find the pprof executable.
 # Let me find out where I actually installed pprof.
 system("which", "pprof")
-#> "/home/landau/go/bin/pprof"
+#> "/home/landau/alternative/path/pprof"
 
 # I can put a line in my .Rprofile or .Renviron file
 # to automatically tell new sessions where pprof lives.
-Sys.setenv(pprof_path = "/home/landau/go/bin/pprof")
+Sys.setenv(PROFFER_PPROF_PATH = "/home/landau/alternative/path/pprof")
 
 # Now, pprof should work.
 px <- pprof({
@@ -164,54 +172,64 @@ Alternatively, you can install the development version from GitHub.
 remotes::install_github("r-prof/proffer")
 ```
 
-To use functions `pprof()` and `serve_pprof()`, you need to install
-[`pprof`](https://github.com/google/pprof). Installing `pprof` is hard,
-so if you have trouble, please do not hesitate to [open an
-issue](https://github.com/r-prof/proffer/issues) and ask for help. And
-if you cannot install `pprof`, then
-[`profvis`](https://rstudio.github.io/profvis/) is an excellent
-alternative.
+To use functions `pprof()` and `serve_pprof()`,
+[`pprof`](https://github.com/google/pprof) needs to be installed. This
+requires a working Go installation and Graphviz. If you have trouble,
+please do not hesitate to [open an
+issue](https://github.com/r-prof/proffer/issues) and ask for help. The
+[`profvis`](https://rstudio.github.io/profvis/) package is an excellent
+alternative with fewer dependencies.
 
-1.  Install the [`RProtoBuf`](https://github.com/eddelbuettel/rprotobuf)
-    package. On Linux, you also need to install the supporting protocol
-    buffer libraries, e.g. `sudo apt-get install protobuf-compiler
-    libprotobuf-dev libprotoc-dev` on Ubuntu.
-2.  Install [Graphviz](https://www.graphviz.org) and ensure the Graphviz
+As you follow the installation instructions below, you can run
+`test_pprof()`, `assert_pprof()`, or `pprof_path()` at any time to see
+if `proffer` can find and use `pprof`. If these functions succeed early,
+you are already done.
+
+1.  Install [Graphviz](https://www.graphviz.org) and ensure the Graphviz
     executables appear in your `PATH` environment variable ([directions
     here](https://bobswift.atlassian.net/wiki/spaces/GVIZ/pages/131924165/Graphviz+installation)).
-3.  [Install the Go programming
+2.  [Install the Go programming
     language](https://golang.org/doc/install).
-4.  Ensure your system can find the Go binaries. Open your command line
+3.  Ensure your system can find the Go binaries. Open your command line
     interface of choice (e.g. Terminal or Command Prompt) and type `go
     version`. If you get an error, you may need to set the `PATH`
     environment variable as described [here for
     Linux](https://www.callicoder.com/golang-installation-setup-gopath-workspace/#linux)
     and [here for
     Windows](http://www.wadewegner.com/2014/12/easy-go-programming-setup-for-windows/)
-5.  Follow [these
+4.  Follow [these
     instructions](https://github.com/golang/go/wiki/SettingGOPATH) to
     set the `GOPATH` environment variables on your system. Type `go env
     GOPATH` in in a new terminal session verify that you set it
     correctly.
-6.  Enter `go get -u github.com/google/pprof` in your terminal to
+5.  Enter `go get -u github.com/google/pprof` in your terminal to
     install `pprof`
-7.  Find the path to the `pprof` executable. It is usually in the `bin`
+6.  Find the path to the `pprof` executable. It is usually in the `bin`
     subdirectory of `GOPATH`, e.g. `/home/landau/go/bin/pprof`.
-8.  Add a line to your `.Renviron` file to set the `pprof_path`
-    environment variable, e.g. `pprof_path=/home/landau/go/bin/pprof`.
-    This variable tells `proffer` how to find `pprof`.
-9.  Open a new R session check that pprof installed correctly.
+7.  Add a line to your `.Renviron` file to set the `PROFFER_PPROF_PATH`
+    environment variable, e.g.
+    `PROFFER_PPROF_PATH=/home/landau/go/bin/pprof`. This variable tells
+    `proffer` how to find `pprof`.
+8.  Open a new R session check that pprof installed correctly.
 
 <!-- end list -->
 
 ``` r
-Sys.getenv("pprof_path")
+Sys.getenv("PROFFER_PPROF_PATH")
 #> /home/landau/go/bin/pprof
-file.exists(Sys.getenv("pprof_path"))
+file.exists(Sys.getenv("PROFFER_PPROF_PATH"))
 #> TRUE
-system2(Sys.getenv("pprof_path")) # Shows the pprof help menu on Unix systems.
-shell(Sys.getenv("pprof_path")) # Analogous for Windows.
+system2(Sys.getenv("PROFFER_PPROF_PATH")) # Shows the pprof help menu on Unix systems.
+shell(Sys.getenv("PROFFER_PPROF_PATH")) # Analogous for Windows.
 ```
+
+## Configuration
+
+The following environment variables let you manually configure the non-R
+dependencies of `proffer`.
+
+  - `PROFFER_PPROF_PATH`: path to the installed
+    [`pprof`](https://github.com/google/pprof) executable.
 
 ## Contributing
 
