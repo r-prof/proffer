@@ -108,7 +108,6 @@ serve_pprof <- function(
   browse = interactive(),
   verbose = TRUE
 ) {
-  assert_pprof(verbose)
   server <- sprintf("%s:%s", host, port %||% random_port())
   url <- sprintf("http://%s", server)
   args <- c("-http", server, pprof)
@@ -123,11 +122,14 @@ serve_pprof <- function(
 }
 
 serve_pprof_impl <- function(args, verbose) {
-  processx::process$new(
-    command = pprof_path(verbose),
-    args = args,
-    stdout = "|",
-    stderr = "|",
-    supervise = TRUE
+  with_safe_path(
+    Sys.getenv("PROFFER_GRAPHVIZ_PATH"),
+    processx::process$new(
+      command = pprof_path(verbose),
+      args = args,
+      stdout = "|",
+      stderr = "|",
+      supervise = TRUE
+    )
   )
 }

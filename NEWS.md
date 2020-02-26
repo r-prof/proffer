@@ -7,6 +7,7 @@
 * Search systems for `pprof` if the `pprof_path` env var is not set (#14, @krlmlr).
 * Export `assert_pprof()` (#13, @krlmlr).
 * Use `PROFFER_PPROF_PATH` env var instead of `pprof_path` (#11, @krlmlr). `pprof_path` is still back-compatibly supported.
+* Introduce new environment variables `PROFFER_GO_BIN_PATH` and `PROFFER_GRAPHVIZ_PATH` to allow the user to set the paths to the respective binaries (#11, @krlmlr).
 
 # proffer 0.0.2
 
