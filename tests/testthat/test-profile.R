@@ -21,7 +21,11 @@ test_that("arguments to record_rprof()", {
   prof <- profile::read_rprof(rprof)
   expect_silent(profile::validate_profile(prof))
 
-  rprof <- record_rprof(replicate(1e2, sample.int(1e4)), rprof = rprof, append = TRUE)
+  rprof <- record_rprof(
+    replicate(1e2, sample.int(1e4)),
+    rprof = rprof,
+    append = TRUE
+  )
   # Needs fix in {profile}
   suppressWarnings(prof2 <- profile::read_rprof(rprof))
   expect_silent(profile::validate_profile(prof2))
