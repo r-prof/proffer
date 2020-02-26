@@ -104,7 +104,6 @@ serve_pprof <- function(
   browse = interactive(),
   verbose = TRUE
 ) {
-  assert_pprof(verbose = FALSE)
   server <- sprintf("%s:%s", host, port %||% random_port())
   url <- sprintf("http://%s", server)
   args <- c("-http", server, pprof)
