@@ -10,9 +10,12 @@ random_port <- function(from = 49152L, to = 65355L) {
   sample(seq.int(from = from, to = to, by = 1L), size = 1L)
 }
 
-with_path <- function(new, code) {
-  path <- c(PATH = paste0(new, ":", Sys.getenv("PATH")))
-  withr::with_envvar(path, code)
+with_safe_path <- function(path, code) {
+  if (!is.null(path) && !is.na(path) && path != "") {
+    withr::with_path(path, code)
+  } else {
+    code
+  }
 }
 
 verbose_msg <- function(verbose, ...) {
