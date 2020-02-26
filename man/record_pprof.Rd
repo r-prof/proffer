@@ -4,19 +4,24 @@
 \alias{record_pprof}
 \title{Profile R code and record pprof samples.}
 \usage{
-record_pprof(expr, pprof = tempfile())
+record_pprof(expr, pprof = tempfile(), ...)
 }
 \arguments{
 \item{expr}{An R expression to profile.}
 
 \item{pprof}{Path to a file with pprof samples.
 Also returned from the function.}
+
+\item{...}{Additional arguments passed on to \code{\link[=Rprof]{Rprof()}}
+via \code{\link[=record_rprof]{record_rprof()}}.}
 }
 \value{
 Path to a file with pprof samples.
 }
 \description{
 Run R code and record pprof samples.
+Profiles are recorded with \code{\link[=record_rprof]{record_rprof()}}
+and then converted with \code{\link[=to_pprof]{to_pprof()}}.
 }
 \examples{
 # Returns a path to pprof samples.
