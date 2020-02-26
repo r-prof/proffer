@@ -134,7 +134,7 @@ remotes::install_github("r-prof/proffer")
 
 ### Non-R dependencies
 
-Install the Go, `pprof`, and Graphviz using the instructions in the links below.
+Install Go, `pprof`, and Graphviz using the instructions in the links below.
 
 1. [Go](https://golang.org/doc/install)
 2. [`pprof`](https://github.com/google/pprof)
