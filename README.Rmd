@@ -191,6 +191,8 @@ shell(Sys.getenv("PROFFER_PPROF_PATH")) # Analogous for Windows.
 The following environment variables let you manually configure the non-R dependencies of `proffer`.
 
 * `PROFFER_PPROF_PATH`: path to the installed [`pprof`](https://github.com/google/pprof) executable.
+* `PROFFER_GO_BIN_PATH`: path to the installed [Go language](https://golang.org/) binary.
+* `PROFFER_GRAPHVIZ_PATH`: path to the installed [Graphviz](https://www.graphviz.org/) executable.
 
 ## Contributing
 

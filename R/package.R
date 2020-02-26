@@ -19,6 +19,7 @@
 #' @importFrom profile read_rprof write_pprof
 #' @importFrom RProtoBuf readProtoFiles
 #' @importFrom utils browseURL Rprof
+#' @importFrom withr with_envvar
 #' @examples
 #' \dontrun{
 #' # Start a pprof virtual server in the background.

@@ -96,7 +96,10 @@ pprof_search <- function(verbose) {
     verbose_msg(verbose, "Go lang compiler tools not installed.")
     return("")
   }
-  gopath <- system2("go", c("env", "GOPATH"), stdout = TRUE)
+  gopath <- with_path(
+    Sys.getenv("PROFFER_GO_BIN_PATH"),
+    system2("go", c("env", "GOPATH"), stdout = TRUE)
+  )
   if (!dir.exists(gopath)) {
     verbose_msg(verbose, "Cannot find 'GOPATH' at", gopath)
     return("")

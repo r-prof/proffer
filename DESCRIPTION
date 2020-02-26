@@ -41,10 +41,10 @@ Imports:
   processx,
   profile,
   RProtoBuf,
-  utils
+  utils,
+  withr
 Suggests:
-  testthat (>= 2.1.0),
-  withr (>= 2.1.2)
+  testthat (>= 2.1.0)
 SystemRequirements:
   Graphviz (https://www.graphviz.org/),
   pprof (https://github.com/google/pprof)

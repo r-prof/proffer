@@ -77,7 +77,7 @@ system.time({
   x <- data.frame(x = x, y = y)
 })
 #>    user  system elapsed 
-#>   0.049   0.001   0.050
+#>   0.037   0.000   0.038
 ```
 
 Moral of the story: before you optimize, throw away your assumptions and
@@ -230,6 +230,10 @@ dependencies of `proffer`.
 
   - `PROFFER_PPROF_PATH`: path to the installed
     [`pprof`](https://github.com/google/pprof) executable.
+  - `PROFFER_GO_BIN_PATH`: path to the installed [Go
+    language](https://golang.org/) binary.
+  - `PROFFER_GRAPHVIZ_PATH`: path to the installed
+    [Graphviz](https://www.graphviz.org/) executable.
 
 ## Contributing
 
