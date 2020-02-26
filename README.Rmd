@@ -132,9 +132,11 @@ Alternatively, you can install the development version from GitHub.
 remotes::install_github("r-prof/proffer")
 ```
 
+The `proffer` package requires the `RProtoBuf` package, which may require installation of additional system dependencies on Linux. See its [installation instructions](https://github.com/eddelbuettel/rprotobuf#installation).
+
 ### Non-R dependencies
 
-Install the Go, `pprof`, and Graphviz using the instructions in the links below.
+Install Go, `pprof`, and Graphviz using the instructions in the links below.
 
 1. [Go](https://golang.org/doc/install)
 2. [`pprof`](https://github.com/google/pprof)
