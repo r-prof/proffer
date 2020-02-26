@@ -97,7 +97,7 @@ pprof_search <- function(verbose) {
     return("")
   }
   gopath <- with_safe_path(
-    Sys.getenv("PROFFER_GO_BIN_PATH"),
+    Sys.getenv("PROFFER_GO_PATH"),
     system2("go", c("env", "GOPATH"), stdout = TRUE)
   )
   if (!dir.exists(gopath)) {

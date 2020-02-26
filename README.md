@@ -161,8 +161,11 @@ you.
 
     # .Renviron file, opened with usethis::edit_r_environ()
     PROFFER_PPROF_PATH=/home/landau/go/bin/pprof
-    PROFFER_GO_BIN_PATH=/usr/bin/go
-    PROFFER_GRAPHVIZ_PATH= # Not necessary on Linux.
+    PROFFER_BIN_PATH=/usr/bin/go
+    # The Graphviz path is not necessary on Linux.
+    # On Windows, it will look something like
+    # C:\Program Files (x86)\Graphviz2.38\bin\dot.exe
+    PROFFER_GRAPHVIZ_PATH=
 
 Remarks on configuration:
 
