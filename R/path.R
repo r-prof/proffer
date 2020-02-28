@@ -10,16 +10,18 @@
 #' pprof_path()
 #' }
 pprof_path <- function() {
-  proffer_pprof_env() %fl%
-    pprof_env() %fl%
-    pprof_sys()
-}
-
-proffer_pprof_env <- function() {
-  Sys.getenv("PROFFER_PPROF_PATH")
+  pprof_env() %fl% pprof_sys()
 }
 
 pprof_env <- function() {
+  pprof_env_new() %fl% pprof_env_old()
+}
+
+pprof_env_new <- function() {
+  Sys.getenv("PROFFER_PPROF_PATH")
+}
+
+pprof_env_old <- function() {
   Sys.getenv("pprof_path")
 }
 
@@ -55,7 +57,7 @@ go_ext_sys <- function() {
   ifelse(.Platform$OS.type == "windows", ".exe", "")
 }
 
-graphviz <- function() {
+graphviz_path <- function() {
   env_graphviz_path() %fl%
     env_graphviz_
 }

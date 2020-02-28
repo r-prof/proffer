@@ -1,6 +1,8 @@
 test_that("pprof_path() and helpers", {
   expect_true(is.character(pprof_path()))
   expect_true(is.character(pprof_env()))
+  expect_true(is.character(pprof_env_new()))
+  expect_true(is.character(pprof_env_old()))
   expect_true(is.character(pprof_sys()))
   expect_true(is.character(go_path()))
   expect_true(is.character(go_bin_path()))
