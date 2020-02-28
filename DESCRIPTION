@@ -38,6 +38,7 @@ Description: Like similar profiling tools,
 Depends:
   R (>= 3.3.0)
 Imports:
+  cli,
   processx,
   profile,
   RProtoBuf,

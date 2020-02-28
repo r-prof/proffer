@@ -1,10 +1,12 @@
 test_that("pprof_path() and helpers", {
   expect_true(is.character(pprof_path()))
-  expect_true(is.character(env_proffer_pprof_path()))
-  expect_true(is.character(env_pprof_go_path()))
-  expect_true(is.character(env_go_dir()))
-  expect_true(is.character(env_go_bin()))
-  expect_true(is.character(env_go_ext()))
+  expect_true(is.character(pprof_env()))
+  expect_true(is.character(pprof_sys()))
+  expect_true(is.character(go_path()))
+  expect_true(is.character(go_bin_path()))
+  expect_true(is.character(go_bin_env()))
+  expect_true(is.character(go_bin_sys()))
+  expect_true(is.character(go_ext_sys()))
 })
 
 test_that("pprof_path() listens to PROFFER_PPROF_PATH", {
