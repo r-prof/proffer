@@ -35,7 +35,7 @@ system.time({
 ```
 
 Why exactly does it take so long? Is it because `for` loops are slow as
-a general rule? Let’s find out empirically.
+a general rule? Let us find out empirically.
 
 ``` r
 library(proffer)
@@ -77,7 +77,7 @@ system.time({
   x <- data.frame(x = x, y = y)
 })
 #>    user  system elapsed 
-#>   0.036   0.001   0.037
+#>   0.048   0.001   0.050
 ```
 
 Moral of the story: before you optimize, throw away your assumptions and
@@ -142,10 +142,15 @@ Alternatively, you can install the development version from GitHub.
 remotes::install_github("r-prof/proffer")
 ```
 
+The `proffer` package requires the `RProtoBuf` package, which may
+require installation of additional system dependencies on Linux. See its
+[installation
+instructions](https://github.com/eddelbuettel/rprotobuf#installation).
+
 ### Non-R dependencies
 
-Install the Go, `pprof`, and Graphviz using the instructions in the
-links below.
+Install Go, `pprof`, and Graphviz using the instructions in the links
+below.
 
 1.  [Go](https://golang.org/doc/install)
 2.  [`pprof`](https://github.com/google/pprof)
@@ -154,7 +159,7 @@ links below.
 ### Configuration
 
 Next, open your your `.Renviron` file and register the installed
-executables in `proffer`’s environment variables. The
+executables in the environment variables of `proffer`. The
 [`edit_r_environ()`](https://usethis.r-lib.org/reference/edit.html)
 function in the [`usethis`](https://usethis.r-lib.org) package can help
 you.
@@ -174,20 +179,40 @@ Remarks on configuration:
     post](https://stackoverflow.com/questions/35064304/runtimeerror-make-sure-the-graphviz-executables-are-on-your-systems-path-aft/47031762#47031762)
     has an example path you can supply directly to
     `PROFFER_GRAPHVIZ_PATH`.
-  - As an alternative to `proffer`’s environment variables above, you
-    can set your
-    [`PATH`](https://en.wikipedia.org/wiki/PATH_\(variable\)) and
+  - As an alternative to the environment variables above, you can set
+    your [`PATH`](https://en.wikipedia.org/wiki/PATH_\(variable\)) and
     [`GOPATH`](https://github.com/golang/go/wiki/GOPATH) yourself if you
     know what you are doing.
 
 ### Verification
 
-Run the following in a new R session. If all the installation and
-configuration succeeded, it should initialize a new instance of `pprof`
-with some R profiling displays.
+Run `pprof_sitrep()` to verify that everything is installed and
+configured correctly.
 
 ``` r
-proffer::test_pprof()
+library(proffer)
+pprof_sitrep()
+#> ● Call test_pprof() to test installation.
+#> ✓ pprof path /Users/c240390/go/bin/pprof
+#> ✓ PROFFER_PPROF_PATH path /Users/c240390/go/bin/pprof
+#> ✓ pprof_path env variable omitted
+#> ✓ pprof system path /Users/c240390/go/bin/pprof
+#> ✓ Go path /Users/c240390/go
+#> ✓ Go binary path /usr/local/bin/go
+#> ✓ PROFFER_GO_PATH path /usr/local/bin/go
+#> ✓ Go binary system path /usr/local/bin/go
+#> ✓ Graphviz path /usr/local/bin/dot
+#> ✓ PROFFER_GRAPHVIZ_PATH /usr/local/bin/dot
+#> ✓ Graphviz system path /usr/local/bin/dot
+```
+
+If no dependencies are missing, `proffer` should work. Test it out with
+`test_pprof()`. On a local machine, it should launch a browser window
+showing an instance of `pprof`.
+
+``` r
+library(proffer)
+test_pprof()
 ```
 
 ## Contributing

@@ -38,7 +38,10 @@ go_path <- function() {
 }
 
 go_path_impl <- function() {
-  with_safe_path(go_bin_path(), system2("go", c("env", "GOPATH"), stdout = TRUE))
+  with_safe_path(
+    go_bin_path(),
+    system2("go", c("env", "GOPATH"), stdout = TRUE)
+  )
 }
 
 go_bin_path <- function() {
@@ -50,7 +53,7 @@ go_bin_env <- function() {
 }
 
 go_bin_sys <- function() {
-  Sys.which("go")
+  unname(Sys.which("go"))
 }
 
 go_ext_sys <- function() {
@@ -58,6 +61,13 @@ go_ext_sys <- function() {
 }
 
 graphviz_path <- function() {
-  env_graphviz_path() %fl%
-    env_graphviz_
+  graphviz_env() %fl% graphviz_sys()
+}
+
+graphviz_env <- function() {
+  Sys.getenv("PROFFER_GRAPHVIZ_PATH")
+}
+
+graphviz_sys <- function() {
+  unname(Sys.which("dot"))
 }
