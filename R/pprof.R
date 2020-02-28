@@ -111,7 +111,7 @@ serve_pprof <- function(
   server <- sprintf("%s:%s", host, port %||% random_port())
   url <- sprintf("http://%s", server)
   args <- c("-http", server, pprof)
-  px <- serve_pprof_impl(args, verbose)
+  px <- serve_pprof_impl(args)
   if (verbose) {
     message(url)
   }
@@ -121,11 +121,11 @@ serve_pprof <- function(
   px
 }
 
-serve_pprof_impl <- function(args, verbose) {
+serve_pprof_impl <- function(args) {
   with_safe_path(
     Sys.getenv("PROFFER_GRAPHVIZ_PATH"),
     processx::process$new(
-      command = pprof_path(verbose),
+      command = pprof_path(),
       args = args,
       stdout = "|",
       stderr = "|",

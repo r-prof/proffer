@@ -17,10 +17,3 @@ with_safe_path <- function(path, code) {
     code
   }
 }
-
-verbose_msg <- function(verbose, ...) {
-  stopifnot(is.logical(verbose))
-  if (verbose) {
-    message(paste(...))
-  }
-}

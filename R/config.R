@@ -33,33 +33,6 @@ test_pprof <- function(
   )
 }
 
-#' @title Check if `proffer` can find your `pprof` installation.
-#' @export
-#' @description Returns silently if `pprof` is installed
-#'   and throws an error if `pprof` is missing.
-#' @details See <https://github.com/r-prof/proffer#installation>
-#'   for setup instructions.
-#' @param verbose Logical, whether to print out messages
-#'   when `proffer` is having trouble searching for `pprof`.
-#' @examples
-#' \dontrun{
-#' assert_pprof()
-#' }
-assert_pprof <- function(verbose = TRUE) {
-  if (file.exists(pprof_path(verbose = verbose))) {
-    return(invisible())
-  }
-  missing_pprof()
-}
-
-missing_pprof <- function() {
-  stop(
-    "cannot find pprof executable. ",
-    "See the setup instructions at https://r-prof.github.io/proffer.",
-    call. = FALSE
-  )
-}
-
 #' @title Show the path to the pprof executable.
 #' @export
 #' @description Defaults to the `PROFFER_PPROF_PATH` environment variable.
@@ -67,33 +40,24 @@ missing_pprof <- function() {
 #' @details See <https://github.com/r-prof/proffer#installation>
 #'   for setup instructions.
 #' @return Character, path to `pprof` it exists and `""` otherwise.
-#' @param verbose Logical, whether to print out messages
-#'   when `proffer` is having trouble searching for `pprof`.
 #' @examples
 #' \dontrun{
 #' pprof_path()
 #' }
-pprof_path <- function(verbose = TRUE) {
+pprof_path <- function() {
   pprof_path <- Sys.getenv("PROFFER_PPROF_PATH")
   if (file.exists(pprof_path)) {
     return(pprof_path)
   }
-  verbose_msg(
-    verbose,
-    "Cannot find pprof at 'PROFFER_PPROF_PATH' env var:",
-    pprof_path
-  )
   pprof_path <- Sys.getenv("pprof_path")
   if (file.exists(pprof_path)) {
     return(pprof_path)
   }
-  verbose_msg(verbose, "Cannot find pprof at 'pprof_path' env var:", pprof_path)
-  pprof_search(verbose)
+  pprof_search()
 }
 
-pprof_search <- function(verbose) {
+pprof_search <- function() {
   if (nchar(Sys.which("go")) == 0) {
-    verbose_msg(verbose, "Go lang compiler tools not installed.")
     return("")
   }
   gopath <- with_safe_path(
@@ -101,7 +65,6 @@ pprof_search <- function(verbose) {
     system2("go", c("env", "GOPATH"), stdout = TRUE)
   )
   if (!dir.exists(gopath)) {
-    verbose_msg(verbose, "Cannot find 'GOPATH' at", gopath)
     return("")
   }
   pprof_path <- file.path(gopath, "bin", "pprof")
@@ -109,7 +72,6 @@ pprof_search <- function(verbose) {
     pprof_path <- paste0(pprof_path, ".exe")
   }
   if (!file.exists(pprof_path)) {
-    verbose_msg(verbose, "Cannot find pprof in GOPATH: ", pprof_path)
     return("")
   }
   pprof_path
