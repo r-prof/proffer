@@ -1,6 +1,10 @@
-test_that("pprof_path()", {
-  skip_on_os("windows")
+test_that("pprof_path() and helpers", {
   expect_true(is.character(pprof_path()))
+  expect_true(is.character(env_proffer_pprof_path()))
+  expect_true(is.character(env_pprof_go_path()))
+  expect_true(is.character(env_go_dir()))
+  expect_true(is.character(env_go_bin()))
+  expect_true(is.character(env_go_ext()))
 })
 
 test_that("pprof_path() listens to PROFFER_PPROF_PATH", {

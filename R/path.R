@@ -10,30 +10,51 @@
 #' pprof_path()
 #' }
 pprof_path <- function() {
-  pprof_path <- Sys.getenv("PROFFER_PPROF_PATH")
-  if (file.exists(pprof_path)) {
-    return(pprof_path)
-  }
-  pprof_path <- Sys.getenv("pprof_path")
-  if (file.exists(pprof_path)) {
-    return(pprof_path)
-  }
-  if (nchar(Sys.which("go")) == 0) {
-    return("")
-  }
-  gopath <- with_safe_path(
+  env_proffer_pprof_path() %fl%
+    env_pprof_path() %fl%
+    env_pprof_go_path()
+}
+
+env_proffer_pprof_path <- function() {
+  Sys.getenv("PROFFER_PPROF_PATH")
+}
+
+env_pprof_path <- function() {
+  Sys.getenv("pprof_path")
+}
+
+env_pprof_go_path <- function() {
+  ifelse(
+    file.exists(env_go_dir()),
+    env_pprof_go_path_impl(),
+    ""
+  )
+}
+
+env_pprof_go_path_impl <- function() {
+  paste0(file.path(env_go_dir(), "bin", "pprof"), env_go_ext())
+}
+
+env_go_dir <- function() {
+  ifelse(
+    file.exists(env_go_bin()),
+    env_go_dir_impl(),
+    ""
+  )
+}
+
+env_go_dir_impl <- function() {
+  with_safe_path(
     Sys.getenv("PROFFER_GO_PATH"),
     system2("go", c("env", "GOPATH"), stdout = TRUE)
   )
-  if (!dir.exists(gopath)) {
-    return("")
-  }
-  pprof_path <- file.path(gopath, "bin", "pprof")
-  if (.Platform$OS.type == "windows") {
-    pprof_path <- paste0(pprof_path, ".exe")
-  }
-  if (!file.exists(pprof_path)) {
-    return("")
-  }
-  pprof_path
+}
+
+env_go_bin <- function() {
+  Sys.which("go")
+}
+
+
+env_go_ext <- function() {
+  ifelse(.Platform$OS.type == "windows", ".exe", "")
 }

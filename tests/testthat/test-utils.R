@@ -4,6 +4,13 @@ test_that("%||%", {
   expect_equal(NULL %||% "y", "y")
 })
 
+test_that("%fl%", {
+  tmp <- tempfile()
+  file.create(tmp)
+  expect_equal(tmp %fl% "y", tmp)
+  expect_equal("" %fl% "y", "y")
+})
+
 test_that("random_port()", {
   port <- random_port()
   expect_true(is.integer(port))
