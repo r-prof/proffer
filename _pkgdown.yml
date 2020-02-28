@@ -21,5 +21,4 @@ reference:
 - title: Troubleshoot
   contents:
   - '`test_pprof`'
-  - '`assert_pprof`'
   - '`pprof_path`'
