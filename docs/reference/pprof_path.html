@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Changelog • proffer</title>
+<title>Show the path to the pprof executable. — pprof_path • proffer</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,7 +42,9 @@
 
 
 
-<meta property="og:title" content="Changelog" />
+<meta property="og:title" content="Show the path to the pprof executable. — pprof_path" />
+<meta property="og:description" content="Defaults to the PROFFER_PPROF_PATH environment variable.
+Otherwise, it searches your Go lang installation for pprof." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -63,7 +65,7 @@
   </head>
 
   <body>
-    <div class="container template-news">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -115,58 +117,41 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Changelog <small></small></h1>
-      <small>Source: <a href='https://github.com/r-prof/proffer/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
+    <h1>Show the path to the pprof executable.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/r-prof/proffer/blob/master/R/path.R'><code>R/path.R</code></a></small>
+    <div class="hidden name"><code>pprof_path.Rd</code></div>
     </div>
 
-    <div id="proffer-0-0-2-9000" class="section level1">
-<h1 class="page-header">
-<a href="#proffer-0-0-2-9000" class="anchor"></a>proffer 0.0.2.9000<small> Unreleased </small>
-</h1>
-<ul>
-<li>
-<code><a href="../reference/pprof.html">pprof()</a></code> passes <code>...</code> to <code><a href="../reference/record_pprof.html">record_pprof()</a></code> (<a href='https://github.com/r-prof/proffer/issues/12'>#12</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</li>
-<li>In the <code>DESCRIPTION</code>, unquote function names and add parentheses afterwards. (CRAN comments for next submission.)</li>
-<li>Motivate profilers more in the README.</li>
-<li>Increase font size in logo.</li>
-<li>Search systems for <code>pprof</code> if the <code>pprof_path</code> env var is not set (<a href='https://github.com/r-prof/proffer/issues/14'>#14</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</li>
-<li>Use <code>PROFFER_PPROF_PATH</code> env var instead of <code>pprof_path</code> (<a href='https://github.com/r-prof/proffer/issues/11'>#11</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>). <code>pprof_path</code> is still back-compatibly supported.</li>
-<li>Introduce new environment variables <code>PROFFER_GO_PATH</code> and <code>PROFFER_GRAPHVIZ_PATH</code> to allow the user to set the paths to the respective binaries (<a href='https://github.com/r-prof/proffer/issues/11'>#11</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</li>
-<li>Add a new <code><a href="../reference/pprof_sitrep.html">pprof_sitrep()</a></code> function to give a situation report of the <code>pprof</code> installation, its dependencies, and their environment variables (<a href='https://github.com/r-prof/proffer/issues/17'>#17</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</li>
-</ul>
-</div>
-    <div id="proffer-0-0-2" class="section level1">
-<h1 class="page-header">
-<a href="#proffer-0-0-2" class="anchor"></a>proffer 0.0.2<small> 2019-12-20 </small>
-</h1>
-<ul>
-<li>Respond to CRAN feedback on version 0.0.1. Software and API names in the <code>DESCRIPTION</code> now appear in single quotes, the grammatical errors are gone, and new links reference the methodological background and context of <code>proffer</code> (<a href="https://github.com/google/pprof" class="uri">https://github.com/google/pprof</a>, <a href="https://developers.google.com/protocol-buffers" class="uri">https://developers.google.com/protocol-buffers</a>, and <a href="https://github.com/r-prof/profile" class="uri">https://github.com/r-prof/profile</a>).</li>
-<li>Use <code>processx</code> instead of <code>callr</code> (<a href='https://github.com/r-prof/proffer/issues/5'>#5</a>, <a href='https://github.com/gaborcsardi'>@gaborcsardi</a>).</li>
-<li>Add Graphviz installation instructions.</li>
-<li>Add pprof and Graphviz as system requirements.</li>
-</ul>
-</div>
-    <div id="proffer-0-0-1" class="section level1">
-<h1 class="page-header">
-<a href="#proffer-0-0-1" class="anchor"></a>proffer 0.0.1<small> Unreleased </small>
-</h1>
-<ul>
-<li>First version.</li>
-</ul>
-</div>
-  </div>
+    <div class="ref-description">
+    <p>Defaults to the <code>PROFFER_PPROF_PATH</code> environment variable.
+Otherwise, it searches your Go lang installation for <code>pprof</code>.</p>
+    </div>
 
+    <pre class="usage"><span class='fu'>pprof_path</span>()</pre>
+
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Character, path to <code>pprof</code> it exists and <code>""</code> otherwise.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>See <a href='https://github.com/r-prof/proffer#installation'>https://github.com/r-prof/proffer#installation</a>
+for setup instructions.</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'>pprof_path</span>()
+}</div></pre>
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <div id="tocnav">
-      <h2>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-        <li><a href="#proffer-0-0-2-9000">0.0.2.9000</a></li>
-        <li><a href="#proffer-0-0-2">0.0.2</a></li>
-        <li><a href="#proffer-0-0-1">0.0.1</a></li>
-      </ul>
-    </div>
-  </div>
+    <h2>Contents</h2>
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="#value">Value</a></li>
+      <li><a href="#details">Details</a></li>
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
+  </div>
 </div>
 
 

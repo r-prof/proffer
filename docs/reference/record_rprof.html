@@ -125,7 +125,7 @@
     <p>Run R code and record Rprof samples.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>record_rprof</span>(<span class='no'>expr</span>, <span class='kw'>rprof</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span>())</pre>
+    <pre class="usage"><span class='fu'>record_rprof</span>(<span class='no'>expr</span>, <span class='kw'>rprof</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span>(), <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -139,6 +139,10 @@
       <td><p>Path to a file with Rprof samples.
 Also returned from the function.</p></td>
     </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Additional arguments passed on to <code><a href='https://rdrr.io/r/utils/Rprof.html'>Rprof()</a></code>.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -147,7 +151,7 @@ Also returned from the function.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Returns a path to Rprof samples.</span>
-<span class='fu'>record_rprof</span>(<span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>replicate</a></span>(<span class='fl'>1e2</span>, <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample.int</a></span>(<span class='fl'>1e4</span>)))</div><div class='output co'>#&gt; [1] "/tmp/RtmpZy2812/filecac2ccbf09"</div></pre>
+<span class='fu'>record_rprof</span>(<span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>replicate</a></span>(<span class='fl'>1e2</span>, <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample.int</a></span>(<span class='fl'>1e4</span>)))</div><div class='output co'>#&gt; [1] "/var/folders/k3/q1f45fsn4_13jbn0742d4zj40000gn/T//RtmpN8qfJ8/file81d1708a76e1"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
