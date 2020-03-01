@@ -5,22 +5,19 @@
 #' pprof_sitrep()
 pprof_sitrep <- function() {
   msg_li("Call test_pprof() to test installation.")
-  sitrep_pprof_path()
-  sitrep_pprof_env_new()
-  sitrep_pprof_env_old()
-  sitrep_pprof_sys()
-  sitrep_go_path()
-  sitrep_go_bin_path()
-  sitrep_go_bin_env()
-  sitrep_go_bin_sys()
-  sitrep_graphviz_path()
-  sitrep_graphviz_env()
-  sitrep_graphviz_sys()
+
+  pprof <- sitrep_pprof_anywhere()
+  graphviz <- sitrep_graphviz_anywhere()
+
+  if (pprof && graphviz) {
+    msg_li("Call test_pprof() to test installation.")
+  }
+
   invisible()
 }
 
 sitrep_pprof_path <- function() {
-  ifelse(
+  branch(
     file.exists(pprof_path()),
     found_pprof_path(),
     missing_pprof_path()
@@ -28,7 +25,7 @@ sitrep_pprof_path <- function() {
 }
 
 sitrep_pprof_env_new <- function() {
-  ifelse(
+  branch(
     file.exists(pprof_env_new()),
     found_pprof_env_new(),
     missing_pprof_env_new()
@@ -36,7 +33,7 @@ sitrep_pprof_env_new <- function() {
 }
 
 sitrep_pprof_env_old <- function() {
-  ifelse(
+  branch(
     file.exists(pprof_env_old()),
     found_pprof_env_old(),
     missing_pprof_env_old()
@@ -44,7 +41,7 @@ sitrep_pprof_env_old <- function() {
 }
 
 sitrep_pprof_sys <- function() {
-  ifelse(
+  branch(
     file.exists(pprof_sys()),
     found_pprof_sys(),
     missing_pprof_sys()
@@ -52,23 +49,15 @@ sitrep_pprof_sys <- function() {
 }
 
 sitrep_go_path <- function() {
-  ifelse(
+  branch(
     file.exists(go_path()),
     found_go_path(),
     missing_go_path()
   )
 }
 
-sitrep_go_bin_path <- function() {
-  ifelse(
-    file.exists(go_bin_path()),
-    found_go_bin_path(),
-    missing_go_bin_path()
-  )
-}
-
 sitrep_go_bin_env <- function() {
-  ifelse(
+  branch(
     file.exists(go_bin_env()),
     found_go_bin_env(),
     missing_go_bin_env()
@@ -76,23 +65,15 @@ sitrep_go_bin_env <- function() {
 }
 
 sitrep_go_bin_sys <- function() {
-  ifelse(
+  branch(
     file.exists(go_bin_sys()),
     found_go_bin_sys(),
     missing_go_bin_sys()
   )
 }
 
-sitrep_graphviz_path <- function() {
-  ifelse(
-    file.exists(graphviz_path()),
-    found_graphviz_path(),
-    missing_graphviz_path()
-  )
-}
-
 sitrep_graphviz_env <- function() {
-  ifelse(
+  branch(
     file.exists(graphviz_env()),
     found_graphviz_env(),
     missing_graphviz_env()
@@ -100,7 +81,7 @@ sitrep_graphviz_env <- function() {
 }
 
 sitrep_graphviz_sys <- function() {
-  ifelse(
+  branch(
     file.exists(graphviz_sys()),
     found_graphviz_sys(),
     missing_graphviz_sys()
@@ -154,13 +135,13 @@ found_graphviz_sys <- function() {
 
 missing_pprof_path <- function() {
   cli::cli_alert_danger("pprof path missing {pprof_path()}")
-  msg_li("See https://github.com/google/pprof to install pprof.")
+  msg_li("See {.url https://github.com/google/pprof} to install pprof.")
 }
 
 missing_pprof_env_new <- function() {
   cli::cli_alert_info("PROFFER_PPROF_PATH path missing {pprof_env_new()}")
-  msg_li("Run usethis::edit_r_environ() to edit .Renviron file.")
-  msg_li("PROFFER_GO_PATH={unname(Sys.which(\"pprof\"))}")
+  suggest_edit_r_environ()
+  msg_li("PROFFER_PPROF_PATH={unname(Sys.which(\"pprof\"))}")
 }
 
 missing_pprof_env_old <- function() {
@@ -185,7 +166,7 @@ missing_go_bin_path <- function() {
 
 missing_go_bin_env <- function() {
   cli::cli_alert_info("PROFFER_GO_PATH path missing {go_bin_env()}")
-  msg_li("Run usethis::edit_r_environ() to edit .Renviron file.")
+  suggest_edit_r_environ()
   msg_li("PROFFER_GO_PATH={unname(Sys.which(\"go\"))}")
 }
 
@@ -201,7 +182,7 @@ missing_graphviz_path <- function() {
 
 missing_graphviz_env <- function() {
   cli::cli_alert_info("PROFFER_GRAPHVIZ_PATH path missing {graphviz_env()}")
-  msg_li("Run usethis::edit_r_environ() to edit .Renviron file.")
+  suggest_edit_r_environ()
   msg_li("PROFFER_GRAPHVIZ_PATH={unname(Sys.which(\"dot\"))}")
 }
 
@@ -214,4 +195,17 @@ msg_li <- function(x) {
   cli::cli_ul()
   cli::cli_li(x)
   cli::cli_end()
+}
+
+suggest_edit_r_environ <- function() {
+  msg_li("Run {.code usethis::edit_r_environ()} to edit the {.path .Renviron} file.")
+}
+
+branch <- function(condition, true, false) {
+  if (condition) {
+    true
+  } else {
+    false
+  }
+  condition
 }
