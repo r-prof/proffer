@@ -112,110 +112,132 @@ sitrep_graphviz_sys <- function() {
 }
 
 found_pprof_path <- function() {
-  cli::cli_alert_success("pprof {pprof_path()}")
+  cli::cli_alert_success("pprof {.path {pprof_path()}}")
 }
 
 found_pprof_env_new <- function() {
-  cli::cli_alert_success("PROFFER_PPROF_PATH {pprof_env_new()}")
+  cli::cli_alert_success(
+    "{.envvar PROFFER_PPROF_PATH} {.path {pprof_env_new()}}"
+  )
 }
 
 found_pprof_env_old <- function() {
-  cli::cli_alert_info("pprof_path {pprof_env_old()}")
-  msg_li("pprof_path is deprecated. Use PROFFER_PPROF_PATH instead.")
+  cli::cli_alert_info("{.envvar pprof_path} {.path {pprof_env_old()}}")
+  msg_li(
+    "{.envvar pprof_path} is deprecated. Use {.envvar PROFFER_PPROF_PATH}."
+  )
 }
 
 found_pprof_sys <- function() {
-  cli::cli_alert_success("pprof system path {pprof_sys()}")
+  cli::cli_alert_success("pprof system path {.path {pprof_sys()}}")
 }
 
 found_go_path <- function() {
-  cli::cli_alert_success("Go folder {go_path()}")
+  cli::cli_alert_success("Go folder {.path {go_path()}}")
 }
 
 found_go_bin_path <- function() {
-  cli::cli_alert_success("Go binary {go_bin_path()}")
+  cli::cli_alert_success("Go binary {.path {go_bin_path()}}")
 }
 
 found_go_bin_env <- function() {
-  cli::cli_alert_success("PROFFER_GO_PATH {go_bin_env()}")
+  cli::cli_alert_success("{.envvar PROFFER_GO_PATH} {.path {go_bin_env()}}")
 }
 
 found_go_bin_sys <- function() {
-  cli::cli_alert_success("Go binary system path {go_bin_sys()}")
+  cli::cli_alert_success("Go binary system path {.path {go_bin_sys()}}")
 }
 
 found_graphviz_path <- function() {
-  cli::cli_alert_success("Graphviz {graphviz_path()}")
+  cli::cli_alert_success("Graphviz {.path {graphviz_path()}}")
 }
 
 found_graphviz_env <- function() {
-  cli::cli_alert_success("PROFFER_GRAPHVIZ_PATH {graphviz_env()}")
+  cli::cli_alert_success(
+    "{.envvar PROFFER_GRAPHVIZ_PATH} {.path {graphviz_env()}}"
+  )
 }
 
 found_graphviz_sys <- function() {
-  cli::cli_alert_success("Graphviz system path {graphviz_sys()}")
+  cli::cli_alert_success("Graphviz system path {.path {graphviz_sys()}}")
 }
 
 missing_pprof_path <- function() {
-  cli::cli_alert_danger("pprof missing {pprof_path()}")
-  msg_li("See https://github.com/google/pprof to install pprof.")
+  cli::cli_alert_danger("pprof missing {.path {pprof_path()}}")
+  msg_li("See {.url https://github.com/google/pprof} to install pprof.")
 }
 
 missing_pprof_env_new <- function() {
-  cli::cli_alert_info("PROFFER_PPROF_PATH missing {pprof_env_new()}")
-  msg_li("Run usethis::edit_r_environ() to edit .Renviron file.")
-  msg_li("PROFFER_GO_PATH={unname(Sys.which(\"pprof\"))}")
+  cli::cli_alert_info(
+    "{.envvar PROFFER_PPROF_PATH} missing {.path {pprof_env_new()}}"
+  )
+  msg_renviron()
+  msg_li("PROFFER_GO_PATH={.path {unname(Sys.which(\"pprof\"))}}")
 }
 
 missing_pprof_env_old <- function() {
-  cli::cli_alert_success("pprof_path env variable omitted {pprof_env_old()}")
+  cli::cli_alert_success(
+    "{.envvar pprof_path} env variable omitted {.path {pprof_env_old()}}"
+  )
 }
 
 missing_pprof_sys <- function() {
-  cli::cli_alert_info("pprof system path missing {pprof_sys()}")
-  msg_li("See https://github.com/google/pprof to install pprof.")
+  cli::cli_alert_info("pprof system path missing {.path {pprof_sys()}}")
+  msg_li("See {.url https://github.com/google/pprof} to install pprof.")
 }
 
 missing_go_path <- function() {
-  cli::cli_alert_danger("Go folder missing {go_path()}")
-  msg_li("See https://golang.org/doc/install to install Go.")
-  msg_li("See https://github.com/golang/go/wiki/GOPATH to configure GOPATH.")
+  cli::cli_alert_danger("Go folder missing {.path {go_path()}}")
+  msg_li("See {.url https://golang.org/doc/install} to install Go.")
+  msg_li(
+    "See {.url https://github.com/golang/go/wiki/GOPATH} to configure GOPATH."
+  )
 }
 
 missing_go_bin_path <- function() {
-  cli::cli_alert_danger("Go binary missing {go_bin_path()}")
-  msg_li("See https://golang.org/doc/install to install Go.")
+  cli::cli_alert_danger("Go binary missing {.path {go_bin_path()}}")
+  msg_li("See {.url https://golang.org/doc/install} to install Go.")
 }
 
 missing_go_bin_env <- function() {
-  cli::cli_alert_info("PROFFER_GO_PATH missing {go_bin_env()}")
-  msg_li("Run usethis::edit_r_environ() to edit .Renviron file.")
-  msg_li("PROFFER_GO_PATH={unname(Sys.which(\"go\"))}")
+  cli::cli_alert_info(
+    "{.envvar PROFFER_GO_PATH} missing {.path {go_bin_env()}}"
+  )
+  msg_renviron()
+  msg_li("PROFFER_GO_PATH={.path {unname(Sys.which(\"go\"))}}")
 }
 
 missing_go_bin_sys <- function() {
-  cli::cli_alert_info("Go binary system path missing {go_bin_sys()}")
-  msg_li("See https://golang.org/doc/install to install Go.")
+  cli::cli_alert_info("Go binary system path missing {.path {go_bin_sys()}}")
+  msg_li("See {.url https://golang.org/doc/install} to install Go.")
 }
 
 missing_graphviz_path <- function() {
-  cli::cli_alert_danger("Graphviz missing {graphviz_path()}")
-  msg_li("See https://www.graphviz.org/download to install Graphviz.")
+  cli::cli_alert_danger("Graphviz missing {.path {graphviz_path()}}")
+  msg_li("See {.url https://www.graphviz.org/download} to install Graphviz.")
 }
 
 missing_graphviz_env <- function() {
-  cli::cli_alert_info("PROFFER_GRAPHVIZ_PATH missing {graphviz_env()}")
-  msg_li("Run usethis::edit_r_environ() to edit .Renviron file.")
-  msg_li("PROFFER_GRAPHVIZ_PATH={unname(Sys.which(\"dot\"))}")
+  cli::cli_alert_info(
+    "{.envvar PROFFER_GRAPHVIZ_PATH} missing {.path {graphviz_env()}}"
+  )
+  msg_renviron()
+  msg_li("PROFFER_GRAPHVIZ_PATH={.path {unname(Sys.which(\"dot\"))}}")
 }
 
 missing_graphviz_sys <- function() {
-  cli::cli_alert_info("Graphviz system path missing {graphviz_sys()}")
-  msg_li("See https://www.graphviz.org/download to install Graphviz.")
+  cli::cli_alert_info("Graphviz system path missing {.path {graphviz_sys()}}")
+  msg_li("See {.url https://www.graphviz.org/download} to install Graphviz.")
 }
 
 msg_li <- function(x) {
   cli::cli_ul()
   cli::cli_li(x)
   cli::cli_end()
+}
+
+msg_renviron <- function() {
+  msg_li(
+    "Run {.code usethis::edit_r_environ()} to edit {.file .Renviron} file."
+  )
 }
