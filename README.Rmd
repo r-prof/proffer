@@ -148,17 +148,17 @@ Next, open your your `.Renviron` file and register the installed executables in 
 
 ```
 # .Renviron file, opened with usethis::edit_r_environ()
-PROFFER_PPROF_PATH=/home/landau/go/bin/pprof
-PROFFER_BIN_PATH=/usr/bin/go
+PROFFER_PPROF_BIN=/home/landau/go/bin/pprof
+PROFFER_BIN_BIN=/usr/bin/go
 # The Graphviz path is not necessary on Linux.
 # On Windows, it will look something like
 # C:\Program Files (x86)\Graphviz2.38\bin\dot.exe
-PROFFER_GRAPHVIZ_PATH=
+PROFFER_GRAPHVIZ_BIN=
 ```
 
 Remarks on configuration:
 
-* `PROFFER_GRAPHVIZ_PATH` is only necessary on some platforms. For Windows, [this post](https://stackoverflow.com/questions/35064304/runtimeerror-make-sure-the-graphviz-executables-are-on-your-systems-path-aft/47031762#47031762) has an example path you can supply directly to `PROFFER_GRAPHVIZ_PATH`.
+* `PROFFER_GRAPHVIZ_BIN` is only necessary on some platforms. For Windows, [this post](https://stackoverflow.com/questions/35064304/runtimeerror-make-sure-the-graphviz-executables-are-on-your-systems-path-aft/47031762#47031762) has an example path you can supply directly to `PROFFER_GRAPHVIZ_BIN`.
 * As an alternative to the environment variables above, you can set your [`PATH`](https://en.wikipedia.org/wiki/PATH_(variable)) and [`GOPATH`](https://github.com/golang/go/wiki/GOPATH) yourself if you know what you are doing.
 
 ### Verification

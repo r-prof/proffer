@@ -158,7 +158,7 @@ serve_pprof <- function(
 
 serve_pprof_impl <- function(args) {
   with_safe_path(
-    Sys.getenv("PROFFER_GRAPHVIZ_PATH"),
+    Sys.getenv("PROFFER_GRAPHVIZ_BIN"),
     processx::process$new(
       command = pprof_path(),
       args = args,

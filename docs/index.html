@@ -202,16 +202,16 @@
 <a href="#configuration" class="anchor"></a>Configuration</h3>
 <p>Next, open your your <code>.Renviron</code> file and register the installed executables in the environment variables of <code>proffer</code>. The <a href="https://usethis.r-lib.org/reference/edit.html"><code>edit_r_environ()</code></a> function in the <a href="https://usethis.r-lib.org"><code>usethis</code></a> package can help you.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co"># .Renviron file, opened with usethis::edit_r_environ()</span></a>
-<a class="sourceLine" id="cb7-2" data-line-number="2">PROFFER_PPROF_PATH=<span class="er">/</span>home<span class="op">/</span>landau<span class="op">/</span>go<span class="op">/</span>bin<span class="op">/</span>pprof</a>
-<a class="sourceLine" id="cb7-3" data-line-number="3">PROFFER_BIN_PATH=<span class="er">/</span>usr<span class="op">/</span>bin<span class="op">/</span>go</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">PROFFER_PPROF_BIN=<span class="er">/</span>home<span class="op">/</span>landau<span class="op">/</span>go<span class="op">/</span>bin<span class="op">/</span>pprof</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">PROFFER_BIN_BIN=<span class="er">/</span>usr<span class="op">/</span>bin<span class="op">/</span>go</a>
 <a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co"># The Graphviz path is not necessary on Linux.</span></a>
 <a class="sourceLine" id="cb7-5" data-line-number="5"><span class="co"># On Windows, it will look something like</span></a>
 <a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co"># C:\Program Files (x86)\Graphviz2.38\bin\dot.exe</span></a>
-<a class="sourceLine" id="cb7-7" data-line-number="7">PROFFER_GRAPHVIZ_PATH=</a></code></pre></div>
+<a class="sourceLine" id="cb7-7" data-line-number="7">PROFFER_GRAPHVIZ_BIN=</a></code></pre></div>
 <p>Remarks on configuration:</p>
 <ul>
 <li>
-<code>PROFFER_GRAPHVIZ_PATH</code> is only necessary on some platforms. For Windows, <a href="https://stackoverflow.com/questions/35064304/runtimeerror-make-sure-the-graphviz-executables-are-on-your-systems-path-aft/47031762#47031762">this post</a> has an example path you can supply directly to <code>PROFFER_GRAPHVIZ_PATH</code>.</li>
+<code>PROFFER_GRAPHVIZ_BIN</code> is only necessary on some platforms. For Windows, <a href="https://stackoverflow.com/questions/35064304/runtimeerror-make-sure-the-graphviz-executables-are-on-your-systems-path-aft/47031762#47031762">this post</a> has an example path you can supply directly to <code>PROFFER_GRAPHVIZ_BIN</code>.</li>
 <li>As an alternative to the environment variables above, you can set your <a href="https://en.wikipedia.org/wiki/PATH_(variable)"><code>PATH</code></a> and <a href="https://github.com/golang/go/wiki/GOPATH"><code>GOPATH</code></a> yourself if you know what you are doing.</li>
 </ul>
 </div>
@@ -223,15 +223,15 @@
 <a class="sourceLine" id="cb8-2" data-line-number="2"><span class="kw"><a href="reference/pprof_sitrep.html">pprof_sitrep</a></span>()</a>
 <a class="sourceLine" id="cb8-3" data-line-number="3"><span class="co">#&gt; ● Call test_pprof() to test installation.</span></a>
 <a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co">#&gt; ✓ pprof path /Users/c240390/go/bin/pprof</span></a>
-<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt; ✓ PROFFER_PPROF_PATH path /Users/c240390/go/bin/pprof</span></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt; ✓ PROFFER_PPROF_BIN path /Users/c240390/go/bin/pprof</span></a>
 <a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt; ✓ pprof_path env variable omitted</span></a>
 <a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co">#&gt; ✓ pprof system path /Users/c240390/go/bin/pprof</span></a>
 <a class="sourceLine" id="cb8-8" data-line-number="8"><span class="co">#&gt; ✓ Go path /Users/c240390/go</span></a>
 <a class="sourceLine" id="cb8-9" data-line-number="9"><span class="co">#&gt; ✓ Go binary path /usr/local/bin/go</span></a>
-<a class="sourceLine" id="cb8-10" data-line-number="10"><span class="co">#&gt; ✓ PROFFER_GO_PATH path /usr/local/bin/go</span></a>
+<a class="sourceLine" id="cb8-10" data-line-number="10"><span class="co">#&gt; ✓ PROFFER_GO_BIN path /usr/local/bin/go</span></a>
 <a class="sourceLine" id="cb8-11" data-line-number="11"><span class="co">#&gt; ✓ Go binary system path /usr/local/bin/go</span></a>
 <a class="sourceLine" id="cb8-12" data-line-number="12"><span class="co">#&gt; ✓ Graphviz path /usr/local/bin/dot</span></a>
-<a class="sourceLine" id="cb8-13" data-line-number="13"><span class="co">#&gt; ✓ PROFFER_GRAPHVIZ_PATH /usr/local/bin/dot</span></a>
+<a class="sourceLine" id="cb8-13" data-line-number="13"><span class="co">#&gt; ✓ PROFFER_GRAPHVIZ_BIN /usr/local/bin/dot</span></a>
 <a class="sourceLine" id="cb8-14" data-line-number="14"><span class="co">#&gt; ✓ Graphviz system path /usr/local/bin/dot</span></a></code></pre></div>
 <p>If no dependencies are missing, <code>proffer</code> should work. Test it out with <code><a href="reference/test_pprof.html">test_pprof()</a></code>. On a local machine, it should launch a browser window showing an instance of <code>pprof</code>.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(proffer)</a>

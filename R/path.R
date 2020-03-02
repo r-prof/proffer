@@ -1,6 +1,6 @@
 #' @title Show the path to the pprof executable.
 #' @export
-#' @description Defaults to the `PROFFER_PPROF_PATH` environment variable.
+#' @description Defaults to the `PROFFER_PPROF_BIN` environment variable.
 #'   Otherwise, it searches your Go lang installation for `pprof`.
 #' @details See <https://github.com/r-prof/proffer#installation>
 #'   for setup instructions.
@@ -18,7 +18,7 @@ pprof_env <- function() {
 }
 
 pprof_env_new <- function() {
-  Sys.getenv("PROFFER_PPROF_PATH")
+  Sys.getenv("PROFFER_PPROF_BIN")
 }
 
 pprof_env_old <- function() {
@@ -49,7 +49,7 @@ go_bin_path <- function() {
 }
 
 go_bin_env <- function() {
-  Sys.getenv("PROFFER_GO_PATH")
+  Sys.getenv("PROFFER_GO_BIN")
 }
 
 go_bin_sys <- function() {
@@ -65,7 +65,7 @@ graphviz_path <- function() {
 }
 
 graphviz_env <- function() {
-  Sys.getenv("PROFFER_GRAPHVIZ_PATH")
+  Sys.getenv("PROFFER_GRAPHVIZ_BIN")
 }
 
 graphviz_sys <- function() {

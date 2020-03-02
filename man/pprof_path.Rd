@@ -10,7 +10,7 @@ pprof_path()
 Character, path to \code{pprof} it exists and \code{""} otherwise.
 }
 \description{
-Defaults to the \code{PROFFER_PPROF_PATH} environment variable.
+Defaults to the \code{PROFFER_PPROF_BIN} environment variable.
 Otherwise, it searches your Go lang installation for \code{pprof}.
 }
 \details{

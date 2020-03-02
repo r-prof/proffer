@@ -165,20 +165,20 @@ function in the [`usethis`](https://usethis.r-lib.org) package can help
 you.
 
     # .Renviron file, opened with usethis::edit_r_environ()
-    PROFFER_PPROF_PATH=/home/landau/go/bin/pprof
-    PROFFER_BIN_PATH=/usr/bin/go
+    PROFFER_PPROF_BIN=/home/landau/go/bin/pprof
+    PROFFER_BIN_BIN=/usr/bin/go
     # The Graphviz path is not necessary on Linux.
     # On Windows, it will look something like
     # C:\Program Files (x86)\Graphviz2.38\bin\dot.exe
-    PROFFER_GRAPHVIZ_PATH=
+    PROFFER_GRAPHVIZ_BIN=
 
 Remarks on configuration:
 
-  - `PROFFER_GRAPHVIZ_PATH` is only necessary on some platforms. For
+  - `PROFFER_GRAPHVIZ_BIN` is only necessary on some platforms. For
     Windows, [this
     post](https://stackoverflow.com/questions/35064304/runtimeerror-make-sure-the-graphviz-executables-are-on-your-systems-path-aft/47031762#47031762)
     has an example path you can supply directly to
-    `PROFFER_GRAPHVIZ_PATH`.
+    `PROFFER_GRAPHVIZ_BIN`.
   - As an alternative to the environment variables above, you can set
     your [`PATH`](https://en.wikipedia.org/wiki/PATH_\(variable\)) and
     [`GOPATH`](https://github.com/golang/go/wiki/GOPATH) yourself if you
@@ -194,15 +194,15 @@ library(proffer)
 pprof_sitrep()
 #> ● Call test_pprof() to test installation.
 #> ✓ pprof path /Users/c240390/go/bin/pprof
-#> ✓ PROFFER_PPROF_PATH path /Users/c240390/go/bin/pprof
+#> ✓ PROFFER_PPROF_BIN path /Users/c240390/go/bin/pprof
 #> ✓ pprof_path env variable omitted
 #> ✓ pprof system path /Users/c240390/go/bin/pprof
 #> ✓ Go path /Users/c240390/go
 #> ✓ Go binary path /usr/local/bin/go
-#> ✓ PROFFER_GO_PATH path /usr/local/bin/go
+#> ✓ PROFFER_GO_BIN path /usr/local/bin/go
 #> ✓ Go binary system path /usr/local/bin/go
 #> ✓ Graphviz path /usr/local/bin/dot
-#> ✓ PROFFER_GRAPHVIZ_PATH /usr/local/bin/dot
+#> ✓ PROFFER_GRAPHVIZ_BIN /usr/local/bin/dot
 #> ✓ Graphviz system path /usr/local/bin/dot
 ```
 

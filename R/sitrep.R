@@ -117,14 +117,14 @@ found_pprof_path <- function() {
 
 found_pprof_env_new <- function() {
   cli::cli_alert_success(
-    "{.envvar PROFFER_PPROF_PATH} {.path {pprof_env_new()}}"
+    "{.envvar PROFFER_PPROF_BIN} {.path {pprof_env_new()}}"
   )
 }
 
 found_pprof_env_old <- function() {
   cli::cli_alert_info("{.envvar pprof_path} {.path {pprof_env_old()}}")
   msg_li(
-    "{.envvar pprof_path} is deprecated. Use {.envvar PROFFER_PPROF_PATH}."
+    "{.envvar pprof_path} is deprecated. Use {.envvar PROFFER_PPROF_BIN}."
   )
 }
 
@@ -141,7 +141,7 @@ found_go_bin_path <- function() {
 }
 
 found_go_bin_env <- function() {
-  cli::cli_alert_success("{.envvar PROFFER_GO_PATH} {.path {go_bin_env()}}")
+  cli::cli_alert_success("{.envvar PROFFER_GO_BIN} {.path {go_bin_env()}}")
 }
 
 found_go_bin_sys <- function() {
@@ -154,7 +154,7 @@ found_graphviz_path <- function() {
 
 found_graphviz_env <- function() {
   cli::cli_alert_success(
-    "{.envvar PROFFER_GRAPHVIZ_PATH} {.path {graphviz_env()}}"
+    "{.envvar PROFFER_GRAPHVIZ_BIN} {.path {graphviz_env()}}"
   )
 }
 
@@ -169,10 +169,10 @@ missing_pprof_path <- function() {
 
 missing_pprof_env_new <- function() {
   cli::cli_alert_info(
-    "{.envvar PROFFER_PPROF_PATH} missing {.path {pprof_env_new()}}"
+    "{.envvar PROFFER_PPROF_BIN} missing {.path {pprof_env_new()}}"
   )
   msg_renviron()
-  msg_li("PROFFER_GO_PATH={.path {unname(Sys.which(\"pprof\"))}}")
+  msg_li("PROFFER_GO_BIN={.path {unname(Sys.which(\"pprof\"))}}")
 }
 
 missing_pprof_env_old <- function() {
@@ -201,10 +201,10 @@ missing_go_bin_path <- function() {
 
 missing_go_bin_env <- function() {
   cli::cli_alert_info(
-    "{.envvar PROFFER_GO_PATH} missing {.path {go_bin_env()}}"
+    "{.envvar PROFFER_GO_BIN} missing {.path {go_bin_env()}}"
   )
   msg_renviron()
-  msg_li("PROFFER_GO_PATH={.path {unname(Sys.which(\"go\"))}}")
+  msg_li("PROFFER_GO_BIN={.path {unname(Sys.which(\"go\"))}}")
 }
 
 missing_go_bin_sys <- function() {
@@ -219,10 +219,10 @@ missing_graphviz_path <- function() {
 
 missing_graphviz_env <- function() {
   cli::cli_alert_info(
-    "{.envvar PROFFER_GRAPHVIZ_PATH} missing {.path {graphviz_env()}}"
+    "{.envvar PROFFER_GRAPHVIZ_BIN} missing {.path {graphviz_env()}}"
   )
   msg_renviron()
-  msg_li("PROFFER_GRAPHVIZ_PATH={.path {unname(Sys.which(\"dot\"))}}")
+  msg_li("PROFFER_GRAPHVIZ_BIN={.path {unname(Sys.which(\"dot\"))}}")
 }
 
 missing_graphviz_sys <- function() {
