@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Convert Rprof samples to pprof format. — to_pprof • proffer</title>
+<title>Test <code>pprof()</code> — test_pprof • proffer</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,8 +42,9 @@
 
 
 
-<meta property="og:title" content="Convert Rprof samples to pprof format. — to_pprof" />
-<meta property="og:description" content="Convert Rprof samples to pprof format." />
+<meta property="og:title" content="Test <code>pprof()</code> — test_pprof" />
+<meta property="og:description" content="Do a test run of pprof() to verify that the
+system dependencies like pprof work as expected." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -116,43 +117,72 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Convert Rprof samples to pprof format.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/r-prof/proffer/blob/master/R/record.R'><code>R/record.R</code></a></small>
-    <div class="hidden name"><code>to_pprof.Rd</code></div>
+    <h1>Test <code>pprof()</code></h1>
+    <small class="dont-index">Source: <a href='https://github.com/r-prof/proffer/blob/master/R/pprof.R'><code>R/pprof.R</code></a></small>
+    <div class="hidden name"><code>test_pprof.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Convert Rprof samples to pprof format.</p>
+    <p>Do a test run of <code><a href='pprof.html'>pprof()</a></code> to verify that the
+system dependencies like <code>pprof</code> work as expected.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>to_pprof</span>(<span class='no'>rprof</span>, <span class='kw'>pprof</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span>())</pre>
+    <pre class="usage"><span class='fu'>test_pprof</span>(
+  <span class='kw'>host</span> <span class='kw'>=</span> <span class='st'>"localhost"</span>,
+  <span class='kw'>port</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>browse</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>(),
+  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>rprof</th>
-      <td><p>Path to Rprof samples.</p></td>
+      <th>host</th>
+      <td><p>Host name. Set to <code>"localhost"</code> to view locally
+or <code>"0.0.0.0"</code> to view from another machine. If you view
+from another machine, the printed out URL will not be valid.
+For example, if <code><a href='pprof.html'>pprof()</a></code> or <code><a href='serve_pprof.html'>serve_pprof()</a></code> prints
+"http://0.0.0.0:8080", then you need to replace 0.0.0.0
+with your computer's name or IP address, e.g.
+"http://my_computer.com:8080".</p></td>
     </tr>
     <tr>
-      <th>pprof</th>
-      <td><p>Path to pprof samples.</p></td>
+      <th>port</th>
+      <td><p>Port number for hosting the local pprof server.
+Chosen randomly by default.</p></td>
+    </tr>
+    <tr>
+      <th>browse</th>
+      <td><p>Logical, whether to open a browser to view
+the pprof server.</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>Logical, whether to print console messages
+such as the URL of the local <code>pprof</code> server.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Path to pprof samples.</p>
+    <p>See <a href='https://github.com/r-prof/proffer#installation'>https://github.com/r-prof/proffer#installation</a>
+for setup instructions.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='pprof.html'>pprof()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>rprof</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='record_rprof.html'>record_rprof</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>replicate</a></span>(<span class='fl'>1e2</span>, <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample.int</a></span>(<span class='fl'>1e4</span>)))
-<span class='fu'>to_pprof</span>(<span class='no'>rprof</span>)</div><div class='output co'>#&gt; [1] "/var/folders/k3/q1f45fsn4_13jbn0742d4zj40000gn/T//RtmpyYeSPv/filec8de27c7e4e2"</div></pre>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'>test_pprof</span>()
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
+      <li><a href="#details">Details</a></li>
+      <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

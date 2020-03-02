@@ -124,8 +124,15 @@
 <a href="#proffer-0-0-2-9000" class="anchor"></a>proffer 0.0.2.9000<small> Unreleased </small>
 </h1>
 <ul>
+<li>
+<code><a href="../reference/pprof.html">pprof()</a></code> passes <code>...</code> to <code><a href="../reference/record_pprof.html">record_pprof()</a></code> (<a href='https://github.com/r-prof/proffer/issues/12'>#12</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</li>
 <li>In the <code>DESCRIPTION</code>, unquote function names and add parentheses afterwards. (CRAN comments for next submission.)</li>
 <li>Motivate profilers more in the README.</li>
+<li>Increase font size in logo.</li>
+<li>Search systems for <code>pprof</code> if the <code>pprof_path</code> env var is not set (<a href='https://github.com/r-prof/proffer/issues/14'>#14</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</li>
+<li>Use <code>PROFFER_PPROF_BIN</code> env var instead of <code>pprof_path</code> (<a href='https://github.com/r-prof/proffer/issues/11'>#11</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>). <code>pprof_path</code> is still back-compatibly supported.</li>
+<li>Introduce new environment variables <code>PROFFER_GO_BIN</code> and <code>PROFFER_GRAPHVIZ_BIN</code> to allow the user to set the paths to the respective binaries (<a href='https://github.com/r-prof/proffer/issues/11'>#11</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</li>
+<li>Add a new <code><a href="../reference/pprof_sitrep.html">pprof_sitrep()</a></code> function to give a situation report of the <code>pprof</code> installation, its dependencies, and their environment variables (<a href='https://github.com/r-prof/proffer/issues/17'>#17</a>, <a href='https://github.com/krlmlr'>@krlmlr</a>).</li>
 </ul>
 </div>
     <div id="proffer-0-0-2" class="section level1">

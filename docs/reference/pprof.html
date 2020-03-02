@@ -44,7 +44,8 @@
 
 <meta property="og:title" content="Profile R code and visualize with pprof. — pprof" />
 <meta property="og:description" content="Run R code and display profiling results
-in a local interactive pprof server." />
+in a local interactive pprof server.
+Results are collected with record_pprof()." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -124,7 +125,8 @@ in a local interactive pprof server." />
 
     <div class="ref-description">
     <p>Run R code and display profiling results
-in a local interactive pprof server.</p>
+in a local interactive pprof server.
+Results are collected with <code><a href='record_pprof.html'>record_pprof()</a></code>.</p>
     </div>
 
     <pre class="usage"><span class='fu'>pprof</span>(
@@ -132,7 +134,8 @@ in a local interactive pprof server.</p>
   <span class='kw'>host</span> <span class='kw'>=</span> <span class='st'>"localhost"</span>,
   <span class='kw'>port</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>browse</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>(),
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='no'>...</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -164,8 +167,13 @@ the pprof server.</p></td>
     </tr>
     <tr>
       <th>verbose</th>
-      <td><p>Logical, whether to print the URL of the pprof
-server to the R console as a message.</p></td>
+      <td><p>Logical, whether to print console messages
+such as the URL of the local <code>pprof</code> server.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Additional arguments passed on to <code><a href='https://rdrr.io/r/utils/Rprof.html'>Rprof()</a></code>
+via <code><a href='record_pprof.html'>record_pprof()</a></code>.</p></td>
     </tr>
     </table>
 

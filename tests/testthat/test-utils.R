@@ -4,6 +4,13 @@ test_that("%||%", {
   expect_equal(NULL %||% "y", "y")
 })
 
+test_that("%fl%", {
+  tmp <- tempfile()
+  file.create(tmp)
+  expect_equal(tmp %fl% "y", tmp)
+  expect_equal("" %fl% "y", "y")
+})
+
 test_that("random_port()", {
   port <- random_port()
   expect_true(is.integer(port))
@@ -31,9 +38,4 @@ test_that("with_safe_path(), empty case", {
   )
   px <- with_safe_path("", processx::run(bin, c("getenv", "PATH")))
   expect_false(grepl("^:", px$stdout))
-})
-
-test_that("verbose_msg", {
-  expect_message(verbose_msg(TRUE, "abc", "def"))
-  expect_silent(verbose_msg(FALSE, "abc", "def"))
 })

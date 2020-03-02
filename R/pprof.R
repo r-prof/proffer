@@ -1,3 +1,38 @@
+#' @title Test `pprof()`
+#' @export
+#' @seealso [pprof()]
+#' @description Do a test run of `pprof()` to verify that the
+#'   system dependencies like `pprof` work as expected.
+#' @details See <https://github.com/r-prof/proffer#installation>
+#'   for setup instructions.
+#' @inheritParams pprof
+#' @examples
+#' \dontrun{
+#' test_pprof()
+#' }
+test_pprof <- function(
+  host = "localhost",
+  port = NULL,
+  browse = interactive(),
+  verbose = TRUE
+) {
+  slow_function <- function() {
+    n <- 1e3
+    x <- data.frame(x = sample.int(n), y = sample.int(n))
+    for (i in seq_len(n)) {
+      x[i, ] <- x[i, ] + 1
+    }
+    x
+  }
+  pprof(
+    slow_function(),
+    host = host,
+    port = port,
+    browse = browse,
+    verbose = verbose
+  )
+}
+
 #' @title Profile R code and visualize with pprof.
 #' @export
 #' @description Run R code and display profiling results
@@ -111,7 +146,7 @@ serve_pprof <- function(
   server <- sprintf("%s:%s", host, port %||% random_port())
   url <- sprintf("http://%s", server)
   args <- c("-http", server, pprof)
-  px <- serve_pprof_impl(args, verbose)
+  px <- serve_pprof_impl(args)
   if (verbose) {
     message(url)
   }
@@ -121,11 +156,11 @@ serve_pprof <- function(
   px
 }
 
-serve_pprof_impl <- function(args, verbose) {
+serve_pprof_impl <- function(args) {
   with_safe_path(
-    Sys.getenv("PROFFER_GRAPHVIZ_PATH"),
+    Sys.getenv("PROFFER_GRAPHVIZ_BIN"),
     processx::process$new(
-      command = pprof_path(verbose),
+      command = pprof_path(),
       args = args,
       stdout = "|",
       stderr = "|",
