@@ -112,20 +112,20 @@ sitrep_graphviz_sys <- function() {
 }
 
 found_pprof_path <- function() {
-  cli::cli_alert_success("pprof {pprof_path()}")
+  cli::cli_alert_success("pprof {.path {pprof_path()}}")
 }
 
 found_pprof_env_new <- function() {
-  cli::cli_alert_success("PROFFER_PPROF_PATH {pprof_env_new()}")
+  cli::cli_alert_success("{.envvar PROFFER_PPROF_PATH} {.path {pprof_env_new()}}")
 }
 
 found_pprof_env_old <- function() {
-  cli::cli_alert_info("pprof_path {pprof_env_old()}")
+  cli::cli_alert_info("{.envvar pprof_path} {pprof_env_old()}")
   msg_li("pprof_path is deprecated. Use PROFFER_PPROF_PATH instead.")
 }
 
 found_pprof_sys <- function() {
-  cli::cli_alert_success("pprof system path {pprof_sys()}")
+  cli::cli_alert_success("pprof system path {.path {pprof_sys()}}")
 }
 
 found_go_path <- function() {
@@ -162,7 +162,7 @@ missing_pprof_path <- function() {
 }
 
 missing_pprof_env_new <- function() {
-  cli::cli_alert_info("PROFFER_PPROF_PATH missing {pprof_env_new()}")
+  cli::cli_alert_info("{.envvar PROFFER_PPROF_PATH} missing {pprof_env_new()}")
   msg_li("Run usethis::edit_r_environ() to edit .Renviron file.")
   msg_li("PROFFER_GO_PATH={unname(Sys.which(\"pprof\"))}")
 }
