@@ -5,17 +5,21 @@
 #' pprof_sitrep()
 pprof_sitrep <- function() {
   msg_li("Call test_pprof() to test installation.")
+  cli::cli_h1("Requirements")
   sitrep_pprof_path()
-  sitrep_pprof_env_new()
-  sitrep_pprof_env_old()
-  sitrep_pprof_sys()
   sitrep_go_path()
   sitrep_go_bin_path()
-  sitrep_go_bin_env()
-  sitrep_go_bin_sys()
   sitrep_graphviz_path()
+  cli::cli_h1("Custom")
+  sitrep_pprof_env_new()
+  sitrep_go_bin_env()
   sitrep_graphviz_env()
+  cli::cli_h1("System")
+  sitrep_pprof_sys()
+  sitrep_go_bin_sys()
   sitrep_graphviz_sys()
+  cli::cli_h1("Deprecated")
+  sitrep_pprof_env_old()
   invisible()
 }
 
@@ -108,15 +112,15 @@ sitrep_graphviz_sys <- function() {
 }
 
 found_pprof_path <- function() {
-  cli::cli_alert_success("pprof path {pprof_path()}")
+  cli::cli_alert_success("pprof {pprof_path()}")
 }
 
 found_pprof_env_new <- function() {
-  cli::cli_alert_success("PROFFER_PPROF_PATH path {pprof_env_new()}")
+  cli::cli_alert_success("PROFFER_PPROF_PATH {pprof_env_new()}")
 }
 
 found_pprof_env_old <- function() {
-  cli::cli_alert_info("pprof_path path {pprof_env_old()}")
+  cli::cli_alert_info("pprof_path {pprof_env_old()}")
   msg_li("pprof_path is deprecated. Use PROFFER_PPROF_PATH instead.")
 }
 
@@ -125,15 +129,15 @@ found_pprof_sys <- function() {
 }
 
 found_go_path <- function() {
-  cli::cli_alert_success("Go path {go_path()}")
+  cli::cli_alert_success("Go folder {go_path()}")
 }
 
 found_go_bin_path <- function() {
-  cli::cli_alert_success("Go binary path {go_bin_path()}")
+  cli::cli_alert_success("Go binary {go_bin_path()}")
 }
 
 found_go_bin_env <- function() {
-  cli::cli_alert_success("PROFFER_GO_PATH path {go_bin_env()}")
+  cli::cli_alert_success("PROFFER_GO_PATH {go_bin_env()}")
 }
 
 found_go_bin_sys <- function() {
@@ -141,7 +145,7 @@ found_go_bin_sys <- function() {
 }
 
 found_graphviz_path <- function() {
-  cli::cli_alert_success("Graphviz path {graphviz_path()}")
+  cli::cli_alert_success("Graphviz {graphviz_path()}")
 }
 
 found_graphviz_env <- function() {
@@ -153,12 +157,12 @@ found_graphviz_sys <- function() {
 }
 
 missing_pprof_path <- function() {
-  cli::cli_alert_danger("pprof path missing {pprof_path()}")
+  cli::cli_alert_danger("pprof missing {pprof_path()}")
   msg_li("See https://github.com/google/pprof to install pprof.")
 }
 
 missing_pprof_env_new <- function() {
-  cli::cli_alert_info("PROFFER_PPROF_PATH path missing {pprof_env_new()}")
+  cli::cli_alert_info("PROFFER_PPROF_PATH missing {pprof_env_new()}")
   msg_li("Run usethis::edit_r_environ() to edit .Renviron file.")
   msg_li("PROFFER_GO_PATH={unname(Sys.which(\"pprof\"))}")
 }
@@ -173,18 +177,18 @@ missing_pprof_sys <- function() {
 }
 
 missing_go_path <- function() {
-  cli::cli_alert_danger("Go path missing {go_path()}")
+  cli::cli_alert_danger("Go folder missing {go_path()}")
   msg_li("See https://golang.org/doc/install to install Go.")
   msg_li("See https://github.com/golang/go/wiki/GOPATH to configure GOPATH.")
 }
 
 missing_go_bin_path <- function() {
-  cli::cli_alert_danger("Go binary path missing {go_bin_path()}")
+  cli::cli_alert_danger("Go binary missing {go_bin_path()}")
   msg_li("See https://golang.org/doc/install to install Go.")
 }
 
 missing_go_bin_env <- function() {
-  cli::cli_alert_info("PROFFER_GO_PATH path missing {go_bin_env()}")
+  cli::cli_alert_info("PROFFER_GO_PATH missing {go_bin_env()}")
   msg_li("Run usethis::edit_r_environ() to edit .Renviron file.")
   msg_li("PROFFER_GO_PATH={unname(Sys.which(\"go\"))}")
 }
@@ -195,12 +199,12 @@ missing_go_bin_sys <- function() {
 }
 
 missing_graphviz_path <- function() {
-  cli::cli_alert_danger("Graphviz path missing {graphviz_path()}")
+  cli::cli_alert_danger("Graphviz missing {graphviz_path()}")
   msg_li("See https://www.graphviz.org/download to install Graphviz.")
 }
 
 missing_graphviz_env <- function() {
-  cli::cli_alert_info("PROFFER_GRAPHVIZ_PATH path missing {graphviz_env()}")
+  cli::cli_alert_info("PROFFER_GRAPHVIZ_PATH missing {graphviz_env()}")
   msg_li("Run usethis::edit_r_environ() to edit .Renviron file.")
   msg_li("PROFFER_GRAPHVIZ_PATH={unname(Sys.which(\"dot\"))}")
 }
