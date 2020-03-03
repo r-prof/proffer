@@ -12,9 +12,10 @@
 #' @param destination Full path to install pprof and Go on Linux systems.
 #'   Defaults to `Sys.getenv("HOME")`, which means the default
 #'   Go installation path is `file.path(Sys.getenv("HOME"), "go")`.
-#'   After installation succeeds, follow the instructions in the
+#'   If you are using Linux, after the installation succeeds,
+#'   follow the instructions in the
 #'   console messages for setting the appropriate environment
-#'   variables so `proffer` can use Go and `pprof`.
+#'   variables so `proffer` can find `pprof` and Go.
 #' @param version Character, a version string such as `"1.14"`
 install_go <- function(
   destination = Sys.getenv("HOME"),

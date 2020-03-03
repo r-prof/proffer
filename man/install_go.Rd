@@ -7,12 +7,13 @@
 install_go(destination = Sys.getenv("HOME"), version = "1.14", quiet = FALSE)
 }
 \arguments{
-\item{destination}{Directory to install pprof and Go on Linux systems.
+\item{destination}{Full path to install pprof and Go on Linux systems.
 Defaults to \code{Sys.getenv("HOME")}, which means the default
 Go installation path is \code{file.path(Sys.getenv("HOME"), "go")}.
-After installation succeeds, follow the instructions in the
+If you are using Linux, after the installation succeeds,
+follow the instructions in the
 console messages for setting the appropriate environment
-variables so \code{proffer} can use Go and \code{pprof}.}
+variables so \code{proffer} can find \code{pprof} and Go.}
 
 \item{version}{Character, a version string such as \code{"1.14"}}
 }
