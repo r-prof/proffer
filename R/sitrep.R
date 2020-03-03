@@ -41,9 +41,9 @@ sitrep_pprof_env_new <- function() {
 
 sitrep_pprof_env_old <- function() {
   ifelse(
-    file.exists(pprof_env_old()),
-    found_pprof_env_old(),
-    missing_pprof_env_old()
+    pprof_env_old() == "",
+    missing_pprof_env_old(),
+    found_pprof_env_old()
   )
 }
 
@@ -177,7 +177,7 @@ missing_pprof_env_new <- function() {
 
 missing_pprof_env_old <- function() {
   cli::cli_alert_success(
-    "{.envvar pprof_path} env variable omitted {.path {pprof_env_old()}}"
+    "{.envvar pprof_path} env variable omitted."
   )
 }
 
