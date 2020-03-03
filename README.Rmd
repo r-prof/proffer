@@ -113,6 +113,31 @@ px$read_error()
 px$kill()
 ```
 
+## Serving pprof remotely
+
+As with Jupyter notebooks, you can serve `pprof` from one computer and use it from another computer on the same network. On the server, you must
+
+1. Find the server's host name or IP address in advance.
+2. Supply `"0.0.0.0"` as the `host` argument.
+
+```{r, eval = FALSE}
+system2("hostname")
+#> mycomputer
+
+px <- pprof({
+  n <- 1e4
+  x <- data.frame(x = rnorm(n), y = rnorm(n))
+  for (i in seq_len(n)) {
+    x[i, ] <- x[i, ] + 1
+  }
+  x
+}, host = "0.0.0.0")
+#> http://0.0.0.0:610712
+```
+
+Then, in the client machine navigate a web browser to the server's host name or IP address and use the port number printed above, e.g. `https://mycomputer:61072`.
+
+
 ## Installation
 
 For old versions of `proffer` (0.0.2 and below) refer to [these older installation instructions](https://github.com/r-prof/proffer/blob/f76bde56796396e83fee00f94430c94974f18303/README.md#installation) instead of the ones below.
