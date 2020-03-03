@@ -52,7 +52,7 @@ run_go_installer_impl.darwin <- function(x, path, destination, quiet) {
 }
 
 run_go_installer_impl.windows <- function(x, path, destination, quiet) {
-
+  browser()
 }
 
 run_go_installer_impl.default <- function(x, path, destination, quiet) {
@@ -61,7 +61,7 @@ run_go_installer_impl.default <- function(x, path, destination, quiet) {
 
 download_go <- function(version, quiet) {
   url <- go_url(version)
-  tmp <- tempfile()
+  tmp <- tempfile(fileext = go_platform_ext())
   utils::download.file(url, tmp, quiet = quiet)
   tmp
 }
