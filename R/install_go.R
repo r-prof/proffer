@@ -48,15 +48,15 @@ install_go_impl <- function(x, destination, version, quiet) {
 
 install_go_impl.linux <- function(x, destination, version, quiet) {
   url <- paste0(go_base_url(), version, ".", "linux-amd64.tar.gz")
-  tmp <- tempfile(fileext = go_platform_ext())
+  tmp <- tempfile()
   utils::download.file(url, tmp, quiet = quiet)
   utils::untar(tmp, exdir = destination, verbose = !quiet)
   if (!quiet) {
-    msg_go_installation(x, destination)
+    msg_go_install_linux(destination)
   }
 }
 
-msg_go_install_linux <- function(x, destination) {
+msg_go_install_linux <- function(destination) {
   pprof_bin <- file.path(destination, "go/pkg/tool/linux_amd64/pprof")
   go_bin <- file.path(destination, "go/bin/go")
   cli_alert_success(
@@ -97,5 +97,5 @@ install_go_impl.default <- function() {
 }
 
 go_base_url <- function() {
-  "https://dl.google.com/go/"
+  "https://dl.google.com/go/go"
 }

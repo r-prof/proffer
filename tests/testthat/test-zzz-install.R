@@ -13,11 +13,12 @@ test_that("install_go() on Windows", {
 })
 
 test_that("install_go() on Linux", {
+  expect_message(msg_go_install_linux("/home/you"))
   skip_if_offline()
   skip_if_not(go_platform_class() == "linux")
   tmp <- tempfile()
   dir.create(tmp)
-  expect_message(install_go(destination = tmp))
+  install_go(destination = tmp, quiet = TRUE)
   pprof_bin <- file.path(tmp, "go/pkg/tool/linux_amd64/pprof")
   go_bin <- file.path(tmp, "go/bin/go")
   expect_true(file.exists(pprof_bin))
