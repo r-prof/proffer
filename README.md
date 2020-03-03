@@ -77,7 +77,7 @@ system.time({
   x <- data.frame(x = x, y = y)
 })
 #>    user  system elapsed 
-#>   0.032   0.004   0.036
+#>   0.032   0.004   0.037
 ```
 
 Moral of the story: before you optimize, throw away your assumptions and
@@ -152,49 +152,54 @@ instructions](https://github.com/eddelbuettel/rprotobuf#installation).
 `proffer` requires
 
 1.  Go: <https://golang.org/doc/install>
-2.  `pprof`: \<<https://github.com/google/pprof>)
-3.  Graphviz: <https://www.graphviz.org/download>
+2.  Graphviz: <https://www.graphviz.org/download>
+3.  `pprof`: <https://github.com/google/pprof>
 
 On Mac and Windows, you can find installers of Go and Graphviz from the
-links above. On Linux, you can install these components directly from R:
+links above. `pprof` should come automatically installed with Go (see
+the configuration section below). On Linux, you can install `pprof` and
+Go directly from R:
 
 ``` r
 library(proffer)
-install_go() # Also installs pprof.
-install_graphviz() # Not implemented yet.
+install_go() # Also installs pprof if on Linux.
 ```
 
 ### Configuration
 
-Open your your `.Renviron` file and register the installed executables
-in the environment variables of `proffer`. The
+First, run `pprof_sitrep()` to see if `proffer` can already find all the
+required non-R dependencies. Then, run `test_pprof()` to see if `pprof`
+actually works for you. If both checks pass, you are done with
+installation.
+
+Otherwise, open your your `.Renviron` file and define special
+environment variables that point to system dependencies. The
 [`edit_r_environ()`](https://usethis.r-lib.org/reference/edit.html)
 function in the [`usethis`](https://usethis.r-lib.org) package can help
-you.
+you. Configuration varies according to your platform and installation
+method.
 
-    # .Renviron file, opened with usethis::edit_r_environ().
-    # Example values for Linux:
-    PROFFER_PPROF_BIN=/home/landau/go/pkg/tool/linux_amd64/pprof
-    PROFFER_BIN_BIN=/home/landau/go/bin/go
-    # The Graphviz path is not necessary on Linux.
-    # On Windows, it will look something like this:
+#### Linux
+
+    PROFFER_PPROF_BIN=/home/YOU/go/pkg/tool/linux_amd64/pprof
+    PROFFER_GO_BIN=/home/YOU/go/bin/go
+    PROFFER_GRAPHVIZ_BIN=/usr/bin/dot
+
+#### Mac OS
+
+    PROFFER_PPROF_BIN=/usr/local/bin/pprof
+    PROFFER_GO_BIN=/usr/local/bin/go
+    PROFFER_GRAPHVIZ_BIN=/usr/local/bin/dot
+
+#### Windows
+
+    PROFFER_PPROF_BIN=C:\Go\pkg\tool\windows_amd64\pprof.exe
+    PROFFER_GO_BIN=C:\Go\bin\go.exe
     PROFFER_GRAPHVIZ_BIN="C:\Program Files (x86)\Graphviz2.38\bin\dot.exe"
-
-Remarks on configuration:
-
-  - `PROFFER_GRAPHVIZ_BIN` is only necessary on some platforms. For
-    Windows, [this
-    post](https://stackoverflow.com/questions/35064304/runtimeerror-make-sure-the-graphviz-executables-are-on-your-systems-path-aft/47031762#47031762)
-    has an example path you can supply directly to
-    `PROFFER_GRAPHVIZ_BIN`.
-  - As an alternative to the environment variables above, you can set
-    your [`PATH`](https://en.wikipedia.org/wiki/PATH_\(variable\)) and
-    [`GOPATH`](https://github.com/golang/go/wiki/GOPATH) yourself if you
-    know what you are doing.
 
 ### Verification
 
-Run `pprof_sitrep()` to verify that everything is installed and
+Run `pprof_sitrep()` again to verify that everything is installed and
 configured correctly.
 
 ``` r
@@ -202,43 +207,42 @@ library(proffer)
 pprof_sitrep()
 #> ● Call test_pprof() to test installation.
 #> 
-#> ── Requirements ────────────────────────────────────
+#> ── Requirements ─────────────────────────────────────────
 #> x pprof missing
-#> ● See <https://github.com/google/pprof> to
-#>   install pprof.
+#> ● See <https://github.com/google/pprof> to install
+#>   pprof.
 #> x Go folder missing /home/landau/go
-#> ● See <https://golang.org/doc/install> to install
-#>   Go.
-#> ● See <https://github.com/golang/go/wiki/GOPATH>
-#>   to configure GOPATH.
+#> ● See <https://golang.org/doc/install> to install Go.
+#> ● See <https://github.com/golang/go/wiki/GOPATH> to
+#>   configure GOPATH.
 #> ✓ Go binary /usr/bin/go
 #> ✓ Graphviz /usr/bin/dot
 #> 
-#> ── Custom ──────────────────────────────────────────
+#> ── Custom ───────────────────────────────────────────────
 #> ℹ `PROFFER_PPROF_BIN` missing /home/landau/go/pkg/tool/linux_amd64/pprof
-#> ● Run `usethis::edit_r_environ()` to edit
-#>   .Renviron file.
+#> ● Run `usethis::edit_r_environ()` to edit .Renviron
+#>   file.
 #> ● PROFFER_GO_BIN=
 #> ℹ `PROFFER_GO_BIN` missing /home/landau/go/bin/go
-#> ● Run `usethis::edit_r_environ()` to edit
-#>   .Renviron file.
+#> ● Run `usethis::edit_r_environ()` to edit .Renviron
+#>   file.
 #> ● PROFFER_GO_BIN=/usr/bin/go
 #> ✓ `PROFFER_GRAPHVIZ_BIN` /usr/bin/dot
 #> 
-#> ── System ──────────────────────────────────────────
+#> ── System ───────────────────────────────────────────────
 #> ℹ pprof system path missing
-#> ● See <https://github.com/google/pprof> to
-#>   install pprof.
+#> ● See <https://github.com/google/pprof> to install
+#>   pprof.
 #> ✓ Go binary system path /usr/bin/go
 #> ✓ Graphviz system path /usr/bin/dot
 #> 
-#> ── Deprecated ──────────────────────────────────────
+#> ── Deprecated ───────────────────────────────────────────
 #> ✓ `pprof_path` env variable omitted
 ```
 
-If no dependencies are missing, `proffer` should work. Test it out with
-`test_pprof()`. On a local machine, it should launch a browser window
-showing an instance of `pprof`.
+If all dependencies are accounted for, `proffer` should work. Test it
+out with `test_pprof()`. On a local machine, it should launch a browser
+window showing an instance of `pprof`.
 
 ``` r
 library(proffer)

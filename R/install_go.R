@@ -1,4 +1,4 @@
-#' @title Install pprof and Go
+#' @title Install pprof and Go on Linux
 #' @export
 #' @description On Linux, this function actually installs Go,
 #'   which comes with its own
