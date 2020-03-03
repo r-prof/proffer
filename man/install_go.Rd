@@ -21,11 +21,14 @@ and \verb{PROFFER_GO_BIN=/home/you/go/bin/go}. \code{usethis::edit_r_environ()}
 is helpful for this.}
 
 \item{version}{Character, a version string such as \code{"1.14"}}
+
+\item{quiet}{Logical, whether to suppress console messages.}
 }
 \description{
-This function installs Go, which comes with its own
-installation of \code{pprof}. Only for amd64 architectures running
-Linux, Mac OS, or Windows.
+On Linux, this function actually installs Go,
+which comes with its own
+installation of \code{pprof}. On Mac and Windows, the function
+simply points the user to a link to download the installer.
 }
 \details{
 On Linux, users will need to set
