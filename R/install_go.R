@@ -4,6 +4,7 @@
 #'   which comes with its own
 #'   installation of `pprof`. On Mac and Windows, the function
 #'   simply points the user to a link to download the installer.
+#'   Assumes amd64 architecture.
 #' @details On Linux, users will need to set
 #'   the environment variables `PROFFER_PPROF_BIN` and `PROFFER_GO_BIN` using
 #'   `usethis::edit_r_environ()`. Typically, if `destination` is `/home/you`,

@@ -2,7 +2,7 @@
 % Please edit documentation in R/install_go.R
 \name{install_go}
 \alias{install_go}
-\title{Install pprof and Go}
+\title{Install pprof and Go on Linux}
 \usage{
 install_go(destination = Sys.getenv("HOME"), version = "1.14", quiet = FALSE)
 }
@@ -29,6 +29,7 @@ On Linux, this function actually installs Go,
 which comes with its own
 installation of \code{pprof}. On Mac and Windows, the function
 simply points the user to a link to download the installer.
+Assumes amd64 architecture.
 }
 \details{
 On Linux, users will need to set
