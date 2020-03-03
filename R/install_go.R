@@ -9,13 +9,18 @@
 #'   then typically those lines look like
 #'   `PROFFER_GO_BIN=/home/you/go/pkg/tool/linux_amd64/pprof`
 #'   `PROFFER_PPROF_BIN=/home/you/go/bin/go`.
-#' @param destination Full path to install pprof and Go on Linux systems.
+#' @param destination Only relevant to Linux,
+#'   full path to the Go installation with the `pprof` and Go executables.
 #'   Defaults to `Sys.getenv("HOME")`, which means the default
 #'   Go installation path is `file.path(Sys.getenv("HOME"), "go")`.
-#'   If you are using Linux, after the installation succeeds,
-#'   follow the instructions in the
-#'   console messages for setting the appropriate environment
-#'   variables so `proffer` can find `pprof` and Go.
+#'   That means the Go binary will be at
+#'   `file.path(Sys.getenv("HOME"), "go/bin/go")`
+#'   and `pprof` will be at
+#'   `file.path(Sys.getenv("HOME"), "go/pkg/tool/linux_amd64/pprof")`.
+#'   You will need to set environment variables in your `.Renviron` file,
+#'   e.g. `PROFFER_PPROF_BIN=/home/you/go/pkg/tool/linux_amd64/pprof`
+#'   and `PROFFER_GO_BIN=/home/you/go/bin/go`. `usethis::edit_r_environ()`
+#'   is helpful for this.
 #' @param version Character, a version string such as `"1.14"`
 install_go <- function(
   destination = Sys.getenv("HOME"),

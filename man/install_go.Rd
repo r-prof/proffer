@@ -7,13 +7,18 @@
 install_go(destination = Sys.getenv("HOME"), version = "1.14", quiet = FALSE)
 }
 \arguments{
-\item{destination}{Full path to install pprof and Go on Linux systems.
+\item{destination}{Only relevant to Linux,
+full path to the Go installation with the \code{pprof} and Go executables.
 Defaults to \code{Sys.getenv("HOME")}, which means the default
 Go installation path is \code{file.path(Sys.getenv("HOME"), "go")}.
-If you are using Linux, after the installation succeeds,
-follow the instructions in the
-console messages for setting the appropriate environment
-variables so \code{proffer} can find \code{pprof} and Go.}
+That means the Go binary will be at
+\code{file.path(Sys.getenv("HOME"), "go/bin/go")}
+and \code{pprof} will be at
+\code{file.path(Sys.getenv("HOME"), "go/pkg/tool/linux_amd64/pprof")}.
+You will need to set environment variables in your \code{.Renviron} file,
+e.g. \verb{PROFFER_PPROF_BIN=/home/you/go/pkg/tool/linux_amd64/pprof}
+and \verb{PROFFER_GO_BIN=/home/you/go/bin/go}. \code{usethis::edit_r_environ()}
+is helpful for this.}
 
 \item{version}{Character, a version string such as \code{"1.14"}}
 }
