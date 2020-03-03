@@ -18,6 +18,9 @@ reference:
   contents:
   - '`to_pprof`'
   - '`to_rprof`'
+- title: Install
+  contents:
+  - '`install_go`'
 - title: Troubleshoot
   contents:
   - '`test_pprof`'

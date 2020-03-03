@@ -1,0 +1,12 @@
+test_that("install_go() on Linux", {
+  skip_if_offline()
+  skip_if_not(go_platform_class() == "linux")
+  tmp <- tempfile()
+  dir.create(tmp)
+  install_go(destination = tmp, quiet = TRUE)
+  pprof_bin <- file.path(tmp, "go/pkg/tool/linux_amd64/pprof")
+  go_bin <- file.path(tmp, "go/bin/go")
+  expect_true(file.exists(pprof_bin))
+  expect_true(file.exists(go_bin))
+  expect_message(msg_go_installation(go_platform_obj(), "dest"))
+})
