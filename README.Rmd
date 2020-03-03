@@ -136,24 +136,32 @@ The `proffer` package requires the `RProtoBuf` package, which may require instal
 
 ### Non-R dependencies
 
-Install Go, `pprof`, and Graphviz using the instructions in the links below.
+`proffer` requires
 
-1. [Go](https://golang.org/doc/install)
-2. [`pprof`](https://github.com/google/pprof)
-3. [Graphviz](https://www.graphviz.org/download/)
+1. Go: <https://golang.org/doc/install>
+2. `pprof`: <https://github.com/google/pprof)
+3. Graphviz: <https://www.graphviz.org/download>
+
+You can install these components directly from R:
+
+```{r, eval = FALSE}
+library(proffer)
+install_go() # Also installs pprof.
+install_graphviz()
+```
 
 ### Configuration
 
-Next, open your your `.Renviron` file and register the installed executables in the environment variables of `proffer`. The [`edit_r_environ()`](https://usethis.r-lib.org/reference/edit.html) function in the [`usethis`](https://usethis.r-lib.org) package can help you.
+Open your your `.Renviron` file and register the installed executables in the environment variables of `proffer`. The [`edit_r_environ()`](https://usethis.r-lib.org/reference/edit.html) function in the [`usethis`](https://usethis.r-lib.org) package can help you.
 
 ```
-# .Renviron file, opened with usethis::edit_r_environ()
-PROFFER_PPROF_BIN=/home/landau/go/bin/pprof
-PROFFER_BIN_BIN=/usr/bin/go
+# .Renviron file, opened with usethis::edit_r_environ().
+# Example values for Linux:
+PROFFER_PPROF_BIN=/home/landau/go/pkg/tool/linux_amd64/pprof
+PROFFER_BIN_BIN=/home/landau/go/bin/go
 # The Graphviz path is not necessary on Linux.
-# On Windows, it will look something like
-# C:\Program Files (x86)\Graphviz2.38\bin\dot.exe
-PROFFER_GRAPHVIZ_BIN=
+# On Windows, it will look something like this:
+PROFFER_GRAPHVIZ_BIN="C:\Program Files (x86)\Graphviz2.38\bin\dot.exe"
 ```
 
 Remarks on configuration:
