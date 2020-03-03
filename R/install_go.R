@@ -23,7 +23,7 @@
 #'   e.g. `PROFFER_PPROF_BIN=/home/you/go/pkg/tool/linux_amd64/pprof`
 #'   and `PROFFER_GO_BIN=/home/you/go/bin/go`. `usethis::edit_r_environ()`
 #'   is helpful for this.
-#' @param version Character, a version string such as `"1.14"`
+#' @param version Character, a version string such as `"1.14"`.
 #' @param quiet Logical, whether to suppress console messages.
 install_go <- function(
   destination = Sys.getenv("HOME"),

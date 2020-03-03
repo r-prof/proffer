@@ -20,7 +20,7 @@ e.g. \verb{PROFFER_PPROF_BIN=/home/you/go/pkg/tool/linux_amd64/pprof}
 and \verb{PROFFER_GO_BIN=/home/you/go/bin/go}. \code{usethis::edit_r_environ()}
 is helpful for this.}
 
-\item{version}{Character, a version string such as \code{"1.14"}}
+\item{version}{Character, a version string such as \code{"1.14"}.}
 
 \item{quiet}{Logical, whether to suppress console messages.}
 }
