@@ -77,7 +77,7 @@ system.time({
   x <- data.frame(x = x, y = y)
 })
 #>    user  system elapsed 
-#>   0.048   0.001   0.050
+#>   0.037   0.000   0.038
 ```
 
 Moral of the story: before you optimize, throw away your assumptions and
@@ -118,6 +118,36 @@ px$read_error()
 # Terminate the process when you are done.
 px$kill()
 ```
+
+## Serving pprof remotely
+
+As with Jupyter notebooks, you can serve `pprof` from one computer and
+use it from another computer on the same network. On the server, you
+must
+
+1.  Find the server’s host name or IP address in advance.
+2.  Supply `"0.0.0.0"` as the `host` argument.
+
+<!-- end list -->
+
+``` r
+system2("hostname")
+#> mycomputer
+
+px <- pprof({
+  n <- 1e4
+  x <- data.frame(x = rnorm(n), y = rnorm(n))
+  for (i in seq_len(n)) {
+    x[i, ] <- x[i, ] + 1
+  }
+  x
+}, host = "0.0.0.0")
+#> http://0.0.0.0:610712
+```
+
+Then, in the client machine navigate a web browser to the server’s host
+name or IP address and use the port number printed above, e.g.
+`https://mycomputer:61072`.
 
 ## Installation
 
@@ -193,17 +223,40 @@ configured correctly.
 library(proffer)
 pprof_sitrep()
 #> ● Call test_pprof() to test installation.
-#> ✓ pprof path /Users/c240390/go/bin/pprof
-#> ✓ PROFFER_PPROF_BIN path /Users/c240390/go/bin/pprof
-#> ✓ pprof_path env variable omitted
-#> ✓ pprof system path /Users/c240390/go/bin/pprof
-#> ✓ Go path /Users/c240390/go
-#> ✓ Go binary path /usr/local/bin/go
-#> ✓ PROFFER_GO_BIN path /usr/local/bin/go
-#> ✓ Go binary system path /usr/local/bin/go
-#> ✓ Graphviz path /usr/local/bin/dot
-#> ✓ PROFFER_GRAPHVIZ_BIN /usr/local/bin/dot
-#> ✓ Graphviz system path /usr/local/bin/dot
+#> 
+#> ── Requirements ──────────────────────────────────
+#> x pprof missing
+#> ● See <https://github.com/google/pprof> to
+#>   install pprof.
+#> x Go folder missing /home/landau/go
+#> ● See <https://golang.org/doc/install> to
+#>   install Go.
+#> ● See
+#>   <https://github.com/golang/go/wiki/GOPATH> to
+#>   configure GOPATH.
+#> ✓ Go binary /usr/bin/go
+#> ✓ Graphviz /usr/bin/dot
+#> 
+#> ── Custom ────────────────────────────────────────
+#> ℹ `PROFFER_PPROF_BIN` missing /home/landau/go/pkg/tool/linux_amd64/pprof
+#> ● Run `usethis::edit_r_environ()` to edit
+#>   .Renviron file.
+#> ● PROFFER_GO_BIN=
+#> ℹ `PROFFER_GO_BIN` missing /home/landau/go/bin/go
+#> ● Run `usethis::edit_r_environ()` to edit
+#>   .Renviron file.
+#> ● PROFFER_GO_BIN=/usr/bin/go
+#> ✓ `PROFFER_GRAPHVIZ_BIN` /usr/bin/dot
+#> 
+#> ── System ────────────────────────────────────────
+#> ℹ pprof system path missing
+#> ● See <https://github.com/google/pprof> to
+#>   install pprof.
+#> ✓ Go binary system path /usr/bin/go
+#> ✓ Graphviz system path /usr/bin/dot
+#> 
+#> ── Deprecated ────────────────────────────────────
+#> ✓ `pprof_path` env variable omitted
 ```
 
 If no dependencies are missing, `proffer` should work. Test it out with
