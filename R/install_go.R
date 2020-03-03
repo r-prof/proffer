@@ -111,7 +111,7 @@ msg_go_installation <- function(x, destination) {
 }
 
 msg_go_installation.linux <- function(x, destination) {
-  pprof_bin <- file.path(destination, "go/pkg/tool/linux_amd/pprof")
+  pprof_bin <- file.path(destination, "go/pkg/tool/linux_amd64/pprof")
   go_bin <- file.path(destination, "go/bin/go")
   cli_alert_success(
     paste(
