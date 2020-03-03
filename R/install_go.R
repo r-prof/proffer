@@ -9,7 +9,7 @@
 #'   then typically those lines look like
 #'   `PROFFER_GO_BIN=/home/you/go/pkg/tool/linux_amd64/pprof`
 #'   `PROFFER_PPROF_BIN=/home/you/go/bin/go`.
-#' @param destination Directory to install pprof and Go on Linux systems.
+#' @param destination Full path to install pprof and Go on Linux systems.
 #'   Defaults to `Sys.getenv("HOME")`, which means the default
 #'   Go installation path is `file.path(Sys.getenv("HOME"), "go")`.
 #'   After installation succeeds, follow the instructions in the
@@ -110,6 +110,8 @@ msg_go_installation <- function(x, destination) {
 }
 
 msg_go_installation.linux <- function(x, destination) {
+  pprof_bin <- file.path(destination, "go/pkg/tool/linux_amd/pprof")
+  go_bin <- file.path(destination, "go/bin/go")
   cli_alert_success(
     paste(
       "pprof installed to",
@@ -117,17 +119,14 @@ msg_go_installation.linux <- function(x, destination) {
     )
   )
   cli_alert_success("Go installed to {.path {file.path(destination, \"go\")}}")
-  msg_li(
+  cli::cli_ul()
+  cli::cli_li(
     paste(
       "Open your {.file .Renviron} file with {.code usethis::edit_r_environ()}",
       "and add the following lines:"
     )
   )
-  msg_li(
-    paste0(
-      "PROFFER_PPROF_BIN=",
-      "{.path {file.path(destination, \"go/pkg/tool/linux_amd/pprof\")}}"
-    )
-  )
-  msg_li("PROFFER_GO_BIN={.path {file.path(destination, \"go/bin/go\")}}")
+  cli::cli_li("PROFFER_PPROF_BIN={.path {pprof_bin}}")
+  cli::cli_li("PROFFER_GO_BIN={.path {go_bin}}")
+  cli::cli_end()
 }
