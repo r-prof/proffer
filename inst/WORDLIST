@@ -1,3 +1,5 @@
+amd
+AMD
 AppVeyor
 Codecov
 cran
@@ -5,6 +7,8 @@ datatable
 env
 environ
 github
+golang
+graphviz
 Graphviz
 http
 https

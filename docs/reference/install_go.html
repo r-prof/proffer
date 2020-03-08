@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • proffer</title>
+<title>Install pprof and Go — install_go • proffer</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,7 +42,10 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Install pprof and Go — install_go" />
+<meta property="og:description" content="This function installs Go, which comes with its own
+installation of pprof. Only for amd64 architectures running
+Linux, Mac OS, or Windows." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -63,7 +66,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -113,162 +116,62 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Install pprof and Go</h1>
+    <small class="dont-index">Source: <a href='https://github.com/r-prof/proffer/blob/master/R/install_go.R'><code>R/install_go.R</code></a></small>
+    <div class="hidden name"><code>install_go.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p>This function installs Go, which comes with its own
+installation of <code>pprof</code>. Only for amd64 architectures running
+Linux, Mac OS, or Windows.</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'>install_go</span>(<span class='kw'>destination</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"HOME"</span>), <span class='kw'>version</span> <span class='kw'>=</span> <span class='st'>"1.14"</span>, <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-help" class="hasAnchor"><a href="#section-help" class="anchor"></a>Help</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="proffer-package.html">proffer-package</a></code> </p>
-        </td>
-        <td><p>proffer: profile R code with pprof</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-everything" class="hasAnchor"><a href="#section-everything" class="anchor"></a>Everything</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="pprof.html">pprof()</a></code> </p>
-        </td>
-        <td><p>Profile R code and visualize with pprof.</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-visualize" class="hasAnchor"><a href="#section-visualize" class="anchor"></a>Visualize</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="serve_pprof.html">serve_pprof()</a></code> </p>
-        </td>
-        <td><p>Visualize profiling data with pprof.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="serve_rprof.html">serve_rprof()</a></code> </p>
-        </td>
-        <td><p>Visualize Rprof() output with pprof.</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-profile" class="hasAnchor"><a href="#section-profile" class="anchor"></a>Profile</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="record_pprof.html">record_pprof()</a></code> </p>
-        </td>
-        <td><p>Profile R code and record pprof samples.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="record_rprof.html">record_rprof()</a></code> </p>
-        </td>
-        <td><p>Profile R code and record Rprof samples.</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-convert" class="hasAnchor"><a href="#section-convert" class="anchor"></a>Convert</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="to_pprof.html">to_pprof()</a></code> </p>
-        </td>
-        <td><p>Convert Rprof samples to pprof format.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="to_rprof.html">to_rprof()</a></code> </p>
-        </td>
-        <td><p>Convert pprof samples to Rprof format.</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-install" class="hasAnchor"><a href="#section-install" class="anchor"></a>Install</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="install_go.html">install_go()</a></code> </p>
-        </td>
-        <td><p>Install pprof and Go</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-troubleshoot" class="hasAnchor"><a href="#section-troubleshoot" class="anchor"></a>Troubleshoot</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="test_pprof.html">test_pprof()</a></code> </p>
-        </td>
-        <td><p>Test <code>pprof()</code></p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="pprof_sitrep.html">pprof_sitrep()</a></code> </p>
-        </td>
-        <td><p>Verify pprof installation</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="pprof_path.html">pprof_path()</a></code> </p>
-        </td>
-        <td><p>Show the path to the pprof executable.</p></td>
-      </tr>
-    </tbody>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>destination</th>
+      <td><p>Only relevant to Linux,
+full path to the Go installation with the <code>pprof</code> and Go executables.
+Defaults to <code><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv("HOME")</a></code>, which means the default
+Go installation path is <code><a href='https://rdrr.io/r/base/file.path.html'>file.path(Sys.getenv("HOME"), "go")</a></code>.
+That means the Go binary will be at
+<code><a href='https://rdrr.io/r/base/file.path.html'>file.path(Sys.getenv("HOME"), "go/bin/go")</a></code>
+and <code>pprof</code> will be at
+<code><a href='https://rdrr.io/r/base/file.path.html'>file.path(Sys.getenv("HOME"), "go/pkg/tool/linux_amd64/pprof")</a></code>.
+You will need to set environment variables in your <code>.Renviron</code> file,
+e.g. <code>PROFFER_PPROF_BIN=/home/you/go/pkg/tool/linux_amd64/pprof</code>
+and <code>PROFFER_GO_BIN=/home/you/go/bin/go</code>. <code><a href='https://usethis.r-lib.org/reference/edit.html'>usethis::edit_r_environ()</a></code>
+is helpful for this.</p></td>
+    </tr>
+    <tr>
+      <th>version</th>
+      <td><p>Character, a version string such as <code>"1.14"</code></p></td>
+    </tr>
     </table>
-  </div>
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>On Linux, users will need to set
+the environment variables <code>PROFFER_PPROF_BIN</code> and <code>PROFFER_GO_BIN</code> using
+<code><a href='https://usethis.r-lib.org/reference/edit.html'>usethis::edit_r_environ()</a></code>. Typically, if <code>destination</code> is <code>/home/you</code>,
+then typically those lines look like
+<code>PROFFER_GO_BIN=/home/you/go/pkg/tool/linux_amd64/pprof</code>
+<code>PROFFER_PPROF_BIN=/home/you/go/bin/go</code>.</p>
+
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-help">Help</a></li>
-      <li><a href="#section-everything">Everything</a></li>
-      <li><a href="#section-visualize">Visualize</a></li>
-      <li><a href="#section-profile">Profile</a></li>
-      <li><a href="#section-convert">Convert</a></li>
-      <li><a href="#section-install">Install</a></li>
-      <li><a href="#section-troubleshoot">Troubleshoot</a></li>
+      <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#details">Details</a></li>
     </ul>
+
   </div>
 </div>
 

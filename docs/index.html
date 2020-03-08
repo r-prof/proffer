@@ -141,7 +141,7 @@
 <a class="sourceLine" id="cb3-9" data-line-number="9">  x &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)</a>
 <a class="sourceLine" id="cb3-10" data-line-number="10">})</a>
 <a class="sourceLine" id="cb3-11" data-line-number="11"><span class="co">#&gt;    user  system elapsed </span></a>
-<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="co">#&gt;   0.048   0.001   0.050</span></a></code></pre></div>
+<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="co">#&gt;   0.038   0.000   0.039</span></a></code></pre></div>
 <p>Moral of the story: before you optimize, throw away your assumptions and run your code through a profiler. That way, you can spend your time optimizing where it counts!</p>
 </div>
 <div id="managing-the-pprof-server" class="section level2">
@@ -190,24 +190,31 @@
 <div id="non-r-dependencies" class="section level3">
 <h3 class="hasAnchor">
 <a href="#non-r-dependencies" class="anchor"></a>Non-R dependencies</h3>
-<p>Install Go, <code>pprof</code>, and Graphviz using the instructions in the links below.</p>
+<p><code>proffer</code> requires</p>
 <ol>
-<li><a href="https://golang.org/doc/install">Go</a></li>
-<li><a href="https://github.com/google/pprof"><code>pprof</code></a></li>
-<li><a href="https://www.graphviz.org/download/">Graphviz</a></li>
+<li>Go: <a href="https://golang.org/doc/install" class="uri">https://golang.org/doc/install</a>
+</li>
+<li>
+<code>pprof</code>: &lt;<a href="https://github.com/google/pprof" class="uri">https://github.com/google/pprof</a>)</li>
+<li>Graphviz: <a href="https://www.graphviz.org/download" class="uri">https://www.graphviz.org/download</a>
+</li>
 </ol>
+<p>You can install these components directly from R:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(proffer)</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw"><a href="reference/install_go.html">install_go</a></span>() <span class="co"># Also installs pprof.</span></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="kw">install_graphviz</span>()</a></code></pre></div>
 </div>
 <div id="configuration" class="section level3">
 <h3 class="hasAnchor">
 <a href="#configuration" class="anchor"></a>Configuration</h3>
-<p>Next, open your your <code>.Renviron</code> file and register the installed executables in the environment variables of <code>proffer</code>. The <a href="https://usethis.r-lib.org/reference/edit.html"><code>edit_r_environ()</code></a> function in the <a href="https://usethis.r-lib.org"><code>usethis</code></a> package can help you.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co"># .Renviron file, opened with usethis::edit_r_environ()</span></a>
-<a class="sourceLine" id="cb7-2" data-line-number="2">PROFFER_PPROF_BIN=<span class="er">/</span>home<span class="op">/</span>landau<span class="op">/</span>go<span class="op">/</span>bin<span class="op">/</span>pprof</a>
-<a class="sourceLine" id="cb7-3" data-line-number="3">PROFFER_BIN_BIN=<span class="er">/</span>usr<span class="op">/</span>bin<span class="op">/</span>go</a>
-<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co"># The Graphviz path is not necessary on Linux.</span></a>
-<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="co"># On Windows, it will look something like</span></a>
-<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co"># C:\Program Files (x86)\Graphviz2.38\bin\dot.exe</span></a>
-<a class="sourceLine" id="cb7-7" data-line-number="7">PROFFER_GRAPHVIZ_BIN=</a></code></pre></div>
+<p>Open your your <code>.Renviron</code> file and register the installed executables in the environment variables of <code>proffer</code>. The <a href="https://usethis.r-lib.org/reference/edit.html"><code>edit_r_environ()</code></a> function in the <a href="https://usethis.r-lib.org"><code>usethis</code></a> package can help you.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="co"># .Renviron file, opened with usethis::edit_r_environ().</span></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="co"># Example values for Linux:</span></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">PROFFER_PPROF_BIN=<span class="er">/</span>home<span class="op">/</span>landau<span class="op">/</span>go<span class="op">/</span>pkg<span class="op">/</span>tool<span class="op">/</span>linux_amd64<span class="op">/</span>pprof</a>
+<a class="sourceLine" id="cb8-4" data-line-number="4">PROFFER_BIN_BIN=<span class="er">/</span>home<span class="op">/</span>landau<span class="op">/</span>go<span class="op">/</span>bin<span class="op">/</span>go</a>
+<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co"># The Graphviz path is not necessary on Linux.</span></a>
+<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co"># On Windows, it will look something like this:</span></a>
+<a class="sourceLine" id="cb8-7" data-line-number="7">PROFFER_GRAPHVIZ_BIN=<span class="st">"C:\Program Files (x86)\Graphviz2.38</span><span class="ch">\b</span><span class="st">in\dot.exe"</span></a></code></pre></div>
 <p>Remarks on configuration:</p>
 <ul>
 <li>
@@ -219,23 +226,34 @@
 <h3 class="hasAnchor">
 <a href="#verification" class="anchor"></a>Verification</h3>
 <p>Run <code><a href="reference/pprof_sitrep.html">pprof_sitrep()</a></code> to verify that everything is installed and configured correctly.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(proffer)</a>
-<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="kw"><a href="reference/pprof_sitrep.html">pprof_sitrep</a></span>()</a>
-<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="co">#&gt; ● Call test_pprof() to test installation.</span></a>
-<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co">#&gt; ✓ pprof path /Users/c240390/go/bin/pprof</span></a>
-<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt; ✓ PROFFER_PPROF_BIN path /Users/c240390/go/bin/pprof</span></a>
-<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt; ✓ pprof_path env variable omitted</span></a>
-<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co">#&gt; ✓ pprof system path /Users/c240390/go/bin/pprof</span></a>
-<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="co">#&gt; ✓ Go path /Users/c240390/go</span></a>
-<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="co">#&gt; ✓ Go binary path /usr/local/bin/go</span></a>
-<a class="sourceLine" id="cb8-10" data-line-number="10"><span class="co">#&gt; ✓ PROFFER_GO_BIN path /usr/local/bin/go</span></a>
-<a class="sourceLine" id="cb8-11" data-line-number="11"><span class="co">#&gt; ✓ Go binary system path /usr/local/bin/go</span></a>
-<a class="sourceLine" id="cb8-12" data-line-number="12"><span class="co">#&gt; ✓ Graphviz path /usr/local/bin/dot</span></a>
-<a class="sourceLine" id="cb8-13" data-line-number="13"><span class="co">#&gt; ✓ PROFFER_GRAPHVIZ_BIN /usr/local/bin/dot</span></a>
-<a class="sourceLine" id="cb8-14" data-line-number="14"><span class="co">#&gt; ✓ Graphviz system path /usr/local/bin/dot</span></a></code></pre></div>
-<p>If no dependencies are missing, <code>proffer</code> should work. Test it out with <code><a href="reference/test_pprof.html">test_pprof()</a></code>. On a local machine, it should launch a browser window showing an instance of <code>pprof</code>.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(proffer)</a>
-<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="kw"><a href="reference/test_pprof.html">test_pprof</a></span>()</a></code></pre></div>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="kw"><a href="reference/pprof_sitrep.html">pprof_sitrep</a></span>()</a>
+<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="co">#&gt; ● Call test_pprof() to test</span></a>
+<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="co">#&gt;   installation.</span></a>
+<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="co">#&gt; ── Requirements ──────────────────────────</span></a>
+<a class="sourceLine" id="cb9-7" data-line-number="7"><span class="co">#&gt; ✓ pprof /home/landau/go/pkg/tool/linux_amd64/pprof</span></a>
+<a class="sourceLine" id="cb9-8" data-line-number="8"><span class="co">#&gt; ✓ Go folder /home/landau/go</span></a>
+<a class="sourceLine" id="cb9-9" data-line-number="9"><span class="co">#&gt; ✓ Go binary /home/landau/go/bin/go</span></a>
+<a class="sourceLine" id="cb9-10" data-line-number="10"><span class="co">#&gt; ✓ Graphviz /usr/bin/dot</span></a>
+<a class="sourceLine" id="cb9-11" data-line-number="11"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb9-12" data-line-number="12"><span class="co">#&gt; ── Custom ────────────────────────────────</span></a>
+<a class="sourceLine" id="cb9-13" data-line-number="13"><span class="co">#&gt; ✓ `PROFFER_PPROF_BIN` /home/landau/go/pkg/tool/linux_amd64/pprof</span></a>
+<a class="sourceLine" id="cb9-14" data-line-number="14"><span class="co">#&gt; ✓ `PROFFER_GO_BIN` /home/landau/go/bin/go</span></a>
+<a class="sourceLine" id="cb9-15" data-line-number="15"><span class="co">#&gt; ✓ `PROFFER_GRAPHVIZ_BIN` /usr/bin/dot</span></a>
+<a class="sourceLine" id="cb9-16" data-line-number="16"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb9-17" data-line-number="17"><span class="co">#&gt; ── System ────────────────────────────────</span></a>
+<a class="sourceLine" id="cb9-18" data-line-number="18"><span class="co">#&gt; ℹ pprof system path missing /home/landau/go/bin/pprof</span></a>
+<a class="sourceLine" id="cb9-19" data-line-number="19"><span class="co">#&gt; ● See &lt;https://github.com/google/pprof&gt;</span></a>
+<a class="sourceLine" id="cb9-20" data-line-number="20"><span class="co">#&gt;   to install pprof.</span></a>
+<a class="sourceLine" id="cb9-21" data-line-number="21"><span class="co">#&gt; ✓ Go binary system path /home/landau/go/bin/go</span></a>
+<a class="sourceLine" id="cb9-22" data-line-number="22"><span class="co">#&gt; ✓ Graphviz system path /usr/bin/dot</span></a>
+<a class="sourceLine" id="cb9-23" data-line-number="23"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb9-24" data-line-number="24"><span class="co">#&gt; ── Deprecated ────────────────────────────</span></a>
+<a class="sourceLine" id="cb9-25" data-line-number="25"><span class="co">#&gt; ✓ `pprof_path` env variable omitted.</span></a></code></pre></div>
+<p>If no dependencies are missing, <code>proffer</code> should work. Test it out with <code><a href="reference/test_pprof.html">test_pprof()</a></code>. On a local machine, it should launch a browser window showing an instance of <code>pprof</code>.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(proffer)</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="kw"><a href="reference/test_pprof.html">test_pprof</a></span>()</a></code></pre></div>
 </div>
 </div>
 <div id="contributing" class="section level2">
@@ -261,15 +279,15 @@
 <h3 class="hasAnchor">
 <a href="#profvis" class="anchor"></a>profvis</h3>
 <p>The <a href="https://github.com/rstudio/profvis"><code>profvis</code></a> is much easier to install than <code>proffer</code> and equally easy to invoke.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(profvis)</a>
-<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/pkg/profvis/man/profvis.html">profvis</a></span>({</a>
-<a class="sourceLine" id="cb10-3" data-line-number="3">  n &lt;-<span class="st"> </span><span class="fl">1e5</span></a>
-<a class="sourceLine" id="cb10-4" data-line-number="4">  x &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(n), <span class="dt">y =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(n))</a>
-<a class="sourceLine" id="cb10-5" data-line-number="5">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span>(n)) {</a>
-<a class="sourceLine" id="cb10-6" data-line-number="6">    x[i, ] &lt;-<span class="st"> </span>x[i, ] <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb10-7" data-line-number="7">  }</a>
-<a class="sourceLine" id="cb10-8" data-line-number="8">  x</a>
-<a class="sourceLine" id="cb10-9" data-line-number="9">})</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(profvis)</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/pkg/profvis/man/profvis.html">profvis</a></span>({</a>
+<a class="sourceLine" id="cb11-3" data-line-number="3">  n &lt;-<span class="st"> </span><span class="fl">1e5</span></a>
+<a class="sourceLine" id="cb11-4" data-line-number="4">  x &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(n), <span class="dt">y =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(n))</a>
+<a class="sourceLine" id="cb11-5" data-line-number="5">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span>(n)) {</a>
+<a class="sourceLine" id="cb11-6" data-line-number="6">    x[i, ] &lt;-<span class="st"> </span>x[i, ] <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb11-7" data-line-number="7">  }</a>
+<a class="sourceLine" id="cb11-8" data-line-number="8">  x</a>
+<a class="sourceLine" id="cb11-9" data-line-number="9">})</a></code></pre></div>
 <p>However, <code>profvis</code>-generated flame graphs can be <a href="https://github.com/rstudio/profvis/issues/115">difficult to read</a> and <a href="https://github.com/rstudio/profvis/issues/104">slow to respond to mouse clicks</a>.</p>
 <center>
 
