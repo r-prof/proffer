@@ -38,10 +38,7 @@ go_path <- function() {
 }
 
 go_path_impl <- function() {
-  with_safe_path(
-    go_bin_path(),
-    system2("go", c("env", "GOPATH"), stdout = TRUE)
-  )
+  system2(go_bin_path(), c("env", "GOPATH"), stdout = TRUE)
 }
 
 go_bin_path <- function() {
