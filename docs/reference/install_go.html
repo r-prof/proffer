@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Install pprof and Go — install_go • proffer</title>
+<title>Install pprof and Go on Linux — install_go • proffer</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,10 +42,12 @@
 
 
 
-<meta property="og:title" content="Install pprof and Go — install_go" />
-<meta property="og:description" content="This function installs Go, which comes with its own
-installation of pprof. Only for amd64 architectures running
-Linux, Mac OS, or Windows." />
+<meta property="og:title" content="Install pprof and Go on Linux — install_go" />
+<meta property="og:description" content="On Linux, this function actually installs Go,
+which comes with its own
+installation of pprof. On Mac and Windows, the function
+simply points the user to a link to download the installer.
+Assumes amd64 architecture." />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -118,15 +120,17 @@ Linux, Mac OS, or Windows." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Install pprof and Go</h1>
-    <small class="dont-index">Source: <a href='https://github.com/r-prof/proffer/blob/master/R/install_go.R'><code>R/install_go.R</code></a></small>
+    <h1>Install pprof and Go on Linux</h1>
+    <small class="dont-index">Source: <a href='https://github.com/r-prof/proffer/blob/master/R/install.R'><code>R/install.R</code></a></small>
     <div class="hidden name"><code>install_go.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function installs Go, which comes with its own
-installation of <code>pprof</code>. Only for amd64 architectures running
-Linux, Mac OS, or Windows.</p>
+    <p>On Linux, this function actually installs Go,
+which comes with its own
+installation of <code>pprof</code>. On Mac and Windows, the function
+simply points the user to a link to download the installer.
+Assumes amd64 architecture.</p>
     </div>
 
     <pre class="usage"><span class='fu'>install_go</span>(<span class='kw'>destination</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"HOME"</span>), <span class='kw'>version</span> <span class='kw'>=</span> <span class='st'>"1.14"</span>, <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
@@ -151,7 +155,11 @@ is helpful for this.</p></td>
     </tr>
     <tr>
       <th>version</th>
-      <td><p>Character, a version string such as <code>"1.14"</code></p></td>
+      <td><p>Character, a version string such as <code>"1.14"</code>.</p></td>
+    </tr>
+    <tr>
+      <th>quiet</th>
+      <td><p>Logical, whether to suppress console messages.</p></td>
     </tr>
     </table>
 

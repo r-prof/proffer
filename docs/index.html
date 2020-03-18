@@ -101,77 +101,96 @@
 <h2 class="hasAnchor">
 <a href="#why-use-a-profiler" class="anchor"></a>Why use a profiler?</h2>
 <p>This data processing code is slow.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>({</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">  n &lt;-<span class="st"> </span><span class="fl">1e5</span></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3">  x &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(n), <span class="dt">y =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(n))</a>
-<a class="sourceLine" id="cb1-4" data-line-number="4">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span>(n)) {</a>
-<a class="sourceLine" id="cb1-5" data-line-number="5">    x[i, ] &lt;-<span class="st"> </span>x[i, ] <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb1-6" data-line-number="6">  }</a>
-<a class="sourceLine" id="cb1-7" data-line-number="7">  x</a>
-<a class="sourceLine" id="cb1-8" data-line-number="8">})</a>
-<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="co">#&gt;   user  system elapsed </span></a>
-<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="co">#&gt; 82.060  28.440 110.582 </span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>({
+  n &lt;-<span class="st"> </span><span class="fl">1e5</span>
+  x &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(n), <span class="dt">y =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(n))
+  <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span>(n)) {
+    x[i, ] &lt;-<span class="st"> </span>x[i, ] <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
+  }
+  x
+})
+<span class="co">#&gt;   user  system elapsed </span>
+<span class="co">#&gt; 82.060  28.440 110.582 </span></code></pre></div>
 <p>Why exactly does it take so long? Is it because <code>for</code> loops are slow as a general rule? Let us find out empirically.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(proffer)</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">px &lt;-<span class="st"> </span><span class="kw"><a href="reference/pprof.html">pprof</a></span>({</a>
-<a class="sourceLine" id="cb2-3" data-line-number="3">  n &lt;-<span class="st"> </span><span class="fl">1e5</span></a>
-<a class="sourceLine" id="cb2-4" data-line-number="4">  x &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(n), <span class="dt">y =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(n))</a>
-<a class="sourceLine" id="cb2-5" data-line-number="5">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span>(n)) {</a>
-<a class="sourceLine" id="cb2-6" data-line-number="6">    x[i, ] &lt;-<span class="st"> </span>x[i, ] <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb2-7" data-line-number="7">  }</a>
-<a class="sourceLine" id="cb2-8" data-line-number="8">  x</a>
-<a class="sourceLine" id="cb2-9" data-line-number="9">})</a>
-<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="co">#&gt; http://localhost:64610</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(proffer)
+px &lt;-<span class="st"> </span><span class="kw"><a href="reference/pprof.html">pprof</a></span>({
+  n &lt;-<span class="st"> </span><span class="fl">1e5</span>
+  x &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(n), <span class="dt">y =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(n))
+  <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span>(n)) {
+    x[i, ] &lt;-<span class="st"> </span>x[i, ] <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
+  }
+  x
+})
+<span class="co">#&gt; http://localhost:64610</span></code></pre></div>
 <p>When we navigate to <a href="http://localhost:64610" class="uri">http://localhost:64610</a> and look at the flame graph, we see <code>[&lt;-.data.frame()</code> (i.e. <code>x[i, ] &lt;- x[i, ] + 1</code>) is taking most of the runtime.</p>
 <center>
-
-<a href="https://r-prof.github.io/proffer/reference/figures/flame.png">
-<img src="https://r-prof.github.io/proffer/reference/figures/flame.png" alt="top" align="center" style="border: none; float: center;"></a>
-
+<a href="https://r-prof.github.io/proffer/reference/figures/flame.png"> <img src="https://r-prof.github.io/proffer/reference/figures/flame.png" alt="top" align="center" style="border: none; float: center;"></a>
 </center>
 <p>So we refactor the code to avoid data frame row assignment. Much faster, even with a <code>for</code> loop!</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>({</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">  n &lt;-<span class="st"> </span><span class="fl">1e5</span></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3">  x &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(n)</a>
-<a class="sourceLine" id="cb3-4" data-line-number="4">  y &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(n)</a>
-<a class="sourceLine" id="cb3-5" data-line-number="5">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span>(n)) {</a>
-<a class="sourceLine" id="cb3-6" data-line-number="6">    x[i] &lt;-<span class="st"> </span>x[i] <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb3-7" data-line-number="7">    y[i] &lt;-<span class="st"> </span>y[i] <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb3-8" data-line-number="8">  }</a>
-<a class="sourceLine" id="cb3-9" data-line-number="9">  x &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)</a>
-<a class="sourceLine" id="cb3-10" data-line-number="10">})</a>
-<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="co">#&gt;    user  system elapsed </span></a>
-<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="co">#&gt;   0.038   0.000   0.039</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>({
+  n &lt;-<span class="st"> </span><span class="fl">1e5</span>
+  x &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(n)
+  y &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(n)
+  <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span>(n)) {
+    x[i] &lt;-<span class="st"> </span>x[i] <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
+    y[i] &lt;-<span class="st"> </span>y[i] <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
+  }
+  x &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)
+})
+<span class="co">#&gt;    user  system elapsed </span>
+<span class="co">#&gt;   0.045   0.001   0.047</span></code></pre></div>
 <p>Moral of the story: before you optimize, throw away your assumptions and run your code through a profiler. That way, you can spend your time optimizing where it counts!</p>
 </div>
 <div id="managing-the-pprof-server" class="section level2">
 <h2 class="hasAnchor">
 <a href="#managing-the-pprof-server" class="anchor"></a>Managing the pprof server</h2>
 <p>The <code>pprof</code> server is a background <a href="https://github.com/r-lib/processx"><code>processx</code></a> process, and you can manage it with the <code>processx</code> methods <a href="https://processx.r-lib.org/#managing-external-processes">described here</a>. Remember to terminate the process with <code>$kill()</code> when you are done with it.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co"># px is a process handler.</span></a>
-<a class="sourceLine" id="cb4-2" data-line-number="2">px &lt;-<span class="st"> </span><span class="kw"><a href="reference/pprof.html">pprof</a></span>({</a>
-<a class="sourceLine" id="cb4-3" data-line-number="3">  n &lt;-<span class="st"> </span><span class="fl">1e4</span></a>
-<a class="sourceLine" id="cb4-4" data-line-number="4">  x &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(n), <span class="dt">y =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(n))</a>
-<a class="sourceLine" id="cb4-5" data-line-number="5">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span>(n)) {</a>
-<a class="sourceLine" id="cb4-6" data-line-number="6">    x[i, ] &lt;-<span class="st"> </span>x[i, ] <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb4-7" data-line-number="7">  }</a>
-<a class="sourceLine" id="cb4-8" data-line-number="8">  x</a>
-<a class="sourceLine" id="cb4-9" data-line-number="9">})</a>
-<a class="sourceLine" id="cb4-10" data-line-number="10"><span class="co">#&gt; http://localhost:50195</span></a>
-<a class="sourceLine" id="cb4-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb4-12" data-line-number="12"><span class="co"># Summary of the background process.</span></a>
-<a class="sourceLine" id="cb4-13" data-line-number="13">px</a>
-<a class="sourceLine" id="cb4-14" data-line-number="14"><span class="co">#&gt; PROCESS 'pprof', running, pid 10451.</span></a>
-<a class="sourceLine" id="cb4-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb4-16" data-line-number="16">px<span class="op">$</span><span class="kw">is_alive</span>()</a>
-<a class="sourceLine" id="cb4-17" data-line-number="17"><span class="co"># [1] TRUE</span></a>
-<a class="sourceLine" id="cb4-18" data-line-number="18"></a>
-<a class="sourceLine" id="cb4-19" data-line-number="19"><span class="co"># Error messages, some of which do not matter.</span></a>
-<a class="sourceLine" id="cb4-20" data-line-number="20">px<span class="op">$</span><span class="kw">read_error</span>()</a>
-<a class="sourceLine" id="cb4-21" data-line-number="21"><span class="co">#&gt; [1] "Main binary filename not available.\n"</span></a>
-<a class="sourceLine" id="cb4-22" data-line-number="22"></a>
-<a class="sourceLine" id="cb4-23" data-line-number="23"><span class="co"># Terminate the process when you are done.</span></a>
-<a class="sourceLine" id="cb4-24" data-line-number="24">px<span class="op">$</span><span class="kw">kill</span>()</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># px is a process handler.</span>
+px &lt;-<span class="st"> </span><span class="kw"><a href="reference/pprof.html">pprof</a></span>({
+  n &lt;-<span class="st"> </span><span class="fl">1e4</span>
+  x &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(n), <span class="dt">y =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(n))
+  <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span>(n)) {
+    x[i, ] &lt;-<span class="st"> </span>x[i, ] <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
+  }
+  x
+})
+<span class="co">#&gt; http://localhost:50195</span>
+
+<span class="co"># Summary of the background process.</span>
+px
+<span class="co">#&gt; PROCESS 'pprof', running, pid 10451.</span>
+
+px<span class="op">$</span><span class="kw">is_alive</span>()
+<span class="co"># [1] TRUE</span>
+
+<span class="co"># Error messages, some of which do not matter.</span>
+px<span class="op">$</span><span class="kw">read_error</span>()
+<span class="co">#&gt; [1] "Main binary filename not available.\n"</span>
+
+<span class="co"># Terminate the process when you are done.</span>
+px<span class="op">$</span><span class="kw">kill</span>()</code></pre></div>
+</div>
+<div id="serving-pprof-remotely" class="section level2">
+<h2 class="hasAnchor">
+<a href="#serving-pprof-remotely" class="anchor"></a>Serving pprof remotely</h2>
+<p>As with Jupyter notebooks, you can serve <code>pprof</code> from one computer and use it from another computer on the same network. On the server, you must</p>
+<ol>
+<li>Find the server’s host name or IP address in advance.</li>
+<li>Supply <code>"0.0.0.0"</code> as the <code>host</code> argument.</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://rdrr.io/r/base/system2.html">system2</a></span>(<span class="st">"hostname"</span>)
+<span class="co">#&gt; mycomputer</span>
+
+px &lt;-<span class="st"> </span><span class="kw"><a href="reference/pprof.html">pprof</a></span>({
+  n &lt;-<span class="st"> </span><span class="fl">1e4</span>
+  x &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(n), <span class="dt">y =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(n))
+  <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span>(n)) {
+    x[i, ] &lt;-<span class="st"> </span>x[i, ] <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
+  }
+  x
+}, <span class="dt">host =</span> <span class="st">"0.0.0.0"</span>)
+<span class="co">#&gt; http://0.0.0.0:610712</span></code></pre></div>
+<p>Then, in the client machine navigate a web browser to the server’s host name or IP address and use the port number printed above, e.g. <code>https://mycomputer:61072</code>.</p>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
@@ -181,10 +200,10 @@
 <h3 class="hasAnchor">
 <a href="#the-r-package" class="anchor"></a>The R package</h3>
 <p>The latest release of <code>proffer</code> is available on <a href="https://CRAN.R-project.org">CRAN</a>.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"proffer"</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"proffer"</span>)</code></pre></div>
 <p>Alternatively, you can install the development version from GitHub.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="co"># install.packages("remotes")</span></a>
-<a class="sourceLine" id="cb6-2" data-line-number="2">remotes<span class="op">::</span><span class="kw"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"r-prof/proffer"</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages("remotes")</span>
+remotes<span class="op">::</span><span class="kw"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"r-prof/proffer"</span>)</code></pre></div>
 <p>The <code>proffer</code> package requires the <code>RProtoBuf</code> package, which may require installation of additional system dependencies on Linux. See its <a href="https://github.com/eddelbuettel/rprotobuf#installation">installation instructions</a>.</p>
 </div>
 <div id="non-r-dependencies" class="section level3">
@@ -194,66 +213,81 @@
 <ol>
 <li>Go: <a href="https://golang.org/doc/install" class="uri">https://golang.org/doc/install</a>
 </li>
-<li>
-<code>pprof</code>: &lt;<a href="https://github.com/google/pprof" class="uri">https://github.com/google/pprof</a>)</li>
 <li>Graphviz: <a href="https://www.graphviz.org/download" class="uri">https://www.graphviz.org/download</a>
 </li>
+<li>
+<code>pprof</code>: <a href="https://github.com/google/pprof" class="uri">https://github.com/google/pprof</a>
+</li>
 </ol>
-<p>You can install these components directly from R:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(proffer)</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw"><a href="reference/install_go.html">install_go</a></span>() <span class="co"># Also installs pprof.</span></a>
-<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="kw">install_graphviz</span>()</a></code></pre></div>
+<p>On Mac and Windows, you can find installers of Go and Graphviz from the links above. <code>pprof</code> should come automatically installed with Go (see the configuration section below). On Linux, you can install <code>pprof</code> and Go directly from R:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(proffer)
+<span class="kw"><a href="reference/install_go.html">install_go</a></span>() <span class="co"># Also installs pprof if on Linux.</span></code></pre></div>
 </div>
 <div id="configuration" class="section level3">
 <h3 class="hasAnchor">
 <a href="#configuration" class="anchor"></a>Configuration</h3>
-<p>Open your your <code>.Renviron</code> file and register the installed executables in the environment variables of <code>proffer</code>. The <a href="https://usethis.r-lib.org/reference/edit.html"><code>edit_r_environ()</code></a> function in the <a href="https://usethis.r-lib.org"><code>usethis</code></a> package can help you.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="co"># .Renviron file, opened with usethis::edit_r_environ().</span></a>
-<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="co"># Example values for Linux:</span></a>
-<a class="sourceLine" id="cb8-3" data-line-number="3">PROFFER_PPROF_BIN=<span class="er">/</span>home<span class="op">/</span>landau<span class="op">/</span>go<span class="op">/</span>pkg<span class="op">/</span>tool<span class="op">/</span>linux_amd64<span class="op">/</span>pprof</a>
-<a class="sourceLine" id="cb8-4" data-line-number="4">PROFFER_BIN_BIN=<span class="er">/</span>home<span class="op">/</span>landau<span class="op">/</span>go<span class="op">/</span>bin<span class="op">/</span>go</a>
-<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co"># The Graphviz path is not necessary on Linux.</span></a>
-<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co"># On Windows, it will look something like this:</span></a>
-<a class="sourceLine" id="cb8-7" data-line-number="7">PROFFER_GRAPHVIZ_BIN=<span class="st">"C:\Program Files (x86)\Graphviz2.38</span><span class="ch">\b</span><span class="st">in\dot.exe"</span></a></code></pre></div>
-<p>Remarks on configuration:</p>
-<ul>
-<li>
-<code>PROFFER_GRAPHVIZ_BIN</code> is only necessary on some platforms. For Windows, <a href="https://stackoverflow.com/questions/35064304/runtimeerror-make-sure-the-graphviz-executables-are-on-your-systems-path-aft/47031762#47031762">this post</a> has an example path you can supply directly to <code>PROFFER_GRAPHVIZ_BIN</code>.</li>
-<li>As an alternative to the environment variables above, you can set your <a href="https://en.wikipedia.org/wiki/PATH_(variable)"><code>PATH</code></a> and <a href="https://github.com/golang/go/wiki/GOPATH"><code>GOPATH</code></a> yourself if you know what you are doing.</li>
-</ul>
+<p>First, run <code><a href="reference/pprof_sitrep.html">pprof_sitrep()</a></code> to see if <code>proffer</code> can already find all the required non-R dependencies. Then, run <code><a href="reference/test_pprof.html">test_pprof()</a></code> to see if <code>pprof</code> actually works for you. If both checks pass, you are done with installation.</p>
+<p>Otherwise, open your your <code>.Renviron</code> file and define special environment variables that point to system dependencies. The <a href="https://usethis.r-lib.org/reference/edit.html"><code>edit_r_environ()</code></a> function in the <a href="https://usethis.r-lib.org"><code>usethis</code></a> package can help you. Configuration varies according to your platform and installation method.</p>
+<div id="linux" class="section level4">
+<h4 class="hasAnchor">
+<a href="#linux" class="anchor"></a>Linux</h4>
+<div class="sourceCode"><pre class="sourceCode R"><code class="sourceCode r">PROFFER_PPROF_BIN=<span class="er">/</span>home<span class="op">/</span>YOU<span class="op">/</span>go<span class="op">/</span>pkg<span class="op">/</span>tool<span class="op">/</span>linux_amd64<span class="op">/</span>pprof
+PROFFER_GO_BIN=<span class="er">/</span>home<span class="op">/</span>YOU<span class="op">/</span>go<span class="op">/</span>bin<span class="op">/</span>go
+PROFFER_GRAPHVIZ_BIN=<span class="er">/</span>usr<span class="op">/</span>bin<span class="op">/</span>dot</code></pre></div>
+</div>
+<div id="mac-os" class="section level4">
+<h4 class="hasAnchor">
+<a href="#mac-os" class="anchor"></a>Mac OS</h4>
+<div class="sourceCode"><pre class="sourceCode R"><code class="sourceCode r">PROFFER_PPROF_BIN=<span class="er">/</span>usr<span class="op">/</span>local<span class="op">/</span>bin<span class="op">/</span>pprof
+PROFFER_GO_BIN=<span class="er">/</span>usr<span class="op">/</span>local<span class="op">/</span>bin<span class="op">/</span>go
+PROFFER_GRAPHVIZ_BIN=<span class="er">/</span>usr<span class="op">/</span>local<span class="op">/</span>bin<span class="op">/</span>dot</code></pre></div>
+</div>
+<div id="windows" class="section level4">
+<h4 class="hasAnchor">
+<a href="#windows" class="anchor"></a>Windows</h4>
+<div class="sourceCode"><pre class="sourceCode R"><code class="sourceCode r">PROFFER_PPROF_BIN=C<span class="op">:</span>\Go\pkg\tool\windows_amd64\pprof.exe
+PROFFER_GO_BIN=C<span class="op">:</span>\Go\bin\go.exe
+PROFFER_GRAPHVIZ_BIN=<span class="st">"C:\Program Files (x86)\Graphviz2.38</span><span class="ch">\b</span><span class="st">in\dot.exe"</span></code></pre></div>
+</div>
 </div>
 <div id="verification" class="section level3">
 <h3 class="hasAnchor">
 <a href="#verification" class="anchor"></a>Verification</h3>
-<p>Run <code><a href="reference/pprof_sitrep.html">pprof_sitrep()</a></code> to verify that everything is installed and configured correctly.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(proffer)</a>
-<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="kw"><a href="reference/pprof_sitrep.html">pprof_sitrep</a></span>()</a>
-<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="co">#&gt; ● Call test_pprof() to test</span></a>
-<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="co">#&gt;   installation.</span></a>
-<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="co">#&gt; ── Requirements ──────────────────────────</span></a>
-<a class="sourceLine" id="cb9-7" data-line-number="7"><span class="co">#&gt; ✓ pprof /home/landau/go/pkg/tool/linux_amd64/pprof</span></a>
-<a class="sourceLine" id="cb9-8" data-line-number="8"><span class="co">#&gt; ✓ Go folder /home/landau/go</span></a>
-<a class="sourceLine" id="cb9-9" data-line-number="9"><span class="co">#&gt; ✓ Go binary /home/landau/go/bin/go</span></a>
-<a class="sourceLine" id="cb9-10" data-line-number="10"><span class="co">#&gt; ✓ Graphviz /usr/bin/dot</span></a>
-<a class="sourceLine" id="cb9-11" data-line-number="11"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb9-12" data-line-number="12"><span class="co">#&gt; ── Custom ────────────────────────────────</span></a>
-<a class="sourceLine" id="cb9-13" data-line-number="13"><span class="co">#&gt; ✓ `PROFFER_PPROF_BIN` /home/landau/go/pkg/tool/linux_amd64/pprof</span></a>
-<a class="sourceLine" id="cb9-14" data-line-number="14"><span class="co">#&gt; ✓ `PROFFER_GO_BIN` /home/landau/go/bin/go</span></a>
-<a class="sourceLine" id="cb9-15" data-line-number="15"><span class="co">#&gt; ✓ `PROFFER_GRAPHVIZ_BIN` /usr/bin/dot</span></a>
-<a class="sourceLine" id="cb9-16" data-line-number="16"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb9-17" data-line-number="17"><span class="co">#&gt; ── System ────────────────────────────────</span></a>
-<a class="sourceLine" id="cb9-18" data-line-number="18"><span class="co">#&gt; ℹ pprof system path missing /home/landau/go/bin/pprof</span></a>
-<a class="sourceLine" id="cb9-19" data-line-number="19"><span class="co">#&gt; ● See &lt;https://github.com/google/pprof&gt;</span></a>
-<a class="sourceLine" id="cb9-20" data-line-number="20"><span class="co">#&gt;   to install pprof.</span></a>
-<a class="sourceLine" id="cb9-21" data-line-number="21"><span class="co">#&gt; ✓ Go binary system path /home/landau/go/bin/go</span></a>
-<a class="sourceLine" id="cb9-22" data-line-number="22"><span class="co">#&gt; ✓ Graphviz system path /usr/bin/dot</span></a>
-<a class="sourceLine" id="cb9-23" data-line-number="23"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb9-24" data-line-number="24"><span class="co">#&gt; ── Deprecated ────────────────────────────</span></a>
-<a class="sourceLine" id="cb9-25" data-line-number="25"><span class="co">#&gt; ✓ `pprof_path` env variable omitted.</span></a></code></pre></div>
-<p>If no dependencies are missing, <code>proffer</code> should work. Test it out with <code><a href="reference/test_pprof.html">test_pprof()</a></code>. On a local machine, it should launch a browser window showing an instance of <code>pprof</code>.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(proffer)</a>
-<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="kw"><a href="reference/test_pprof.html">test_pprof</a></span>()</a></code></pre></div>
+<p>Run <code><a href="reference/pprof_sitrep.html">pprof_sitrep()</a></code> again to verify that everything is installed and configured correctly.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(proffer)
+<span class="kw"><a href="reference/pprof_sitrep.html">pprof_sitrep</a></span>()
+<span class="co">#&gt; ● Call test_pprof() to test installation.</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; ── Requirements ──────────────────────────────</span>
+<span class="co">#&gt; ✓ pprof /Users/c240390/go/bin/pprof</span>
+<span class="co">#&gt; ✓ Go binary /usr/local/bin/go</span>
+<span class="co">#&gt; ✓ Go folder /Users/c240390/go</span>
+<span class="co">#&gt; ✓ Graphviz /usr/local/bin/dot</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; ── Custom ────────────────────────────────────</span>
+<span class="co">#&gt; ℹ `PROFFER_PPROF_BIN` missing</span>
+<span class="co">#&gt; ● Run `usethis::edit_r_environ()` to edit</span>
+<span class="co">#&gt;   .Renviron file.</span>
+<span class="co">#&gt; ● PROFFER_GO_BIN=/usr/local/bin/go</span>
+<span class="co">#&gt; ℹ `PROFFER_GO_BIN` missing</span>
+<span class="co">#&gt; ● Run `usethis::edit_r_environ()` to edit</span>
+<span class="co">#&gt;   .Renviron file.</span>
+<span class="co">#&gt; ● PROFFER_GO_BIN=/usr/local/bin/go</span>
+<span class="co">#&gt; ℹ `PROFFER_GRAPHVIZ_BIN` missing</span>
+<span class="co">#&gt; ● Run `usethis::edit_r_environ()` to edit</span>
+<span class="co">#&gt;   .Renviron file.</span>
+<span class="co">#&gt; ● PROFFER_GRAPHVIZ_BIN=/usr/local/bin/dot</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; ── System ────────────────────────────────────</span>
+<span class="co">#&gt; ✓ pprof system path /Users/c240390/go/bin/pprof</span>
+<span class="co">#&gt; ✓ Go binary system path /usr/local/bin/go</span>
+<span class="co">#&gt; ✓ Graphviz system path /usr/local/bin/dot</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; ── Deprecated ────────────────────────────────</span>
+<span class="co">#&gt; ✓ `pprof_path` env variable omitted.</span></code></pre></div>
+<p>If all dependencies are accounted for, <code>proffer</code> should work. Test it out with <code><a href="reference/test_pprof.html">test_pprof()</a></code>. On a local machine, it should launch a browser window showing an instance of <code>pprof</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(proffer)
+<span class="kw"><a href="reference/test_pprof.html">test_pprof</a></span>()</code></pre></div>
 </div>
 </div>
 <div id="contributing" class="section level2">
@@ -279,21 +313,18 @@
 <h3 class="hasAnchor">
 <a href="#profvis" class="anchor"></a>profvis</h3>
 <p>The <a href="https://github.com/rstudio/profvis"><code>profvis</code></a> is much easier to install than <code>proffer</code> and equally easy to invoke.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(profvis)</a>
-<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/pkg/profvis/man/profvis.html">profvis</a></span>({</a>
-<a class="sourceLine" id="cb11-3" data-line-number="3">  n &lt;-<span class="st"> </span><span class="fl">1e5</span></a>
-<a class="sourceLine" id="cb11-4" data-line-number="4">  x &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(n), <span class="dt">y =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(n))</a>
-<a class="sourceLine" id="cb11-5" data-line-number="5">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span>(n)) {</a>
-<a class="sourceLine" id="cb11-6" data-line-number="6">    x[i, ] &lt;-<span class="st"> </span>x[i, ] <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb11-7" data-line-number="7">  }</a>
-<a class="sourceLine" id="cb11-8" data-line-number="8">  x</a>
-<a class="sourceLine" id="cb11-9" data-line-number="9">})</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(profvis)
+<span class="kw"><a href="https://rdrr.io/pkg/profvis/man/profvis.html">profvis</a></span>({
+  n &lt;-<span class="st"> </span><span class="fl">1e5</span>
+  x &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(n), <span class="dt">y =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(n))
+  <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span>(n)) {
+    x[i, ] &lt;-<span class="st"> </span>x[i, ] <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
+  }
+  x
+})</code></pre></div>
 <p>However, <code>profvis</code>-generated flame graphs can be <a href="https://github.com/rstudio/profvis/issues/115">difficult to read</a> and <a href="https://github.com/rstudio/profvis/issues/104">slow to respond to mouse clicks</a>.</p>
 <center>
-
-<a href="https://r-prof.github.io/proffer/reference/figures/profvis.png">
-<img src="https://r-prof.github.io/proffer/reference/figures/profvis.png" alt="top" align="center" style="border: none; float: center;"></a>
-
+<a href="https://r-prof.github.io/proffer/reference/figures/profvis.png"> <img src="https://r-prof.github.io/proffer/reference/figures/profvis.png" alt="top" align="center" style="border: none; float: center;"></a>
 </center>
 <p><code>proffer</code> uses <a href="https://github.com/google/pprof"><code>pprof</code></a> to create friendlier, faster visualizations.</p>
 </div>
