@@ -190,7 +190,11 @@ missing_go_path <- function() {
   cli::cli_alert_danger("Go folder missing {.path {go_path()}}")
   msg_li("See {.url https://golang.org/doc/install} to install Go.")
   msg_li(
-    "See {.url https://github.com/golang/go/wiki/GOPATH} to configure GOPATH."
+    paste(
+      "If the Go folder is missing but the Go binary is non-missing,",
+      "you may need to configure the GOPATH environment variable.",
+      "See {.url https://github.com/golang/go/wiki/GOPATH}.", collapse = " "
+    )
   )
 }
 
