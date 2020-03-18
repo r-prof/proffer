@@ -7,8 +7,8 @@ pprof_sitrep <- function() {
   msg_li("Call test_pprof() to test installation.")
   cli::cli_h1("Requirements")
   sitrep_pprof_path()
-  sitrep_go_path()
   sitrep_go_bin_path()
+  sitrep_go_path()
   sitrep_graphviz_path()
   cli::cli_h1("Custom")
   sitrep_pprof_env_new()
@@ -55,19 +55,19 @@ sitrep_pprof_sys <- function() {
   )
 }
 
-sitrep_go_path <- function() {
-  ifelse(
-    file.exists(go_path()),
-    found_go_path(),
-    missing_go_path()
-  )
-}
-
 sitrep_go_bin_path <- function() {
   ifelse(
     file.exists(go_bin_path()),
     found_go_bin_path(),
     missing_go_bin_path()
+  )
+}
+
+sitrep_go_path <- function() {
+  ifelse(
+    file.exists(go_path()),
+    found_go_path(),
+    missing_go_path()
   )
 }
 
@@ -132,12 +132,12 @@ found_pprof_sys <- function() {
   cli::cli_alert_success("pprof system path {.path {pprof_sys()}}")
 }
 
-found_go_path <- function() {
-  cli::cli_alert_success("Go folder {.path {go_path()}}")
-}
-
 found_go_bin_path <- function() {
   cli::cli_alert_success("Go binary {.path {go_bin_path()}}")
+}
+
+found_go_path <- function() {
+  cli::cli_alert_success("Go folder {.path {go_path()}}")
 }
 
 found_go_bin_env <- function() {
@@ -172,7 +172,7 @@ missing_pprof_env_new <- function() {
     "{.envvar PROFFER_PPROF_BIN} missing {.path {pprof_env_new()}}"
   )
   msg_renviron()
-  msg_li("PROFFER_GO_BIN={.path {unname(Sys.which(\"pprof\"))}}")
+  msg_li("PROFFER_GO_BIN={.path {go_bin_sys()}}")
 }
 
 missing_pprof_env_old <- function() {
@@ -184,6 +184,11 @@ missing_pprof_env_old <- function() {
 missing_pprof_sys <- function() {
   cli::cli_alert_info("pprof system path missing {.path {pprof_sys()}}")
   msg_li("See {.url https://github.com/google/pprof} to install pprof.")
+}
+
+missing_go_bin_path <- function() {
+  cli::cli_alert_danger("Go binary missing {.path {go_bin_path()}}")
+  msg_li("See {.url https://golang.org/doc/install} to install Go.")
 }
 
 missing_go_path <- function() {
@@ -198,17 +203,12 @@ missing_go_path <- function() {
   )
 }
 
-missing_go_bin_path <- function() {
-  cli::cli_alert_danger("Go binary missing {.path {go_bin_path()}}")
-  msg_li("See {.url https://golang.org/doc/install} to install Go.")
-}
-
 missing_go_bin_env <- function() {
   cli::cli_alert_info(
     "{.envvar PROFFER_GO_BIN} missing {.path {go_bin_env()}}"
   )
   msg_renviron()
-  msg_li("PROFFER_GO_BIN={.path {unname(Sys.which(\"go\"))}}")
+  msg_li("PROFFER_GO_BIN={.path {go_bin_sys()}}")
 }
 
 missing_go_bin_sys <- function() {
@@ -226,7 +226,7 @@ missing_graphviz_env <- function() {
     "{.envvar PROFFER_GRAPHVIZ_BIN} missing {.path {graphviz_env()}}"
   )
   msg_renviron()
-  msg_li("PROFFER_GRAPHVIZ_BIN={.path {unname(Sys.which(\"dot\"))}}")
+  msg_li("PROFFER_GRAPHVIZ_BIN={.path {graphviz_sys()}}")
 }
 
 missing_graphviz_sys <- function() {

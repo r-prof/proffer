@@ -26,7 +26,7 @@ pprof_env_old <- function() {
 }
 
 pprof_sys <- function() {
-  ifelse(file.exists(go_path()), pprof_sys_impl(), "")
+  ifelse(file.exists(go_path()), pprof_sys_impl(), unname(Sys.which("pprof")))
 }
 
 pprof_sys_impl <- function() {
