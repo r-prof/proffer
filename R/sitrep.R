@@ -172,7 +172,7 @@ missing_pprof_env_new <- function() {
     "{.envvar PROFFER_PPROF_BIN} missing {.path {pprof_env_new()}}"
   )
   msg_renviron()
-  msg_li("PROFFER_GO_BIN={.path {pprof_sys()}}")
+  msg_li("PROFFER_PPROF_BIN={.path {pprof_sys()}}")
 }
 
 missing_pprof_env_old <- function() {
