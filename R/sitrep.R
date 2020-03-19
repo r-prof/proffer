@@ -7,9 +7,10 @@ pprof_sitrep <- function() {
   msg_li("Call test_pprof() to test installation.")
   cli::cli_h1("Requirements")
   sitrep_pprof_path()
+  sitrep_graphviz_path()
+  cli::cli_h1("Go")
   sitrep_go_bin_path()
   sitrep_go_path()
-  sitrep_graphviz_path()
   cli::cli_h1("Custom")
   sitrep_pprof_env_new()
   sitrep_go_bin_env()
@@ -187,12 +188,12 @@ missing_pprof_sys <- function() {
 }
 
 missing_go_bin_path <- function() {
-  cli::cli_alert_danger("Go binary missing {.path {go_bin_path()}}")
+  cli::cli_alert_info("Go binary missing {.path {go_bin_path()}}")
   msg_li("See {.url https://golang.org/doc/install} to install Go.")
 }
 
 missing_go_path <- function() {
-  cli::cli_alert_danger("Go folder missing {.path {go_path()}}")
+  cli::cli_alert_info("Go folder missing {.path {go_path()}}")
   msg_li("See {.url https://golang.org/doc/install} to install Go.")
   msg_li(
     paste(
