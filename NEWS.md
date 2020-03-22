@@ -1,4 +1,4 @@
-# proffer 0.0.2.9000
+# proffer 0.1.0
 
 * `pprof()` passes `...` to `record_pprof()` (#12, @krlmlr).
 * In the `DESCRIPTION`, unquote function names and add parentheses afterwards. (CRAN comments for next submission.)
