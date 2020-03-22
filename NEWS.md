@@ -8,6 +8,7 @@
 * Use `PROFFER_PPROF_BIN` env var instead of `pprof_path` (#11, @krlmlr). `pprof_path` is still back-compatibly supported.
 * Introduce new environment variables `PROFFER_GO_BIN` and `PROFFER_GRAPHVIZ_BIN` to allow the user to set the paths to the respective binaries (#11, @krlmlr).
 * Add a new `pprof_sitrep()` function to give a situation report of the `pprof` installation, its dependencies, and their environment variables (#17, @krlmlr).
+* Add new function `test_pprof()`.
 
 # proffer 0.0.2
 
