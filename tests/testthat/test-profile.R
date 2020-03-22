@@ -20,7 +20,6 @@ test_that("arguments to record_rprof()", {
   rprof <- record_rprof(replicate(1e2, sample.int(1e4)))
   prof <- profile::read_rprof(rprof)
   expect_silent(profile::validate_profile(prof))
-
   rprof <- record_rprof(
     replicate(1e2, sample.int(1e4)),
     rprof = rprof,
@@ -29,12 +28,5 @@ test_that("arguments to record_rprof()", {
   # Needs fix in {profile}
   suppressWarnings(prof2 <- profile::read_rprof(rprof))
   expect_silent(profile::validate_profile(prof2))
-
   expect_gt(nrow(prof2$samples), nrow(prof$samples))
-
-  expect_error(
-    record_rprof(replicate(1e2, sample.int(1e4)), bogus = argument),
-    "bogus",
-    fixed = TRUE
-  )
 })
