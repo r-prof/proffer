@@ -1,6 +1,6 @@
 # proffer 0.1.0.9000
 
-
+* Address a CRAN check error for R-devel on Windows: lengthen the time of a test to avoid empty protocol buffers.
 
 # proffer 0.1.0
 

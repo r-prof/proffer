@@ -1,5 +1,5 @@
 test_that("record_pprof() and convert to rprof", {
-  pprof <- record_pprof(replicate(1e2, sample.int(1e4)))
+  pprof <- record_pprof(slow_function())
   samples <- profile::read_pprof(pprof)
   expect_silent(profile::validate_profile(samples))
   rprof <- to_rprof(pprof)
@@ -8,7 +8,7 @@ test_that("record_pprof() and convert to rprof", {
 })
 
 test_that("record_rprof() and convert to pprof", {
-  rprof <- record_rprof(replicate(1e2, sample.int(1e4)))
+  rprof <- record_rprof(slow_function())
   samples <- profile::read_rprof(rprof)
   expect_silent(profile::validate_profile(samples))
   pprof <- to_pprof(rprof)
@@ -17,14 +17,10 @@ test_that("record_rprof() and convert to pprof", {
 })
 
 test_that("arguments to record_rprof()", {
-  rprof <- record_rprof(replicate(1e2, sample.int(1e4)))
+  rprof <- record_rprof(slow_function())
   prof <- profile::read_rprof(rprof)
   expect_silent(profile::validate_profile(prof))
-  rprof <- record_rprof(
-    replicate(1e2, sample.int(1e4)),
-    rprof = rprof,
-    append = TRUE
-  )
+  rprof <- record_rprof(slow_function(), rprof = rprof, append = TRUE)
   # Needs fix in {profile}
   suppressWarnings(prof2 <- profile::read_rprof(rprof))
   expect_silent(profile::validate_profile(prof2))
