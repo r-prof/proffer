@@ -3,7 +3,7 @@
 proffer <img src="https://r-prof.github.io/proffer/reference/figures/logo.png" align="right" alt="logo" width="120" height="139" style="border: none; float: right;">
 =====================================================================================================================================================================
 
-[![CRAN](https://www.r-pkg.org/badges/version/proffer)](https://cran.r-project.org/package=proffer) [![license](https://img.shields.io/badge/licence-MIT-blue.svg)](https://opensource.org/licenses/MIT) [![active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) [![Travis build status](https://travis-ci.org/r-prof/proffer.svg?branch=master)](https://travis-ci.org/r-prof/proffer) [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/r-prof/proffer?branch=master&svg=true)](https://ci.appveyor.com/project/r-prof/proffer) [![Codecov](https://codecov.io/github/r-prof/proffer/coverage.svg?branch=master)](https://codecov.io/github/r-prof/proffer?branch=master)
+[![CRAN](https://www.r-pkg.org/badges/version/proffer)](https://cran.r-project.org/package=proffer) [![license](https://img.shields.io/badge/licence-MIT-blue.svg)](https://opensource.org/licenses/MIT) [![active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active) [![check](https://github.com/r-prof/proffer/workflows/check/badge.svg)](https://github.com/r-prof/proffer/actions?workflow=check) [![codecov](https://codecov.io/github/r-prof/proffer/coverage.svg?branch=master)](https://codecov.io/github/r-prof/proffer?branch=master)
 
 The `proffer` package profiles R code to find bottlenecks. Visit <https://r-prof.github.io/proffer> for documentation. <https://r-prof.github.io/proffer/reference/index.html> has a complete list of available functions in the package.
 
@@ -59,7 +59,7 @@ system.time({
   x <- data.frame(x = x, y = y)
 })
 #>    user  system elapsed 
-#>   0.045   0.001   0.047
+#>   0.044   0.002   0.045
 ```
 
 Moral of the story: before you optimize, throw away your assumptions and run your code through a profiler. That way, you can spend your time optimizing where it counts!
@@ -191,32 +191,25 @@ library(proffer)
 pprof_sitrep()
 #> ● Call test_pprof() to test installation.
 #> 
-#> ── Requirements ──────────────────────────────
+#> ── Requirements ────────────────────────────────
 #> ✓ pprof /Users/c240390/go/bin/pprof
-#> ✓ Go binary /usr/local/bin/go
-#> ✓ Go folder /Users/c240390/go
 #> ✓ Graphviz /usr/local/bin/dot
 #> 
-#> ── Custom ────────────────────────────────────
-#> ℹ `PROFFER_PPROF_BIN` missing
-#> ● Run `usethis::edit_r_environ()` to edit
-#>   .Renviron file.
-#> ● PROFFER_GO_BIN=/usr/local/bin/go
-#> ℹ `PROFFER_GO_BIN` missing
-#> ● Run `usethis::edit_r_environ()` to edit
-#>   .Renviron file.
-#> ● PROFFER_GO_BIN=/usr/local/bin/go
-#> ℹ `PROFFER_GRAPHVIZ_BIN` missing
-#> ● Run `usethis::edit_r_environ()` to edit
-#>   .Renviron file.
-#> ● PROFFER_GRAPHVIZ_BIN=/usr/local/bin/dot
+#> ── Go ──────────────────────────────────────────
+#> ✓ Go binary /usr/local/bin/go
+#> ✓ Go folder /Users/c240390/go
 #> 
-#> ── System ────────────────────────────────────
+#> ── Custom ──────────────────────────────────────
+#> ✓ `PROFFER_PPROF_BIN` /Users/c240390/go/bin/pprof
+#> ✓ `PROFFER_GO_BIN` /usr/local/bin/go
+#> ✓ `PROFFER_GRAPHVIZ_BIN` /usr/local/bin/dot
+#> 
+#> ── System ──────────────────────────────────────
 #> ✓ pprof system path /Users/c240390/go/bin/pprof
 #> ✓ Go binary system path /usr/local/bin/go
 #> ✓ Graphviz system path /usr/local/bin/dot
 #> 
-#> ── Deprecated ────────────────────────────────
+#> ── Deprecated ──────────────────────────────────
 #> ✓ `pprof_path` env variable omitted.
 ```
 
