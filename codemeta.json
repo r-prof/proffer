@@ -8,17 +8,20 @@
   "description": "Like similar profiling tools,\n  the 'proffer' package automatically detects\n  sources of slowness in R code.\n  The distinguishing feature of 'proffer' is its utilization of\n  'pprof', which supplies interactive visualizations\n  that are efficient and easy to interpret.\n  Behind the scenes, the 'profile' package converts\n  native Rprof() data to a protocol buffer\n  that 'pprof' understands.\n  For the documentation of 'proffer',\n  visit <https://r-prof.github.io/proffer>.\n  To learn about the implementations and methodologies of\n  'pprof', 'profile', and protocol buffers,\n  visit <https://github.com/google/pprof>.\n  <https://developers.google.com/protocol-buffers>,\n  and <https://github.com/r-prof/profile>, respectively.",
   "name": "proffer: Profile R Code and Visualize with 'Pprof'",
   "codeRepository": "https://github.com/r-prof/proffer",
-  "relatedLink": ["https://r-prof.github.io/proffer", "https://CRAN.R-project.org/package=proffer"],
+  "relatedLink": [
+    "https://r-prof.github.io/proffer",
+    "https://CRAN.R-project.org/package=proffer"
+  ],
   "issueTracker": "https://github.com/r-prof/proffer/issues",
   "license": "https://spdx.org/licenses/MIT",
   "version": "0.1.0.9000",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
-    "version": "3.6.1",
+    "version": "4.0.0",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 3.6.1 (2019-07-05)",
+  "runtimePlatform": "R version 4.0.0 (2020-04-24)",
   "author": [
     {
       "@type": "Person",
@@ -131,15 +134,11 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=withr"
-    },
-    {
-      "@type": "SoftwareApplication",
-      "identifier": "https://sysreqs.r-hub.io/get/git"
     }
   ],
   "releaseNotes": "https://github.com/wlandau/proffer/blob/master/NEWS.md",
   "readme": "https://github.com/r-prof/proffer/blob/master/README.md",
-  "fileSize": "713.138KB",
+  "fileSize": "713.147KB",
   "contIntegration": [
     "https://travis-ci.org/r-prof/proffer",
     "https://ci.appveyor.com/project/r-prof/proffer",
