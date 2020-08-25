@@ -5,7 +5,7 @@ Encoding: UTF-8
 Language: en-US
 License: MIT + file LICENSE
 URL: https://github.com/r-prof/proffer,
-  https://r-prof.github.io/proffer
+  https://r-prof.github.io/proffer/
 BugReports: https://github.com/r-prof/proffer/issues
 Authors@R: c(
   person(
