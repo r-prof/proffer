@@ -1,4 +1,7 @@
 destination: docs/
+template:
+  params:
+    bootswatch: flatly # https://bootswatch.com/flatly/
 reference:
 - title: Help
   contents:
