@@ -164,9 +164,11 @@ The `proffer` package requires the `RProtoBuf` package, which may require instal
 
 1. Go: <https://golang.org/doc/install>
 2. Graphviz: <https://www.graphviz.org/download>
-3. `pprof`: <https://github.com/google/pprof>
+3. `pprof`: <https://github.com/google/pprof> (already comes with Go)
 
-On Mac and Windows, you can find installers of Go and Graphviz from the links above. `pprof` should come automatically installed with Go (see the configuration section below). On Linux, you can install `pprof` and Go directly from R:
+`pprof` itself is already installed with Go. We highly recommend you use Go's default copy of `pprof` because [compatibility issues](https://github.com/r-prof/proffer/issues/27) could arise if you install the latest `pprof` manually.
+
+Mac and Windows installers of Go and Graphviz are available at the links above. On Linux, you can install Go (and thus `pprof`) directly from R:
 
 ```{r, eval = FALSE}
 library(proffer)
