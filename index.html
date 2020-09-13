@@ -128,7 +128,7 @@
 </pre></div>
 <p>When we navigate to <a href="http://localhost:64610" class="uri">http://localhost:64610</a> and look at the flame graph, we see <code>[&lt;-.data.frame()</code> (i.e. <code>x[i, ] &lt;- x[i, ] + 1</code>) is taking most of the runtime.</p>
 <center>
-<a href="https://r-prof.github.io/proffer/reference/figures/flame.png"> <img src="https://r-prof.github.io/proffer/reference/figures/flame.png" alt="top" align="center" style="border: none; float: center;"></a>
+<p><a href="https://r-prof.github.io/proffer/reference/figures/flame.png"> <img src="https://r-prof.github.io/proffer/reference/figures/flame.png" alt="top" align="center" style="border: none; float: center;"></a></p>
 </center>
 <p>So we refactor the code to avoid data frame row assignment. Much faster, even with a <code>for</code> loop!</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
@@ -143,7 +143,7 @@
   <span class="kw">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(x = <span class="kw">x</span>, y = <span class="kw">y</span>)
 })
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.044   0.002   0.045</span>
+<span class="co">#&gt;   0.045   0.001   0.047</span>
 </pre></div>
 <p>Moral of the story: before you optimize, throw away your assumptions and run your code through a profiler. That way, you can spend your time optimizing where it counts!</p>
 </div>
@@ -186,7 +186,7 @@
 <li>Find the server’s host name or IP address in advance.</li>
 <li>Supply <code>"0.0.0.0"</code> as the <code>host</code> argument.</li>
 </ol>
-<div class="sourceCode" id="cb5"><pre class="downlit">
+<!-- end list --><div class="sourceCode" id="cb5"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/base/system2.html">system2</a></span>(<span class="st">"hostname"</span>)
 <span class="co">#&gt; mycomputer</span>
 
@@ -230,10 +230,10 @@
 <li>Graphviz: <a href="https://www.graphviz.org/download" class="uri">https://www.graphviz.org/download</a>
 </li>
 <li>
-<code>pprof</code>: <a href="https://github.com/google/pprof" class="uri">https://github.com/google/pprof</a>
-</li>
+<code>pprof</code>: <a href="https://github.com/google/pprof" class="uri">https://github.com/google/pprof</a> (already comes with Go)</li>
 </ol>
-<p>On Mac and Windows, you can find installers of Go and Graphviz from the links above. <code>pprof</code> should come automatically installed with Go (see the configuration section below). On Linux, you can install <code>pprof</code> and Go directly from R:</p>
+<p><code>pprof</code> itself is already installed with Go. We highly recommend you use Go’s default copy of <code>pprof</code> because <a href="https://github.com/r-prof/proffer/issues/27">compatibility issues</a> could arise if you install the latest <code>pprof</code> manually.</p>
+<p>Mac and Windows installers of Go and Graphviz are available at the links above. On Linux, you can install Go (and thus <code>pprof</code>) directly from R:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit">
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/r-prof/proffer">proffer</a></span>)
 <span class="fu"><a href="reference/install_go.html">install_go</a></span>() <span class="co"># Also installs pprof if on Linux.</span>
@@ -275,25 +275,25 @@
 <span class="fu"><a href="reference/pprof_sitrep.html">pprof_sitrep</a></span>()
 <span class="co">#&gt; ● Call test_pprof() to test installation.</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; ── Requirements ────────────────────────────────</span>
+<span class="co">#&gt; ── Requirements ───────────────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; ✓ pprof /Users/c240390/go/bin/pprof</span>
 <span class="co">#&gt; ✓ Graphviz /usr/local/bin/dot</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; ── Go ──────────────────────────────────────────</span>
+<span class="co">#&gt; ── Go ─────────────────────────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; ✓ Go binary /usr/local/bin/go</span>
 <span class="co">#&gt; ✓ Go folder /Users/c240390/go</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; ── Custom ──────────────────────────────────────</span>
+<span class="co">#&gt; ── Custom ─────────────────────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; ✓ `PROFFER_PPROF_BIN` /Users/c240390/go/bin/pprof</span>
 <span class="co">#&gt; ✓ `PROFFER_GO_BIN` /usr/local/bin/go</span>
 <span class="co">#&gt; ✓ `PROFFER_GRAPHVIZ_BIN` /usr/local/bin/dot</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; ── System ──────────────────────────────────────</span>
+<span class="co">#&gt; ── System ─────────────────────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; ✓ pprof system path /Users/c240390/go/bin/pprof</span>
 <span class="co">#&gt; ✓ Go binary system path /usr/local/bin/go</span>
 <span class="co">#&gt; ✓ Graphviz system path /usr/local/bin/dot</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; ── Deprecated ──────────────────────────────────</span>
+<span class="co">#&gt; ── Deprecated ─────────────────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; ✓ `pprof_path` env variable omitted.</span>
 </pre></div>
 <p>If all dependencies are accounted for, <code>proffer</code> should work. Test it out with <code><a href="reference/test_pprof.html">test_pprof()</a></code>. On a local machine, it should launch a browser window showing an instance of <code>pprof</code>.</p>
@@ -339,7 +339,7 @@
 </pre></div>
 <p>However, <code>profvis</code>-generated flame graphs can be <a href="https://github.com/rstudio/profvis/issues/115">difficult to read</a> and <a href="https://github.com/rstudio/profvis/issues/104">slow to respond to mouse clicks</a>.</p>
 <center>
-<a href="https://r-prof.github.io/proffer/reference/figures/profvis.png"> <img src="https://r-prof.github.io/proffer/reference/figures/profvis.png" alt="top" align="center" style="border: none; float: center;"></a>
+<p><a href="https://r-prof.github.io/proffer/reference/figures/profvis.png"> <img src="https://r-prof.github.io/proffer/reference/figures/profvis.png" alt="top" align="center" style="border: none; float: center;"></a></p>
 </center>
 <p><code>proffer</code> uses <a href="https://github.com/google/pprof"><code>pprof</code></a> to create friendlier, faster visualizations.</p>
 </div>
@@ -400,7 +400,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>
