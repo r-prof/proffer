@@ -60,12 +60,6 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="reference/index.html">Reference</a>
 </li>
 <li>
@@ -102,49 +96,46 @@
 <a href="#why-use-a-profiler" class="anchor"></a>Why use a profiler?</h2>
 <p>This data processing code is slow.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>({
-  <span class="kw">n</span> <span class="op">&lt;-</span> <span class="fl">1e5</span>
-  <span class="kw">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(x = <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="kw">n</span>), y = <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="kw">n</span>))
-  <span class="co">for</span> (<span class="kw">i</span> <span class="co">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span>(<span class="kw">n</span>)) {
-    <span class="kw">x</span>[<span class="kw">i</span>, ] <span class="op">&lt;-</span> <span class="kw">x</span>[<span class="kw">i</span>, ] <span class="op">+</span> <span class="fl">1</span>
-  }
-  <span class="kw">x</span>
-})
+<span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span><span class="op">{</span>
+  <span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">1e5</span>
+  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span>
+  <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">x</span><span class="op">[</span><span class="va">i</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">[</span><span class="va">i</span>, <span class="op">]</span> <span class="op">+</span> <span class="fl">1</span>
+  <span class="op">}</span>
+  <span class="va">x</span>
+<span class="op">}</span><span class="op">)</span>
 <span class="co">#&gt;   user  system elapsed </span>
-<span class="co">#&gt; 82.060  28.440 110.582 </span>
-</pre></div>
+<span class="co">#&gt; 82.060  28.440 110.582 </span></pre></div>
 <p>Why exactly does it take so long? Is it because <code>for</code> loops are slow as a general rule? Let us find out empirically.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/r-prof/proffer">proffer</a></span>)
-<span class="kw">px</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pprof.html">pprof</a></span>({
-  <span class="kw">n</span> <span class="op">&lt;-</span> <span class="fl">1e5</span>
-  <span class="kw">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(x = <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="kw">n</span>), y = <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="kw">n</span>))
-  <span class="co">for</span> (<span class="kw">i</span> <span class="co">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span>(<span class="kw">n</span>)) {
-    <span class="kw">x</span>[<span class="kw">i</span>, ] <span class="op">&lt;-</span> <span class="kw">x</span>[<span class="kw">i</span>, ] <span class="op">+</span> <span class="fl">1</span>
-  }
-  <span class="kw">x</span>
-})
-<span class="co">#&gt; http://localhost:64610</span>
-</pre></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-prof/proffer">proffer</a></span><span class="op">)</span>
+<span class="va">px</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pprof.html">pprof</a></span><span class="op">(</span><span class="op">{</span>
+  <span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">1e5</span>
+  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span>
+  <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">x</span><span class="op">[</span><span class="va">i</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">[</span><span class="va">i</span>, <span class="op">]</span> <span class="op">+</span> <span class="fl">1</span>
+  <span class="op">}</span>
+  <span class="va">x</span>
+<span class="op">}</span><span class="op">)</span>
+<span class="co">#&gt; http://localhost:64610</span></pre></div>
 <p>When we navigate to <a href="http://localhost:64610" class="uri">http://localhost:64610</a> and look at the flame graph, we see <code>[&lt;-.data.frame()</code> (i.e. <code>x[i, ] &lt;- x[i, ] + 1</code>) is taking most of the runtime.</p>
 <center>
 <p><a href="https://r-prof.github.io/proffer/reference/figures/flame.png"> <img src="https://r-prof.github.io/proffer/reference/figures/flame.png" alt="top" align="center" style="border: none; float: center;"></a></p>
 </center>
 <p>So we refactor the code to avoid data frame row assignment. Much faster, even with a <code>for</code> loop!</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>({
-  <span class="kw">n</span> <span class="op">&lt;-</span> <span class="fl">1e5</span>
-  <span class="kw">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="kw">n</span>)
-  <span class="kw">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="kw">n</span>)
-  <span class="co">for</span> (<span class="kw">i</span> <span class="co">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span>(<span class="kw">n</span>)) {
-    <span class="kw">x</span>[<span class="kw">i</span>] <span class="op">&lt;-</span> <span class="kw">x</span>[<span class="kw">i</span>] <span class="op">+</span> <span class="fl">1</span>
-    <span class="kw">y</span>[<span class="kw">i</span>] <span class="op">&lt;-</span> <span class="kw">y</span>[<span class="kw">i</span>] <span class="op">+</span> <span class="fl">1</span>
-  }
-  <span class="kw">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(x = <span class="kw">x</span>, y = <span class="kw">y</span>)
-})
+<span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span><span class="op">{</span>
+  <span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">1e5</span>
+  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>
+  <span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>
+  <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">x</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">+</span> <span class="fl">1</span>
+    <span class="va">y</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">y</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">+</span> <span class="fl">1</span>
+  <span class="op">}</span>
+  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, y <span class="op">=</span> <span class="va">y</span><span class="op">)</span>
+<span class="op">}</span><span class="op">)</span>
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.045   0.001   0.047</span>
-</pre></div>
+<span class="co">#&gt;   0.045   0.001   0.047</span></pre></div>
 <p>Moral of the story: before you optimize, throw away your assumptions and run your code through a profiler. That way, you can spend your time optimizing where it counts!</p>
 </div>
 <div id="managing-the-pprof-server" class="section level2">
@@ -153,30 +144,29 @@
 <p>The <code>pprof</code> server is a background <a href="https://github.com/r-lib/processx"><code>processx</code></a> process, and you can manage it with the <code>processx</code> methods <a href="https://processx.r-lib.org/#managing-external-processes">described here</a>. Remember to terminate the process with <code>$kill()</code> when you are done with it.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit">
 <span class="co"># px is a process handler.</span>
-<span class="kw">px</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pprof.html">pprof</a></span>({
-  <span class="kw">n</span> <span class="op">&lt;-</span> <span class="fl">1e4</span>
-  <span class="kw">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(x = <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="kw">n</span>), y = <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="kw">n</span>))
-  <span class="co">for</span> (<span class="kw">i</span> <span class="co">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span>(<span class="kw">n</span>)) {
-    <span class="kw">x</span>[<span class="kw">i</span>, ] <span class="op">&lt;-</span> <span class="kw">x</span>[<span class="kw">i</span>, ] <span class="op">+</span> <span class="fl">1</span>
-  }
-  <span class="kw">x</span>
-})
+<span class="va">px</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pprof.html">pprof</a></span><span class="op">(</span><span class="op">{</span>
+  <span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">1e4</span>
+  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span>
+  <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">x</span><span class="op">[</span><span class="va">i</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">[</span><span class="va">i</span>, <span class="op">]</span> <span class="op">+</span> <span class="fl">1</span>
+  <span class="op">}</span>
+  <span class="va">x</span>
+<span class="op">}</span><span class="op">)</span>
 <span class="co">#&gt; http://localhost:50195</span>
 
 <span class="co"># Summary of the background process.</span>
-<span class="kw">px</span>
+<span class="va">px</span>
 <span class="co">#&gt; PROCESS 'pprof', running, pid 10451.</span>
 
-<span class="kw">px</span><span class="op">$</span><span class="fu">is_alive</span>()
+<span class="va">px</span><span class="op">$</span><span class="fu">is_alive</span><span class="op">(</span><span class="op">)</span>
 <span class="co"># [1] TRUE</span>
 
 <span class="co"># Error messages, some of which do not matter.</span>
-<span class="kw">px</span><span class="op">$</span><span class="fu">read_error</span>()
+<span class="va">px</span><span class="op">$</span><span class="fu">read_error</span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; [1] "Main binary filename not available.\n"</span>
 
 <span class="co"># Terminate the process when you are done.</span>
-<span class="kw">px</span><span class="op">$</span><span class="fu">kill</span>()
-</pre></div>
+<span class="va">px</span><span class="op">$</span><span class="fu">kill</span><span class="op">(</span><span class="op">)</span></pre></div>
 </div>
 <div id="serving-pprof-remotely" class="section level2">
 <h2 class="hasAnchor">
@@ -187,19 +177,18 @@
 <li>Supply <code>"0.0.0.0"</code> as the <code>host</code> argument.</li>
 </ol>
 <!-- end list --><div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/system2.html">system2</a></span>(<span class="st">"hostname"</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/system2.html">system2</a></span><span class="op">(</span><span class="st">"hostname"</span><span class="op">)</span>
 <span class="co">#&gt; mycomputer</span>
 
-<span class="kw">px</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pprof.html">pprof</a></span>({
-  <span class="kw">n</span> <span class="op">&lt;-</span> <span class="fl">1e4</span>
-  <span class="kw">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(x = <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="kw">n</span>), y = <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="kw">n</span>))
-  <span class="co">for</span> (<span class="kw">i</span> <span class="co">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span>(<span class="kw">n</span>)) {
-    <span class="kw">x</span>[<span class="kw">i</span>, ] <span class="op">&lt;-</span> <span class="kw">x</span>[<span class="kw">i</span>, ] <span class="op">+</span> <span class="fl">1</span>
-  }
-  <span class="kw">x</span>
-}, host = <span class="st">"0.0.0.0"</span>)
-<span class="co">#&gt; http://0.0.0.0:610712</span>
-</pre></div>
+<span class="va">px</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pprof.html">pprof</a></span><span class="op">(</span><span class="op">{</span>
+  <span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">1e4</span>
+  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span>
+  <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">x</span><span class="op">[</span><span class="va">i</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">[</span><span class="va">i</span>, <span class="op">]</span> <span class="op">+</span> <span class="fl">1</span>
+  <span class="op">}</span>
+  <span class="va">x</span>
+<span class="op">}</span>, host <span class="op">=</span> <span class="st">"0.0.0.0"</span><span class="op">)</span>
+<span class="co">#&gt; http://0.0.0.0:610712</span></pre></div>
 <p>Then, in the client machine navigate a web browser to the server’s host name or IP address and use the port number printed above, e.g. <code>https://mycomputer:61072</code>.</p>
 </div>
 <div id="installation" class="section level2">
@@ -211,13 +200,11 @@
 <a href="#the-r-package" class="anchor"></a>The R package</h3>
 <p>The latest release of <code>proffer</code> is available on <a href="https://CRAN.R-project.org">CRAN</a>.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"proffer"</span>)
-</pre></div>
+<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"proffer"</span><span class="op">)</span></pre></div>
 <p>Alternatively, you can install the development version from GitHub.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit">
 <span class="co"># install.packages("remotes")</span>
-<span class="kw">remotes</span>::<span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"r-prof/proffer"</span>)
-</pre></div>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"r-prof/proffer"</span><span class="op">)</span></pre></div>
 <p>The <code>proffer</code> package requires the <code>RProtoBuf</code> package, which may require installation of additional system dependencies on Linux. See its <a href="https://github.com/eddelbuettel/rprotobuf#installation">installation instructions</a>.</p>
 </div>
 <div id="non-r-dependencies" class="section level3">
@@ -235,9 +222,8 @@
 <p><code>pprof</code> itself is already installed with Go. We highly recommend you use Go’s default copy of <code>pprof</code> because <a href="https://github.com/r-prof/proffer/issues/27">compatibility issues</a> could arise if you install the latest <code>pprof</code> manually.</p>
 <p>Mac and Windows installers of Go and Graphviz are available at the links above. On Linux, you can install Go (and thus <code>pprof</code>) directly from R:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/r-prof/proffer">proffer</a></span>)
-<span class="fu"><a href="reference/install_go.html">install_go</a></span>() <span class="co"># Also installs pprof if on Linux.</span>
-</pre></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-prof/proffer">proffer</a></span><span class="op">)</span>
+<span class="fu"><a href="reference/install_go.html">install_go</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># Also installs pprof if on Linux.</span></pre></div>
 </div>
 <div id="configuration" class="section level3">
 <h3 class="hasAnchor">
@@ -271,8 +257,8 @@
 <a href="#verification" class="anchor"></a>Verification</h3>
 <p>Run <code><a href="reference/pprof_sitrep.html">pprof_sitrep()</a></code> again to verify that everything is installed and configured correctly.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/r-prof/proffer">proffer</a></span>)
-<span class="fu"><a href="reference/pprof_sitrep.html">pprof_sitrep</a></span>()
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-prof/proffer">proffer</a></span><span class="op">)</span>
+<span class="fu"><a href="reference/pprof_sitrep.html">pprof_sitrep</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; ● Call test_pprof() to test installation.</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; ── Requirements ───────────────────────────────────────────────────────────────────</span>
@@ -294,13 +280,11 @@
 <span class="co">#&gt; ✓ Graphviz system path /usr/local/bin/dot</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; ── Deprecated ─────────────────────────────────────────────────────────────────────</span>
-<span class="co">#&gt; ✓ `pprof_path` env variable omitted.</span>
-</pre></div>
+<span class="co">#&gt; ✓ `pprof_path` env variable omitted.</span></pre></div>
 <p>If all dependencies are accounted for, <code>proffer</code> should work. Test it out with <code><a href="reference/test_pprof.html">test_pprof()</a></code>. On a local machine, it should launch a browser window showing an instance of <code>pprof</code>.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/r-prof/proffer">proffer</a></span>)
-<span class="fu"><a href="reference/test_pprof.html">test_pprof</a></span>()
-</pre></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-prof/proffer">proffer</a></span><span class="op">)</span>
+<span class="fu"><a href="reference/test_pprof.html">test_pprof</a></span><span class="op">(</span><span class="op">)</span></pre></div>
 </div>
 </div>
 <div id="contributing" class="section level2">
@@ -327,16 +311,15 @@
 <a href="#profvis" class="anchor"></a>profvis</h3>
 <p>The <a href="https://github.com/rstudio/profvis"><code>profvis</code></a> is much easier to install than <code>proffer</code> and equally easy to invoke.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">profvis</span>)
-<span class="fu">profvis</span>({
-  <span class="kw">n</span> <span class="op">&lt;-</span> <span class="fl">1e5</span>
-  <span class="kw">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(x = <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="kw">n</span>), y = <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="kw">n</span>))
-  <span class="co">for</span> (<span class="kw">i</span> <span class="co">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span>(<span class="kw">n</span>)) {
-    <span class="kw">x</span>[<span class="kw">i</span>, ] <span class="op">&lt;-</span> <span class="kw">x</span>[<span class="kw">i</span>, ] <span class="op">+</span> <span class="fl">1</span>
-  }
-  <span class="kw">x</span>
-})
-</pre></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">profvis</span><span class="op">)</span>
+<span class="fu">profvis</span><span class="op">(</span><span class="op">{</span>
+  <span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">1e5</span>
+  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span>
+  <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">x</span><span class="op">[</span><span class="va">i</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">[</span><span class="va">i</span>, <span class="op">]</span> <span class="op">+</span> <span class="fl">1</span>
+  <span class="op">}</span>
+  <span class="va">x</span>
+<span class="op">}</span><span class="op">)</span></pre></div>
 <p>However, <code>profvis</code>-generated flame graphs can be <a href="https://github.com/rstudio/profvis/issues/115">difficult to read</a> and <a href="https://github.com/rstudio/profvis/issues/104">slow to respond to mouse clicks</a>.</p>
 <center>
 <p><a href="https://r-prof.github.io/proffer/reference/figures/profvis.png"> <img src="https://r-prof.github.io/proffer/reference/figures/profvis.png" alt="top" align="center" style="border: none; float: center;"></a></p>

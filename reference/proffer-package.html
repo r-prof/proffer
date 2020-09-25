@@ -95,12 +95,6 @@ For documentation, visit https://r-prof.github.io/proffer." />
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
@@ -155,12 +149,12 @@ For documentation, visit <a href='https://r-prof.github.io/proffer'>https://r-pr
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># TBD</span>
-<span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='co'># Start a pprof virtual server in the background.</span>
-<span class='kw'>px</span> <span class='op'>&lt;-</span> <span class='fu'><a href='pprof.html'>pprof</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>replicate</a></span>(<span class='fl'>1e2</span>, <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample.int</a></span>(<span class='fl'>1e4</span>)))
+<span class='va'>px</span> <span class='op'>&lt;-</span> <span class='fu'><a href='pprof.html'>pprof</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>replicate</a></span><span class='op'>(</span><span class='fl'>1e2</span>, <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample.int</a></span><span class='op'>(</span><span class='fl'>1e4</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
 <span class='co'># Terminate the server.</span>
-<span class='kw'>px</span><span class='op'>$</span><span class='fu'>kill</span>()
-}
+<span class='va'>px</span><span class='op'>$</span><span class='fu'>kill</span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>}</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
