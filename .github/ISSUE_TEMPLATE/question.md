@@ -8,10 +8,20 @@ assignees: ''
 
 ## Prework
 
-- [ ] Read and abide by `proffer`'s [code of conduct](https://github.com/r-prof/proffer/blob/master/CODE_OF_CONDUCT.md).
-- [ ] Search for duplicates among the [existing issues](https://github.com/r-prof/proffer/issues), both open and closed.
-- [ ] If you think your question has a quick and definite answer, consider posting to [Stack Overflow](https://stackoverflow.com) under the [`proffer-r-package` tag](https://stackoverflow.com/tags/proffer-r-package). (If you anticipate extended follow-up and discussion, you are already in the right place!)
+* [ ] Read and agree to the [code of conduct](https://github.com/r-prof/proffer/blob/master/CODE_OF_CONDUCT.md) and [contributing guidelines](https://github.com/r-prof/proffer/blob/master/CONTRIBUTING.md).
+* [ ] If there is [already a relevant issue](https://github.com/r-prof/proffer/issues), whether open or closed, comment on the existing thread instead of posting a new issue.
+* [ ] For any problem you identify, post a [minimal reproducible example](https://www.tidyverse.org/help/) so the maintainer can troubleshoot. A reproducible example is:
+    * [ ] **Runnable**: post enough R code and data so any onlooker can create the error on their own computer.
+    * [ ] **Minimal**: reduce runtime wherever possible and remove complicated details that are irrelevant to the issue at hand.
+    * [ ] **Readable**: format your code according to the [tidyverse style guide](https://style.tidyverse.org/).
 
 ## Question
 
-What would you like to know?
+Please ask your question.
+
+## Reproducible example
+
+* [ ] For any problem you identify, post a [minimal reproducible example](https://www.tidyverse.org/help/) so the maintainer can troubleshoot. A reproducible example is:
+    * [ ] **Runnable**: post enough R code and data so any onlooker can create the error on their own computer.
+    * [ ] **Minimal**: reduce runtime wherever possible and remove complicated details that are irrelevant to the issue at hand.
+    * [ ] **Readable**: format your code according to the [tidyverse style guide](https://style.tidyverse.org/).
