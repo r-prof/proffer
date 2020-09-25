@@ -1,4 +1,7 @@
 destination: docs/
+template:
+  params:
+    bootswatch: flatly # https://bootswatch.com/flatly/
 reference:
 - title: Help
   contents:
@@ -18,3 +21,11 @@ reference:
   contents:
   - '`to_pprof`'
   - '`to_rprof`'
+- title: Install
+  contents:
+  - '`install_go`'
+- title: Troubleshoot
+  contents:
+  - '`test_pprof`'
+  - '`pprof_sitrep`'
+  - '`pprof_path`'

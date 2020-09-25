@@ -18,9 +18,8 @@ knitr::opts_chunk$set(
 [![CRAN](https://www.r-pkg.org/badges/version/proffer)](https://cran.r-project.org/package=proffer)
 [![license](https://img.shields.io/badge/licence-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![Travis build status](https://travis-ci.org/r-prof/proffer.svg?branch=master)](https://travis-ci.org/r-prof/proffer)
-[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/r-prof/proffer?branch=master&svg=true)](https://ci.appveyor.com/project/r-prof/proffer)
-[![Codecov](https://codecov.io/github/r-prof/proffer/coverage.svg?branch=master)](https://codecov.io/github/r-prof/proffer?branch=master)
+[![check](https://github.com/r-prof/proffer/workflows/check/badge.svg)](https://github.com/r-prof/proffer/actions?workflow=check)
+[![codecov](https://codecov.io/github/r-prof/proffer/coverage.svg?branch=master)](https://codecov.io/github/r-prof/proffer?branch=master)
 
 The `proffer` package profiles R code to find bottlenecks. Visit <https://r-prof.github.io/proffer> for documentation. <https://r-prof.github.io/proffer/reference/index.html> has a complete list of available functions in the package. 
 
@@ -41,7 +40,7 @@ system.time({
 #> 82.060  28.440 110.582 
 ```
 
-Why exactly does it take so long? Is it because `for` loops are slow as a general rule? Let's find out empirically.
+Why exactly does it take so long? Is it because `for` loops are slow as a general rule? Let us find out empirically.
 
 ```{r, eval = FALSE}
 library(proffer)
@@ -84,9 +83,10 @@ Moral of the story: before you optimize, throw away your assumptions and run you
 
 ## Managing the pprof server
 
-Sometimes, your `pprof` server may not work right away. If that happens, take a look at the error logs.
+The `pprof` server is a background [`processx`](https://github.com/r-lib/processx) process, and you can manage it with the `processx` methods [described here](https://processx.r-lib.org/#managing-external-processes). Remember to terminate the process with `$kill()` when you are done with it.
 
 ```{r, eval = FALSE}
+# px is a process handler.
 px <- pprof({
   n <- 1e4
   x <- data.frame(x = rnorm(n), y = rnorm(n))
@@ -97,24 +97,32 @@ px <- pprof({
 })
 #> http://localhost:50195
 
-px # How is my background process doing?
-#> PROCESS 'R', finished.
+# Summary of the background process.
+px
+#> PROCESS 'pprof', running, pid 10451.
+
 px$is_alive()
-# [1] FALSE
+# [1] TRUE
 
-px$read_error() # Why did it quit soon?
-#> [1] "sh: /user/local/bin/pprof: No such file or directory\nWarning message:\nIn system2(Sys.getenv(\"pprof_path\"), args) : error in running command\n"
+# Error messages, some of which do not matter.
+px$read_error()
+#> [1] "Main binary filename not available.\n"
 
-# Oh, I must have set the wrong path to the pprof executable.
-# Let me find out where I actually installed pprof.
-system("which", "pprof")
-#> "/home/landau/go/bin/pprof"
+# Terminate the process when you are done.
+px$kill()
+```
 
-# I can put a line in my .Rprofile or .Renviron file
-# to automatically tell new sessions where pprof lives.
-Sys.setenv(pprof_path = "/home/landau/go/bin/pprof")
+## Serving pprof remotely
 
-# Now, pprof should work.
+As with Jupyter notebooks, you can serve `pprof` from one computer and use it from another computer on the same network. On the server, you must
+
+1. Find the server's host name or IP address in advance.
+2. Supply `"0.0.0.0"` as the `host` argument.
+
+```{r, eval = FALSE}
+system2("hostname")
+#> mycomputer
+
 px <- pprof({
   n <- 1e4
   x <- data.frame(x = rnorm(n), y = rnorm(n))
@@ -122,26 +130,18 @@ px <- pprof({
     x[i, ] <- x[i, ] + 1
   }
   x
-})
-#> http://localhost:64610
-
-px
-#> PROCESS 'R', running, pid 12361.
-px$is_alive()
-# [1] TRUE
-
-# Now a web browser should be able to open http://localhost:64610.
+}, host = "0.0.0.0")
+#> http://0.0.0.0:610712
 ```
 
-It is best to take down the `pprof` server when you are done with it.
+Then, in the client machine navigate a web browser to the server's host name or IP address and use the port number printed above, e.g. `https://mycomputer:61072`.
 
-```{r, eval = FALSE}
-px$kill()
-```
-
-`px` is the handle of a [`callr`](https://github.com/r-lib/callr) background process. To learn more about how to manage the process, have a look at the [`callr`](https://callr.r-lib.org/) documentation, particularly the function [`r_bg()`](https://callr.r-lib.org/reference/r_bg.html).
 
 ## Installation
+
+For old versions of `proffer` (0.0.2 and below) refer to [these older installation instructions](https://github.com/r-prof/proffer/blob/f76bde56796396e83fee00f94430c94974f18303/README.md#installation) instead of the ones below.
+
+### The R package
 
 The latest release of `proffer` is available on [CRAN](https://CRAN.R-project.org).
 
@@ -156,25 +156,69 @@ Alternatively, you can install the development version from GitHub.
 remotes::install_github("r-prof/proffer")
 ```
 
-To use functions `pprof()` and `serve_pprof()`, you need to install [`pprof`](https://github.com/google/pprof). Installing `pprof` is hard, so if you have trouble, please do not hesitate to [open an issue](https://github.com/r-prof/proffer/issues) and ask for help. And if you cannot install `pprof`, then [`profvis`](https://rstudio.github.io/profvis/) is an excellent alternative.
+The `proffer` package requires the `RProtoBuf` package, which may require installation of additional system dependencies on Linux. See its [installation instructions](https://github.com/eddelbuettel/rprotobuf#installation).
 
-1. Install the [`RProtoBuf`](https://github.com/eddelbuettel/rprotobuf) package. On Linux, you also need to install the supporting protocol buffer libraries, e.g. `sudo apt-get install protobuf-compiler libprotobuf-dev libprotoc-dev` on Ubuntu.
-1. Install [Graphviz](https://www.graphviz.org) and ensure the Graphviz executables appear in your `PATH` environment variable ([directions here](https://bobswift.atlassian.net/wiki/spaces/GVIZ/pages/131924165/Graphviz+installation)).
-1. [Install the Go programming language](https://golang.org/doc/install).
-1. Ensure your system can find the Go binaries. Open your command line interface of choice (e.g. Terminal or Command Prompt) and type `go version`. If you get an error, you may need to set the `PATH` environment variable as described [here for Linux](https://www.callicoder.com/golang-installation-setup-gopath-workspace/#linux) and [here for Windows](http://www.wadewegner.com/2014/12/easy-go-programming-setup-for-windows/)
-1. Follow [these instructions](https://github.com/golang/go/wiki/SettingGOPATH) to set the `GOPATH` environment variables on your system. Type `go env GOPATH` in in a new terminal session verify that you set it correctly. 
-1. Enter `go get -u github.com/google/pprof` in your terminal to install `pprof`
-1. Find the path to the `pprof` executable. It is usually in the `bin` subdirectory of `GOPATH`, e.g. `/home/landau/go/bin/pprof`.
-1. Add a line to your `.Renviron` file to set the `pprof_path` environment variable, e.g. `pprof_path=/home/landau/go/bin/pprof`. This variable tells `proffer` how to find `pprof`.
-1. Open a new R session check that pprof installed correctly.
+### Non-R dependencies
+
+`proffer` requires
+
+1. Go: <https://golang.org/doc/install>
+2. Graphviz: <https://www.graphviz.org/download>
+3. `pprof`: <https://github.com/google/pprof> (already comes with Go)
+
+`pprof` itself is already installed with Go. We highly recommend you use Go's default copy of `pprof` because [compatibility issues](https://github.com/r-prof/proffer/issues/27) could arise if you install the latest `pprof` manually.
+
+Mac and Windows installers of Go and Graphviz are available at the links above. On Linux, you can install Go (and thus `pprof`) directly from R:
 
 ```{r, eval = FALSE}
-Sys.getenv("pprof_path")
-#> /home/landau/go/bin/pprof
-file.exists(Sys.getenv("pprof_path"))
-#> TRUE
-system2(Sys.getenv("pprof_path")) # Shows the pprof help menu on Unix systems.
-shell(Sys.getenv("pprof_path")) # Analogous for Windows.
+library(proffer)
+install_go() # Also installs pprof if on Linux.
+```
+
+### Configuration
+
+First, run `pprof_sitrep()` to see if `proffer` can already find all the required non-R dependencies. Then, run `test_pprof()` to see if `pprof` actually works for you. If both checks pass, you are done with installation.
+
+Otherwise, open your your `.Renviron` file and define special environment variables that point to system dependencies. The [`edit_r_environ()`](https://usethis.r-lib.org/reference/edit.html) function in the [`usethis`](https://usethis.r-lib.org) package can help you. Configuration varies according to your platform and installation method.
+
+#### Linux
+
+```
+PROFFER_PPROF_BIN=/home/YOU/go/pkg/tool/linux_amd64/pprof
+PROFFER_GO_BIN=/home/YOU/go/bin/go
+PROFFER_GRAPHVIZ_BIN=/usr/bin/dot
+```
+
+#### Mac OS
+
+```
+PROFFER_PPROF_BIN=/usr/local/bin/pprof
+PROFFER_GO_BIN=/usr/local/bin/go
+PROFFER_GRAPHVIZ_BIN=/usr/local/bin/dot
+```
+
+#### Windows
+
+```
+PROFFER_PPROF_BIN=C:\Go\pkg\tool\windows_amd64\pprof.exe
+PROFFER_GO_BIN=C:\Go\bin\go.exe
+PROFFER_GRAPHVIZ_BIN="C:\Program Files (x86)\Graphviz2.38\bin\dot.exe"
+```
+
+### Verification
+
+Run `pprof_sitrep()` again to verify that everything is installed and configured correctly.
+
+```{r}
+library(proffer)
+pprof_sitrep()
+```
+
+If all dependencies are accounted for, `proffer` should work. Test it out with `test_pprof()`. On a local machine, it should launch a browser window showing an instance of `pprof`.
+
+```{r, eval = FALSE}
+library(proffer)
+test_pprof()
 ```
 
 ## Contributing

@@ -1,11 +1,49 @@
+#' @title Test `pprof()`
+#' @export
+#' @seealso [pprof()]
+#' @description Do a test run of `pprof()` to verify that the
+#'   system dependencies like `pprof` work as expected.
+#' @details See <https://github.com/r-prof/proffer#installation>
+#'   for setup instructions.
+#' @inheritParams pprof
+#' @examples
+#' \dontrun{
+#' test_pprof()
+#' }
+test_pprof <- function(
+  host = "localhost",
+  port = NULL,
+  browse = interactive(),
+  verbose = TRUE
+) {
+  slow_function <- function() {
+    n <- 1e3
+    x <- data.frame(x = sample.int(n), y = sample.int(n))
+    for (i in seq_len(n)) {
+      x[i, ] <- x[i, ] + 1
+    }
+    x
+  }
+  pprof(
+    slow_function(),
+    host = host,
+    port = port,
+    browse = browse,
+    verbose = verbose
+  )
+}
+
 #' @title Profile R code and visualize with pprof.
 #' @export
 #' @description Run R code and display profiling results
 #'   in a local interactive pprof server.
+#'   Results are collected with [record_pprof()].
 #' @return A `processx::process$new()` handle. Use this handle
 #'   to take down the server with `$kill()`.
 #' @inheritParams serve_pprof
 #' @param expr R code to run and profile.
+#' @param ... Additional arguments passed on to [Rprof()]
+#'   via [record_pprof()].
 #' @examples
 #' \dontrun{
 #' # Start a pprof virtual server in the background.
@@ -18,9 +56,10 @@ pprof <- function(
   host = "localhost",
   port = NULL,
   browse = interactive(),
-  verbose = TRUE
+  verbose = TRUE,
+  ...
 ) {
-  pprof <- record_pprof(expr)
+  pprof <- record_pprof(expr, ...)
   serve_pprof(
     pprof = pprof,
     host = host,
@@ -87,8 +126,8 @@ serve_rprof <- function(
 #'   Chosen randomly by default.
 #' @param browse Logical, whether to open a browser to view
 #'   the pprof server.
-#' @param verbose Logical, whether to print the URL of the pprof
-#'   server to the R console as a message.
+#' @param verbose Logical, whether to print console messages
+#'   such as the URL of the local `pprof` server.
 #' @examples
 #' \dontrun{
 #' pprof <- record_pprof(replicate(1e2, sample.int(1e4)))
@@ -104,7 +143,6 @@ serve_pprof <- function(
   browse = interactive(),
   verbose = TRUE
 ) {
-  assert_pprof()
   server <- sprintf("%s:%s", host, port %||% random_port())
   url <- sprintf("http://%s", server)
   args <- c("-http", server, pprof)
@@ -119,35 +157,14 @@ serve_pprof <- function(
 }
 
 serve_pprof_impl <- function(args) {
-  processx::process$new(
-    command = get_pprof_path(),
-    args = args,
-    stdout = "|",
-    stderr = "|",
-    supervise = TRUE
+  with_safe_path(
+    Sys.getenv("PROFFER_GRAPHVIZ_BIN"),
+    processx::process$new(
+      command = pprof_path(),
+      args = args,
+      stdout = "|",
+      stderr = "|",
+      supervise = TRUE
+    )
   )
-}
-
-random_port <- function(from = 49152L, to = 65355L) {
-  sample(seq.int(from = from, to = to, by = 1L), size = 1L)
-}
-
-assert_pprof <- function() {
-  if (file.exists(get_pprof_path())) {
-    return()
-  }
-  missing_pprof()
-}
-
-missing_pprof <- function() {
-  stop(
-    "cannot find pprof at ",
-    shQuote(get_pprof_path()),
-    ". See the setup instructions at https://r-prof.github.io/proffer.",
-    call. = FALSE
-  )
-}
-
-get_pprof_path <- function() {
-  Sys.getenv("pprof_path")
 }

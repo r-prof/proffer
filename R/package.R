@@ -15,10 +15,13 @@
 #' @examples
 #' # TBD
 #' @references <https://github.com/r-prof/proffer>
+#' @importFrom cli cli_alert_danger cli_alert_info cli_alert_success cli_h1
+#'   cli_li cli_ul
 #' @importFrom processx process
 #' @importFrom profile read_rprof write_pprof
 #' @importFrom RProtoBuf readProtoFiles
 #' @importFrom utils browseURL Rprof
+#' @importFrom withr with_path
 #' @examples
 #' \dontrun{
 #' # Start a pprof virtual server in the background.

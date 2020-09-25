@@ -1,11 +1,11 @@
 Package: proffer
 Title: Profile R Code and Visualize with 'Pprof'
-Version: 0.0.2.9000
+Version: 0.1.0.9000
 Encoding: UTF-8
 Language: en-US
 License: MIT + file LICENSE
 URL: https://github.com/r-prof/proffer,
-  https://r-prof.github.io/proffer
+  https://r-prof.github.io/proffer/
 BugReports: https://github.com/r-prof/proffer/issues
 Authors@R: c(
   person(
@@ -38,15 +38,16 @@ Description: Like similar profiling tools,
 Depends:
   R (>= 3.3.0)
 Imports:
+  cli,
   processx,
   profile,
   RProtoBuf,
-  utils
+  utils,
+  withr
 Suggests:
-  profvis,
   testthat (>= 2.1.0)
 SystemRequirements:
   Graphviz (https://www.graphviz.org/),
   pprof (https://github.com/google/pprof)
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.1.9000

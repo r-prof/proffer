@@ -29,8 +29,8 @@ Chosen randomly by default.}
 \item{browse}{Logical, whether to open a browser to view
 the pprof server.}
 
-\item{verbose}{Logical, whether to print the URL of the pprof
-server to the R console as a message.}
+\item{verbose}{Logical, whether to print console messages
+such as the URL of the local \code{pprof} server.}
 }
 \value{
 A \code{processx::process$new()} handle. Use this handle

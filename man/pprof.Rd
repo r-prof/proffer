@@ -9,7 +9,8 @@ pprof(
   host = "localhost",
   port = NULL,
   browse = interactive(),
-  verbose = TRUE
+  verbose = TRUE,
+  ...
 )
 }
 \arguments{
@@ -29,8 +30,11 @@ Chosen randomly by default.}
 \item{browse}{Logical, whether to open a browser to view
 the pprof server.}
 
-\item{verbose}{Logical, whether to print the URL of the pprof
-server to the R console as a message.}
+\item{verbose}{Logical, whether to print console messages
+such as the URL of the local \code{pprof} server.}
+
+\item{...}{Additional arguments passed on to \code{\link[=Rprof]{Rprof()}}
+via \code{\link[=record_pprof]{record_pprof()}}.}
 }
 \value{
 A \code{processx::process$new()} handle. Use this handle
@@ -39,6 +43,7 @@ to take down the server with \verb{$kill()}.
 \description{
 Run R code and display profiling results
 in a local interactive pprof server.
+Results are collected with \code{\link[=record_pprof]{record_pprof()}}.
 }
 \examples{
 \dontrun{

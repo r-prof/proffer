@@ -1,15 +1,19 @@
 #' @title Profile R code and record pprof samples.
 #' @export
 #' @description Run R code and record pprof samples.
+#'   Profiles are recorded with [record_rprof()]
+#'   and then converted with [to_pprof()].
 #' @return Path to a file with pprof samples.
 #' @param expr An R expression to profile.
 #' @param pprof Path to a file with pprof samples.
 #'   Also returned from the function.
+#' @param ... Additional arguments passed on to [Rprof()]
+#'   via [record_rprof()].
 #' @examples
 #' # Returns a path to pprof samples.
 #' record_pprof(replicate(1e2, sample.int(1e4)))
-record_pprof <- function(expr, pprof = tempfile()) {
-  rprof <- record_rprof(expr)
+record_pprof <- function(expr, pprof = tempfile(), ...) {
+  rprof <- record_rprof(expr, ...)
   to_pprof(rprof, pprof = pprof)
   pprof
 }
@@ -21,12 +25,13 @@ record_pprof <- function(expr, pprof = tempfile()) {
 #' @param expr An R expression to profile.
 #' @param rprof Path to a file with Rprof samples.
 #'   Also returned from the function.
+#' @param ... Additional arguments passed on to [Rprof()].
 #' @examples
 #' # Returns a path to Rprof samples.
 #' record_rprof(replicate(1e2, sample.int(1e4)))
-record_rprof <- function(expr, rprof = tempfile()) {
+record_rprof <- function(expr, rprof = tempfile(), ...) {
   on.exit(Rprof(NULL))
-  Rprof(filename = rprof)
+  Rprof(filename = rprof, ...)
   expr
   rprof
 }
