@@ -9,9 +9,13 @@ assignees: r-prof
 
 ## Prework
 
-- [ ] Read and abide by `proffer`'s [code of conduct](https://github.com/r-prof/proffer/blob/master/CODE_OF_CONDUCT.md).
-- [ ] Search for duplicates among the [existing issues](https://github.com/r-prof/proffer/issues), both open and closed.
-- [ ] Advanced users: verify that the bottleneck still persists in the current development version (i.e. `remotes::install_github("r-prof/proffer")`) and mention the [SHA-1 hash](https://git-scm.com/book/en/v1/Getting-Started-Git-Basics#Git-Has-Integrity) of the [Git commit you install](https://github.com/r-prof/proffer/commits/master).
+
+* [ ] Read and agree to the [code of conduct](https://github.com/r-prof/proffer/blob/master/CODE_OF_CONDUCT.md) and [contributing guidelines](https://github.com/r-prof/proffer/blob/master/CONTRIBUTING.md).
+* [ ] If there is [already a relevant issue](https://github.com/r-prof/proffer/issues), whether open or closed, comment on the existing thread instead of posting a new issue.
+* [ ] For any problem you identify, post a [minimal reproducible example](https://www.tidyverse.org/help/) so the maintainer can troubleshoot. A reproducible example is:
+    * [ ] **Runnable**: post enough R code and data so any onlooker can create the error on their own computer.
+    * [ ] **Minimal**: reduce runtime wherever possible and remove complicated details that are irrelevant to the issue at hand.
+    * [ ] **Readable**: format your code according to the [tidyverse style guide](https://style.tidyverse.org/).
 
 ## Description
 
@@ -19,9 +23,10 @@ Describe the bottleneck clearly and concisely.
 
 ## Reproducible example
 
-Provide a minimal reproducible example with code and output that demonstrates the problem. The `reprex()` function from the [`reprex`](https://github.com/tidyverse/reprex) package is extremely helpful for this.
-
-To help us read your code, please try to follow the [tidyverse style guide](https://style.tidyverse.org/). The `style_text()` and `style_file()` functions from the [`styler`](https://github.com/r-lib/styler) package make it easier.
+* [ ] For any problem you identify, post a [minimal reproducible example](https://www.tidyverse.org/help/) so the maintainer can troubleshoot. A reproducible example is:
+    * [ ] **Runnable**: post enough R code and data so any onlooker can create the error on their own computer.
+    * [ ] **Minimal**: reduce runtime wherever possible and remove complicated details that are irrelevant to the issue at hand.
+    * [ ] **Readable**: format your code according to the [tidyverse style guide](https://style.tidyverse.org/).
 
 ## Benchmarks
 
