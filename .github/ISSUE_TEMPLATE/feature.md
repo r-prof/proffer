@@ -8,7 +8,7 @@ assignees: r-prof
 
 ## Prework
 
-- [ ] Read and abide by `proffer`'s [code of conduct](https://github.com/r-prof/proffer/blob/master/CODE_OF_CONDUCT.md).
+- [ ] Read and abide by `proffer`'s [code of conduct](https://github.com/r-prof/proffer/blob/main/CODE_OF_CONDUCT.md).
 - [ ] Search for duplicates among the [existing issues](https://github.com/r-prof/proffer/issues), both open and closed.
 
 ## Proposal

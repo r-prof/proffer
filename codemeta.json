@@ -136,13 +136,13 @@
       "sameAs": "https://CRAN.R-project.org/package=withr"
     }
   ],
-  "releaseNotes": "https://github.com/wlandau/proffer/blob/master/NEWS.md",
-  "readme": "https://github.com/r-prof/proffer/blob/master/README.md",
+  "releaseNotes": "https://github.com/wlandau/proffer/blob/main/NEWS.md",
+  "readme": "https://github.com/r-prof/proffer/blob/main/README.md",
   "fileSize": "713.147KB",
   "contIntegration": [
     "https://travis-ci.org/r-prof/proffer",
     "https://ci.appveyor.com/project/r-prof/proffer",
-    "https://codecov.io/github/r-prof/proffer?branch=master"
+    "https://codecov.io/github/r-prof/proffer?branch=main"
   ],
   "developmentStatus": "https://www.repostatus.org/#active",
   "provider": {
