@@ -150,11 +150,7 @@ serve_pprof <- function(
     browse_url(host, port, verbose)
   }
   if (verbose) {
-    cli::cli_ul()
-    cli::cli_li("url: {.path http://{host}:{port}}")
-    cli::cli_li("host: {.path {host}}")
-    cli::cli_li("port: {.path {port}}")
-    cli::cli_end()
+    show_url(host, port)
   }
   invisible(px)
 }
@@ -180,6 +176,14 @@ browse_url <- function(host, port, verbose) {
   spinner$finish()
   url <- paste0("http://", host, ":", port)
   utils::browseURL(url)
+}
+
+show_url <- function(host, port) {
+  cli::cli_ul()
+  cli::cli_li("url: {.path http://{host}:{port}}")
+  cli::cli_li("host: {.path {host}}")
+  cli::cli_li("port: {.path {port}}")
+  cli::cli_end()
 }
 
 serve_pprof_impl <- function(args) {
