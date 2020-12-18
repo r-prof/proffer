@@ -14,8 +14,12 @@
   }
 }
 
-random_port <- function(from = 49152L, to = 65355L) {
-  sample(seq.int(from = from, to = to, by = 1L), size = 1L)
+trn <- function(condition, x, y) {
+  if (condition) {
+    x
+  } else {
+    y
+  }
 }
 
 with_safe_path <- function(path, code) {

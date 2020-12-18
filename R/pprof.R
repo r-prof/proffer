@@ -12,7 +12,7 @@
 #' }
 test_pprof <- function(
   host = "localhost",
-  port = NULL,
+  port = proffer::random_port(),
   browse = interactive(),
   verbose = TRUE
 ) {
@@ -54,7 +54,7 @@ test_pprof <- function(
 pprof <- function(
   expr,
   host = "localhost",
-  port = NULL,
+  port = proffer::random_port(),
   browse = interactive(),
   verbose = TRUE,
   ...
@@ -92,7 +92,7 @@ pprof <- function(
 serve_rprof <- function(
   rprof,
   host = "localhost",
-  port = NULL,
+  port = proffer::random_port(),
   browse = interactive(),
   verbose = TRUE
 ) {
@@ -139,21 +139,47 @@ serve_rprof <- function(
 serve_pprof <- function(
   pprof,
   host = "localhost",
-  port = NULL,
+  port = proffer::random_port(),
   browse = interactive(),
   verbose = TRUE
 ) {
-  server <- sprintf("%s:%s", host, port %||% random_port())
-  url <- sprintf("http://%s", server)
+  server <- sprintf("%s:%s", host, port)
   args <- c("-http", server, pprof)
   px <- serve_pprof_impl(args)
-  if (verbose) {
-    message(url)
-  }
   if (browse) {
-    utils::browseURL(url)
+    browse_url(host, port, verbose)
   }
-  px
+  if (verbose) {
+    cli::cli_ul()
+    cli::cli_li("url: {.path http://{host}:{port}}")
+    cli::cli_li("host: {.path {host}}")
+    cli::cli_li("port: {.path {port}}")
+    cli::cli_end()
+  }
+  invisible(px)
+}
+
+#' @title Choose a random TCP port.
+#' @export
+#' @description Choose a random TCP port that is unlikely to be occupied
+#'   by another process.
+#' @return Port number, positive integer of length 1.
+#' @param lower Integer of length 1, lower bound of the port number.
+#' @param upper Integer of length 1, upper bound of the port number.
+random_port <- function(lower = 49152L, upper = 65355L) {
+  sample(seq.int(from = lower, to = upper, by = 1L), size = 1L)
+}
+
+browse_url <- function(host, port, verbose) {
+  spinner <- cli::make_spinner()
+  trn(verbose, spinner$spin(), NULL)
+  while (!pingr::is_up(destination = host, port = port)) {
+    Sys.sleep(0.01)
+    trn(verbose, spinner$spin(), NULL)
+  }
+  spinner$finish()
+  url <- paste0("http://", host, ":", port)
+  utils::browseURL(url)
 }
 
 serve_pprof_impl <- function(args) {

@@ -7,7 +7,7 @@
 serve_rprof(
   rprof,
   host = "localhost",
-  port = NULL,
+  port = proffer::random_port(),
   browse = interactive(),
   verbose = TRUE
 )

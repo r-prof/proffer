@@ -44,7 +44,9 @@ px <- pprof({
   }
   x
 })
-#> http://localhost:64610
+#> ● url: http://localhost:57517
+#> ● host: localhost
+#> ● port: 57517
 ```
 
 When we navigate to <http://localhost:64610> and look at the flame
@@ -74,7 +76,7 @@ system.time({
   x <- data.frame(x = x, y = y)
 })
 #>    user  system elapsed 
-#>   0.045   0.001   0.047
+#>   0.044   0.001   0.045
 ```
 
 Moral of the story: before you optimize, throw away your assumptions and
@@ -99,7 +101,9 @@ px <- pprof({
   }
   x
 })
-#> http://localhost:50195
+#> ● url: http://localhost:50195
+#> ● host: localhost
+#> ● port: 50195
 
 # Summary of the background process.
 px
@@ -139,7 +143,9 @@ px <- pprof({
   }
   x
 }, host = "0.0.0.0")
-#> http://0.0.0.0:610712
+#> ● url: http://localhost:610712
+#> ● host: localhost
+#> ● port: 610712
 ```
 
 Then, in the client machine navigate a web browser to the server’s host
@@ -237,25 +243,25 @@ library(proffer)
 pprof_sitrep()
 #> ● Call test_pprof() to test installation.
 #> 
-#> ── Requirements ───────────────────────────────────────────────────────────────────
+#> ── Requirements ────────────────────────────────────────────────────────────────
 #> ✓ pprof /Users/c240390/go/bin/pprof
 #> ✓ Graphviz /usr/local/bin/dot
 #> 
-#> ── Go ─────────────────────────────────────────────────────────────────────────────
+#> ── Go ──────────────────────────────────────────────────────────────────────────
 #> ✓ Go binary /usr/local/bin/go
 #> ✓ Go folder /Users/c240390/go
 #> 
-#> ── Custom ─────────────────────────────────────────────────────────────────────────
+#> ── Custom ──────────────────────────────────────────────────────────────────────
 #> ✓ `PROFFER_PPROF_BIN` /Users/c240390/go/bin/pprof
 #> ✓ `PROFFER_GO_BIN` /usr/local/bin/go
 #> ✓ `PROFFER_GRAPHVIZ_BIN` /usr/local/bin/dot
 #> 
-#> ── System ─────────────────────────────────────────────────────────────────────────
+#> ── System ──────────────────────────────────────────────────────────────────────
 #> ✓ pprof system path /Users/c240390/go/bin/pprof
 #> ✓ Go binary system path /usr/local/bin/go
 #> ✓ Graphviz system path /usr/local/bin/dot
 #> 
-#> ── Deprecated ─────────────────────────────────────────────────────────────────────
+#> ── Deprecated ──────────────────────────────────────────────────────────────────
 #> ✓ `pprof_path` env variable omitted.
 ```
 

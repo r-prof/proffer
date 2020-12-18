@@ -52,7 +52,9 @@ px <- pprof({
   }
   x
 })
-#> http://localhost:64610
+#> ● url: http://localhost:57517
+#> ● host: localhost
+#> ● port: 57517
 ```
 
 
@@ -95,7 +97,9 @@ px <- pprof({
   }
   x
 })
-#> http://localhost:50195
+#> ● url: http://localhost:50195
+#> ● host: localhost
+#> ● port: 50195
 
 # Summary of the background process.
 px
@@ -131,11 +135,12 @@ px <- pprof({
   }
   x
 }, host = "0.0.0.0")
-#> http://0.0.0.0:610712
+#> ● url: http://localhost:610712
+#> ● host: localhost
+#> ● port: 610712
 ```
 
 Then, in the client machine navigate a web browser to the server's host name or IP address and use the port number printed above, e.g. `https://mycomputer:61072`.
-
 
 ## Installation
 

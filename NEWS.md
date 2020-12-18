@@ -2,6 +2,8 @@
 
 * Address a CRAN check error for R-devel on Windows: lengthen the time of a test to avoid empty protocol buffers.
 * Build site with GitHub Actions and use flatly theme (#26, @krlmlr).
+* Ping port until `pprof` is initialized (#28).
+* Improve console messages of host and port.
 
 # proffer 0.1.0
 

@@ -38,12 +38,13 @@ Description: Like similar profiling tools,
 Depends:
   R (>= 3.3.0)
 Imports:
-  cli,
-  processx,
-  profile,
-  RProtoBuf,
+  cli (>= 2.0.0),
+  pingr (>= 2.0.1),
+  processx (>= 3.4.0),
+  profile (>= 1.0),
+  RProtoBuf (>= 0.4.14),
   utils,
-  withr
+  withr (>= 2.1.2)
 Suggests:
   testthat (>= 2.1.0)
 SystemRequirements:
