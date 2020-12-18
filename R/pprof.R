@@ -147,7 +147,7 @@ serve_pprof <- function(
   args <- c("-http", server, pprof)
   px <- serve_pprof_impl(args)
   if (browse) {
-    browse_url(host, port, verbose)
+    browse_port(host, port, verbose)
   }
   if (verbose) {
     show_url(host, port)
@@ -166,7 +166,7 @@ random_port <- function(lower = 49152L, upper = 65355L) {
   sample(seq.int(from = lower, to = upper, by = 1L), size = 1L)
 }
 
-browse_url <- function(host, port, verbose) {
+browse_port <- function(host, port, verbose) {
   spinner <- cli::make_spinner()
   trn(verbose, spinner$spin(), NULL)
   while (!pingr::is_up(destination = host, port = port)) {
