@@ -4,6 +4,7 @@
 * Build site with GitHub Actions and use flatly theme (#26, @krlmlr).
 * Ping port until `pprof` is initialized (#28).
 * Improve console messages of host and port.
+* Forward error message if `pprof` process quits early.
 
 # proffer 0.1.0
 
