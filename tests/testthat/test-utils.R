@@ -44,3 +44,11 @@ test_that("with_safe_path(), empty case", {
   px <- with_safe_path("", processx::run(bin, c("getenv", "PATH")))
   expect_false(grepl("^:", px$stdout))
 })
+
+test_that("stop0()", {
+  expect_error(stop0(123))
+})
+
+test_that("warn0()", {
+  expect_warning(warn0(123))
+})

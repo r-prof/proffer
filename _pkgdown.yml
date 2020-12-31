@@ -21,11 +21,12 @@ reference:
   contents:
   - '`to_pprof`'
   - '`to_rprof`'
-- title: Install
-  contents:
-  - '`install_go`'
 - title: Troubleshoot
   contents:
   - '`test_pprof`'
   - '`pprof_sitrep`'
   - '`pprof_path`'
+- title: Utilities
+  contents:
+  - '`install_go`'
+  - '`random_port`'

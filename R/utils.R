@@ -14,12 +14,20 @@
   }
 }
 
+stop0 <- function(...) {
+  stop(..., call. = FALSE)
+}
+
 trn <- function(condition, x, y) {
   if (condition) {
     x
   } else {
     y
   }
+}
+
+warn0 <- function(...) {
+  warning(..., call. = FALSE)
 }
 
 with_safe_path <- function(path, code) {
