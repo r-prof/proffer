@@ -1,4 +1,4 @@
-# proffer 0.1.0.9000
+# proffer 0.1.1
 
 * Address a CRAN check error for R-devel on Windows: lengthen the time of a test to avoid empty protocol buffers.
 * Build site with GitHub Actions and use flatly theme (#26, @krlmlr).
