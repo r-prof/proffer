@@ -29,7 +29,7 @@ Description: Like similar profiling tools,
   native Rprof() data to a protocol buffer
   that 'pprof' understands.
   For the documentation of 'proffer',
-  visit <https://r-prof.github.io/proffer>.
+  visit <https://r-prof.github.io/proffer/>.
   To learn about the implementations and methodologies of
   'pprof', 'profile', and protocol buffers,
   visit <https://github.com/google/pprof>.
