@@ -120,7 +120,7 @@
 <span class="co">#&gt; ● url: http://localhost:57517</span>
 <span class="co">#&gt; ● host: localhost</span>
 <span class="co">#&gt; ● port: 57517</span></code></pre></div>
-<p>When we navigate to <a href="http://localhost:64610" class="uri">http://localhost:64610</a> and look at the flame graph, we see <code>[&lt;-.data.frame()</code> (i.e. <code>x[i, ] &lt;- x[i, ] + 1</code>) is taking most of the runtime.</p>
+<p>When we navigate to <code>http://localhost:64610</code> and look at the flame graph, we see <code>[&lt;-.data.frame()</code> (i.e. <code>x[i, ] &lt;- x[i, ] + 1</code>) is taking most of the runtime.</p>
 <center>
 <p><a href="https://r-prof.github.io/proffer/reference/figures/flame.png"> <img src="https://r-prof.github.io/proffer/reference/figures/flame.png" alt="top" align="center" style="border: none; float: center;"></a></p>
 </center>
@@ -137,7 +137,7 @@
   <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, y <span class="op">=</span> <span class="va">y</span><span class="op">)</span>
 <span class="op">}</span><span class="op">)</span>
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.044   0.001   0.045</span></code></pre></div>
+<span class="co">#&gt;   0.052   0.003   0.056</span></code></pre></div>
 <p>Moral of the story: before you optimize, throw away your assumptions and run your code through a profiler. That way, you can spend your time optimizing where it counts!</p>
 </div>
 <div id="managing-the-pprof-server" class="section level2">
@@ -282,8 +282,8 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; ── System ──────────────────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; ✓ pprof system path /Users/c240390/go/bin/pprof</span>
-<span class="co">#&gt; ✓ Go binary system path /usr/local/bin/go</span>
-<span class="co">#&gt; ✓ Graphviz system path /usr/local/bin/dot</span>
+<span class="co">#&gt; ✓ Go binary system path /usr/local/bin//go</span>
+<span class="co">#&gt; ✓ Graphviz system path /usr/local/bin//dot</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; ── Deprecated ──────────────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; ✓ `pprof_path` env variable omitted.</span></code></pre></div>
@@ -296,7 +296,7 @@
 <div id="contributing" class="section level2">
 <h2 class="hasAnchor">
 <a href="#contributing" class="anchor"></a>Contributing</h2>
-<p>We encourage participation through <a href="https://github.com/r-prof/proffer/issues">issues</a> and <a href="https://github.com/r-prof/proffer/pulls">pull requests</a>. <code>proffer</code> has a <a href="https://github.com/r-prof/CODE_OF_CONDUCT.md">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
+<p>We encourage participation through <a href="https://github.com/r-prof/proffer/issues">issues</a> and <a href="https://github.com/r-prof/proffer/pulls">pull requests</a>. <code>proffer</code> has a <a href="https://github.com/r-prof/proffer/blob/main/CODE_OF_CONDUCT.md">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
 <div id="resources" class="section level2">
 <h2 class="hasAnchor">
@@ -306,7 +306,7 @@
 <li><a href="http://adv-r.had.co.nz/Performance.html" class="uri">http://adv-r.had.co.nz/Performance.html</a></li>
 <li><a href="https://www.r-bloggers.com/strategies-to-speedup-r-code/" class="uri">https://www.r-bloggers.com/strategies-to-speedup-r-code/</a></li>
 <li><a href="https://www.r-bloggers.com/faster-higher-stonger-a-guide-to-speeding-up-r-code-for-busy-people/" class="uri">https://www.r-bloggers.com/faster-higher-stonger-a-guide-to-speeding-up-r-code-for-busy-people/</a></li>
-<li><a href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html" class="uri">https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html</a></li>
+<li><a href="https://cran.r-project.org/package=data.table/vignettes/datatable-intro.html" class="uri">https://cran.r-project.org/package=data.table/vignettes/datatable-intro.html</a></li>
 </ul>
 </div>
 <div id="similar-work" class="section level2">
