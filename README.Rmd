@@ -58,7 +58,7 @@ px <- pprof({
 ```
 
 
-When we navigate to <http://localhost:64610> and look at the flame graph, we see `[<-.data.frame()` (i.e. `x[i, ] <- x[i, ] + 1`) is taking most of the runtime.
+When we navigate to `http://localhost:64610` and look at the flame graph, we see `[<-.data.frame()` (i.e. `x[i, ] <- x[i, ] + 1`) is taking most of the runtime.
 
 <center>
 <a href="https://r-prof.github.io/proffer/reference/figures/flame.png">
@@ -228,7 +228,7 @@ test_pprof()
 
 ## Contributing
 
-We encourage participation through [issues](https://github.com/r-prof/proffer/issues) and [pull requests](https://github.com/r-prof/proffer/pulls). `proffer` has a [Contributor Code of Conduct](https://github.com/r-prof/CODE_OF_CONDUCT.md). By contributing to this project, you agree to abide by its terms.
+We encourage participation through [issues](https://github.com/r-prof/proffer/issues) and [pull requests](https://github.com/r-prof/proffer/pulls). `proffer` has a [Contributor Code of Conduct](https://github.com/r-prof/proffer/blob/main/CODE_OF_CONDUCT.md). By contributing to this project, you agree to abide by its terms.
 
 ## Resources
 
@@ -237,7 +237,7 @@ Profilers identify bottlenecks, but the do not offer solutions. It helps to lear
 - <http://adv-r.had.co.nz/Performance.html>
 - <https://www.r-bloggers.com/strategies-to-speedup-r-code/>
 - <https://www.r-bloggers.com/faster-higher-stonger-a-guide-to-speeding-up-r-code-for-busy-people/>
-- <https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html>
+- <https://cran.r-project.org/package=data.table/vignettes/datatable-intro.html>
 
 ## Similar work
 

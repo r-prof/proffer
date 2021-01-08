@@ -49,7 +49,7 @@ px <- pprof({
 #> ● port: 57517
 ```
 
-When we navigate to <http://localhost:64610> and look at the flame
+When we navigate to `http://localhost:64610` and look at the flame
 graph, we see `[<-.data.frame()` (i.e. `x[i, ] <- x[i, ] + 1`) is taking
 most of the runtime.
 
@@ -76,7 +76,7 @@ system.time({
   x <- data.frame(x = x, y = y)
 })
 #>    user  system elapsed 
-#>   0.044   0.001   0.045
+#>   0.052   0.003   0.056
 ```
 
 Moral of the story: before you optimize, throw away your assumptions and
@@ -258,8 +258,8 @@ pprof_sitrep()
 #> 
 #> ── System ──────────────────────────────────────────────────────────────────────
 #> ✓ pprof system path /Users/c240390/go/bin/pprof
-#> ✓ Go binary system path /usr/local/bin/go
-#> ✓ Graphviz system path /usr/local/bin/dot
+#> ✓ Go binary system path /usr/local/bin//go
+#> ✓ Graphviz system path /usr/local/bin//dot
 #> 
 #> ── Deprecated ──────────────────────────────────────────────────────────────────
 #> ✓ `pprof_path` env variable omitted.
@@ -280,8 +280,8 @@ We encourage participation through
 [issues](https://github.com/r-prof/proffer/issues) and [pull
 requests](https://github.com/r-prof/proffer/pulls). `proffer` has a
 [Contributor Code of
-Conduct](https://github.com/r-prof/CODE_OF_CONDUCT.md). By contributing
-to this project, you agree to abide by its terms.
+Conduct](https://github.com/r-prof/proffer/blob/main/CODE_OF_CONDUCT.md).
+By contributing to this project, you agree to abide by its terms.
 
 ## Resources
 
@@ -292,7 +292,7 @@ alternatives to try.
   - <http://adv-r.had.co.nz/Performance.html>
   - <https://www.r-bloggers.com/strategies-to-speedup-r-code/>
   - <https://www.r-bloggers.com/faster-higher-stonger-a-guide-to-speeding-up-r-code-for-busy-people/>
-  - <https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html>
+  - <https://cran.r-project.org/package=data.table/vignettes/datatable-intro.html>
 
 ## Similar work
 
