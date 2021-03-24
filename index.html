@@ -41,6 +41,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -90,16 +92,16 @@
 <a href="#proffer-" class="anchor"></a>proffer <img src="https://r-prof.github.io/proffer/reference/figures/logo.png" align="right" alt="logo" width="120" height="139" style="border: none; float: right;">
 </h1></div>
 
-<p>The <code>proffer</code> package profiles R code to find bottlenecks. Visit <a href="https://r-prof.github.io/proffer" class="uri">https://r-prof.github.io/proffer</a> for documentation. <a href="https://r-prof.github.io/proffer/reference/index.html" class="uri">https://r-prof.github.io/proffer/reference/index.html</a> has a complete list of available functions in the package.</p>
+<p>The <code>proffer</code> package profiles R code to find bottlenecks. Visit <a href="https://r-prof.github.io/proffer" class="external-link uri">https://r-prof.github.io/proffer</a> for documentation. <a href="https://r-prof.github.io/proffer/reference/index.html" class="external-link uri">https://r-prof.github.io/proffer/reference/index.html</a> has a complete list of available functions in the package.</p>
 <div id="why-use-a-profiler" class="section level2">
 <h2 class="hasAnchor">
 <a href="#why-use-a-profiler" class="anchor"></a>Why use a profiler?</h2>
 <p>This data processing code is slow.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span><span class="op">{</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="op">{</span>
   <span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">1e5</span>
-  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span>
-  <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span>
+  <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
     <span class="va">x</span><span class="op">[</span><span class="va">i</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">[</span><span class="va">i</span>, <span class="op">]</span> <span class="op">+</span> <span class="fl">1</span>
   <span class="op">}</span>
   <span class="va">x</span>
@@ -108,11 +110,11 @@
 <span class="co">#&gt; 82.060  28.440 110.582 </span></code></pre></div>
 <p>Why exactly does it take so long? Is it because <code>for</code> loops are slow as a general rule? Let us find out empirically.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-prof/proffer">proffer</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-prof/proffer" class="external-link">proffer</a></span><span class="op">)</span>
 <span class="va">px</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pprof.html">pprof</a></span><span class="op">(</span><span class="op">{</span>
   <span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">1e5</span>
-  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span>
-  <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span>
+  <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
     <span class="va">x</span><span class="op">[</span><span class="va">i</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">[</span><span class="va">i</span>, <span class="op">]</span> <span class="op">+</span> <span class="fl">1</span>
   <span class="op">}</span>
   <span class="va">x</span>
@@ -122,19 +124,19 @@
 <span class="co">#&gt; ● port: 57517</span></code></pre></div>
 <p>When we navigate to <code>http://localhost:64610</code> and look at the flame graph, we see <code>[&lt;-.data.frame()</code> (i.e. <code>x[i, ] &lt;- x[i, ] + 1</code>) is taking most of the runtime.</p>
 <center>
-<p><a href="https://r-prof.github.io/proffer/reference/figures/flame.png"> <img src="https://r-prof.github.io/proffer/reference/figures/flame.png" alt="top" align="center" style="border: none; float: center;"></a></p>
+<p><a href="https://r-prof.github.io/proffer/reference/figures/flame.png" class="external-link"> <img src="https://r-prof.github.io/proffer/reference/figures/flame.png" alt="top" align="center" style="border: none; float: center;"></a></p>
 </center>
 <p>So we refactor the code to avoid data frame row assignment. Much faster, even with a <code>for</code> loop!</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span><span class="op">{</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="op">{</span>
   <span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">1e5</span>
-  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>
-  <span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>
-  <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>
+  <span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>
+  <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
     <span class="va">x</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">+</span> <span class="fl">1</span>
     <span class="va">y</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">y</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">+</span> <span class="fl">1</span>
   <span class="op">}</span>
-  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, y <span class="op">=</span> <span class="va">y</span><span class="op">)</span>
+  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, y <span class="op">=</span> <span class="va">y</span><span class="op">)</span>
 <span class="op">}</span><span class="op">)</span>
 <span class="co">#&gt;    user  system elapsed </span>
 <span class="co">#&gt;   0.052   0.003   0.056</span></code></pre></div>
@@ -143,13 +145,13 @@
 <div id="managing-the-pprof-server" class="section level2">
 <h2 class="hasAnchor">
 <a href="#managing-the-pprof-server" class="anchor"></a>Managing the pprof server</h2>
-<p>The <code>pprof</code> server is a background <a href="https://github.com/r-lib/processx"><code>processx</code></a> process, and you can manage it with the <code>processx</code> methods <a href="https://processx.r-lib.org/#managing-external-processes">described here</a>. Remember to terminate the process with <code>$kill()</code> when you are done with it.</p>
+<p>The <code>pprof</code> server is a background <a href="https://github.com/r-lib/processx" class="external-link"><code>processx</code></a> process, and you can manage it with the <code>processx</code> methods <a href="https://processx.r-lib.org/#managing-external-processes" class="external-link">described here</a>. Remember to terminate the process with <code>$kill()</code> when you are done with it.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># px is a process handler.</span>
 <span class="va">px</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pprof.html">pprof</a></span><span class="op">(</span><span class="op">{</span>
   <span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">1e4</span>
-  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span>
-  <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span>
+  <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
     <span class="va">x</span><span class="op">[</span><span class="va">i</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">[</span><span class="va">i</span>, <span class="op">]</span> <span class="op">+</span> <span class="fl">1</span>
   <span class="op">}</span>
   <span class="va">x</span>
@@ -176,18 +178,18 @@
 <h2 class="hasAnchor">
 <a href="#serving-pprof-remotely" class="anchor"></a>Serving pprof remotely</h2>
 <p>As with Jupyter notebooks, you can serve <code>pprof</code> from one computer and use it from another computer on the same network. On the server, you must</p>
-<ol>
+<ol style="list-style-type: decimal">
 <li>Find the server’s host name or IP address in advance.</li>
 <li>Supply <code>"0.0.0.0"</code> as the <code>host</code> argument.</li>
 </ol>
 <!-- end list --><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/system2.html">system2</a></span><span class="op">(</span><span class="st">"hostname"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/system2.html" class="external-link">system2</a></span><span class="op">(</span><span class="st">"hostname"</span><span class="op">)</span>
 <span class="co">#&gt; mycomputer</span>
 
 <span class="va">px</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pprof.html">pprof</a></span><span class="op">(</span><span class="op">{</span>
   <span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">1e4</span>
-  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span>
-  <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span>
+  <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
     <span class="va">x</span><span class="op">[</span><span class="va">i</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">[</span><span class="va">i</span>, <span class="op">]</span> <span class="op">+</span> <span class="fl">1</span>
   <span class="op">}</span>
   <span class="va">x</span>
@@ -200,42 +202,42 @@
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p>For old versions of <code>proffer</code> (0.0.2 and below) refer to <a href="https://github.com/r-prof/proffer/blob/f76bde56796396e83fee00f94430c94974f18303/README.md#installation">these older installation instructions</a> instead of the ones below.</p>
+<p>For old versions of <code>proffer</code> (0.0.2 and below) refer to <a href="https://github.com/r-prof/proffer/blob/f76bde56796396e83fee00f94430c94974f18303/README.md#installation" class="external-link">these older installation instructions</a> instead of the ones below.</p>
 <div id="the-r-package" class="section level3">
 <h3 class="hasAnchor">
 <a href="#the-r-package" class="anchor"></a>The R package</h3>
-<p>The latest release of <code>proffer</code> is available on <a href="https://CRAN.R-project.org">CRAN</a>.</p>
+<p>The latest release of <code>proffer</code> is available on <a href="https://CRAN.R-project.org" class="external-link">CRAN</a>.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"proffer"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"proffer"</span><span class="op">)</span></code></pre></div>
 <p>Alternatively, you can install the development version from GitHub.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># install.packages("remotes")</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"r-prof/proffer"</span><span class="op">)</span></code></pre></div>
-<p>The <code>proffer</code> package requires the <code>RProtoBuf</code> package, which may require installation of additional system dependencies on Linux. See its <a href="https://github.com/eddelbuettel/rprotobuf#installation">installation instructions</a>.</p>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"r-prof/proffer"</span><span class="op">)</span></code></pre></div>
+<p>The <code>proffer</code> package requires the <code>RProtoBuf</code> package, which may require installation of additional system dependencies on Linux. See its <a href="https://github.com/eddelbuettel/rprotobuf#installation" class="external-link">installation instructions</a>.</p>
 </div>
 <div id="non-r-dependencies" class="section level3">
 <h3 class="hasAnchor">
 <a href="#non-r-dependencies" class="anchor"></a>Non-R dependencies</h3>
 <p><code>proffer</code> requires</p>
-<ol>
-<li>Go: <a href="https://golang.org/doc/install" class="uri">https://golang.org/doc/install</a>
+<ol style="list-style-type: decimal">
+<li>Go: <a href="https://golang.org/doc/install" class="external-link uri">https://golang.org/doc/install</a>
 </li>
-<li>Graphviz: <a href="https://www.graphviz.org/download" class="uri">https://www.graphviz.org/download</a>
+<li>Graphviz: <a href="https://www.graphviz.org/download" class="external-link uri">https://www.graphviz.org/download</a>
 </li>
 <li>
-<code>pprof</code>: <a href="https://github.com/google/pprof" class="uri">https://github.com/google/pprof</a> (already comes with Go)</li>
+<code>pprof</code>: <a href="https://github.com/google/pprof" class="external-link uri">https://github.com/google/pprof</a> (already comes with Go)</li>
 </ol>
-<p><code>pprof</code> itself is already installed with Go. We highly recommend you use Go’s default copy of <code>pprof</code> because <a href="https://github.com/r-prof/proffer/issues/27">compatibility issues</a> could arise if you install the latest <code>pprof</code> manually.</p>
+<p><code>pprof</code> itself is already installed with Go. We highly recommend you use Go’s default copy of <code>pprof</code> because <a href="https://github.com/r-prof/proffer/issues/27" class="external-link">compatibility issues</a> could arise if you install the latest <code>pprof</code> manually.</p>
 <p>Mac and Windows installers of Go and Graphviz are available at the links above. On Linux, you can install Go (and thus <code>pprof</code>) directly from R:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-prof/proffer">proffer</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-prof/proffer" class="external-link">proffer</a></span><span class="op">)</span>
 <span class="fu"><a href="reference/install_go.html">install_go</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># Also installs pprof if on Linux.</span></code></pre></div>
 </div>
 <div id="configuration" class="section level3">
 <h3 class="hasAnchor">
 <a href="#configuration" class="anchor"></a>Configuration</h3>
 <p>First, run <code><a href="reference/pprof_sitrep.html">pprof_sitrep()</a></code> to see if <code>proffer</code> can already find all the required non-R dependencies. Then, run <code><a href="reference/test_pprof.html">test_pprof()</a></code> to see if <code>pprof</code> actually works for you. If both checks pass, you are done with installation.</p>
-<p>Otherwise, open your your <code>.Renviron</code> file and define special environment variables that point to system dependencies. The <a href="https://usethis.r-lib.org/reference/edit.html"><code>edit_r_environ()</code></a> function in the <a href="https://usethis.r-lib.org"><code>usethis</code></a> package can help you. Configuration varies according to your platform and installation method.</p>
+<p>Otherwise, open your your <code>.Renviron</code> file and define special environment variables that point to system dependencies. The <a href="https://usethis.r-lib.org/reference/edit.html" class="external-link"><code>edit_r_environ()</code></a> function in the <a href="https://usethis.r-lib.org" class="external-link"><code>usethis</code></a> package can help you. Configuration varies according to your platform and installation method.</p>
 <div id="linux" class="section level4">
 <h4 class="hasAnchor">
 <a href="#linux" class="anchor"></a>Linux</h4>
@@ -263,7 +265,7 @@
 <a href="#verification" class="anchor"></a>Verification</h3>
 <p>Run <code><a href="reference/pprof_sitrep.html">pprof_sitrep()</a></code> again to verify that everything is installed and configured correctly.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-prof/proffer">proffer</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-prof/proffer" class="external-link">proffer</a></span><span class="op">)</span>
 <span class="fu"><a href="reference/pprof_sitrep.html">pprof_sitrep</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; ● Call test_pprof() to test installation.</span>
 <span class="co">#&gt; </span>
@@ -289,24 +291,24 @@
 <span class="co">#&gt; ✓ `pprof_path` env variable omitted.</span></code></pre></div>
 <p>If all dependencies are accounted for, <code>proffer</code> should work. Test it out with <code><a href="reference/test_pprof.html">test_pprof()</a></code>. On a local machine, it should launch a browser window showing an instance of <code>pprof</code>.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-prof/proffer">proffer</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-prof/proffer" class="external-link">proffer</a></span><span class="op">)</span>
 <span class="fu"><a href="reference/test_pprof.html">test_pprof</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div id="contributing" class="section level2">
 <h2 class="hasAnchor">
 <a href="#contributing" class="anchor"></a>Contributing</h2>
-<p>We encourage participation through <a href="https://github.com/r-prof/proffer/issues">issues</a> and <a href="https://github.com/r-prof/proffer/pulls">pull requests</a>. <code>proffer</code> has a <a href="https://github.com/r-prof/proffer/blob/main/CODE_OF_CONDUCT.md">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
+<p>We encourage participation through <a href="https://github.com/r-prof/proffer/issues" class="external-link">issues</a> and <a href="https://github.com/r-prof/proffer/pulls" class="external-link">pull requests</a>. <code>proffer</code> has a <a href="https://github.com/r-prof/proffer/blob/main/CODE_OF_CONDUCT.md" class="external-link">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
 <div id="resources" class="section level2">
 <h2 class="hasAnchor">
 <a href="#resources" class="anchor"></a>Resources</h2>
 <p>Profilers identify bottlenecks, but the do not offer solutions. It helps to learn about fast code in general so you can think of efficient alternatives to try.</p>
 <ul>
-<li><a href="http://adv-r.had.co.nz/Performance.html" class="uri">http://adv-r.had.co.nz/Performance.html</a></li>
-<li><a href="https://www.r-bloggers.com/strategies-to-speedup-r-code/" class="uri">https://www.r-bloggers.com/strategies-to-speedup-r-code/</a></li>
-<li><a href="https://www.r-bloggers.com/faster-higher-stonger-a-guide-to-speeding-up-r-code-for-busy-people/" class="uri">https://www.r-bloggers.com/faster-higher-stonger-a-guide-to-speeding-up-r-code-for-busy-people/</a></li>
-<li><a href="https://cran.r-project.org/package=data.table/vignettes/datatable-intro.html" class="uri">https://cran.r-project.org/package=data.table/vignettes/datatable-intro.html</a></li>
+<li><a href="http://adv-r.had.co.nz/Performance.html" class="external-link uri">http://adv-r.had.co.nz/Performance.html</a></li>
+<li><a href="https://www.r-bloggers.com/strategies-to-speedup-r-code/" class="external-link uri">https://www.r-bloggers.com/strategies-to-speedup-r-code/</a></li>
+<li><a href="https://www.r-bloggers.com/faster-higher-stonger-a-guide-to-speeding-up-r-code-for-busy-people/" class="external-link uri">https://www.r-bloggers.com/faster-higher-stonger-a-guide-to-speeding-up-r-code-for-busy-people/</a></li>
+<li><a href="https://cran.r-project.org/package=data.table/vignettes/datatable-intro.html" class="external-link uri">https://cran.r-project.org/package=data.table/vignettes/datatable-intro.html</a></li>
 </ul>
 </div>
 <div id="similar-work" class="section level2">
@@ -315,22 +317,22 @@
 <div id="profvis" class="section level3">
 <h3 class="hasAnchor">
 <a href="#profvis" class="anchor"></a>profvis</h3>
-<p>The <a href="https://github.com/rstudio/profvis"><code>profvis</code></a> is much easier to install than <code>proffer</code> and equally easy to invoke.</p>
+<p>The <a href="https://github.com/rstudio/profvis" class="external-link"><code>profvis</code></a> is much easier to install than <code>proffer</code> and equally easy to invoke.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">profvis</span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">profvis</span><span class="op">)</span>
 <span class="fu">profvis</span><span class="op">(</span><span class="op">{</span>
   <span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">1e5</span>
-  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span>
-  <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span>
+  <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
     <span class="va">x</span><span class="op">[</span><span class="va">i</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">[</span><span class="va">i</span>, <span class="op">]</span> <span class="op">+</span> <span class="fl">1</span>
   <span class="op">}</span>
   <span class="va">x</span>
 <span class="op">}</span><span class="op">)</span></code></pre></div>
-<p>However, <code>profvis</code>-generated flame graphs can be <a href="https://github.com/rstudio/profvis/issues/115">difficult to read</a> and <a href="https://github.com/rstudio/profvis/issues/104">slow to respond to mouse clicks</a>.</p>
+<p>However, <code>profvis</code>-generated flame graphs can be <a href="https://github.com/rstudio/profvis/issues/115" class="external-link">difficult to read</a> and <a href="https://github.com/rstudio/profvis/issues/104" class="external-link">slow to respond to mouse clicks</a>.</p>
 <center>
-<p><a href="https://r-prof.github.io/proffer/reference/figures/profvis.png"> <img src="https://r-prof.github.io/proffer/reference/figures/profvis.png" alt="top" align="center" style="border: none; float: center;"></a></p>
+<p><a href="https://r-prof.github.io/proffer/reference/figures/profvis.png" class="external-link"> <img src="https://r-prof.github.io/proffer/reference/figures/profvis.png" alt="top" align="center" style="border: none; float: center;"></a></p>
 </center>
-<p><code>proffer</code> uses <a href="https://github.com/google/pprof"><code>pprof</code></a> to create friendlier, faster visualizations.</p>
+<p><code>proffer</code> uses <a href="https://github.com/google/pprof" class="external-link"><code>pprof</code></a> to create friendlier, faster visualizations.</p>
 </div>
 </div>
 </div>
@@ -338,7 +340,7 @@
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
 <li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=proffer">https://​cloud.r-project.org/​package=proffer</a>
 </li>
@@ -348,48 +350,54 @@
 </li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
 <li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
+
 <div class="community">
-<h2>Community</h2>
+<h2 data-toc-skip>Community</h2>
 <ul class="list-unstyled">
 <li><a href="CONTRIBUTING.html">Contributing guide</a></li>
 <li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
 </ul>
 </div>
+
 <div class="developers">
-<h2>Developers</h2>
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>William Michael Landau <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0003-1878-3253" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li><a href="authors.html">All authors...</a></li>
+<li><a href="authors.html">More on authors...</a></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://cran.r-project.org/package=proffer"><img src="https://www.r-pkg.org/badges/version/proffer" alt="CRAN"></a></li>
-<li><a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/licence-MIT-blue.svg" alt="license"></a></li>
-<li><a href="https://www.repostatus.org/#active"><img src="https://www.repostatus.org/badges/latest/active.svg" alt="active"></a></li>
-<li><a href="https://github.com/r-prof/proffer/actions?workflow=check"><img src="https://github.com/r-prof/proffer/workflows/check/badge.svg" alt="check"></a></li>
-<li><a href="https://codecov.io/github/r-prof/proffer?branch=main"><img src="https://codecov.io/github/r-prof/proffer/coverage.svg?branch=main" alt="codecov"></a></li>
+<li><a href="https://cran.r-project.org/package=proffer" class="external-link"><img src="https://www.r-pkg.org/badges/version/proffer" alt="CRAN"></a></li>
+<li><a href="https://opensource.org/licenses/MIT" class="external-link"><img src="https://img.shields.io/badge/licence-MIT-blue.svg" alt="license"></a></li>
+<li><a href="https://www.repostatus.org/#active" class="external-link"><img src="https://www.repostatus.org/badges/latest/active.svg" alt="active"></a></li>
+<li><a href="https://github.com/r-prof/proffer/actions?workflow=check" class="external-link"><img src="https://github.com/r-prof/proffer/workflows/check/badge.svg" alt="check"></a></li>
+<li><a href="https://codecov.io/github/r-prof/proffer?branch=main" class="external-link"><img src="https://codecov.io/github/r-prof/proffer/coverage.svg?branch=main" alt="codecov"></a></li>
 </ul>
 </div>
-</div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by William Michael Landau.</p>
+  <p></p>
+<p>Developed by William Michael Landau.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p>
 </div>
 
       </footer>
@@ -397,6 +405,8 @@
 
   
 
+
+  
 
   </body>
 </html>

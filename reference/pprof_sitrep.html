@@ -53,6 +53,8 @@
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -64,9 +66,18 @@
 
 
 
+<!-- dependencies from examples -->
+
+
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -130,7 +141,7 @@
     <pre class="examples"><div class='input'><span class='fu'>pprof_sitrep</span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='message'>● Call test_pprof() to test installation.</span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'><span style='color: #00BBBB;'>──</span><span> </span><span style='font-weight: bold;'>Requirements</span><span> </span><span style='color: #00BBBB;'>────────────────────────────────────────────────────────────────</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BB0000;'>✖</span><span> pprof missing ''</span></div><div class='output co'>#&gt; <span class='message'>● See </span><span style='color: #0000BB;font-style: italic;'>&lt;https://github.com/google/pprof&gt;</span><span> to install pprof.</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #BB0000;'>✖</span><span> Graphviz missing ''</span></div><div class='output co'>#&gt; <span class='message'>● See </span><span style='color: #0000BB;font-style: italic;'>&lt;https://www.graphviz.org/download&gt;</span><span> to install Graphviz.</span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>──</span><span> </span><span style='font-weight: bold;'>Go</span><span> </span><span style='color: #00BBBB;'>──────────────────────────────────────────────────────────────────────────</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✔</span><span> Go binary </span><span style='color: #0000BB;'>/usr/local/bin/go</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> Go folder missing </span><span style='color: #0000BB;'>/Users/runner/go</span><span></span></div><div class='output co'>#&gt; <span class='message'>● See </span><span style='color: #0000BB;font-style: italic;'>&lt;https://golang.org/doc/install&gt;</span><span> to install Go.</span></div><div class='output co'>#&gt; <span class='message'>● If the Go folder is missing but the Go binary is non-missing, you may need</span>
 #&gt; <span class='message'>  to configure the GOPATH environment variable. See</span>
-#&gt; <span class='message'>  </span><span style='color: #0000BB;font-style: italic;'>&lt;https://github.com/golang/go/wiki/GOPATH&gt;</span><span>.</span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>──</span><span> </span><span style='font-weight: bold;'>Custom</span><span> </span><span style='color: #00BBBB;'>──────────────────────────────────────────────────────────────────────</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> </span><span style='color: #000000;background-color: #BBBBBB;'>`PROFFER_PPROF_BIN`</span><span> missing ''</span></div><div class='output co'>#&gt; <span class='message'>● Run </span><span style='color: #000000;background-color: #BBBBBB;'>`usethis::edit_r_environ()`</span><span> to edit '</span><span style='color: #0000BB;'>.Renviron</span><span>' file.</span></div><div class='output co'>#&gt; <span class='message'>● PROFFER_PPROF_BIN=''</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> </span><span style='color: #000000;background-color: #BBBBBB;'>`PROFFER_GO_BIN`</span><span> missing ''</span></div><div class='output co'>#&gt; <span class='message'>● Run </span><span style='color: #000000;background-color: #BBBBBB;'>`usethis::edit_r_environ()`</span><span> to edit '</span><span style='color: #0000BB;'>.Renviron</span><span>' file.</span></div><div class='output co'>#&gt; <span class='message'>● PROFFER_GO_BIN=</span><span style='color: #0000BB;'>/usr/local/bin/go</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> </span><span style='color: #000000;background-color: #BBBBBB;'>`PROFFER_GRAPHVIZ_BIN`</span><span> missing ''</span></div><div class='output co'>#&gt; <span class='message'>● Run </span><span style='color: #000000;background-color: #BBBBBB;'>`usethis::edit_r_environ()`</span><span> to edit '</span><span style='color: #0000BB;'>.Renviron</span><span>' file.</span></div><div class='output co'>#&gt; <span class='message'>● PROFFER_GRAPHVIZ_BIN=''</span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>──</span><span> </span><span style='font-weight: bold;'>System</span><span> </span><span style='color: #00BBBB;'>──────────────────────────────────────────────────────────────────────</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> pprof system path missing ''</span></div><div class='output co'>#&gt; <span class='message'>● See </span><span style='color: #0000BB;font-style: italic;'>&lt;https://github.com/google/pprof&gt;</span><span> to install pprof.</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✔</span><span> Go binary system path </span><span style='color: #0000BB;'>/usr/local/bin/go</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> Graphviz system path missing ''</span></div><div class='output co'>#&gt; <span class='message'>● See </span><span style='color: #0000BB;font-style: italic;'>&lt;https://www.graphviz.org/download&gt;</span><span> to install Graphviz.</span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>──</span><span> </span><span style='font-weight: bold;'>Deprecated</span><span> </span><span style='color: #00BBBB;'>──────────────────────────────────────────────────────────────────</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✔</span><span> </span><span style='color: #000000;background-color: #BBBBBB;'>`pprof_path`</span><span> env variable omitted.</span></div></span></pre>
+#&gt; <span class='message'>  </span><span style='color: #0000BB;font-style: italic;'>&lt;https://github.com/golang/go/wiki/GOPATH&gt;</span><span>.</span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>──</span><span> </span><span style='font-weight: bold;'>Custom</span><span> </span><span style='color: #00BBBB;'>──────────────────────────────────────────────────────────────────────</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> </span><span style='color: #262626;background-color: #DADADA;'>`PROFFER_PPROF_BIN`</span><span> missing ''</span></div><div class='output co'>#&gt; <span class='message'>● Run </span><span style='color: #262626;background-color: #DADADA;'>`usethis::edit_r_environ()`</span><span> to edit '</span><span style='color: #0000BB;'>.Renviron</span><span>' file.</span></div><div class='output co'>#&gt; <span class='message'>● PROFFER_PPROF_BIN=''</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> </span><span style='color: #262626;background-color: #DADADA;'>`PROFFER_GO_BIN`</span><span> missing ''</span></div><div class='output co'>#&gt; <span class='message'>● Run </span><span style='color: #262626;background-color: #DADADA;'>`usethis::edit_r_environ()`</span><span> to edit '</span><span style='color: #0000BB;'>.Renviron</span><span>' file.</span></div><div class='output co'>#&gt; <span class='message'>● PROFFER_GO_BIN=</span><span style='color: #0000BB;'>/usr/local/bin/go</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> </span><span style='color: #262626;background-color: #DADADA;'>`PROFFER_GRAPHVIZ_BIN`</span><span> missing ''</span></div><div class='output co'>#&gt; <span class='message'>● Run </span><span style='color: #262626;background-color: #DADADA;'>`usethis::edit_r_environ()`</span><span> to edit '</span><span style='color: #0000BB;'>.Renviron</span><span>' file.</span></div><div class='output co'>#&gt; <span class='message'>● PROFFER_GRAPHVIZ_BIN=''</span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>──</span><span> </span><span style='font-weight: bold;'>System</span><span> </span><span style='color: #00BBBB;'>──────────────────────────────────────────────────────────────────────</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> pprof system path missing ''</span></div><div class='output co'>#&gt; <span class='message'>● See </span><span style='color: #0000BB;font-style: italic;'>&lt;https://github.com/google/pprof&gt;</span><span> to install pprof.</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✔</span><span> Go binary system path </span><span style='color: #0000BB;'>/usr/local/bin/go</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> Graphviz system path missing ''</span></div><div class='output co'>#&gt; <span class='message'>● See </span><span style='color: #0000BB;font-style: italic;'>&lt;https://www.graphviz.org/download&gt;</span><span> to install Graphviz.</span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BBBB;'>──</span><span> </span><span style='font-weight: bold;'>Deprecated</span><span> </span><span style='color: #00BBBB;'>──────────────────────────────────────────────────────────────────</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✔</span><span> </span><span style='color: #262626;background-color: #DADADA;'>`pprof_path`</span><span> env variable omitted.</span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -142,11 +153,11 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by William Michael Landau.</p>
+  <p><p>Developed by William Michael Landau.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -154,6 +165,8 @@
 
   
 
+
+  
 
   </body>
 </html>
