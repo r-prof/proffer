@@ -1,11 +1,3 @@
-`%||%` <- function(x, y) {
-  if (is.null(x)) {
-    y
-  } else {
-    x
-  }
-}
-
 `%fl%` <- function(x, y) {
   if (!all(file.exists(x))) {
     y

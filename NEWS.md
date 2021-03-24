@@ -1,6 +1,6 @@
 # proffer 0.1.1.9000
 
-
+* Remove superfluous operator `%||%`.
 
 # proffer 0.1.1
 
