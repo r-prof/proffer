@@ -168,10 +168,10 @@ random_port <- function(lower = 49152L, upper = 65355L) {
 
 browse_port <- function(host, port, process, verbose) {
   spinner <- cli::make_spinner()
-  trn(verbose, spinner$spin(), NULL)
+  if_any(verbose, spinner$spin(), NULL)
   while (!pingr::is_up(destination = host, port = port)) {
-    trn(process$is_alive(), Sys.sleep(0.01), stop0(process$read_all_error()))
-    trn(verbose, spinner$spin(), NULL)
+    if_any(process$is_alive(), Sys.sleep(0.01), stop0(process$read_all_error()))
+    if_any(verbose, spinner$spin(), NULL)
   }
   spinner$finish()
   url <- paste0("http://", host, ":", port)

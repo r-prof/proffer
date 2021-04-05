@@ -10,7 +10,7 @@ stop0 <- function(...) {
   stop(..., call. = FALSE)
 }
 
-trn <- function(condition, x, y) {
+if_any <- function(condition, x, y) {
   if (condition) {
     x
   } else {
