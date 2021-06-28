@@ -23,7 +23,7 @@
 #' @importFrom utils browseURL Rprof
 #' @importFrom withr with_path
 #' @examples
-#' \dontrun{
+#' if (identical(Sys.getenv("PROFFER_EXAMPLES"), "true")) {
 #' # Start a pprof virtual server in the background.
 #' px <- pprof(replicate(1e2, sample.int(1e4)))
 #' # Terminate the server.

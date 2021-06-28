@@ -45,7 +45,7 @@ Navigate a browser to a URL in the message.
 The server starts in a background process
 }
 \examples{
-\dontrun{
+if (identical(Sys.getenv("PROFFER_EXAMPLES"), "true")) {
 pprof <- record_pprof(replicate(1e2, sample.int(1e4)))
 # Start a pprof virtual server in the background.
 px <- serve_pprof(pprof)

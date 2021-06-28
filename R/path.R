@@ -6,7 +6,7 @@
 #'   for setup instructions.
 #' @return Character, path to `pprof` it exists and `""` otherwise.
 #' @examples
-#' \dontrun{
+#' if (identical(Sys.getenv("PROFFER_EXAMPLES"), "true")) {
 #' pprof_path()
 #' }
 pprof_path <- function() {

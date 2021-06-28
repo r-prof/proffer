@@ -24,6 +24,8 @@ Profiles are recorded with \code{\link[=record_rprof]{record_rprof()}}
 and then converted with \code{\link[=to_pprof]{to_pprof()}}.
 }
 \examples{
+if (identical(Sys.getenv("PROFFER_EXAMPLES"), "true")) {
 # Returns a path to pprof samples.
 record_pprof(replicate(1e2, sample.int(1e4)))
+}
 }

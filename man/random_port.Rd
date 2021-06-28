@@ -18,3 +18,6 @@ Port number, positive integer of length 1.
 Choose a random TCP port that is unlikely to be occupied
 by another process.
 }
+\examples{
+random_port()
+}

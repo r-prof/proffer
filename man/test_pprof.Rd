@@ -38,7 +38,7 @@ See \url{https://github.com/r-prof/proffer#installation}
 for setup instructions.
 }
 \examples{
-\dontrun{
+if (identical(Sys.getenv("PROFFER_EXAMPLES"), "true")) {
 test_pprof()
 }
 }

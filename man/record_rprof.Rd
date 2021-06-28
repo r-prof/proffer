@@ -21,6 +21,8 @@ Path to a file with Rprof samples.
 Run R code and record Rprof samples.
 }
 \examples{
+if (identical(Sys.getenv("PROFFER_EXAMPLES"), "true")) {
 # Returns a path to Rprof samples.
 record_rprof(replicate(1e2, sample.int(1e4)))
+}
 }

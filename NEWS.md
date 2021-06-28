@@ -1,6 +1,6 @@
-# proffer 0.1.2.9000
+# proffer 0.1.3
 
-
+* Reduce check time of examples.
 
 # proffer 0.1.2
 

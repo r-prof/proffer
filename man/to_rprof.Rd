@@ -18,6 +18,8 @@ Path to pprof samples.
 Convert pprof samples to Rprof format.
 }
 \examples{
+if (identical(Sys.getenv("PROFFER_EXAMPLES"), "true")) {
 pprof <- record_pprof(replicate(1e2, sample.int(1e4)))
 to_rprof(pprof)
+}
 }

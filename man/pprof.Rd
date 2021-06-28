@@ -46,7 +46,7 @@ in a local interactive pprof server.
 Results are collected with \code{\link[=record_pprof]{record_pprof()}}.
 }
 \examples{
-\dontrun{
+if (identical(Sys.getenv("PROFFER_EXAMPLES"), "true")) {
 # Start a pprof virtual server in the background.
 px <- pprof(replicate(1e2, sample.int(1e4)))
 # Terminate the server.
