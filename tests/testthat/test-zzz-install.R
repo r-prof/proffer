@@ -1,4 +1,6 @@
 test_that("install_go() on Mac", {
+  skip_on_cran()
+  skip_if_offline()
   x <- structure(list(), class = "darwin")
   dest <- "/home/you"
   vers <- "1.14"
@@ -6,6 +8,8 @@ test_that("install_go() on Mac", {
 })
 
 test_that("install_go() on Windows", {
+  skip_on_cran()
+  skip_if_offline()
   x <- structure(list(), class = "windows")
   dest <- "/home/you"
   vers <- "1.14"
@@ -13,6 +17,8 @@ test_that("install_go() on Windows", {
 })
 
 test_that("install_go() on Linux", {
+  skip_on_cran()
+  skip_if_offline()
   expect_message(msg_go_install_linux("/home/you"))
   skip_if_offline()
   skip_if_not(go_platform_class() == "linux")
