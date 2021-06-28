@@ -1,6 +1,7 @@
-# proffer 0.1.1.9000
+# proffer 0.1.2
 
 * Remove superfluous operator `%||%`.
+* Skip Go installation tests on CRAN.
 
 # proffer 0.1.1
 
