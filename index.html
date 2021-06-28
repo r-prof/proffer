@@ -89,13 +89,13 @@
   <div class="contents col-md-9">
 <div id="proffer-" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#proffer-" class="anchor"></a>proffer <img src="https://r-prof.github.io/proffer/reference/figures/logo.png" align="right" alt="logo" width="120" height="139" style="border: none; float: right;">
+<a href="#proffer-" class="anchor" aria-hidden="true"></a>proffer <img src="https://r-prof.github.io/proffer/reference/figures/logo.png" align="right" alt="logo" width="120" height="139" style="border: none; float: right;">
 </h1></div>
 
 <p>The <code>proffer</code> package profiles R code to find bottlenecks. Visit <a href="https://r-prof.github.io/proffer" class="external-link uri">https://r-prof.github.io/proffer</a> for documentation. <a href="https://r-prof.github.io/proffer/reference/index.html" class="external-link uri">https://r-prof.github.io/proffer/reference/index.html</a> has a complete list of available functions in the package.</p>
 <div id="why-use-a-profiler" class="section level2">
 <h2 class="hasAnchor">
-<a href="#why-use-a-profiler" class="anchor"></a>Why use a profiler?</h2>
+<a href="#why-use-a-profiler" class="anchor" aria-hidden="true"></a>Why use a profiler?</h2>
 <p>This data processing code is slow.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="op">{</span>
@@ -144,7 +144,7 @@
 </div>
 <div id="managing-the-pprof-server" class="section level2">
 <h2 class="hasAnchor">
-<a href="#managing-the-pprof-server" class="anchor"></a>Managing the pprof server</h2>
+<a href="#managing-the-pprof-server" class="anchor" aria-hidden="true"></a>Managing the pprof server</h2>
 <p>The <code>pprof</code> server is a background <a href="https://github.com/r-lib/processx" class="external-link"><code>processx</code></a> process, and you can manage it with the <code>processx</code> methods <a href="https://processx.r-lib.org/#managing-external-processes" class="external-link">described here</a>. Remember to terminate the process with <code>$kill()</code> when you are done with it.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># px is a process handler.</span>
@@ -176,7 +176,7 @@
 </div>
 <div id="serving-pprof-remotely" class="section level2">
 <h2 class="hasAnchor">
-<a href="#serving-pprof-remotely" class="anchor"></a>Serving pprof remotely</h2>
+<a href="#serving-pprof-remotely" class="anchor" aria-hidden="true"></a>Serving pprof remotely</h2>
 <p>As with Jupyter notebooks, you can serve <code>pprof</code> from one computer and use it from another computer on the same network. On the server, you must</p>
 <ol style="list-style-type: decimal">
 <li>Find the server’s host name or IP address in advance.</li>
@@ -201,11 +201,11 @@
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
+<a href="#installation" class="anchor" aria-hidden="true"></a>Installation</h2>
 <p>For old versions of <code>proffer</code> (0.0.2 and below) refer to <a href="https://github.com/r-prof/proffer/blob/f76bde56796396e83fee00f94430c94974f18303/README.md#installation" class="external-link">these older installation instructions</a> instead of the ones below.</p>
 <div id="the-r-package" class="section level3">
 <h3 class="hasAnchor">
-<a href="#the-r-package" class="anchor"></a>The R package</h3>
+<a href="#the-r-package" class="anchor" aria-hidden="true"></a>The R package</h3>
 <p>The latest release of <code>proffer</code> is available on <a href="https://CRAN.R-project.org" class="external-link">CRAN</a>.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"proffer"</span><span class="op">)</span></code></pre></div>
@@ -217,7 +217,7 @@
 </div>
 <div id="non-r-dependencies" class="section level3">
 <h3 class="hasAnchor">
-<a href="#non-r-dependencies" class="anchor"></a>Non-R dependencies</h3>
+<a href="#non-r-dependencies" class="anchor" aria-hidden="true"></a>Non-R dependencies</h3>
 <p><code>proffer</code> requires</p>
 <ol style="list-style-type: decimal">
 <li>Go: <a href="https://golang.org/doc/install" class="external-link uri">https://golang.org/doc/install</a>
@@ -235,26 +235,26 @@
 </div>
 <div id="configuration" class="section level3">
 <h3 class="hasAnchor">
-<a href="#configuration" class="anchor"></a>Configuration</h3>
+<a href="#configuration" class="anchor" aria-hidden="true"></a>Configuration</h3>
 <p>First, run <code><a href="reference/pprof_sitrep.html">pprof_sitrep()</a></code> to see if <code>proffer</code> can already find all the required non-R dependencies. Then, run <code><a href="reference/test_pprof.html">test_pprof()</a></code> to see if <code>pprof</code> actually works for you. If both checks pass, you are done with installation.</p>
 <p>Otherwise, open your your <code>.Renviron</code> file and define special environment variables that point to system dependencies. The <a href="https://usethis.r-lib.org/reference/edit.html" class="external-link"><code>edit_r_environ()</code></a> function in the <a href="https://usethis.r-lib.org" class="external-link"><code>usethis</code></a> package can help you. Configuration varies according to your platform and installation method.</p>
 <div id="linux" class="section level4">
 <h4 class="hasAnchor">
-<a href="#linux" class="anchor"></a>Linux</h4>
+<a href="#linux" class="anchor" aria-hidden="true"></a>Linux</h4>
 <div class="sourceCode" id="cb9"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>PROFFER_PPROF_BIN=<span class="er">/</span>home<span class="op">/</span>YOU<span class="op">/</span>go<span class="op">/</span>pkg<span class="op">/</span>tool<span class="op">/</span>linux_amd64<span class="op">/</span>pprof</span>
 <span id="cb9-2"><a href="#cb9-2"></a>PROFFER_GO_BIN=<span class="er">/</span>home<span class="op">/</span>YOU<span class="op">/</span>go<span class="op">/</span>bin<span class="op">/</span>go</span>
 <span id="cb9-3"><a href="#cb9-3"></a>PROFFER_GRAPHVIZ_BIN=<span class="er">/</span>usr<span class="op">/</span>bin<span class="op">/</span>dot</span></code></pre></div>
 </div>
 <div id="mac-os" class="section level4">
 <h4 class="hasAnchor">
-<a href="#mac-os" class="anchor"></a>Mac OS</h4>
+<a href="#mac-os" class="anchor" aria-hidden="true"></a>Mac OS</h4>
 <div class="sourceCode" id="cb10"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>PROFFER_PPROF_BIN=<span class="er">/</span>usr<span class="op">/</span>local<span class="op">/</span>bin<span class="op">/</span>pprof</span>
 <span id="cb10-2"><a href="#cb10-2"></a>PROFFER_GO_BIN=<span class="er">/</span>usr<span class="op">/</span>local<span class="op">/</span>bin<span class="op">/</span>go</span>
 <span id="cb10-3"><a href="#cb10-3"></a>PROFFER_GRAPHVIZ_BIN=<span class="er">/</span>usr<span class="op">/</span>local<span class="op">/</span>bin<span class="op">/</span>dot</span></code></pre></div>
 </div>
 <div id="windows" class="section level4">
 <h4 class="hasAnchor">
-<a href="#windows" class="anchor"></a>Windows</h4>
+<a href="#windows" class="anchor" aria-hidden="true"></a>Windows</h4>
 <div class="sourceCode" id="cb11"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>PROFFER_PPROF_BIN=C<span class="op">:</span>\Go\pkg\tool\windows_amd64\pprof.exe</span>
 <span id="cb11-2"><a href="#cb11-2"></a>PROFFER_GO_BIN=C<span class="op">:</span>\Go\bin\go.exe</span>
 <span id="cb11-3"><a href="#cb11-3"></a>PROFFER_GRAPHVIZ_BIN=<span class="st">"C:\Program Files (x86)\Graphviz2.38</span><span class="ch">\b</span><span class="st">in\dot.exe"</span></span></code></pre></div>
@@ -262,7 +262,7 @@
 </div>
 <div id="verification" class="section level3">
 <h3 class="hasAnchor">
-<a href="#verification" class="anchor"></a>Verification</h3>
+<a href="#verification" class="anchor" aria-hidden="true"></a>Verification</h3>
 <p>Run <code><a href="reference/pprof_sitrep.html">pprof_sitrep()</a></code> again to verify that everything is installed and configured correctly.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-prof/proffer" class="external-link">proffer</a></span><span class="op">)</span>
@@ -297,12 +297,12 @@
 </div>
 <div id="contributing" class="section level2">
 <h2 class="hasAnchor">
-<a href="#contributing" class="anchor"></a>Contributing</h2>
+<a href="#contributing" class="anchor" aria-hidden="true"></a>Contributing</h2>
 <p>We encourage participation through <a href="https://github.com/r-prof/proffer/issues" class="external-link">issues</a> and <a href="https://github.com/r-prof/proffer/pulls" class="external-link">pull requests</a>. <code>proffer</code> has a <a href="https://github.com/r-prof/proffer/blob/main/CODE_OF_CONDUCT.md" class="external-link">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
 <div id="resources" class="section level2">
 <h2 class="hasAnchor">
-<a href="#resources" class="anchor"></a>Resources</h2>
+<a href="#resources" class="anchor" aria-hidden="true"></a>Resources</h2>
 <p>Profilers identify bottlenecks, but the do not offer solutions. It helps to learn about fast code in general so you can think of efficient alternatives to try.</p>
 <ul>
 <li><a href="http://adv-r.had.co.nz/Performance.html" class="external-link uri">http://adv-r.had.co.nz/Performance.html</a></li>
@@ -313,10 +313,10 @@
 </div>
 <div id="similar-work" class="section level2">
 <h2 class="hasAnchor">
-<a href="#similar-work" class="anchor"></a>Similar work</h2>
+<a href="#similar-work" class="anchor" aria-hidden="true"></a>Similar work</h2>
 <div id="profvis" class="section level3">
 <h3 class="hasAnchor">
-<a href="#profvis" class="anchor"></a>profvis</h3>
+<a href="#profvis" class="anchor" aria-hidden="true"></a>profvis</h3>
 <p>The <a href="https://github.com/rstudio/profvis" class="external-link"><code>profvis</code></a> is much easier to install than <code>proffer</code> and equally easy to invoke.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">profvis</span><span class="op">)</span>
