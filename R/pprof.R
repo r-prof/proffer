@@ -176,13 +176,13 @@ browse_port <- function(host, port, process, verbose) {
     if_any(verbose, spinner$spin(), NULL)
   }
   spinner$finish()
-  url <- paste0("http://", host, ":", port)
+  url <- paste0("http://", host, ":", port, "/ui/flamegraph")
   utils::browseURL(url)
 }
 
 show_url <- function(host, port) {
   cli::cli_ul()
-  cli::cli_li("url: {.path http://{host}:{port}}")
+  cli::cli_li("url: {.path http://{host}:{port}/ui/flamegraph}")
   cli::cli_li("host: {.path {host}}")
   cli::cli_li("port: {.path {port}}")
   cli::cli_end()
