@@ -4,7 +4,7 @@
 
 # proffer 0.1.5
 
-* Skip all tests on CRAN. When I submitted version 0.1.4, in the CRAN incoming pretests on 64-bit Windows R-devel (2021-07-25 r80663), the unit tests took 24 minutes to run. This length of time is certainly egregious, but I do no have access to the precise configuration of CRAN's machines, and I cannot reproduce the issue on R hub, Win Builder, or GitHub Actions. In all these latter services, the total check time is 1-2 minutes. My only option is to suppress all tests on CRAN.
+* Skip all tests on CRAN. When I submitted version 0.1.4, in the CRAN incoming pretests on 64-bit Windows R-devel (2021-07-25 r80663), the unit tests took 24 minutes to run. This length of time is certainly egregious, but I do no have access to the precise configuration of CRAN's machines, and I cannot reproduce the issue on R hub, Win Builder, or GitHub Actions. In all these latter services, the total check time is 1-2 minutes.
 
 # proffer 0.1.4
 
