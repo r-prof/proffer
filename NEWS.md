@@ -1,4 +1,4 @@
-# proffer 0.1.3.9000
+# proffer 0.1.4
 
 * Choose the flame graph as the default view.
 
