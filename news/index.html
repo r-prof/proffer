@@ -87,7 +87,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">proffer</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.4.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.5</span>
       </span>
     </div>
 
@@ -124,10 +124,11 @@
       <small>Source: <a href='https://github.com/r-prof/proffer/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="proffer-0149000" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.4.9000">
-<a href="#proffer-0149000" class="anchor" aria-hidden="true"></a>proffer 0.1.4.9000<small> Unreleased </small></h1>
-</div>
+    <div id="proffer-015" class="section level1">
+<h1 class="page-header" data-toc-text="0.1.5">
+<a href="#proffer-015" class="anchor" aria-hidden="true"></a>proffer 0.1.5<small> Unreleased </small></h1>
+<ul><li>Skip all tests on CRAN. When I submitted version 0.1.4, in the CRAN incoming pretests on 64-bit Windows R-devel (2021-07-25 r80663), the unit tests took 24 minutes to run. This length of time is certainly egregious, but I do no have access to the precise configuration of CRAN’s machines, and I cannot reproduce the issue on R hub, Win Builder, or GitHub Actions. In all these latter services, the total check time is 1-2 minutes. My only option is to suppress all tests on CRAN.</li>
+</ul></div>
     <div id="proffer-014" class="section level1">
 <h1 class="page-header" data-toc-text="0.1.4">
 <a href="#proffer-014" class="anchor" aria-hidden="true"></a>proffer 0.1.4<small> Unreleased </small></h1>
