@@ -184,7 +184,7 @@ show_url <- function(host, port) {
   cli::cli_ul()
   cli::cli_li("url: {.path http://{host}:{port}/ui/flamegraph}")
   cli::cli_li("host: {.path {host}}")
-  cli::cli_li("port: {.path {port}}")
+  cli::cli_li("port: {.path {as.character(port)}}")
   cli::cli_end()
 }
 
