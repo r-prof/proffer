@@ -6,10 +6,10 @@ on:
   pull_request:
     branches: [main, master]
 
-name: R-CMD-check
+name: check
 
 jobs:
-  R-CMD-check:
+  check:
     runs-on: ${{ matrix.config.os }}
 
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
@@ -30,6 +30,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+
+      - name: protobuf
+        if: runner.os == 'Linux'
+        run: sudo apt-get install protobuf-compiler libprotobuf-dev libprotoc-dev
 
       - uses: r-lib/actions/setup-pandoc@v2
 
