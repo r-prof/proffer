@@ -39,6 +39,7 @@ Depends:
   R (>= 3.3.0)
 Imports:
   cli (>= 2.0.0),
+  parallelly (>= 1.26.0),
   pingr (>= 2.0.1),
   processx (>= 3.4.0),
   profile (>= 1.0),

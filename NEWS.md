@@ -1,6 +1,7 @@
 # proffer 0.1.5.9000
 
 * Fix `path.expand()` error when printing the port number (#30, @HenrikBengtsson).
+* Use `parallelly::freePort()` to drive `random_port()` (#31, @HenrikBengtsson).
 
 # proffer 0.1.5
 

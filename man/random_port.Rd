@@ -2,9 +2,9 @@
 % Please edit documentation in R/pprof.R
 \name{random_port}
 \alias{random_port}
-\title{Choose a random TCP port.}
+\title{Choose a random free TCP port.}
 \usage{
-random_port(lower = 49152L, upper = 65355L)
+random_port(lower = 49152L, upper = 65535L)
 }
 \arguments{
 \item{lower}{Integer of length 1, lower bound of the port number.}
@@ -15,8 +15,12 @@ random_port(lower = 49152L, upper = 65355L)
 Port number, positive integer of length 1.
 }
 \description{
-Choose a random TCP port that is unlikely to be occupied
-by another process.
+Choose a random free TCP port.
+}
+\details{
+This function is a simple wrapper around
+\code{parallelly::freePort()} with the default port range
+covering ephemeral ports only.
 }
 \examples{
 random_port()

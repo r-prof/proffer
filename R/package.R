@@ -17,6 +17,7 @@
 #' @references <https://github.com/r-prof/proffer>
 #' @importFrom cli cli_alert_danger cli_alert_info cli_alert_success cli_h1
 #'   cli_li cli_ul make_spinner
+#' @importFrom parallelly freePort
 #' @importFrom processx process
 #' @importFrom profile read_rprof write_pprof
 #' @importFrom RProtoBuf readProtoFiles
