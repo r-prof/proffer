@@ -10,7 +10,7 @@
 [![codecov](https://codecov.io/github/r-prof/proffer/coverage.svg?branch=main)](https://codecov.io/github/r-prof/proffer?branch=main)
 
 The `proffer` package profiles R code to find bottlenecks. Visit
-<https://r-prof.github.io/proffer> for documentation.
+<https://r-prof.github.io/proffer/> for documentation.
 <https://r-prof.github.io/proffer/reference/index.html> has a complete
 list of available functions in the package.
 
@@ -54,15 +54,13 @@ graph, we see `[<-.data.frame()` (i.e. `x[i, ] <- x[i, ] + 1`) is taking
 most of the runtime.
 
 <center>
-
 <a href="https://r-prof.github.io/proffer/reference/figures/flame.png">
 <img src="https://r-prof.github.io/proffer/reference/figures/flame.png" alt="top" align="center" style = "border: none; float: center;">
 </a>
-
 </center>
 
 So we refactor the code to avoid data frame row assignment. Much faster,
-even with a `for` loop\!
+even with a `for` loop!
 
 ``` r
 system.time({
@@ -76,12 +74,12 @@ system.time({
   x <- data.frame(x = x, y = y)
 })
 #>    user  system elapsed 
-#>   0.052   0.003   0.056
+#>   0.036   0.000   0.041
 ```
 
 Moral of the story: before you optimize, throw away your assumptions and
 run your code through a profiler. That way, you can spend your time
-optimizing where it counts\!
+optimizing where it counts!
 
 ## Managing the pprof server
 
@@ -128,8 +126,6 @@ must
 
 1.  Find the server’s host name or IP address in advance.
 2.  Supply `"0.0.0.0"` as the `host` argument.
-
-<!-- end list -->
 
 ``` r
 system2("hostname")
@@ -184,7 +180,7 @@ instructions](https://github.com/eddelbuettel/rprotobuf#installation).
 
 `proffer` requires
 
-1.  Go: <https://golang.org/doc/install>
+1.  Go: <https://go.dev/doc/install>
 2.  Graphviz: <https://www.graphviz.org/download>
 3.  `pprof`: <https://github.com/google/pprof> (already comes with Go)
 
@@ -241,28 +237,29 @@ configured correctly.
 ``` r
 library(proffer)
 pprof_sitrep()
-#> ● Call test_pprof() to test installation.
+#> • Call test_pprof() to test installation.
 #> 
 #> ── Requirements ────────────────────────────────────────────────────────────────
-#> ✓ pprof /Users/c240390/go/bin/pprof
-#> ✓ Graphviz /usr/local/bin/dot
+#> ✔ pprof ']8;;file:///home/landau/go/pkg/tool/linux_amd64/pprof/home/landau/go/pkg/tool/linux_amd64/pprof]8;;'
+#> ✔ Graphviz ']8;;file:///usr/bin/dot/usr/bin/dot]8;;'
 #> 
 #> ── Go ──────────────────────────────────────────────────────────────────────────
-#> ✓ Go binary /usr/local/bin/go
-#> ✓ Go folder /Users/c240390/go
+#> ✔ Go binary ']8;;file:///home/landau/go/bin/go/home/landau/go/bin/go]8;;'
+#> ✔ Go folder ']8;;file:///home/landau/go/home/landau/go]8;;'
 #> 
 #> ── Custom ──────────────────────────────────────────────────────────────────────
-#> ✓ `PROFFER_PPROF_BIN` /Users/c240390/go/bin/pprof
-#> ✓ `PROFFER_GO_BIN` /usr/local/bin/go
-#> ✓ `PROFFER_GRAPHVIZ_BIN` /usr/local/bin/dot
+#> ✔ `PROFFER_PPROF_BIN` ']8;;file:///home/landau/go/pkg/tool/linux_amd64/pprof/home/landau/go/pkg/tool/linux_amd64/pprof]8;;'
+#> ✔ `PROFFER_GO_BIN` ']8;;file:///home/landau/go/bin/go/home/landau/go/bin/go]8;;'
+#> ✔ `PROFFER_GRAPHVIZ_BIN` ']8;;file:///usr/bin/dot/usr/bin/dot]8;;'
 #> 
 #> ── System ──────────────────────────────────────────────────────────────────────
-#> ✓ pprof system path /Users/c240390/go/bin/pprof
-#> ✓ Go binary system path /usr/local/bin//go
-#> ✓ Graphviz system path /usr/local/bin//dot
+#> ℹ pprof system path missing ']8;;file:///home/landau/go/bin/pprof/home/landau/go/bin/pprof]8;;'
+#> • See <]8;;https://github.com/google/pprofhttps://github.com/google/pprof]8;;> to install pprof.
+#> ✔ Go binary system path ']8;;file:///usr/bin/go/usr/bin/go]8;;'
+#> ✔ Graphviz system path ']8;;file:///usr/bin/dot/usr/bin/dot]8;;'
 #> 
 #> ── Deprecated ──────────────────────────────────────────────────────────────────
-#> ✓ `pprof_path` env variable omitted.
+#> ✔ `pprof_path` env variable omitted.
 ```
 
 If all dependencies are accounted for, `proffer` should work. Test it
@@ -289,10 +286,10 @@ Profilers identify bottlenecks, but the do not offer solutions. It helps
 to learn about fast code in general so you can think of efficient
 alternatives to try.
 
-  - <http://adv-r.had.co.nz/Performance.html>
-  - <https://www.r-bloggers.com/strategies-to-speedup-r-code/>
-  - <https://www.r-bloggers.com/faster-higher-stonger-a-guide-to-speeding-up-r-code-for-busy-people/>
-  - <https://cran.r-project.org/package=data.table/vignettes/datatable-intro.html>
+- <http://adv-r.had.co.nz/Performance.html>
+- <https://www.r-bloggers.com/2016/01/strategies-to-speedup-r-code/>
+- <https://www.r-bloggers.com/2013/04/faster-higher-stonger-a-guide-to-speeding-up-r-code-for-busy-people/>
+- <https://cran.r-project.org/package=data.table/vignettes/datatable-intro.html>
 
 ## Similar work
 
@@ -318,11 +315,9 @@ read](https://github.com/rstudio/profvis/issues/115) and [slow to
 respond to mouse clicks](https://github.com/rstudio/profvis/issues/104).
 
 <center>
-
 <a href="https://r-prof.github.io/proffer/reference/figures/profvis.png">
 <img src="https://r-prof.github.io/proffer/reference/figures/profvis.png" alt="top" align="center" style = "border: none; float: center;">
 </a>
-
 </center>
 
 `proffer` uses [`pprof`](https://github.com/google/pprof) to create

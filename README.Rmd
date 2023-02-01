@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 [![check](https://github.com/r-prof/proffer/workflows/check/badge.svg)](https://github.com/r-prof/proffer/actions?workflow=check)
 [![codecov](https://codecov.io/github/r-prof/proffer/coverage.svg?branch=main)](https://codecov.io/github/r-prof/proffer?branch=main)
 
-The `proffer` package profiles R code to find bottlenecks. Visit <https://r-prof.github.io/proffer> for documentation. <https://r-prof.github.io/proffer/reference/index.html> has a complete list of available functions in the package. 
+The `proffer` package profiles R code to find bottlenecks. Visit <https://r-prof.github.io/proffer/> for documentation. <https://r-prof.github.io/proffer/reference/index.html> has a complete list of available functions in the package. 
 
 ## Why use a profiler?
 
@@ -167,7 +167,7 @@ The `proffer` package requires the `RProtoBuf` package, which may require instal
 
 `proffer` requires
 
-1. Go: <https://golang.org/doc/install>
+1. Go: <https://go.dev/doc/install>
 2. Graphviz: <https://www.graphviz.org/download>
 3. `pprof`: <https://github.com/google/pprof> (already comes with Go)
 
@@ -235,8 +235,8 @@ We encourage participation through [issues](https://github.com/r-prof/proffer/is
 Profilers identify bottlenecks, but the do not offer solutions. It helps to learn about fast code in general so you can think of efficient alternatives to try.
 
 - <http://adv-r.had.co.nz/Performance.html>
-- <https://www.r-bloggers.com/strategies-to-speedup-r-code/>
-- <https://www.r-bloggers.com/faster-higher-stonger-a-guide-to-speeding-up-r-code-for-busy-people/>
+- <https://www.r-bloggers.com/2016/01/strategies-to-speedup-r-code/>
+- <https://www.r-bloggers.com/2013/04/faster-higher-stonger-a-guide-to-speeding-up-r-code-for-busy-people/>
 - <https://cran.r-project.org/package=data.table/vignettes/datatable-intro.html>
 
 ## Similar work
