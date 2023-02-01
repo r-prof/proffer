@@ -2,6 +2,8 @@
 
 * Fix `path.expand()` error when printing the port number (#30, @HenrikBengtsson).
 * Use `parallelly::freePort()` to drive `random_port()` (#31, @HenrikBengtsson).
+* Add the `-no_browser` flag to the `pprof` call to avoid redundant browsers.
+* Update go link and go version (1.19.5).
 
 # proffer 0.1.5
 

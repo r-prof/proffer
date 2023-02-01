@@ -144,7 +144,7 @@ serve_pprof <- function(
   verbose = TRUE
 ) {
   server <- sprintf("%s:%s", host, port)
-  args <- c("-http", server, pprof)
+  args <- c("-http", server, "-no_browser", pprof)
   process <- serve_pprof_impl(args)
   if (browse) {
     browse_port(host, port, process, verbose)
