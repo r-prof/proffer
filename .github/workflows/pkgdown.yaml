@@ -24,6 +24,8 @@ jobs:
 
       - name: Set up Go
         uses: actions/setup-go@v4
+        with:
+          version: 1.23.2
 
       - name: protobuf
         run: sudo apt-get install protobuf-compiler libprotobuf-dev libprotoc-dev
