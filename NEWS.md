@@ -1,6 +1,7 @@
-# proffer 0.1.6.9000
+# proffer 0.2.0
 
-
+* Deprecate `install_go()`. Visit <https://go.dev/dl/> to download the appropriate build of Go for your platform.
+* Use the copy of `pprof` that comes with Go.
 
 # proffer 0.1.6
 

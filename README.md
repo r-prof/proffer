@@ -74,7 +74,7 @@ system.time({
   x <- data.frame(x = x, y = y)
 })
 #>    user  system elapsed 
-#>   0.036   0.000   0.041
+#>   0.019   0.000   0.020
 ```
 
 Moral of the story: before you optimize, throw away your assumptions and
@@ -178,58 +178,17 @@ instructions](https://github.com/eddelbuettel/rprotobuf#installation).
 
 ### Non-R dependencies
 
-`proffer` requires
-
-1.  Go: <https://go.dev/doc/install>
-2.  Graphviz: <https://www.graphviz.org/download>
-3.  `pprof`: <https://github.com/google/pprof> (already comes with Go)
-
-`pprof` itself is already installed with Go. We highly recommend you use
-Go’s default copy of `pprof` because [compatibility
-issues](https://github.com/r-prof/proffer/issues/27) could arise if you
-install the latest `pprof` manually.
-
-Mac and Windows installers of Go and Graphviz are available at the links
-above. On Linux, you can install Go (and thus `pprof`) directly from R:
-
-``` r
-library(proffer)
-install_go() # Also installs pprof if on Linux.
-```
+`proffer` requires the copy of `pprof` that comes pre-packaged with the
+Go language. You can install Go at <https://go.dev/doc/install>.[^1]
 
 ### Configuration
 
-First, run `pprof_sitrep()` to see if `proffer` can already find all the
-required non-R dependencies. Then, run `test_pprof()` to see if `pprof`
-actually works for you. If both checks pass, you are done with
-installation.
+You can set the `PROFFER_GO_BIN` environment variable to a custom
+location for the Go binary. See
+[`usethis::edit_r_environ()`](https://usethis.r-lib.org/reference/edit.html)
+for directions on how to make this configuration permanent.
 
-Otherwise, open your your `.Renviron` file and define special
-environment variables that point to system dependencies. The
-[`edit_r_environ()`](https://usethis.r-lib.org/reference/edit.html)
-function in the [`usethis`](https://usethis.r-lib.org) package can help
-you. Configuration varies according to your platform and installation
-method.
-
-#### Linux
-
-    PROFFER_PPROF_BIN=/home/YOU/go/pkg/tool/linux_amd64/pprof
-    PROFFER_GO_BIN=/home/YOU/go/bin/go
-    PROFFER_GRAPHVIZ_BIN=/usr/bin/dot
-
-#### Mac OS
-
-    PROFFER_PPROF_BIN=/usr/local/bin/pprof
-    PROFFER_GO_BIN=/usr/local/bin/go
-    PROFFER_GRAPHVIZ_BIN=/usr/local/bin/dot
-
-#### Windows
-
-    PROFFER_PPROF_BIN=C:\Go\pkg\tool\windows_amd64\pprof.exe
-    PROFFER_GO_BIN=C:\Go\bin\go.exe
-    PROFFER_GRAPHVIZ_BIN="C:\Program Files (x86)\Graphviz2.38\bin\dot.exe"
-
-### Verification
+### Local testing
 
 Run `pprof_sitrep()` again to verify that everything is installed and
 configured correctly.
@@ -240,26 +199,10 @@ pprof_sitrep()
 #> • Call test_pprof() to test installation.
 #> 
 #> ── Requirements ────────────────────────────────────────────────────────────────
-#> ✔ pprof ']8;;file:///home/landau/go/pkg/tool/linux_amd64/pprof/home/landau/go/pkg/tool/linux_amd64/pprof]8;;'
-#> ✔ Graphviz ']8;;file:///usr/bin/dot/usr/bin/dot]8;;'
-#> 
-#> ── Go ──────────────────────────────────────────────────────────────────────────
-#> ✔ Go binary ']8;;file:///home/landau/go/bin/go/home/landau/go/bin/go]8;;'
-#> ✔ Go folder ']8;;file:///home/landau/go/home/landau/go]8;;'
+#> ✔ Go binary '/usr/local/go/bin/go'
 #> 
 #> ── Custom ──────────────────────────────────────────────────────────────────────
-#> ✔ `PROFFER_PPROF_BIN` ']8;;file:///home/landau/go/pkg/tool/linux_amd64/pprof/home/landau/go/pkg/tool/linux_amd64/pprof]8;;'
-#> ✔ `PROFFER_GO_BIN` ']8;;file:///home/landau/go/bin/go/home/landau/go/bin/go]8;;'
-#> ✔ `PROFFER_GRAPHVIZ_BIN` ']8;;file:///usr/bin/dot/usr/bin/dot]8;;'
-#> 
-#> ── System ──────────────────────────────────────────────────────────────────────
-#> ℹ pprof system path missing ']8;;file:///home/landau/go/bin/pprof/home/landau/go/bin/pprof]8;;'
-#> • See <]8;;https://github.com/google/pprofhttps://github.com/google/pprof]8;;> to install pprof.
-#> ✔ Go binary system path ']8;;file:///usr/bin/go/usr/bin/go]8;;'
-#> ✔ Graphviz system path ']8;;file:///usr/bin/dot/usr/bin/dot]8;;'
-#> 
-#> ── Deprecated ──────────────────────────────────────────────────────────────────
-#> ✔ `pprof_path` env variable omitted.
+#> ✔ `PROFFER_GO_BIN` '/usr/local/go/bin/go'
 ```
 
 If all dependencies are accounted for, `proffer` should work. Test it
@@ -268,7 +211,14 @@ window showing an instance of `pprof`.
 
 ``` r
 library(proffer)
-test_pprof()
+process <- test_pprof()
+```
+
+When you are done testing, you can clean up the process to conserve
+resources.
+
+``` r
+process$kill()
 ```
 
 ## Contributing
@@ -322,3 +272,7 @@ respond to mouse clicks](https://github.com/rstudio/profvis/issues/104).
 
 `proffer` uses [`pprof`](https://github.com/google/pprof) to create
 friendlier, faster visualizations.
+
+[^1]: One of the graph visualizations requires Graphviz, which you
+    <https://www.graphviz.org/download>, but this visualization is
+    arguably not as useful as the flame graph.

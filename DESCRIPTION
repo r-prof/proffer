@@ -1,6 +1,6 @@
 Package: proffer
 Title: Profile R Code and Visualize with 'Pprof'
-Version: 0.1.6.9000
+Version: 0.2.0
 Encoding: UTF-8
 Language: en-US
 License: MIT + file LICENSE
@@ -52,4 +52,4 @@ SystemRequirements:
   Graphviz (https://www.graphviz.org/),
   pprof (https://github.com/google/pprof)
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2

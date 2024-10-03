@@ -2,23 +2,19 @@
 % Please edit documentation in R/path.R
 \name{pprof_path}
 \alias{pprof_path}
-\title{Show the path to the pprof executable.}
+\title{Deprecated}
 \usage{
 pprof_path()
 }
 \value{
-Character, path to \code{pprof} it exists and \code{""} otherwise.
+Character, path to Go.
 }
 \description{
-Defaults to the \code{PROFFER_PPROF_BIN} environment variable.
-Otherwise, it searches your Go lang installation for \code{pprof}.
-}
-\details{
-See \url{https://github.com/r-prof/proffer#installation}
-for setup instructions.
+Deprecated.
 }
 \examples{
 if (identical(Sys.getenv("PROFFER_EXAMPLES"), "true")) {
 pprof_path()
 }
 }
+\keyword{internal}

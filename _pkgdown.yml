@@ -28,5 +28,4 @@ reference:
   - '`pprof_path`'
 - title: Utilities
   contents:
-  - '`install_go`'
   - '`random_port`'

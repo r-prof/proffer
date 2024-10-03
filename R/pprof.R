@@ -184,9 +184,10 @@ browse_port <- function(host, port, process, verbose) {
 
 show_url <- function(host, port) {
   cli::cli_ul()
-  cli::cli_li("url: {.path http://{host}:{port}/ui/flamegraph}")
-  cli::cli_li("host: {.path {host}}")
-  cli::cli_li("port: {.path {as.character(port)}}")
+  url <- sprintf("http://%s:%s/ui/flamegraph", host, port)
+  cli::cli_li("url: {.url {url}}")
+  cli::cli_li("host: {host}")
+  cli::cli_li("port: {port}")
   cli::cli_end()
 }
 
@@ -194,8 +195,8 @@ serve_pprof_impl <- function(args) {
   with_safe_path(
     Sys.getenv("PROFFER_GRAPHVIZ_BIN"),
     processx::process$new(
-      command = pprof_path(),
-      args = args,
+      command = go_bin_path(),
+      args = c("tool", "pprof", args),
       stdout = "|",
       stderr = "|",
       supervise = TRUE

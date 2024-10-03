@@ -2,40 +2,20 @@
 % Please edit documentation in R/install.R
 \name{install_go}
 \alias{install_go}
-\title{Install pprof and Go on Linux}
+\title{Deprecated}
 \usage{
-install_go(destination = Sys.getenv("HOME"), version = "1.19.5", quiet = FALSE)
+install_go(destination = tempfile(), version = NULL, quiet = FALSE)
 }
 \arguments{
-\item{destination}{Only relevant to Linux,
-full path to the Go installation with the \code{pprof} and Go executables.
-Defaults to \code{Sys.getenv("HOME")}, which means the default
-Go installation path is \code{file.path(Sys.getenv("HOME"), "go")}.
-That means the Go binary will be at
-\code{file.path(Sys.getenv("HOME"), "go/bin/go")}
-and \code{pprof} will be at
-\code{file.path(Sys.getenv("HOME"), "go/pkg/tool/linux_amd64/pprof")}.
-You will need to set environment variables in your \code{.Renviron} file,
-e.g. \verb{PROFFER_PPROF_BIN=/home/you/go/pkg/tool/linux_amd64/pprof}
-and \verb{PROFFER_GO_BIN=/home/you/go/bin/go}. \code{usethis::edit_r_environ()}
-is helpful for this.}
+\item{destination}{Full path to the Go installation with the \code{pprof}
+and Go executables.}
 
 \item{version}{Character, a version string such as \code{"1.19.5"}.}
 
 \item{quiet}{Logical, whether to suppress console messages.}
 }
 \description{
-On Linux, this function actually installs Go,
-which comes with its own
-installation of \code{pprof}. On Mac and Windows, the function
-simply points the user to a link to download the installer.
-Assumes amd64 architecture.
+Deprecated. To install Go, visit \url{https://go.dev/dl/}
+and choose the appropriate build for your platform.
 }
-\details{
-On Linux, users will need to set
-the environment variables \code{PROFFER_PPROF_BIN} and \code{PROFFER_GO_BIN} using
-\code{usethis::edit_r_environ()}. Typically, if \code{destination} is \verb{/home/you},
-then typically those lines look like
-\verb{PROFFER_GO_BIN=/home/you/go/pkg/tool/linux_amd64/pprof}
-\verb{PROFFER_PPROF_BIN=/home/you/go/bin/go}.
-}
+\keyword{internal}

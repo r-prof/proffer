@@ -1,5 +1,4 @@
 #' proffer: profile R code with pprof
-#' @docType package
 #' @description It can be challenging to find sources of
 #' slowness in large workflows, and the proffer package can help.
 #' Proffer runs R code and displays summaries
