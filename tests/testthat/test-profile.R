@@ -1,4 +1,5 @@
 test_that("record_pprof() and convert to rprof", {
+  skip_on_cran()
   pprof <- record_pprof(slow_function())
   samples <- profile::read_pprof(pprof)
   expect_silent(profile::validate_profile(samples))
@@ -8,6 +9,7 @@ test_that("record_pprof() and convert to rprof", {
 })
 
 test_that("record_rprof() and convert to pprof", {
+  skip_on_cran()
   rprof <- record_rprof(slow_function())
   samples <- profile::read_rprof(rprof)
   expect_silent(profile::validate_profile(samples))
@@ -17,6 +19,7 @@ test_that("record_rprof() and convert to pprof", {
 })
 
 test_that("arguments to record_rprof()", {
+  skip_on_cran()
   rprof <- record_rprof(slow_function())
   prof <- profile::read_rprof(rprof)
   expect_silent(profile::validate_profile(prof))
