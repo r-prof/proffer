@@ -1,6 +1,6 @@
 Package: proffer
 Title: Profile R Code and Visualize with 'Pprof'
-Version: 0.2.0
+Version: 0.2.0.9000
 Encoding: UTF-8
 Language: en-US
 License: MIT + file LICENSE
