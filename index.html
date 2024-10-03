@@ -12,28 +12,13 @@
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="apple-touch-icon-120x120.png">
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Profile R Code and Visualize with Pprof">
-<meta property="og:description" content="Like similar profiling tools,
-  the proffer package automatically detects
-  sources of slowness in R code.
-  The distinguishing feature of proffer is its utilization of
-  pprof, which supplies interactive visualizations
-  that are efficient and easy to interpret.
-  Behind the scenes, the profile package converts
-  native Rprof() data to a protocol buffer
-  that pprof understands.
-  For the documentation of proffer,
-  visit &lt;https://r-prof.github.io/proffer/&gt;.
-  To learn about the implementations and methodologies of
-  pprof, profile, and protocol buffers,
-  visit &lt;https://github.com/google/pprof&gt;.
-  &lt;https://developers.google.com/protocol-buffers&gt;,
-  and &lt;https://github.com/r-prof/profile&gt;, respectively.">
+<meta property="og:description" content="Like similar profiling tools, the proffer package automatically detects sources of slowness in R code. The distinguishing feature of proffer is its utilization of pprof, which supplies interactive visualizations that are efficient and easy to interpret. Behind the scenes, the profile package converts native Rprof() data to a protocol buffer that pprof understands. For the documentation of proffer, visit &lt;https://r-prof.github.io/proffer/&gt;. To learn about the implementations and methodologies of pprof, profile, and protocol buffers, visit &lt;https://github.com/google/pprof&gt;. &lt;https://developers.google.com/protocol-buffers&gt;, and &lt;https://github.com/r-prof/profile&gt;, respectively.">
 <meta property="og:image" content="/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -41,7 +26,7 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
-    
+
 
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -55,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">proffer</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.6.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.0</span>
       </span>
     </div>
 
@@ -72,7 +57,7 @@
 <li>
   <a href="https://github.com/r-prof/proffer/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
-     
+
   </a>
 </li>
       </ul>
@@ -83,10 +68,11 @@
 </div>
 <!--/.navbar -->
 
-      
+
 
       </header><div class="row">
   <div class="contents col-md-9">
+
 <div class="section level1">
 <div class="page-header"><h1 id="proffer-">proffer <img src="https://r-prof.github.io/proffer/reference/figures/logo.png" align="right" alt="logo" width="120" height="139" style="border: none; float: right;"><a class="anchor" aria-label="anchor" href="#proffer-"></a>
 </h1></div>
@@ -138,7 +124,7 @@
 <span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, y <span class="op">=</span> <span class="va">y</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.036   0.000   0.041</span></span></code></pre></div>
+<span><span class="co">#&gt;   0.019   0.000   0.020</span></span></code></pre></div>
 <p>Moral of the story: before you optimize, throw away your assumptions and run your code through a profiler. That way, you can spend your time optimizing where it counts!</p>
 </div>
 <div class="section level2">
@@ -217,82 +203,34 @@
 <div class="section level3">
 <h3 id="non-r-dependencies">Non-R dependencies<a class="anchor" aria-label="anchor" href="#non-r-dependencies"></a>
 </h3>
-<p><code>proffer</code> requires</p>
-<ol style="list-style-type: decimal">
-<li>Go: <a href="https://go.dev/doc/install" class="external-link uri">https://go.dev/doc/install</a>
-</li>
-<li>Graphviz: <a href="https://www.graphviz.org/download" class="external-link uri">https://www.graphviz.org/download</a>
-</li>
-<li>
-<code>pprof</code>: <a href="https://github.com/google/pprof" class="external-link uri">https://github.com/google/pprof</a> (already comes with Go)</li>
-</ol>
-<p><code>pprof</code> itself is already installed with Go. We highly recommend you use Go’s default copy of <code>pprof</code> because <a href="https://github.com/r-prof/proffer/issues/27" class="external-link">compatibility issues</a> could arise if you install the latest <code>pprof</code> manually.</p>
-<p>Mac and Windows installers of Go and Graphviz are available at the links above. On Linux, you can install Go (and thus <code>pprof</code>) directly from R:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-prof/proffer" class="external-link">proffer</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="reference/install_go.html">install_go</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># Also installs pprof if on Linux.</span></span></code></pre></div>
+<p><code>proffer</code> requires the copy of <code>pprof</code> that comes pre-packaged with the Go language. You can install Go at <a href="https://go.dev/doc/install" class="external-link uri">https://go.dev/doc/install</a>.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 </div>
 <div class="section level3">
 <h3 id="configuration">Configuration<a class="anchor" aria-label="anchor" href="#configuration"></a>
 </h3>
-<p>First, run <code><a href="reference/pprof_sitrep.html">pprof_sitrep()</a></code> to see if <code>proffer</code> can already find all the required non-R dependencies. Then, run <code><a href="reference/test_pprof.html">test_pprof()</a></code> to see if <code>pprof</code> actually works for you. If both checks pass, you are done with installation.</p>
-<p>Otherwise, open your your <code>.Renviron</code> file and define special environment variables that point to system dependencies. The <a href="https://usethis.r-lib.org/reference/edit.html" class="external-link"><code>edit_r_environ()</code></a> function in the <a href="https://usethis.r-lib.org" class="external-link"><code>usethis</code></a> package can help you. Configuration varies according to your platform and installation method.</p>
-<div class="section level4">
-<h4 id="linux">Linux<a class="anchor" aria-label="anchor" href="#linux"></a>
-</h4>
-<div class="sourceCode" id="cb9"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>PROFFER_PPROF_BIN<span class="ot">=</span><span class="er">/</span>home<span class="sc">/</span>YOU<span class="sc">/</span>go<span class="sc">/</span>pkg<span class="sc">/</span>tool<span class="sc">/</span>linux_amd64<span class="sc">/</span>pprof</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>PROFFER_GO_BIN<span class="ot">=</span><span class="er">/</span>home<span class="sc">/</span>YOU<span class="sc">/</span>go<span class="sc">/</span>bin<span class="sc">/</span>go</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>PROFFER_GRAPHVIZ_BIN<span class="ot">=</span><span class="er">/</span>usr<span class="sc">/</span>bin<span class="sc">/</span>dot</span></code></pre></div>
-</div>
-<div class="section level4">
-<h4 id="mac-os">Mac OS<a class="anchor" aria-label="anchor" href="#mac-os"></a>
-</h4>
-<div class="sourceCode" id="cb10"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>PROFFER_PPROF_BIN<span class="ot">=</span><span class="er">/</span>usr<span class="sc">/</span>local<span class="sc">/</span>bin<span class="sc">/</span>pprof</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>PROFFER_GO_BIN<span class="ot">=</span><span class="er">/</span>usr<span class="sc">/</span>local<span class="sc">/</span>bin<span class="sc">/</span>go</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>PROFFER_GRAPHVIZ_BIN<span class="ot">=</span><span class="er">/</span>usr<span class="sc">/</span>local<span class="sc">/</span>bin<span class="sc">/</span>dot</span></code></pre></div>
-</div>
-<div class="section level4">
-<h4 id="windows">Windows<a class="anchor" aria-label="anchor" href="#windows"></a>
-</h4>
-<div class="sourceCode" id="cb11"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>PROFFER_PPROF_BIN<span class="ot">=</span>C<span class="sc">:</span>\Go\pkg\tool\windows_amd64\pprof.exe</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>PROFFER_GO_BIN<span class="ot">=</span>C<span class="sc">:</span>\Go\bin\go.exe</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>PROFFER_GRAPHVIZ_BIN<span class="ot">=</span><span class="st">"C:\Program Files (x86)\Graphviz2.38</span><span class="sc">\b</span><span class="st">in\dot.exe"</span></span></code></pre></div>
-</div>
+<p>You can set the <code>PROFFER_GO_BIN</code> environment variable to a custom location for the Go binary. See <a href="https://usethis.r-lib.org/reference/edit.html" class="external-link"><code>usethis::edit_r_environ()</code></a> for directions on how to make this configuration permanent.</p>
 </div>
 <div class="section level3">
-<h3 id="verification">Verification<a class="anchor" aria-label="anchor" href="#verification"></a>
+<h3 id="local-testing">Local testing<a class="anchor" aria-label="anchor" href="#local-testing"></a>
 </h3>
 <p>Run <code><a href="reference/pprof_sitrep.html">pprof_sitrep()</a></code> again to verify that everything is installed and configured correctly.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-prof/proffer" class="external-link">proffer</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/pprof_sitrep.html">pprof_sitrep</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; • Call test_pprof() to test installation.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── Requirements ────────────────────────────────────────────────────────────────</span></span>
-<span><span class="co">#&gt; ✔ pprof ']8;;file:///home/landau/go/pkg/tool/linux_amd64/pprof/home/landau/go/pkg/tool/linux_amd64/pprof]8;;'</span></span>
-<span><span class="co">#&gt; ✔ Graphviz ']8;;file:///usr/bin/dot/usr/bin/dot]8;;'</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; ── Go ──────────────────────────────────────────────────────────────────────────</span></span>
-<span><span class="co">#&gt; ✔ Go binary ']8;;file:///home/landau/go/bin/go/home/landau/go/bin/go]8;;'</span></span>
-<span><span class="co">#&gt; ✔ Go folder ']8;;file:///home/landau/go/home/landau/go]8;;'</span></span>
+<span><span class="co">#&gt; ✔ Go binary '/usr/local/go/bin/go'</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ── Custom ──────────────────────────────────────────────────────────────────────</span></span>
-<span><span class="co">#&gt; ✔ `PROFFER_PPROF_BIN` ']8;;file:///home/landau/go/pkg/tool/linux_amd64/pprof/home/landau/go/pkg/tool/linux_amd64/pprof]8;;'</span></span>
-<span><span class="co">#&gt; ✔ `PROFFER_GO_BIN` ']8;;file:///home/landau/go/bin/go/home/landau/go/bin/go]8;;'</span></span>
-<span><span class="co">#&gt; ✔ `PROFFER_GRAPHVIZ_BIN` ']8;;file:///usr/bin/dot/usr/bin/dot]8;;'</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; ── System ──────────────────────────────────────────────────────────────────────</span></span>
-<span><span class="co">#&gt; ℹ pprof system path missing ']8;;file:///home/landau/go/bin/pprof/home/landau/go/bin/pprof]8;;'</span></span>
-<span><span class="co">#&gt; • See &lt;]8;;https://github.com/google/pprofhttps://github.com/google/pprof]8;;&gt; to install pprof.</span></span>
-<span><span class="co">#&gt; ✔ Go binary system path ']8;;file:///usr/bin/go/usr/bin/go]8;;'</span></span>
-<span><span class="co">#&gt; ✔ Graphviz system path ']8;;file:///usr/bin/dot/usr/bin/dot]8;;'</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; ── Deprecated ──────────────────────────────────────────────────────────────────</span></span>
-<span><span class="co">#&gt; ✔ `pprof_path` env variable omitted.</span></span></code></pre></div>
+<span><span class="co">#&gt; ✔ `PROFFER_GO_BIN` '/usr/local/go/bin/go'</span></span></code></pre></div>
 <p>If all dependencies are accounted for, <code>proffer</code> should work. Test it out with <code><a href="reference/test_pprof.html">test_pprof()</a></code>. On a local machine, it should launch a browser window showing an instance of <code>pprof</code>.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/r-prof/proffer" class="external-link">proffer</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="reference/test_pprof.html">test_pprof</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">process</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/test_pprof.html">test_pprof</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>When you are done testing, you can clean up the process to conserve resources.</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">process</span><span class="op">$</span><span class="fu">kill</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -318,8 +256,8 @@
 <h3 id="profvis">profvis<a class="anchor" aria-label="anchor" href="#profvis"></a>
 </h3>
 <p>The <a href="https://github.com/rstudio/profvis" class="external-link"><code>profvis</code></a> is much easier to install than <code>proffer</code> and equally easy to invoke.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/profvis/" class="external-link">profvis</a></span><span class="op">)</span></span>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://profvis.r-lib.org" class="external-link">profvis</a></span><span class="op">)</span></span>
 <span><span class="fu">profvis</span><span class="op">(</span><span class="op">{</span></span>
 <span>  <span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">1e5</span></span>
 <span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span></span>
@@ -336,6 +274,13 @@
 </div>
 </div>
 </div>
+<div class="footnotes footnotes-end-of-document">
+<hr>
+<ol>
+<li id="fn1"><p>One of the graph visualizations requires Graphviz, which you <a href="https://www.graphviz.org/download" class="external-link uri">https://www.graphviz.org/download</a>, but this visualization is arguably not as useful as the flame graph.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -392,16 +337,16 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
       </footer>
 </div>
 
-  
 
 
-  
+
+
 
   </body>
 </html>
