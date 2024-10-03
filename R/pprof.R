@@ -192,14 +192,18 @@ show_url <- function(host, port) {
 }
 
 serve_pprof_impl <- function(args) {
-  with_safe_path(
-    Sys.getenv("PROFFER_GRAPHVIZ_BIN"),
-    processx::process$new(
-      command = go_bin_path(),
-      args = c("tool", "pprof", args),
-      stdout = "|",
-      stderr = "|",
-      supervise = TRUE
-    )
+  processx::run(
+    command = go_bin_path(),
+    args = c("telemetry", "off"),
+    stdout = "|",
+    stderr = "|",
+    error_on_status = FALSE
+  )
+  processx::process$new(
+    command = go_bin_path(),
+    args = c("tool", "pprof", args),
+    stdout = "|",
+    stderr = "|",
+    supervise = TRUE
   )
 }

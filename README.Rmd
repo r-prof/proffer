@@ -193,6 +193,10 @@ When you are done testing, you can clean up the process to conserve resources.
 process$kill()
 ```
 
+## Telemetry
+
+Recent versions of Go implement telemetry by default. Functions in `proffer` such as `pprof()` turn off telemetry in order to comply with CRAN policies. Read <https://go.dev/doc/telemetry> to learn how to restore telemetry settings after using `proffer`.
+
 ## Contributing
 
 We encourage participation through [issues](https://github.com/r-prof/proffer/issues) and [pull requests](https://github.com/r-prof/proffer/pulls). `proffer` has a [Contributor Code of Conduct](https://github.com/r-prof/proffer/blob/main/CODE_OF_CONDUCT.md). By contributing to this project, you agree to abide by its terms.

@@ -74,7 +74,7 @@ system.time({
   x <- data.frame(x = x, y = y)
 })
 #>    user  system elapsed 
-#>   0.018   0.001   0.019
+#>   0.019   0.001   0.020
 ```
 
 Moral of the story: before you optimize, throw away your assumptions and
@@ -220,6 +220,13 @@ resources.
 ``` r
 process$kill()
 ```
+
+## Telemetry
+
+Recent versions of Go implement telemetry by default. Functions in
+`proffer` such as `pprof()` turn off telemetry in order to comply with
+CRAN policies. Read <https://go.dev/doc/telemetry> to learn how to
+restore telemetry settings after using `proffer`.
 
 ## Contributing
 

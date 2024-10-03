@@ -2,6 +2,7 @@
 
 * Deprecate `install_go()`. Visit <https://go.dev/dl/> to download the appropriate build of Go for your platform.
 * Use the copy of `pprof` that comes with Go.
+* Disable Go telemetry to comply with CRAN policies.
 
 # proffer 0.1.6
 
