@@ -33,7 +33,7 @@ Description: Like similar profiling tools,
   To learn about the implementations and methodologies of
   'pprof', 'profile', and protocol buffers,
   visit <https://github.com/google/pprof>.
-  <https://developers.google.com/protocol-buffers>,
+  <https://protobuf.dev>,
   and <https://github.com/r-prof/profile>, respectively.
 Depends:
   R (>= 3.3.0)

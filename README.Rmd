@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 [![license](https://img.shields.io/badge/licence-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![check](https://github.com/r-prof/proffer/workflows/check/badge.svg)](https://github.com/r-prof/proffer/actions?workflow=check)
-[![codecov](https://codecov.io/github/r-prof/proffer/coverage.svg?branch=main)](https://codecov.io/github/r-prof/proffer?branch=main)
+[![codecov](https://codecov.io/github/r-prof/proffer/coverage.svg?branch=main)](https://app.codecov.io/github/r-prof/proffer?branch=main)
 
 The `proffer` package profiles R code to find bottlenecks. Visit <https://r-prof.github.io/proffer/> for documentation. <https://r-prof.github.io/proffer/reference/index.html> has a complete list of available functions in the package. 
 
@@ -210,7 +210,7 @@ Profilers identify bottlenecks, but the do not offer solutions. It helps to lear
 
 ### profvis
 
-The [`profvis`](https://github.com/rstudio/profvis) is much easier to install than `proffer` and equally easy to invoke.
+The [`profvis`](https://github.com/r-lib/profvis) package is easier to install than `proffer` and easy to invoke.
 
 ```{r, eval = FALSE}
 library(profvis)
@@ -224,7 +224,7 @@ profvis({
 })
 ```
 
-However, `profvis`-generated flame graphs can be [difficult to read](https://github.com/rstudio/profvis/issues/115) and [slow to respond to mouse clicks](https://github.com/rstudio/profvis/issues/104).
+However, `profvis`-generated flame graphs can be [difficult to read](https://github.com/r-lib/profvis/issues/115) and [slow to respond to mouse clicks](https://github.com/r-lib/profvis/issues/104).
 
 <center>
 <a href="https://r-prof.github.io/proffer/reference/figures/profvis.png">

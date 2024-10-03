@@ -7,7 +7,7 @@
 [![license](https://img.shields.io/badge/licence-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![active](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![check](https://github.com/r-prof/proffer/workflows/check/badge.svg)](https://github.com/r-prof/proffer/actions?workflow=check)
-[![codecov](https://codecov.io/github/r-prof/proffer/coverage.svg?branch=main)](https://codecov.io/github/r-prof/proffer?branch=main)
+[![codecov](https://codecov.io/github/r-prof/proffer/coverage.svg?branch=main)](https://app.codecov.io/github/r-prof/proffer?branch=main)
 
 The `proffer` package profiles R code to find bottlenecks. Visit
 <https://r-prof.github.io/proffer/> for documentation.
@@ -74,7 +74,7 @@ system.time({
   x <- data.frame(x = x, y = y)
 })
 #>    user  system elapsed 
-#>   0.019   0.000   0.020
+#>   0.018   0.001   0.019
 ```
 
 Moral of the story: before you optimize, throw away your assumptions and
@@ -245,8 +245,8 @@ alternatives to try.
 
 ### profvis
 
-The [`profvis`](https://github.com/rstudio/profvis) is much easier to
-install than `proffer` and equally easy to invoke.
+The [`profvis`](https://github.com/r-lib/profvis) package is easier to
+install than `proffer` and easy to invoke.
 
 ``` r
 library(profvis)
@@ -261,8 +261,8 @@ profvis({
 ```
 
 However, `profvis`-generated flame graphs can be [difficult to
-read](https://github.com/rstudio/profvis/issues/115) and [slow to
-respond to mouse clicks](https://github.com/rstudio/profvis/issues/104).
+read](https://github.com/r-lib/profvis/issues/115) and [slow to respond
+to mouse clicks](https://github.com/r-lib/profvis/issues/104).
 
 <center>
 <a href="https://r-prof.github.io/proffer/reference/figures/profvis.png">
