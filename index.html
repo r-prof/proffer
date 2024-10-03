@@ -124,7 +124,7 @@
 <span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, y <span class="op">=</span> <span class="va">y</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.018   0.001   0.019</span></span></code></pre></div>
+<span><span class="co">#&gt;   0.019   0.001   0.020</span></span></code></pre></div>
 <p>Moral of the story: before you optimize, throw away your assumptions and run your code through a profiler. That way, you can spend your time optimizing where it counts!</p>
 </div>
 <div class="section level2">
@@ -232,6 +232,11 @@
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">process</span><span class="op">$</span><span class="fu">kill</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
+</div>
+<div class="section level2">
+<h2 id="telemetry">Telemetry<a class="anchor" aria-label="anchor" href="#telemetry"></a>
+</h2>
+<p>Recent versions of Go implement telemetry by default. Functions in <code>proffer</code> such as <code><a href="reference/pprof.html">pprof()</a></code> turn off telemetry in order to comply with CRAN policies. Read <a href="https://go.dev/doc/telemetry" class="external-link uri">https://go.dev/doc/telemetry</a> to learn how to restore telemetry settings after using <code>proffer</code>.</p>
 </div>
 <div class="section level2">
 <h2 id="contributing">Contributing<a class="anchor" aria-label="anchor" href="#contributing"></a>
