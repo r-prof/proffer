@@ -1,4 +1,4 @@
-# proffer 0.2.0.9001 (development)
+# proffer 0.2.1
 
 * Use `path.expand()` on path to profiling samples.
 
