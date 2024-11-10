@@ -6,6 +6,7 @@
 \usage{
 pprof(
   expr,
+  seconds_timeout = Inf,
   host = "localhost",
   port = proffer::random_port(),
   browse = interactive(),
@@ -15,6 +16,11 @@ pprof(
 }
 \arguments{
 \item{expr}{R code to run and profile.}
+
+\item{seconds_timeout}{Maximum number of seconds of elapsed time
+to profile \code{expr}. When the timeout is reached, \code{proffer} stops running
+\code{expr} and returns the profiling samples taken during the
+\code{seconds_timeout} time window.}
 
 \item{host}{Host name. Set to \code{"localhost"} to view locally
 or \code{"0.0.0.0"} to view from another machine. If you view

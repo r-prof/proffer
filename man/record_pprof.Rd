@@ -4,16 +4,20 @@
 \alias{record_pprof}
 \title{Profile R code and record pprof samples.}
 \usage{
-record_pprof(expr, pprof = tempfile(), ...)
+record_pprof(expr, seconds_timeout = Inf, pprof = tempfile(), ...)
 }
 \arguments{
 \item{expr}{An R expression to profile.}
 
+\item{seconds_timeout}{Maximum number of seconds of elapsed time
+to profile \code{expr}. When the timeout is reached, \code{proffer} stops running
+\code{expr} and returns the profiling samples taken during the
+\code{seconds_timeout} time window.}
+
 \item{pprof}{Path to a file with pprof samples.
 Also returned from the function.}
 
-\item{...}{Additional arguments passed on to \code{\link[=Rprof]{Rprof()}}
-via \code{\link[=record_rprof]{record_rprof()}}.}
+\item{...}{Additional arguments passed on to \code{\link[=Rprof]{Rprof()}}.}
 }
 \value{
 Path to a file with pprof samples.

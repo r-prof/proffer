@@ -38,6 +38,14 @@ test_that("pprof()", {
   px$kill()
 })
 
+test_that("pprof() can time out", {
+  skip("interactive only")
+  start <- as.numeric(proc.time()["elapsed"])
+  px <- pprof(while (TRUE) slow_function(), seconds_timeout = 5)
+  message(as.numeric(proc.time()["elapsed"]) - start)
+  px$kill()
+})
+
 test_that("test_pprof()", {
   skip("interactive only")
   # Should launch a browser and show a message.

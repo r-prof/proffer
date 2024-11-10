@@ -40,6 +40,7 @@ test_pprof <- function(
 #'   Results are collected with [record_pprof()].
 #' @return A `processx::process$new()` handle. Use this handle
 #'   to take down the server with `$kill()`.
+#' @inheritParams record_rprof
 #' @inheritParams serve_pprof
 #' @param expr R code to run and profile.
 #' @param ... Additional arguments passed on to [Rprof()]
@@ -53,13 +54,18 @@ test_pprof <- function(
 #' }
 pprof <- function(
   expr,
+  seconds_timeout = Inf,
   host = "localhost",
   port = proffer::random_port(),
   browse = interactive(),
   verbose = TRUE,
   ...
 ) {
-  pprof <- record_pprof(expr, ...)
+  pprof <- record_pprof(
+    expr = expr,
+    seconds_timeout = seconds_timeout,
+    ...
+  )
   serve_pprof(
     pprof = pprof,
     host = host,

@@ -19,6 +19,7 @@
 #' @importFrom parallelly freePort
 #' @importFrom processx process
 #' @importFrom profile read_rprof write_pprof
+#' @importFrom R.utils withTimeout
 #' @importFrom RProtoBuf readProtoFiles
 #' @importFrom utils browseURL Rprof
 #' @importFrom withr with_path

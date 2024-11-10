@@ -1,6 +1,6 @@
-# proffer 0.2.1.9000 (development)
+# proffer 0.2.1.9001 (development)
 
-
+* Add `seconds_timeout`.
 
 # proffer 0.2.1
 

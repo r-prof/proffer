@@ -4,18 +4,25 @@
 #'   Profiles are recorded with [record_rprof()]
 #'   and then converted with [to_pprof()].
 #' @return Path to a file with pprof samples.
-#' @param expr An R expression to profile.
+#' @inheritParams record_rprof
 #' @param pprof Path to a file with pprof samples.
 #'   Also returned from the function.
-#' @param ... Additional arguments passed on to [Rprof()]
-#'   via [record_rprof()].
 #' @examples
 #' if (identical(Sys.getenv("PROFFER_EXAMPLES"), "true")) {
 #' # Returns a path to pprof samples.
 #' record_pprof(replicate(1e2, sample.int(1e4)))
 #' }
-record_pprof <- function(expr, pprof = tempfile(), ...) {
-  rprof <- record_rprof(expr, ...)
+record_pprof <- function(
+  expr,
+  seconds_timeout = Inf,
+  pprof = tempfile(),
+  ...
+) {
+  rprof <- record_rprof(
+    expr = expr,
+    seconds_timeout = seconds_timeout,
+    ...
+  )
   to_pprof(rprof, pprof = pprof)
   pprof
 }
@@ -25,6 +32,10 @@ record_pprof <- function(expr, pprof = tempfile(), ...) {
 #' @description Run R code and record Rprof samples.
 #' @return Path to a file with Rprof samples.
 #' @param expr An R expression to profile.
+#' @param seconds_timeout Maximum number of seconds of elapsed time
+#'   to profile `expr`. When the timeout is reached, `proffer` stops running
+#'   `expr` and returns the profiling samples taken during the
+#'   `seconds_timeout` time window.
 #' @param rprof Path to a file with Rprof samples.
 #'   Also returned from the function.
 #' @param ... Additional arguments passed on to [Rprof()].
@@ -33,10 +44,15 @@ record_pprof <- function(expr, pprof = tempfile(), ...) {
 #' # Returns a path to Rprof samples.
 #' record_rprof(replicate(1e2, sample.int(1e4)))
 #' }
-record_rprof <- function(expr, rprof = tempfile(), ...) {
+record_rprof <- function(
+  expr,
+  seconds_timeout = Inf,
+  rprof = tempfile(),
+  ...
+) {
   on.exit(Rprof(NULL))
   Rprof(filename = rprof, ...)
-  expr
+  R.utils::withTimeout(expr, timeout = seconds_timeout, onTimeout = "silent")
   rprof
 }
 

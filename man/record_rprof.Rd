@@ -4,10 +4,15 @@
 \alias{record_rprof}
 \title{Profile R code and record Rprof samples.}
 \usage{
-record_rprof(expr, rprof = tempfile(), ...)
+record_rprof(expr, seconds_timeout = Inf, rprof = tempfile(), ...)
 }
 \arguments{
 \item{expr}{An R expression to profile.}
+
+\item{seconds_timeout}{Maximum number of seconds of elapsed time
+to profile \code{expr}. When the timeout is reached, \code{proffer} stops running
+\code{expr} and returns the profiling samples taken during the
+\code{seconds_timeout} time window.}
 
 \item{rprof}{Path to a file with Rprof samples.
 Also returned from the function.}

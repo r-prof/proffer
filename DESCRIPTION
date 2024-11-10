@@ -1,6 +1,6 @@
 Package: proffer
 Title: Profile R Code and Visualize with 'Pprof'
-Version: 0.2.1.9000
+Version: 0.2.1.9001
 Encoding: UTF-8
 Language: en-US
 License: MIT + file LICENSE
@@ -43,6 +43,7 @@ Imports:
   pingr (>= 2.0.1),
   processx (>= 3.4.0),
   profile (>= 1.0),
+  R.utils,
   RProtoBuf (>= 0.4.14),
   utils,
   withr (>= 2.1.2)
