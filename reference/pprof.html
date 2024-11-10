@@ -19,7 +19,7 @@ Results are collected with record_pprof()."><meta property="og:image" content="/
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">proffer</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.1.9001</span>
       </span>
     </div>
 
@@ -59,6 +59,7 @@ Results are collected with <code><a href="record_pprof.html">record_pprof()</a><
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">pprof</span><span class="op">(</span></span>
 <span>  <span class="va">expr</span>,</span>
+<span>  seconds_timeout <span class="op">=</span> <span class="cn">Inf</span>,</span>
 <span>  host <span class="op">=</span> <span class="st">"localhost"</span>,</span>
 <span>  port <span class="op">=</span> <span class="fu">proffer</span><span class="fu">::</span><span class="fu"><a href="random_port.html">random_port</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  browse <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span>,</span>
@@ -73,6 +74,13 @@ Results are collected with <code><a href="record_pprof.html">record_pprof()</a><
 
 <dl><dt id="arg-expr">expr<a class="anchor" aria-label="anchor" href="#arg-expr"></a></dt>
 <dd><p>R code to run and profile.</p></dd>
+
+
+<dt id="arg-seconds-timeout">seconds_timeout<a class="anchor" aria-label="anchor" href="#arg-seconds-timeout"></a></dt>
+<dd><p>Maximum number of seconds of elapsed time
+to profile <code>expr</code>. When the timeout is reached, <code>proffer</code> stops running
+<code>expr</code> and returns the profiling samples taken during the
+<code>seconds_timeout</code> time window.</p></dd>
 
 
 <dt id="arg-host">host<a class="anchor" aria-label="anchor" href="#arg-host"></a></dt>

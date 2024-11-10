@@ -19,7 +19,7 @@ and then converted with to_pprof()."><meta property="og:image" content="/logo.pn
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">proffer</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.1.9001</span>
       </span>
     </div>
 
@@ -57,7 +57,7 @@ and then converted with <code><a href="to_pprof.html">to_pprof()</a></code>.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">record_pprof</span><span class="op">(</span><span class="va">expr</span>, pprof <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">record_pprof</span><span class="op">(</span><span class="va">expr</span>, seconds_timeout <span class="op">=</span> <span class="cn">Inf</span>, pprof <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -68,14 +68,20 @@ and then converted with <code><a href="to_pprof.html">to_pprof()</a></code>.</p>
 <dd><p>An R expression to profile.</p></dd>
 
 
+<dt id="arg-seconds-timeout">seconds_timeout<a class="anchor" aria-label="anchor" href="#arg-seconds-timeout"></a></dt>
+<dd><p>Maximum number of seconds of elapsed time
+to profile <code>expr</code>. When the timeout is reached, <code>proffer</code> stops running
+<code>expr</code> and returns the profiling samples taken during the
+<code>seconds_timeout</code> time window.</p></dd>
+
+
 <dt id="arg-pprof">pprof<a class="anchor" aria-label="anchor" href="#arg-pprof"></a></dt>
 <dd><p>Path to a file with pprof samples.
 Also returned from the function.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>Additional arguments passed on to <code><a href="https://rdrr.io/r/utils/Rprof.html" class="external-link">Rprof()</a></code>
-via <code><a href="record_rprof.html">record_rprof()</a></code>.</p></dd>
+<dd><p>Additional arguments passed on to <code><a href="https://rdrr.io/r/utils/Rprof.html" class="external-link">Rprof()</a></code>.</p></dd>
 
 </dl></div>
     <div id="value">
