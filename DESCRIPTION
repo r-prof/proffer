@@ -46,7 +46,7 @@ Imports:
   R.utils,
   RProtoBuf (>= 0.4.14),
   utils,
-  withr (>= 2.1.2)
+  withr (>= 3.0.2.9001)
 Suggests:
   testthat (>= 2.1.0)
 SystemRequirements:
