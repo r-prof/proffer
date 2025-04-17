@@ -74,7 +74,7 @@ system.time({
   x <- data.frame(x = x, y = y)
 })
 #>    user  system elapsed 
-#>   0.019   0.001   0.020
+#>   0.020   0.001   0.021
 ```
 
 Moral of the story: before you optimize, throw away your assumptions and
@@ -247,38 +247,6 @@ alternatives to try.
 - <https://www.r-bloggers.com/2016/01/strategies-to-speedup-r-code/>
 - <https://www.r-bloggers.com/2013/04/faster-higher-stonger-a-guide-to-speeding-up-r-code-for-busy-people/>
 - <https://cran.r-project.org/package=data.table/vignettes/datatable-intro.html>
-
-## Similar work
-
-### profvis
-
-The [`profvis`](https://github.com/r-lib/profvis) package is easier to
-install than `proffer` and easy to invoke.
-
-``` r
-library(profvis)
-profvis({
-  n <- 1e5
-  x <- data.frame(x = rnorm(n), y = rnorm(n))
-  for (i in seq_len(n)) {
-    x[i, ] <- x[i, ] + 1
-  }
-  x
-})
-```
-
-However, `profvis`-generated flame graphs can be [difficult to
-read](https://github.com/r-lib/profvis/issues/115) and [slow to respond
-to mouse clicks](https://github.com/r-lib/profvis/issues/104).
-
-<center>
-<a href="https://r-prof.github.io/proffer/reference/figures/profvis.png">
-<img src="https://r-prof.github.io/proffer/reference/figures/profvis.png" alt="top" align="center" style = "border: none; float: center;">
-</a>
-</center>
-
-`proffer` uses [`pprof`](https://github.com/google/pprof) to create
-friendlier, faster visualizations.
 
 [^1]: One of the graph visualizations requires Graphviz, which you
     <https://www.graphviz.org/download>, but this visualization is
