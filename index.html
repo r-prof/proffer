@@ -124,7 +124,7 @@
 <span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, y <span class="op">=</span> <span class="va">y</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.019   0.001   0.020</span></span></code></pre></div>
+<span><span class="co">#&gt;   0.020   0.001   0.021</span></span></code></pre></div>
 <p>Moral of the story: before you optimize, throw away your assumptions and run your code through a profiler. That way, you can spend your time optimizing where it counts!</p>
 </div>
 <div class="section level2">
@@ -253,30 +253,6 @@
 <li><a href="https://www.r-bloggers.com/2013/04/faster-higher-stonger-a-guide-to-speeding-up-r-code-for-busy-people/" class="external-link uri">https://www.r-bloggers.com/2013/04/faster-higher-stonger-a-guide-to-speeding-up-r-code-for-busy-people/</a></li>
 <li><a href="https://cran.r-project.org/package=data.table/vignettes/datatable-intro.html" class="external-link uri">https://cran.r-project.org/package=data.table/vignettes/datatable-intro.html</a></li>
 </ul>
-</div>
-<div class="section level2">
-<h2 id="similar-work">Similar work<a class="anchor" aria-label="anchor" href="#similar-work"></a>
-</h2>
-<div class="section level3">
-<h3 id="profvis">profvis<a class="anchor" aria-label="anchor" href="#profvis"></a>
-</h3>
-<p>The <a href="https://github.com/r-lib/profvis" class="external-link"><code>profvis</code></a> package is easier to install than <code>proffer</code> and easy to invoke.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://profvis.r-lib.org" class="external-link">profvis</a></span><span class="op">)</span></span>
-<span><span class="fu">profvis</span><span class="op">(</span><span class="op">{</span></span>
-<span>  <span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">1e5</span></span>
-<span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span></span>
-<span>  <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="va">x</span><span class="op">[</span><span class="va">i</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">[</span><span class="va">i</span>, <span class="op">]</span> <span class="op">+</span> <span class="fl">1</span></span>
-<span>  <span class="op">}</span></span>
-<span>  <span class="va">x</span></span>
-<span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
-<p>However, <code>profvis</code>-generated flame graphs can be <a href="https://github.com/r-lib/profvis/issues/115" class="external-link">difficult to read</a> and <a href="https://github.com/r-lib/profvis/issues/104" class="external-link">slow to respond to mouse clicks</a>.</p>
-<center>
-<a href="https://r-prof.github.io/proffer/reference/figures/profvis.png" class="external-link"> <img src="https://r-prof.github.io/proffer/reference/figures/profvis.png" alt="top" align="center" style="border: none; float: center;"></a>
-</center>
-<p><code>proffer</code> uses <a href="https://github.com/google/pprof" class="external-link"><code>pprof</code></a> to create friendlier, faster visualizations.</p>
-</div>
 </div>
 </div>
 <div class="footnotes footnotes-end-of-document">
