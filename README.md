@@ -54,6 +54,7 @@ graph, we see `[<-.data.frame()` (i.e. `x[i, ] <- x[i, ] + 1`) is taking
 most of the runtime.
 
 <center>
+
 <a href="https://r-prof.github.io/proffer/reference/figures/flame.png">
 <img src="https://r-prof.github.io/proffer/reference/figures/flame.png" alt="top" align="center" style = "border: none; float: center;">
 </a>
@@ -74,7 +75,7 @@ system.time({
   x <- data.frame(x = x, y = y)
 })
 #>    user  system elapsed 
-#>   0.020   0.001   0.021
+#>   0.012   0.000   0.013
 ```
 
 Moral of the story: before you optimize, throw away your assumptions and
@@ -247,6 +248,25 @@ alternatives to try.
 - <https://www.r-bloggers.com/2016/01/strategies-to-speedup-r-code/>
 - <https://www.r-bloggers.com/2013/04/faster-higher-stonger-a-guide-to-speeding-up-r-code-for-busy-people/>
 - <https://cran.r-project.org/package=data.table/vignettes/datatable-intro.html>
+
+## What about `profvis`
+
+[`profvis`](https://github.com/r-lib/profvis) is a more widely used and
+established profiling package, and it existed before `proffer`.
+`proffer` was originally developed because:
+
+1.  [`profvis`](https://github.com/r-lib/profvis) flame graphs [did not
+    originally support
+    aggregation](https://github.com/r-lib/profvis/issues/115).
+2.  [`profvis`](https://github.com/r-lib/profvis) visualizations
+    [performed slowly on large profiling
+    datasets](https://github.com/r-lib/profvis/issues/104).
+
+Since then, (1) [has been
+fixed](https://github.com/r-lib/profvis/pull/126), and it is possible to
+produce aggregated flame graphs with
+`print(profvis::provis(...), aggregate = TRUE)`. When (2) is also
+addressed, `proffer` may be superseded.
 
 [^1]: One of the graph visualizations requires Graphviz, which you
     <https://www.graphviz.org/download>, but this visualization is

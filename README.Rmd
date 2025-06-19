@@ -209,3 +209,15 @@ Profilers identify bottlenecks, but the do not offer solutions. It helps to lear
 - <https://www.r-bloggers.com/2016/01/strategies-to-speedup-r-code/>
 - <https://www.r-bloggers.com/2013/04/faster-higher-stonger-a-guide-to-speeding-up-r-code-for-busy-people/>
 - <https://cran.r-project.org/package=data.table/vignettes/datatable-intro.html>
+
+## What about `profvis`
+
+[`profvis`](https://github.com/r-lib/profvis) is a more widely used and established profiling package, and it existed before `proffer`.
+`proffer` was originally developed because:
+
+1. [`profvis`](https://github.com/r-lib/profvis) flame graphs [did not originally support aggregation](https://github.com/r-lib/profvis/issues/115).
+2. [`profvis`](https://github.com/r-lib/profvis) visualizations [performed slowly on large profiling datasets](https://github.com/r-lib/profvis/issues/104).
+
+Since then, (1) [has been fixed](https://github.com/r-lib/profvis/pull/126), and it is possible to produce aggregated flame graphs with `print(profvis::provis(...), aggregate = TRUE)`.
+When (2) is also addressed, `proffer` may be superseded.
+
